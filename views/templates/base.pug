@@ -3,5 +3,11 @@ html
   head
     meta(charset='utf-8')
     title=meta.title
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js')
+    script(src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.0/mapbox-gl.js')
+    link(href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.0/mapbox-gl.css' rel='stylesheet')
+    link(href='/styles/mapbox.css' rel='stylesheet')
+    script(src='/scripts/mapbox.js')
   body
     !=content
+    div.basemap#testmap

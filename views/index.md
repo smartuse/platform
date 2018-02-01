@@ -1,6 +1,6 @@
 ---
-title: Hello world!
+title: Smart Use Alpha
 template: templates/base.pug
 ---
 
-WasssUP!
+# Metropolregion Zürich
