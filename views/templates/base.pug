@@ -4,10 +4,16 @@ html
     meta(charset='utf-8')
     title=meta.title
     script(src='https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js')
+    script(src='/vendor/modernizr-3.5.0.min.js')
+    script(src='https://cdn.jsdelivr.net/npm/riot@3.8/riot+compiler.min.js')
     script(src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.0/mapbox-gl.js')
     link(href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.0/mapbox-gl.css' rel='stylesheet')
-    link(href='/styles/mapbox.css' rel='stylesheet')
-    script(src='/scripts/mapbox.js')
+    link(href='/styles/normalize.css' rel='stylesheet')
+    link(href='/styles/main.css' rel='stylesheet')
+    link(href='/styles/custom.css' rel='stylesheet')
+    script(src='/scripts/main.js')
   body
     !=content
     div.basemap#testmap
+    sample
+    script(type='riot/tag' src='tags/sample.tag')
