@@ -1,0 +1,75 @@
+{
+  "name": "smartuse-arge",
+  "description": "A landuse mapping project focusing on the greater metropolitan area around Zurich, Switzerland (Metropolitankonferenz Zürich)",
+  "version": "0.0.1",
+  "author": {
+    "name": "Arbeitsgemeinschaft SMART USE",
+    "email": "info@datalets.ch"
+  },
+  "contributors": [
+    {
+      "name": "Oleg Lavrovsky",
+      "email": "o@datalets.ch"
+    },
+    {
+      "name": "Philipp Kueng",
+      "email": "i@philippkueng.ch"
+    },
+    {
+      "name": "Thorben Westerhuys",
+      "email": "thorben@hosoyaschaefer.com"
+    }
+  ],
+  "engines": {
+    "node": ">=6.x"
+  },
+  "scripts": {
+    "start": "./node_modules/.bin/cross-env NODE_ENV=development ./node_modules/.bin/nodemon server.js",
+    "test": "./node_modules/.bin/cross-env NODE_ENV=test ./node_modules/.bin/babel-tape-runner test/test-*.js"
+  },
+  "dependencies": {
+    "body-parser": "1.18.2",
+    "co": "~4.6.0",
+    "compression": "~1.7.0",
+    "connect-flash": "~0.1.1",
+    "connect-mongo": "~2.0.1",
+    "cookie-parser": "~1.4.1",
+    "cookie-session": "~2.0.0-beta.3",
+    "cross-env": "~5.1.3",
+    "csurf": "1.9.0",
+    "dotenv": "~5.0.0",
+    "express": "4.16.2",
+    "express-remarkable": "^1.0.0",
+    "express-session": "~1.15.1",
+    "forever": "~0.15.1",
+    "method-override": "~2.3.5",
+    "mongoose": "~5.0.3",
+    "mongoose-user": "~0.0.1",
+    "morgan": "~1.9.0",
+    "passport": "~0.4.0",
+    "passport-local": "~1.0.0",
+    "pug": "^2.0.0-rc.4",
+    "view-helpers": "~0.1.5",
+    "winston": "~2.4.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "~8.2.1",
+    "babel-preset-stage-0": "~6.24.1",
+    "babel-tape-runner": "~2.0.1",
+    "eslint": "~4.16.0",
+    "nodemon": "~1.14.11",
+    "supertest": "~3.0.0",
+    "tape": "~4.8.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.com/loleg/smartuse.git"
+  },
+  "keywords": [
+    "geo",
+    "landuse",
+    "mapping",
+    "zurich",
+    "switzerland"
+  ]
+}
