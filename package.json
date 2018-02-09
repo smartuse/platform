@@ -1,10 +1,10 @@
 {
   "name": "smartuse-arge",
-  "description": "A landuse mapping project focusing on the greater metropolitan area around Zurich, Switzerland (Metropolitankonferenz Zürich)",
+  "description": "A land use mapping project focusing on the greater metropolitan area around Zurich, Switzerland (Metropolitankonferenz Zürich)",
   "version": "0.0.1",
   "author": {
     "name": "Arbeitsgemeinschaft SMART USE",
-    "email": "info@datalets.ch"
+    "email": "info@smartuse.ch"
   },
   "contributors": [
     {
@@ -12,12 +12,12 @@
       "email": "o@datalets.ch"
     },
     {
-      "name": "Philipp Kueng",
-      "email": "i@philippkueng.ch"
-    },
-    {
       "name": "Thorben Westerhuys",
       "email": "thorben@hosoyaschaefer.com"
+    },
+    {
+      "name": "Philipp Kueng",
+      "email": "i@philippkueng.ch"
     }
   ],
   "engines": {

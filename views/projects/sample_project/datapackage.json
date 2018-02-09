@@ -1,0 +1,12 @@
+{
+  "name": "smartuse-sample",
+  "resources": [
+    {
+      "name": "office-locations-geojson",
+      "description": "Sample data in GeoJSON format",
+      "path": "data/lat-lon.geojson",
+      "spatial-profile": "simple-vector",
+      "format": "geojson"
+    }
+  ]
+}
