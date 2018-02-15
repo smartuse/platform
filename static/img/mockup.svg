@@ -1,0 +1,500 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg8"
+   inkscape:export-filename="/home/oleg/Clients/SmartUse/static/img/mockup.png"
+   inkscape:export-xdpi="100.02691"
+   inkscape:export-ydpi="100.02691"
+   inkscape:version="0.92.2 (5c3e80d, 2017-08-06)"
+   sodipodi:docname="mockup.svg">
+  <defs
+     id="defs2">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient129">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop125" />
+      <stop
+         style="stop-color:#000000;stop-opacity:0;"
+         offset="1"
+         id="stop127" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient129"
+       id="linearGradient131"
+       x1="150.56635"
+       y1="123.70666"
+       x2="184.4201"
+       y2="123.70666"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(14.204372,6.1552269)" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.1176136"
+     inkscape:cx="482.15866"
+     inkscape:cy="699.47045"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1016"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="color:#000000;overflow:visible;opacity:1;fill:#000000;fill-opacity:0;stroke:#008000;stroke-width:0.49224082;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.50196078"
+       id="rect10"
+       width="47.712513"
+       height="13.85202"
+       x="15.73843"
+       y="34.687843" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.37200356px;line-height:0px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.49146688px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="20.795517"
+       y="46.780884"
+       id="text14"><tspan
+         sodipodi:role="line"
+         id="tspan12"
+         x="20.795517"
+         y="46.780884"
+         style="stroke-width:0.49146688px">SmartUse</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.96875px;line-height:0px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="40.60083"
+       y="62.864609"
+       id="text18"><tspan
+         sodipodi:role="line"
+         id="tspan16"
+         x="40.60083"
+         y="62.864609"
+         style="stroke-width:0.26458332px">Tree Density in Greater Zürich</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.47680593px;line-height:0px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.16512038px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="41.527771"
+       y="67.294449"
+       id="text22"><tspan
+         sodipodi:role="line"
+         id="tspan20"
+         x="41.527771"
+         y="67.294449"
+         style="stroke-width:0.16512038px">Stadt Zürich</tspan></text>
+    <rect
+       style="color:#000000;overflow:visible;opacity:1;fill:#000000;fill-opacity:0;stroke:#008000;stroke-width:0.26499999;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.50196078"
+       id="rect24"
+       width="119.07999"
+       height="65.340111"
+       x="40.00898"
+       y="70.558624" />
+    <rect
+       style="color:#000000;overflow:visible;opacity:1;fill:#000000;fill-opacity:0;stroke:#008000;stroke-width:0.26499999;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.50196078"
+       id="rect26"
+       width="5.3266397"
+       height="4.97153"
+       x="149.14592"
+       y="73.636238" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.96875px;line-height:0px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="150.56636"
+       y="77.897552"
+       id="text30"><tspan
+         sodipodi:role="line"
+         id="tspan28"
+         x="150.56636"
+         y="77.897552"
+         style="stroke-width:0.26458332px">?</tspan></text>
+    <ellipse
+       style="color:#000000;overflow:visible;opacity:1;fill:#000000;fill-opacity:0;stroke:#008000;stroke-width:0.26499999;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.50196078"
+       id="path32"
+       cx="100.14082"
+       cy="99.144943"
+       rx="5.2082696"
+       ry="4.7939758" />
+    <rect
+       style="color:#000000;overflow:visible;opacity:1;fill:#000000;fill-opacity:0;stroke:#008000;stroke-width:0.26499999;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.50196078"
+       id="rect34"
+       width="37.878323"
+       height="11.481861"
+       x="100.85104"
+       y="99.322479" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot40"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;line-height:0px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       transform="matrix(0.26458333,0,0,0.26458333,6.8654465,-43.796814)"><flowRegion
+         id="flowRegion42"><rect
+           id="rect44"
+           width="123.92476"
+           height="91.265884"
+           x="330.16776"
+           y="573.13483" /></flowRegion><flowPara
+         id="flowPara46"></flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot48"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;line-height:0px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       transform="matrix(0.26458333,0,0,0.26458333,17.755466,-47.703016)"><flowRegion
+         id="flowRegion50"><rect
+           id="rect52"
+           width="129.74072"
+           height="93.5028"
+           x="331.06253"
+           y="573.13483" /></flowRegion><flowPara
+         id="flowPara54"
+         style="font-size:10.66666698px;line-height:12px">Height of tree: 20 cm</flowPara><flowPara
+         style="font-size:10.66666698px;line-height:12px"
+         id="flowPara145" /><flowPara
+         style="font-size:10.66666698px;line-height:12px"
+         id="flowPara147" /><flowPara
+         style="font-size:10.66666698px;line-height:12px"
+         id="flowPara56" /><flowPara
+         style="font-size:10.66666698px;line-height:12px"
+         id="flowPara58" /></flowRoot>    <rect
+       style="color:#000000;overflow:visible;opacity:1;fill:#000000;fill-opacity:0;stroke:#008000;stroke-width:0.46797696;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.50196078"
+       id="rect60"
+       width="43.79681"
+       height="8.2369413"
+       x="148.19894"
+       y="49.648888" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.66578007px;line-height:0px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.31105199px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="156.49768"
+       y="54.451508"
+       id="text64"
+       transform="scale(0.97778367,1.0227211)"><tspan
+         sodipodi:role="line"
+         id="tspan62"
+         x="156.49768"
+         y="54.451508"
+         style="stroke-width:0.31105199px">Share! Discuss!</tspan></text>
+    <flowRoot
+       transform="matrix(0.26458333,0,0,0.26458333,-20.714709,15.331576)"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;line-height:0px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       id="flowRoot76"
+       xml:space="preserve"><flowRegion
+         id="flowRegion68"><rect
+           y="573.13483"
+           x="331.06253"
+           height="89.476372"
+           width="306.90393"
+           id="rect66" /></flowRegion><flowPara
+         id="flowPara74"
+         style="font-size:10.66666698px;line-height:12px"></flowPara><flowPara
+         style="font-size:10.66666698px;line-height:12px"
+         id="flowPara83">Pellentesque ut faucibus nisi, pellentesque gravida sapien. Vestibulum luctus dapibus urna, at eleifend ante luctus fermentum. Etiam tincidunt dignissim bibendum. Donec ullamcorper pellentesque ipsum et imperdiet. Vestibulum dapibus et felis sit amet malesuada. Nunc tempus aliquet justo et consequat. Duis interdum lorem sed luctus interdum. Morbi vulputate, urna eu sodales sagittis, lacus purus cursus orci, in molestie ligula massa vitae neque.</flowPara></flowRoot>    <rect
+       style="color:#000000;overflow:visible;opacity:1;fill:#000000;fill-opacity:0;stroke:#008000;stroke-width:0.26499999;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.50196078"
+       id="rect85"
+       width="76.703613"
+       height="43.796814"
+       x="67.707512"
+       y="194.9088" />
+    <rect
+       style="color:#000000;overflow:visible;opacity:1;fill:#000000;fill-opacity:0;stroke:#008000;stroke-width:0.30915335;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.50196078"
+       id="rect87"
+       width="8.715209"
+       height="24.340019"
+       x="79.566566"
+       y="212.68634" />
+    <rect
+       style="color:#000000;overflow:visible;opacity:1;fill:#000000;fill-opacity:0;stroke:#008000;stroke-width:0.26499999;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.50196078"
+       id="rect89"
+       width="9.4695807"
+       height="18.702438"
+       x="88.303848"
+       y="218.34598" />
+    <rect
+       style="color:#000000;overflow:visible;opacity:1;fill:#000000;fill-opacity:0;stroke:#008000;stroke-width:0.23158969;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.50196078"
+       id="rect91"
+       width="9.5039511"
+       height="32.9412"
+       x="97.756248"
+       y="204.12445" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot101"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;line-height:0px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       transform="matrix(0.26458333,0,0,0.26458333,-46.045839,-13.717437)"><flowRegion
+         id="flowRegion95"><rect
+           id="rect93"
+           width="448.27652"
+           height="28.632483"
+           x="331.06253"
+           y="573.13483" /></flowRegion><flowPara
+         style="font-size:10.66666698px;line-height:12px"
+         id="flowPara97"></flowPara><flowPara
+         id="flowPara99"
+         style="font-size:10.66666698px;line-height:12px">Pellentesque ut faucibus nisi, pellentesque gravida sapien. Vestibulum luctus dapibus urna, at eleifend ante luctus fermentum. Etiam <flowSpan
+   style="fill:#0000ff"
+   id="flowSpan1016">tincidunt</flowSpan> dignissim bibendum. Donec ullamcorper pellentesque ipsum et imperdiet. Vestibulum dapibus et felis sit amet malesuada. Nunc tempus aliquet justo et consequat. Duis interdum lorem sed luctus interdum. Morbi vulputate, urna eu sodales sagittis, lacus purus cursus orci, in molestie ligula massa vitae neque.</flowPara></flowRoot>    <circle
+       style="color:#000000;overflow:visible;opacity:1;fill:#000000;fill-opacity:0;stroke:#008000;stroke-width:0.26499999;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.50196078"
+       id="path105"
+       cx="70.074905"
+       cy="151.92041"
+       r="3.3143532" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.96875px;line-height:0px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="68.543091"
+       y="153.57758"
+       id="text109"><tspan
+         sodipodi:role="line"
+         id="tspan107"
+         x="68.543091"
+         y="153.57758"
+         style="stroke-width:0.26458332px">1</tspan></text>
+    <circle
+       r="3.3143532"
+       cy="151.92041"
+       cx="85.949913"
+       id="circle111"
+       style="color:#000000;overflow:visible;opacity:1;fill:#000000;fill-opacity:0;stroke:#008000;stroke-width:0.26499999;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.50196078" />
+    <text
+       id="text115"
+       y="153.57758"
+       x="84.418091"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.96875px;line-height:0px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       xml:space="preserve"><tspan
+         style="stroke-width:0.26458332px"
+         y="153.57758"
+         x="84.418091"
+         id="tspan113"
+         sodipodi:role="line">2</tspan></text>
+    <circle
+       style="color:#000000;overflow:visible;opacity:1;fill:#000000;fill-opacity:0;stroke:#008000;stroke-width:0.26499999;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.50196078"
+       id="circle117"
+       cx="101.8249"
+       cy="151.92041"
+       r="3.3143532" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.96875px;line-height:0px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="100.29308"
+       y="153.57758"
+       id="text121"><tspan
+         sodipodi:role="line"
+         id="tspan119"
+         x="100.29308"
+         y="153.57758"
+         style="stroke-width:0.26458332px">3</tspan></text>
+    <rect
+       style="color:#000000;overflow:visible;opacity:1;fill:url(#linearGradient131);fill-opacity:1;stroke:#008000;stroke-width:0.26499999;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.50196078"
+       id="rect123"
+       width="33.853756"
+       height="4.6164203"
+       x="164.77072"
+       y="125.24547" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.96875px;line-height:0px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="164.0605"
+       y="134.59668"
+       id="text135"><tspan
+         sodipodi:role="line"
+         id="tspan133"
+         x="164.0605"
+         y="134.59668"
+         style="stroke-width:0.26458332px">0</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.96875px;line-height:0px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="195.31012"
+       y="134.59668"
+       id="text139"><tspan
+         sodipodi:role="line"
+         id="tspan137"
+         x="195.31012"
+         y="134.59668"
+         style="stroke-width:0.26458332px">255</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.01176691px;line-height:0px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.13411778px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="164.96277"
+       y="123.75862"
+       id="text143"><tspan
+         sodipodi:role="line"
+         id="tspan141"
+         x="164.96277"
+         y="123.75862"
+         style="stroke-width:0.13411778px">Height of trees (cm)</tspan></text>
+    <rect
+       style="color:#000000;overflow:visible;opacity:1;fill:#000000;fill-opacity:0;stroke:#008000;stroke-width:0.3643167;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.50196078"
+       id="rect149"
+       width="68.791885"
+       height="5.4640546"
+       x="90.247421"
+       y="130.38503" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.13338375px;line-height:0px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:end;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.14222558px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="156.42392"
+       y="134.06586"
+       id="text153"><tspan
+         sodipodi:role="line"
+         id="tspan151"
+         x="156.42392"
+         y="134.06586"
+         style="text-align:end;text-anchor:end;stroke-width:0.14222558px">(C) Open Street Map. The data comes from the Tiefbauamt.</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.96875px;line-height:0px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="-237.14673"
+       y="149.59825"
+       id="text157"
+       transform="rotate(-90)"><tspan
+         sodipodi:role="line"
+         id="tspan155"
+         x="-237.14673"
+         y="149.59825"
+         style="stroke-width:0.26458332px">Embed</tspan></text>
+    <rect
+       style="color:#000000;overflow:visible;opacity:1;fill:#000000;fill-opacity:0;stroke:#008000;stroke-width:0.21202503;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.50196078"
+       id="rect159"
+       width="8.1021185"
+       height="18.51866"
+       x="144.38464"
+       y="220.21346" />
+    <rect
+       style="color:#000000;overflow:visible;opacity:1;fill:#000000;fill-opacity:0;stroke:#008000;stroke-width:0.26499999;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.50196078"
+       id="rect161"
+       width="43.796814"
+       height="8.9961023"
+       x="148.19894"
+       y="38.00695" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.96875px;line-height:0px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="151.27657"
+       y="44.635658"
+       id="text165"><tspan
+         sodipodi:role="line"
+         id="tspan163"
+         x="151.27657"
+         y="44.635658"
+         style="stroke-width:0.26458332px">Search</tspan></text>
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot1014"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;line-height:0px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       transform="matrix(0.26458333,0,0,0.26458333,-20.714709,93.692362)"><flowRegion
+         id="flowRegion1008"><rect
+           id="rect1006"
+           width="310.48294"
+           height="237.11238"
+           x="331.06253"
+           y="573.13483" /></flowRegion><flowPara
+         style="font-size:10.66666698px;line-height:12px"
+         id="flowPara1010" /><flowPara
+         id="flowPara1012"
+         style="font-size:10.66666698px;line-height:12px">Pellentesque ut faucibus nisi, pellentesque gravida sapien. Vestibulum luctus dapibus urna, at eleifend ante luctus fermentum. Etiam tincidunt dignissim bibendum. Donec ullamcorper pellentesque ipsum et imperdiet. Vestibulum dapibus et felis sit amet malesuada. </flowPara><flowPara
+         style="font-size:10.66666698px;line-height:12px"
+         id="flowPara1050" /><flowPara
+         style="font-size:10.66666698px;line-height:12px"
+         id="flowPara1052" /><flowPara
+         style="font-size:10.66666698px;line-height:12px"
+         id="flowPara1054" /><flowPara
+         style="font-size:10.66666698px;line-height:12px"
+         id="flowPara1056" /><flowPara
+         style="font-size:10.66666698px;line-height:12px"
+         id="flowPara1026" /><flowPara
+         style="font-size:10.66666698px;line-height:12px"
+         id="flowPara1038" /><flowPara
+         style="font-size:10.66666698px;line-height:12px"
+         id="flowPara1040" /><flowPara
+         style="font-size:10.66666698px;line-height:12px"
+         id="flowPara1042" /><flowPara
+         style="font-size:10.66666698px;line-height:12px"
+         id="flowPara1044" /><flowPara
+         style="font-size:10.66666698px;line-height:12px"
+         id="flowPara1046" /><flowPara
+         style="font-size:10.66666698px;line-height:12px"
+         id="flowPara1048" /><flowPara
+         style="font-weight:bold;font-size:21.33333397px;line-height:12px"
+         id="flowPara1030" /><flowPara
+         style="font-weight:bold;font-size:21.33333397px;line-height:12px"
+         id="flowPara1058" /><flowPara
+         style="font-weight:bold;font-size:21.33333397px;line-height:12px"
+         id="flowPara1060" /><flowPara
+         style="font-weight:bold;font-size:21.33333397px;line-height:12px"
+         id="flowPara1062" /><flowPara
+         style="font-weight:bold;font-size:21.33333397px;line-height:12px"
+         id="flowPara1064" /><flowPara
+         style="font-weight:bold;font-size:21.33333397px;line-height:12px"
+         id="flowPara1072">    </flowPara><flowPara
+         style="font-weight:bold;font-size:21.33333397px;line-height:12px"
+         id="flowPara1074"> </flowPara><flowPara
+         style="font-weight:bold;font-size:21.33333397px;line-height:12px;fill:#0000ff"
+         id="flowPara1068">tincidunt</flowPara><flowPara
+         style="font-weight:bold;font-size:21.33333397px;line-height:12px"
+         id="flowPara1076"> </flowPara><flowPara
+         style="font-size:10.66666698px;line-height:12px"
+         id="flowPara1032" /><flowPara
+         style="font-size:10.66666698px;line-height:12px"
+         id="flowPara1034">Nunc tempus aliquet justo et consequat. Duis interdum lorem sed luctus interdum. Morbi vulputate, urna eu sodales sagittis, lacus purus cursus orci, in molestie ligula massa vitae neque.</flowPara></flowRoot>    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.96875px;line-height:0px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="114.34519"
+       y="217.92899"
+       id="text1080"><tspan
+         sodipodi:role="line"
+         id="tspan1078"
+         x="114.34519"
+         y="217.92899"
+         style="line-height:3.96875px;stroke-width:0.26458332px">Image..</tspan><tspan
+         sodipodi:role="line"
+         x="114.34519"
+         y="221.89774"
+         style="line-height:3.96875px;stroke-width:0.26458332px"
+         id="tspan1082">Graph..</tspan><tspan
+         sodipodi:role="line"
+         x="114.34519"
+         y="225.86649"
+         style="line-height:3.96875px;stroke-width:0.26458332px"
+         id="tspan1084">Video..</tspan><tspan
+         sodipodi:role="line"
+         x="114.34519"
+         y="229.83524"
+         style="line-height:3.96875px;stroke-width:0.26458332px"
+         id="tspan1086">etc.</tspan></text>
+  </g>
+</svg>
