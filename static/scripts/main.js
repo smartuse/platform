@@ -4,6 +4,15 @@ Zepto(function($){
 
   riot.mount('sample');
 
+  var tags = riot.mount('rg-pagination', {
+    pagination: {
+      pages: 10,
+      page: 6
+    }
+  });
+
+  tags[0].on('page', function (page) { console.log(page) });
+
   mapboxgl.accessToken = 'pk.eyJ1Ijoic21hcnR1c2UiLCJhIjoiY2pkNGowcGdzMHhpbzMzcWp3eGYydGhmMiJ9.k9QyYo-2pFvyyFDJiz16UA';
   map = new mapboxgl.Map({
     container: 'testmap',

@@ -1,3 +1,53 @@
+body {
+  font-family: "Roboto", sans-serif;
+}
+.c-link--brand {
+	/* text-align: right; */
+}
+.logo {
+	background: url("/img/SmartUse-Logo.png") left center no-repeat;
+	background-size: cover;
+	display: inline-block;
+	width: 193px;
+	height: 70px;
+	margin: 0px;
+	font-size: 0px;
+	margin-top: 15px;
+}
+
 .basemap {
-  width: 500px; height: 400px;
+  width: 100%; height: 400px;
+  background-color: lightgreen;
+}
+
+.o-page-header {
+	margin-bottom: 1em;
+	padding-bottom: 1em;
+}
+
+.nav button {
+	float: right;
+	padding: 5px 15px;
+	margin-right: 5px;
+	margin-bottom: 15px;
+	font-size: 120%;
+	border: 1px solid #999;
+	background: white;
+}
+
+.page-meta h1 {
+	margin-bottom: 0px;
+}
+.page-meta .author {
+	margin-top: 0px;
+}
+
+.map-description {
+	margin: 2em;
+}
+
+.page-content {
+	border-top: 1px solid #ddd;
+	margin-top: 1em;
+	padding-top: 1em;
 }

@@ -48,7 +48,7 @@ require('./config/routes')(app, passport);
 function listen() {
   if (app.get('env') === 'test') return;
   app.listen(port);
-  console.log('SmartUse app started on port ' + port);
+  console.log('SmartUse app started on http://localhost:' + port);
 }
 
 function connect() {
