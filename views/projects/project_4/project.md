@@ -1,7 +1,7 @@
 ---
-title: Mobilitätsprofile
+title: Die funktionale Region
 template: templates/project.pug
-name: "smartuse-mobility"
+name: "smartuse-swisscom"
 author: "HSA"
 mapinfo: "Geschossflächenreserven in der Metropolitanregion, separiert nach Zonenzugehörigkeit (Wohnen, Industrie und Mischzonen)"
 categories:
