@@ -22,10 +22,6 @@ resources:
   linewidth: 1
   color: "#000"
   format: geojson
-  view:
-   lat: 0.5
-   lon: 42.1
-   zoom: 19.1
  -
   name: "oev-stations"
   description: "ÖV S-Bahn Haltestellen"
@@ -38,132 +34,364 @@ resources:
   color: "#000"
   fillcolor: "#000"
   format: geojson
-  view:
-   lat: 0.5
-   lon: 42.1
-   zoom: 19.1
 -
-  name: "geschossflaechen-reserve-industrie"
-  description: "Geschossflaechenreserven Industriezonen"
+  name: "01-pendlerorte"
+  description: "Pendlerorte"
   author: "Amtliche Vermessung Kanton Zürich"
   link: ""
-  path: "data/01-geschossflaechen-industrie.geojson"
+  path: "data/01-pendlerorte.geojson"
   "spatial-profile": "simple-vector"
-  type: filled-polygon
+  type: filled-square
   format: geojson
-  view:
-   lat: 0.5
-   lon: 42.1
-   zoom: 19.1
+  legend:
+   -
+    type: range
+    min: 0.5
+    max: 5.8
+    caption: "Bew. pro Beschäft."
+-
+  name: "02-fischenthal-outline"
+  description: "Fischenthal Outline"
+  author: "Amt für Raumentwicklung "
+  link: "http://www.geolion.zh.ch/geodatensatz/865"
+  path: "data/02-fischenthal-miv.geojson"
+  "spatial-profile": "simple-vector"
+  type: line
+  format: geojson
+-
+  name: "02-fischenthal-miv"
+  description: "Fischenthal MIV Einzug"
+  author: "Verkehrsamt Kanton Zürich"
+  link: "https://afv.zh.ch/internet/volkswirtschaftsdirektion/afv/de/verkehrsgrundlagen/verkehrsnachfrage/verkehrsnachfrage_gemeinden.html"
+  path: "data/02-fischenthal-miv.geojson"
+  "spatial-profile": "simple-vector"
+  type: filled-square
+  format: geojson
   legend:
    -
     type: range
     min: 0
-    max: 2646
-    caption: "Geschossflächenreserven in 1000 m2"
+    max: 440
+    caption: "Ø Personenwege pro Werktag"
 -
-  name: "geschossflaechen-reserve-misch"
-  description: "Geschossflaechenreserven Mischzonen"
-  author: "Amtliche Vermessung Kanton Zürich"
+  name: "02-fischenthal-miv-cluster"
+  description: "Fischenthal MIV Cluster"
+  author: "HSA "
   link: ""
-  path: "data/01-geschossflaechen-misch.geojson"
+  path: "data/02-fischenthal-miv-cluster.geojson"
   "spatial-profile": "simple-vector"
-  type: filled-polygon
+  type: line
   format: geojson
-  view:
-   lat: 0.5
-   lon: 42.1
-   zoom: 19.1
+-
+  name: "02-fischenthal-oev"
+  description: "Fischenthal ÖV Einzug"
+  author: "Verkehrsamt Kanton Zürich"
+  link: "https://afv.zh.ch/internet/volkswirtschaftsdirektion/afv/de/verkehrsgrundlagen/verkehrsnachfrage/verkehrsnachfrage_gemeinden.html"
+  path: "data/02-fischenthal-oev.geojson"
+  "spatial-profile": "simple-vector"
+  type: filled-square
+  format: geojson
   legend:
    -
     type: range
     min: 0
-    max: 2646
-    caption: "Geschossflächenreserven in 1000 m2"
+    max: 55
+    caption: "Ø Personenwege pro Werktag"
 -
-  name: "geschossflaechen-reserve-wohnen"
-  description: "Geschossflaechenreserven Wohnzonen"
-  author: "Amtliche Vermessung Kanton Zürich"
+  name: "02-fischenthal-oev-cluster"
+  description: "Fischenthal ÖV Cluster"
+  author: "HSA "
   link: ""
-  path: "data/01-geschossflaechen-wohnen.geojson"
+  path: "data/02-fischenthal-oev-cluster.geojson"
   "spatial-profile": "simple-vector"
-  type: filled-polygon
+  type: line
   format: geojson
-  view:
-   lat: 0.5
-   lon: 42.1
-   zoom: 19.1
+-
+  name: "03-fehrenaltdorf-outline"
+  description: "Fehrenaltdorf Outline"
+  author: "Amt für Raumentwicklung "
+  link: "http://www.geolion.zh.ch/geodatensatz/865"
+  path: "data/03-fehrenaltdorf-miv.geojson"
+  "spatial-profile": "simple-vector"
+  type: line
+  format: geojson
+-
+  name: "03-fehrenaltdorf-miv"
+  description: "Fehrenaltdorf MIV Einzug"
+  author: "Verkehrsamt Kanton Zürich"
+  link: "https://afv.zh.ch/internet/volkswirtschaftsdirektion/afv/de/verkehrsgrundlagen/verkehrsnachfrage/verkehrsnachfrage_gemeinden.html"
+  path: "data/03-fehrenaltdorf-miv.geojson"
+  "spatial-profile": "simple-vector"
+  type: filled-square
+  format: geojson
   legend:
    -
     type: range
     min: 0
-    max: 2646
-    caption: "Geschossflächenreserven in 1000 m2"
+    max: 440
+    caption: "Ø Personenwege pro Werktag"
 -
-  name: "geschossflaechen-reserve"
-  description: "Geschossflaechenreserven"
-  author: "Amtliche Vermessung Kanton Zürich"
+  name: "03-fehrenaltdorf-miv-cluster"
+  description: "Fehrenaltdorf MIV Cluster"
+  author: "HSA "
   link: ""
-  path: "data/01-geschossflaechen-reserve.geojson"
+  path: "data/03-fehrenaltdorf-miv-cluster.geojson"
   "spatial-profile": "simple-vector"
-  type: filled-polygon
+  type: line
   format: geojson
-  view:
-   lat: 0.5
-   lon: 42.1
-   zoom: 19.1
 -
-  name: "density-people"
-  description: "Personendichte"
-  author: "Copernicus Land Use, Urban Atlas"
-  link: ""
-  path: "data/02-personendichte.geojson"
+  name: "03-fehrenaltdorf-oev"
+  description: "Fehrenaltdorf ÖV Einzug"
+  author: "Verkehrsamt Kanton Zürich"
+  link: "https://afv.zh.ch/internet/volkswirtschaftsdirektion/afv/de/verkehrsgrundlagen/verkehrsnachfrage/verkehrsnachfrage_gemeinden.html"
+  path: "data/03-fehrenaltdorf-oev.geojson"
   "spatial-profile": "simple-vector"
-  type: filled-polygon
+  type: filled-square
   format: geojson
-  view:
-   lat: 0.5
-   lon: 42.1
-   zoom: 19.1
+  legend:
+   -
+    type: range
+    min: 0
+    max: 55
+    caption: "Ø Personenwege pro Werktag"
+-
+  name: "03-fehrenaltdorf-oev-cluster"
+  description: "Fehrenaltdorf ÖV Cluster"
+  author: "HSA "
+  link: ""
+  path: "data/03-fehrenaltdorf-oev-cluster.geojson"
+  "spatial-profile": "simple-vector"
+  type: line
+  format: geojson
+-
+  name: "04-lufingen-outline"
+  description: "Lufingen Outline"
+  author: "Amt für Raumentwicklung "
+  link: "http://www.geolion.zh.ch/geodatensatz/865"
+  path: "data/04-lufingen-outline.geojson"
+  "spatial-profile": "simple-vector"
+  type: line
+  format: geojson
+-
+  name: "04-lufingen-miv"
+  description: "Lufingen MIV Einzug"
+  author: "Verkehrsamt Kanton Zürich"
+  link: "https://afv.zh.ch/internet/volkswirtschaftsdirektion/afv/de/verkehrsgrundlagen/verkehrsnachfrage/verkehrsnachfrage_gemeinden.html"
+  path: "data/04-lufingen-miv.geojson"
+  "spatial-profile": "simple-vector"
+  type: filled-square
+  format: geojson
+  legend:
+   -
+    type: range
+    min: 0
+    max: 440
+    caption: "Ø Personenwege pro Werktag"
+-
+  name: "04-lufingen-miv-cluster"
+  description: "Lufingen MIV Cluster"
+  author: "HSA "
+  link: ""
+  path: "data/04-lufingen-miv-cluster.geojson"
+  "spatial-profile": "simple-vector"
+  type: line
+  format: geojson
+-
+  name: "04-lufingen-oev"
+  description: "Lufingen ÖV Einzug"
+  author: "Verkehrsamt Kanton Zürich"
+  link: "https://afv.zh.ch/internet/volkswirtschaftsdirektion/afv/de/verkehrsgrundlagen/verkehrsnachfrage/verkehrsnachfrage_gemeinden.html"
+  path: "data/04-lufingen-oev.geojson"
+  "spatial-profile": "simple-vector"
+  type: filled-square
+  format: geojson
+  legend:
+   -
+    type: range
+    min: 0
+    max: 55
+    caption: "Ø Personenwege pro Werktag"
+-
+  name: "04-lufingen-oev-cluster"
+  description: "Lufingen ÖV Cluster"
+  author: "HSA "
+  link: ""
+  path: "data/04-lufingen-oev-cluster.geojson"
+  "spatial-profile": "simple-vector"
+  type: line
+  format: geojson
+-
+  name: "05-neerach-outline"
+  description: "Neerach Outline"
+  author: "Amt für Raumentwicklung "
+  link: "http://www.geolion.zh.ch/geodatensatz/865"
+  path: "data/05-neerach-outline.geojson"
+  "spatial-profile": "simple-vector"
+  type: line
+  format: geojson
+-
+  name: "05-neerach-miv"
+  description: "Neerach MIV Einzug"
+  author: "Verkehrsamt Kanton Zürich"
+  link: "https://afv.zh.ch/internet/volkswirtschaftsdirektion/afv/de/verkehrsgrundlagen/verkehrsnachfrage/verkehrsnachfrage_gemeinden.html"
+  path: "data/05-neerach-miv.geojson"
+  "spatial-profile": "simple-vector"
+  type: filled-square
+  format: geojson
+  legend:
+   -
+    type: range
+    min: 0
+    max: 440
+    caption: "Ø Personenwege pro Werktag"
+-
+  name: "05-neerach-miv-cluster"
+  description: "Neerach MIV Cluster"
+  author: "HSA "
+  link: ""
+  path: "data/05-neerach-miv-cluster.geojson"
+  "spatial-profile": "simple-vector"
+  type: line
+  format: geojson
+-
+  name: "05-neerach-oev"
+  description: "Neerach ÖV Einzug"
+  author: "Verkehrsamt Kanton Zürich"
+  link: "https://afv.zh.ch/internet/volkswirtschaftsdirektion/afv/de/verkehrsgrundlagen/verkehrsnachfrage/verkehrsnachfrage_gemeinden.html"
+  path: "data/05-neerach-oev.geojson"
+  "spatial-profile": "simple-vector"
+  type: filled-square
+  format: geojson
+  legend:
+   -
+    type: range
+    min: 0
+    max: 55
+    caption: "Ø Personenwege pro Werktag"
+-
+  name: "05-neerach-oev-cluster"
+  description: "Neerach ÖV Cluster"
+  author: "HSA "
+  link: ""
+  path: "data/05-neerach-oev-cluster.geojson"
+  "spatial-profile": "simple-vector"
+  type: line
+  format: geojson
 compositions:
  -
-  name: "Geschossflächenreserven Industrie"
-  mapinfo: "Geschossflächenreserven in der Metropolitanregion Industriezonen"
-  mapstyle: "simple-grey"
+  name: "Pendlerorte"
+  mapinfo: "Einwohner pro Beschäftigem/r"
+  mapstyle: "light-v9"
+  view:
+   lat: 0.5
+   lon: 42.1
+   zoom: 19.1
   layers:
-   - geschossflaechen-reserve-industrie
+   - 01-pendlerorte
    - oev-edges
    - oev-stations
  -
-  name: "Geschossflächenreserven Mischzonen"
-  mapinfo: "Geschossflächenreserven in der Metropolitanregion Mischzonen"
-  mapstyle: "simple-grey"
+  name: "Fischenthal-MIV"
+  mapinfo: "Mobilitätsprofil MIV Fischenthal"
+  mapstyle: "light-v9"
+  view:
+   lat: 0.5
+   lon: 42.1
+   zoom: 19.1
   layers:
-   - geschossflaechen-reserve-wohnen
+   - 02-fischenthal-miv
+   - 02-fischenthal-miv-cluster
+   - 02-fischenthal-outline
+ -
+  name: "Fischenthal-OEV"
+  mapinfo: "Mobilitätsprofil ÖV Fischenthal"
+  mapstyle: "light-v9"
+  view:
+   lat: 0.5
+   lon: 42.1
+   zoom: 19.1
+  layers:
+   - 02-fischenthal-oev
+   - 02-fischenthal-oev-cluster
+   - 02-fischenthal-outline
    - oev-edges
    - oev-stations
  -
-  name: "Geschossflächenreserven Wohnen"
-  mapinfo: "Geschossflächenreserven in der Metropolitanregion Wohnzonen"
-  mapstyle: "simple-grey"
+  name: "Fehrenaltdorf-MIV"
+  mapinfo: "Mobilitätsprofil MIV Fehrenaltdorf"
+  mapstyle: "light-v9"
+  view:
+   lat: 0.5
+   lon: 42.1
+   zoom: 19.1
   layers:
-   - geschossflaechen-reserve-wohnen
+   - 03-fehrenaltdorf-miv
+   - 03-fehrenaltdorf-miv-cluster
+   - 03-fehrenaltdorf-outline
+ -
+  name: "Fehrenaltdorf-OEV"
+  mapinfo: "Mobilitätsprofil ÖV Fehrenaltdorf"
+  mapstyle: "light-v9"
+  view:
+   lat: 0.5
+   lon: 42.1
+   zoom: 19.1
+  layers:
+   - 03-fehrenaltdorf-oev
+   - 03-fehrenaltdorf-oev-cluster
+   - 03-fehrenaltdorf-outline
    - oev-edges
    - oev-stations
  -
-  name: "Geschossflächenreserven"
-  mapinfo: "Geschossflächenreserven in der Metropolitanregion nach Zonenzugehörigkeit"
-  mapstyle: "simple-grey"
+  name: "Lufingen-MIV"
+  mapinfo: "Mobilitätsprofil MIV Lufingen"
+  mapstyle: "light-v9"
+  view:
+   lat: 0.5
+   lon: 42.1
+   zoom: 19.1
   layers:
-   - geschossflaechen-reserve-kombiniert
+   - 04-lufingen-miv
+   - 04-lufingen-miv-cluster
+   - 04-lufingen-outline
+ -
+  name: "Lufingen-OEV"
+  mapinfo: "Mobilitätsprofil ÖV Lufingen"
+  mapstyle: "light-v9"
+  view:
+   lat: 0.5
+   lon: 42.1
+   zoom: 19.1
+  layers:
+   - 04-lufingen-oev
+   - 04-lufingen-oev-cluster
+   - 04-lufingen-outline
    - oev-edges
    - oev-stations
  -
-  name: "Personendichte"
-  mapinfo: "Personendichte in der Metropolitanregion"
-  mapstyle: "simple-grey"
+  name: "Neerach-MIV"
+  mapinfo: "Mobilitätsprofil MIV Neerach"
+  mapstyle: "light-v9"
+  view:
+   lat: 0.5
+   lon: 42.1
+   zoom: 19.1
   layers:
-   - density-people
+   - 05-neerach-miv
+   - 05-neerach-miv-cluster
+   - 05-neerach-outline
+ -
+  name: "Neerach-OEV"
+  mapinfo: "Mobilitätsprofil ÖV Neerach"
+  mapstyle: "light-v9"
+  view:
+   lat: 0.5
+   lon: 42.1
+   zoom: 19.1
+  layers:
+   - 05-neerach-oev
+   - 05-neerach-oev-cluster
+   - 05-neerach-outline
    - oev-edges
    - oev-stations
 ---

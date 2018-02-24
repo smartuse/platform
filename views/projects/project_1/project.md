@@ -49,7 +49,7 @@ resources:
   link: ""
   path: "data/01-geschossflaechen-industrie.geojson"
   "spatial-profile": "simple-vector"
-  type: filled-polygon
+  type: filled-square
   format: geojson
   view:
    lat: 0.5
@@ -68,7 +68,7 @@ resources:
   link: ""
   path: "data/01-geschossflaechen-misch.geojson"
   "spatial-profile": "simple-vector"
-  type: filled-polygon
+  type: filled-square
   format: geojson
   view:
    lat: 0.5
@@ -87,7 +87,7 @@ resources:
   link: ""
   path: "data/01-geschossflaechen-wohnen.geojson"
   "spatial-profile": "simple-vector"
-  type: filled-polygon
+  type: filled-square
   format: geojson
   view:
    lat: 0.5
@@ -106,7 +106,7 @@ resources:
   link: ""
   path: "data/01-geschossflaechen-reserve.geojson"
   "spatial-profile": "simple-vector"
-  type: filled-polygon
+  type: filled-square
   format: geojson
   view:
    lat: 0.5
@@ -119,7 +119,7 @@ resources:
   link: ""
   path: "data/02-personendichte.geojson"
   "spatial-profile": "simple-vector"
-  type: filled-polygon
+  type: filled-square
   format: geojson
   view:
    lat: 0.5
@@ -129,7 +129,7 @@ compositions:
  -
   name: "Geschossflächenreserven Industrie"
   mapinfo: "Geschossflächenreserven in der Metropolitanregion Industriezonen"
-  mapstyle: "simple-grey"
+  mapstyle: "light-v9"
   layers:
    - geschossflaechen-reserve-industrie
    - oev-edges
@@ -137,7 +137,7 @@ compositions:
  -
   name: "Geschossflächenreserven Mischzonen"
   mapinfo: "Geschossflächenreserven in der Metropolitanregion Mischzonen"
-  mapstyle: "simple-grey"
+  mapstyle: "light-v9"
   layers:
    - geschossflaechen-reserve-wohnen
    - oev-edges
@@ -145,7 +145,7 @@ compositions:
  -
   name: "Geschossflächenreserven Wohnen"
   mapinfo: "Geschossflächenreserven in der Metropolitanregion Wohnzonen"
-  mapstyle: "simple-grey"
+  mapstyle: "light-v9"
   layers:
    - geschossflaechen-reserve-wohnen
    - oev-edges
@@ -153,7 +153,7 @@ compositions:
  -
   name: "Geschossflächenreserven"
   mapinfo: "Geschossflächenreserven in der Metropolitanregion nach Zonenzugehörigkeit"
-  mapstyle: "simple-grey"
+  mapstyle: "light-v9"
   layers:
    - geschossflaechen-reserve-kombiniert
    - oev-edges
@@ -161,7 +161,7 @@ compositions:
  -
   name: "Personendichte"
   mapinfo: "Personendichte in der Metropolitanregion"
-  mapstyle: "simple-grey"
+  mapstyle: "light-v9"
   layers:
    - density-people
    - oev-edges
