@@ -1,21 +1,55 @@
 ---
-title: Sample project
+title: Politische Veränderung
 template: templates/project.pug
-name: "smartuse-sample"
-author: "Grün Stadt Zürich, Tiefbau- und Entsorgungsdepartement"
-mapinfo: "Donec ut ullamcorper nisl, quis auctor velit. Mauris sit amet posuere metus. Nulla urna purus, finibus et arcu venenatis, semper lacinia diam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed et ante ante. Integer blandit, ipsum blandit dignissim scelerisque, ex sapien pulvinar diam, quis facilisis dolor justo in dui."
+name: "smartuse-political"
+author: "HSA"
+mapinfo: "Geschossflächenreserven in der Metropolitanregion, separiert nach Zonenzugehörigkeit (Wohnen, Industrie und Mischzonen)"
 categories:
- - trees
- - government
+ - geschossflaechen
+ - reserven
  - featured
-"date-created": "2018-01-01"
-updated: "April 2018"
+"date-created": "2018-02-20"
+updated: "Februar 2018"
 resources:
  -
-  name: "treedensity-zurich"
-  description: "A sample dataset courtesy of Thorben"
-  path: "data/TreeDensity-Zurich.geojson"
+  name: "oev-edges"
+  description: "ÖV S-Bahn Linien"
+  author: ""
+  link: ""
+  path: "data/00-oev-edges.geojson"
   "spatial-profile": "simple-vector"
+  type: line
+  linewidth: 1
+  color: "#000"
+  format: geojson
+  view:
+   lat: 0.5
+   lon: 42.1
+   zoom: 19.1
+ -
+  name: "oev-stations"
+  description: "ÖV S-Bahn Haltestellen"
+  author: ""
+  link: ""
+  path: "data/00-oev-stations.geojson"
+  "spatial-profile": "simple-vector"
+  type: filled-circle
+  linewidth: 1
+  color: "#000"
+  fillcolor: "#000"
+  format: geojson
+  view:
+   lat: 0.5
+   lon: 42.1
+   zoom: 19.1
+-
+  name: "geschossflaechen-reserve-industrie"
+  description: "Geschossflaechenreserven Industriezonen"
+  author: "Amtliche Vermessung Kanton Zürich"
+  link: ""
+  path: "data/01-geschossflaechen-industrie.geojson"
+  "spatial-profile": "simple-vector"
+  type: filled-polygon
   format: geojson
   view:
    lat: 0.5
@@ -25,18 +59,113 @@ resources:
    -
     type: range
     min: 0
-    max: 255
-    caption: "The range of tree sizes, measured in cm"
+    max: 2646
+    caption: "Geschossflächenreserven in 1000 m2"
+-
+  name: "geschossflaechen-reserve-misch"
+  description: "Geschossflaechenreserven Mischzonen"
+  author: "Amtliche Vermessung Kanton Zürich"
+  link: ""
+  path: "data/01-geschossflaechen-misch.geojson"
+  "spatial-profile": "simple-vector"
+  type: filled-polygon
+  format: geojson
+  view:
+   lat: 0.5
+   lon: 42.1
+   zoom: 19.1
+  legend:
+   -
+    type: range
+    min: 0
+    max: 2646
+    caption: "Geschossflächenreserven in 1000 m2"
+-
+  name: "geschossflaechen-reserve-wohnen"
+  description: "Geschossflaechenreserven Wohnzonen"
+  author: "Amtliche Vermessung Kanton Zürich"
+  link: ""
+  path: "data/01-geschossflaechen-wohnen.geojson"
+  "spatial-profile": "simple-vector"
+  type: filled-polygon
+  format: geojson
+  view:
+   lat: 0.5
+   lon: 42.1
+   zoom: 19.1
+  legend:
+   -
+    type: range
+    min: 0
+    max: 2646
+    caption: "Geschossflächenreserven in 1000 m2"
+-
+  name: "geschossflaechen-reserve"
+  description: "Geschossflaechenreserven"
+  author: "Amtliche Vermessung Kanton Zürich"
+  link: ""
+  path: "data/01-geschossflaechen-reserve.geojson"
+  "spatial-profile": "simple-vector"
+  type: filled-polygon
+  format: geojson
+  view:
+   lat: 0.5
+   lon: 42.1
+   zoom: 19.1
+-
+  name: "density-people"
+  description: "Personendichte"
+  author: "Copernicus Land Use, Urban Atlas"
+  link: ""
+  path: "data/02-personendichte.geojson"
+  "spatial-profile": "simple-vector"
+  type: filled-polygon
+  format: geojson
+  view:
+   lat: 0.5
+   lon: 42.1
+   zoom: 19.1
+compositions:
+ -
+  name: "Geschossflächenreserven Industrie"
+  mapinfo: "Geschossflächenreserven in der Metropolitanregion Industriezonen"
+  mapstyle: "simple-grey"
+  layers:
+   - geschossflaechen-reserve-industrie
+   - oev-edges
+   - oev-stations
+ -
+  name: "Geschossflächenreserven Mischzonen"
+  mapinfo: "Geschossflächenreserven in der Metropolitanregion Mischzonen"
+  mapstyle: "simple-grey"
+  layers:
+   - geschossflaechen-reserve-wohnen
+   - oev-edges
+   - oev-stations
+ -
+  name: "Geschossflächenreserven Wohnen"
+  mapinfo: "Geschossflächenreserven in der Metropolitanregion Wohnzonen"
+  mapstyle: "simple-grey"
+  layers:
+   - geschossflaechen-reserve-wohnen
+   - oev-edges
+   - oev-stations
+ -
+  name: "Geschossflächenreserven"
+  mapinfo: "Geschossflächenreserven in der Metropolitanregion nach Zonenzugehörigkeit"
+  mapstyle: "simple-grey"
+  layers:
+   - geschossflaechen-reserve-kombiniert
+   - oev-edges
+   - oev-stations
+ -
+  name: "Personendichte"
+  mapinfo: "Personendichte in der Metropolitanregion"
+  mapstyle: "simple-grey"
+  layers:
+   - density-people
+   - oev-edges
+   - oev-stations
 ---
 
-This is a sample model shared in the SmartUse application. Projects are managed in the database, and any files they provide stored in this folder. This may include:
-
-- Markdown content such as this text
-- Point data (CSV, GeoJSON)
-- Vector data (GeoJSON, GeoPackage, Shapefile)
-- Pixel data (PNG, JPEG, TIFF, GeoTIFF)
-
-The project metadata itself is specified in a JSON structure, currently in a sample `datapackage.json` file in this folder, and later accessible through an API. The schema will be developed in accordance to the [Spatial Data Package](https://research.okfn.org/spatial-data-package-investigation/#point-datasets) standard.
-
-The below map is rendered using [mapbox-gl-js](https://www.mapbox.com/mapbox-gl-js/).
-We are planning to use the [Riot.js](http://riotjs.com/) library to build out the frontend.
+Die Metropolitanregion Zürich besteht aus einer vielzahl an Gemeinden, die in ihrer Unterschiedlichkeit die Region ausmachen. Diese Zusammenstellung verdeutlicht die Abhängkeiten zwischen tatsächlich gebautem Raum, planerischer Intention und realer Nutzung.
