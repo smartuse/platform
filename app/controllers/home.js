@@ -24,3 +24,6 @@ exports.sample2 = function (req, res) {
 exports.sample3 = function (req, res) {
   res.render('projects/project_3/project');
 };
+exports.sample4 = function (req, res) {
+  res.render('projects/project_4/project');
+};
