@@ -1,11 +1,13 @@
 ---
-title: Politische Veränderung
+title: Trends
 template: templates/project.pug
 name: "smartuse-political"
 author: "HSA"
-mapinfo: "Geschossflächenreserven in der Metropolitanregion, separiert nach Zonenzugehörigkeit (Wohnen, Industrie und Mischzonen)"
+mapinfo: "Räumliche Trends in der Metropolitanregion"
 categories:
- - geschossflaechen
+ - bauland
+ - politisch
+ - wanderung
  - reserven
  - featured
 "date-created": "2018-02-20"
@@ -42,14 +44,27 @@ resources:
    lat: 0.5
    lon: 42.1
    zoom: 19.1
--
-  name: "geschossflaechen-reserve-industrie"
-  description: "Geschossflaechenreserven Industriezonen"
-  author: "Amtliche Vermessung Kanton Zürich"
+ -
+  name: "gemeinde-stats"
+  description: "Statistiken zu Politik, Bauland und Wanderung"
+  author: "Statistik Amt Zürich"
   link: ""
-  path: "data/01-geschossflaechen-industrie.geojson"
+  path: "data/3-00-GemeindeStats.geojson"
   "spatial-profile": "simple-vector"
-  type: filled-polygon
+  type: filled-square
+  format: geojson
+  view:
+   lat: 0.5
+   lon: 42.1
+   zoom: 19.1
+ -
+  name: "political-shift-geojson"
+  description: "Politische Verschiebung Kantonsratswahl Kanton Zürich"
+  author: "Statistik Amt Zürich"
+  link: ""
+  path: "data/3-00-PoliticalShift.geojson"
+  "spatial-profile": "simple-vector"
+  type: filled-square
   format: geojson
   view:
    lat: 0.5
@@ -58,18 +73,16 @@ resources:
   legend:
    -
     type: range
-    min: 0
-    max: 2646
-    caption: "Geschossflächenreserven in 1000 m2"
--
-  name: "geschossflaechen-reserve-misch"
-  description: "Geschossflaechenreserven Mischzonen"
-  author: "Amtliche Vermessung Kanton Zürich"
+    min: -7.4
+    max: 3.2
+    caption: "Verschiebung nach links bzw. rechts (in %)"
+ -
+  name: "political-shift"
+  description: "Politische Verschiebung Kantonsratswahl Kanton Zürich"
+  author: "Statistik Amt Zürich"
   link: ""
-  path: "data/01-geschossflaechen-misch.geojson"
-  "spatial-profile": "simple-vector"
-  type: filled-polygon
-  format: geojson
+  path: "data/3-01-Politische-Verschiebung-KRW-2011-2015-links-rechts-gridded.tif"
+  format: geotiff
   view:
    lat: 0.5
    lon: 42.1
@@ -77,18 +90,16 @@ resources:
   legend:
    -
     type: range
-    min: 0
-    max: 2646
-    caption: "Geschossflächenreserven in 1000 m2"
--
-  name: "geschossflaechen-reserve-wohnen"
-  description: "Geschossflaechenreserven Wohnzonen"
-  author: "Amtliche Vermessung Kanton Zürich"
+    min: -7.4
+    max: 3.2
+    caption: "Verschiebung nach links bzw. rechts (in %)"
+ -
+  name: "baulandreserve"
+  description: "Baulandreserve"
+  author: "Statistik Amt Zürich"
   link: ""
-  path: "data/01-geschossflaechen-wohnen.geojson"
-  "spatial-profile": "simple-vector"
-  type: filled-polygon
-  format: geojson
+  path: "data/3-02-Baulandreserve-ha-gridded.tif"
+  format: geotiff
   view:
    lat: 0.5
    lon: 42.1
@@ -96,76 +107,58 @@ resources:
   legend:
    -
     type: range
-    min: 0
-    max: 2646
-    caption: "Geschossflächenreserven in 1000 m2"
--
-  name: "geschossflaechen-reserve"
-  description: "Geschossflaechenreserven"
-  author: "Amtliche Vermessung Kanton Zürich"
+    min: 11
+    max: 4427
+    caption: "Baulandreserve in ha"
+ -
+  name: "wanderungssaldo"
+  description: "Wanderungssaldo"
+  author: "Statistik Amt Zürich"
   link: ""
-  path: "data/01-geschossflaechen-reserve.geojson"
-  "spatial-profile": "simple-vector"
+  path: "data/3-03-Wanderungssaldo-gridded.tif"
   type: filled-polygon
-  format: geojson
+  format: geotiff
   view:
    lat: 0.5
    lon: 42.1
    zoom: 19.1
--
-  name: "density-people"
-  description: "Personendichte"
-  author: "Copernicus Land Use, Urban Atlas"
-  link: ""
-  path: "data/02-personendichte.geojson"
-  "spatial-profile": "simple-vector"
-  type: filled-polygon
-  format: geojson
-  view:
-   lat: 0.5
-   lon: 42.1
-   zoom: 19.1
+  legend:
+   -
+    type: range
+    min: -57
+    max: 5857
+    caption: "Wanderungssaldo (P./Jahr)"
+
 compositions:
  -
-  name: "Geschossflächenreserven Industrie"
-  mapinfo: "Geschossflächenreserven in der Metropolitanregion Industriezonen"
+  name: "01-political-shift"
+  mapinfo: "Politische Verschiebung Kantonsratswahlen 2011 zu 2015"
   mapstyle: "simple-grey"
   layers:
-   - geschossflaechen-reserve-industrie
+   - political-shift-geojson
    - oev-edges
    - oev-stations
  -
-  name: "Geschossflächenreserven Mischzonen"
-  mapinfo: "Geschossflächenreserven in der Metropolitanregion Mischzonen"
+  name: "02-baulandreserve"
+  mapinfo: "Baulandreserven in ha"
   mapstyle: "simple-grey"
   layers:
-   - geschossflaechen-reserve-wohnen
+   - gemeinde-stats:
+    - layer:
+     - gemeinde64
    - oev-edges
    - oev-stations
  -
-  name: "Geschossflächenreserven Wohnen"
-  mapinfo: "Geschossflächenreserven in der Metropolitanregion Wohnzonen"
+  name: "03-wanderungssaldo"
+  mapinfo: "Wanderungssaldo"
   mapstyle: "simple-grey"
   layers:
-   - geschossflaechen-reserve-wohnen
+   - gemeinde-stats:
+    - layer:
+     - gemeinde99
    - oev-edges
    - oev-stations
- -
-  name: "Geschossflächenreserven"
-  mapinfo: "Geschossflächenreserven in der Metropolitanregion nach Zonenzugehörigkeit"
-  mapstyle: "simple-grey"
-  layers:
-   - geschossflaechen-reserve-kombiniert
-   - oev-edges
-   - oev-stations
- -
-  name: "Personendichte"
-  mapinfo: "Personendichte in der Metropolitanregion"
-  mapstyle: "simple-grey"
-  layers:
-   - density-people
-   - oev-edges
-   - oev-stations
+ 
 ---
 
 Die Metropolitanregion Zürich besteht aus einer vielzahl an Gemeinden, die in ihrer Unterschiedlichkeit die Region ausmachen. Diese Zusammenstellung verdeutlicht die Abhängkeiten zwischen tatsächlich gebautem Raum, planerischer Intention und realer Nutzung.
