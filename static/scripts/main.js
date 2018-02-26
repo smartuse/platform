@@ -40,25 +40,25 @@ Zepto(function($){
             "type": res.type || "symbol"
           };
 
-          if (res.type == "line")
+          if (layer.type == "line")
             layer["paint"] = {
                 "line-color": res.color || "#888",
                 "line-width": res.linewidth || 3
             };
 
-          if (res.type == "circle")
+          if (layer.type == "circle")
             layer["paint"] = {
                 "circle-color": res.fillcolor || "#000",
                 "circle-radius": res.fillradius || 2,
             };
 
-          if (res.type == "fill")
+          if (layer.type == "fill")
             layer["paint"] = {
                 "fill-color": res.fillcolor || "#088",
                 "fill-opacity": res.fillopacity || 0.8,
             };
 
-          if (res.type == "symbol")
+          if (layer.type == "symbol")
             layer["layout"] = {
                 "icon-image": "{icon}-15",
                 "text-field": "{title}",
