@@ -67,6 +67,10 @@ body {
   display: block;
 }
 
+.item .map canvas {
+  left: 0px;
+}
+
 /*
 	Theme controls how everything looks in Gallery CSS.
 */

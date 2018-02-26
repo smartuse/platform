@@ -20,4 +20,4 @@ This is a sample model shared in the SmartUse application. Projects are managed 
 The project metadata itself is specified in a JSON structure, currently in a sample `datapackage.json` file in this folder, and later accessible through an API. The schema will be developed in accordance to the [Spatial Data Package](https://research.okfn.org/spatial-data-package-investigation/#point-datasets) standard.
 
 The below map is rendered using [mapbox-gl-js](https://www.mapbox.com/mapbox-gl-js/).
-We are planning to use the [Riot.js](http://riotjs.com/) library to build out the frontend.
+We are using the [Riot.js](http://riotjs.com/) library with [Blaze CSS](https://www.blazeui.com/) to build out the frontend.

@@ -1,7 +1,6 @@
-var map;
+var maps = {};
 
 Zepto(function($){
-
 
   $.getJSON('/' + project_path + '/datapackage.json', function(datapackage) {
     gallery = $('.gallery'); //.html('<div class="controls"></div>');
@@ -10,7 +9,7 @@ Zepto(function($){
     // console.log(datapackage);
     $.each(datapackage.resources, function(i, res) {
       var ii = i + 1;
-      gallery.prepend('<div id="item-'+ii+'" class="control-operator"></div>');
+      gallery.append('<div id="item-'+ii+'" class="control-operator"></div>');
       // gallery.find('.controls').append('<a href="#item-'+ii+'" class="control-button">•</a>');
       item = gallery.append('<figure class="item" />').find('.item:last-child');
 
@@ -20,12 +19,12 @@ Zepto(function($){
         img.attr('style', 'background-image:url('+imgpath+')');
 
       } else if (res.format == 'geojson') {
-        item.prepend('<div class="map" id="map-'+ii+'" />');
+        item.append('<div class="map" id="map-'+ii+'" />');
         filepath = (res.path.indexOf('http')<0) ?
           '/' + project_path + '/' + res.path : res.path;
         $.getJSON(filepath, function(geojson) {
 
-          map = new mapboxgl.Map({
+          var map = new mapboxgl.Map({
             container: 'map-' + ii,
             style: 'mapbox://styles/mapbox/light-v9',
             zoom: 9.28056836461962,
@@ -49,6 +48,8 @@ Zepto(function($){
             });
           });
 
+          maps[ii] = map;
+
         });
       }
 
@@ -63,7 +64,11 @@ Zepto(function($){
         page: 1
       }
     });
-    tags[0].on('page', function (page) { location.href="#item-" + page; });
+    tags[0].on('page', function (page) {
+      location.href="#item-" + page;
+      if (maps.hasOwnProperty(page))
+        maps[page].resize();
+    });
     location.href="#item-1";
 
   });
