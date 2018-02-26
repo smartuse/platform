@@ -1,7 +1,7 @@
 ---
 title: Sample project
+summary: This is a sample model shared in the SmartUse application.
 template: templates/project.pug
-name: "smartuse-sample"
 author: "Grün Stadt Zürich, Tiefbau- und Entsorgungsdepartement"
 updated: "April 2018"
 categories:
@@ -10,7 +10,7 @@ categories:
  - featured
 ---
 
-This is a sample model shared in the SmartUse application. Projects are managed in the database, and any files they provide stored in this folder. This may include:
+Projects are managed in the database, and any files they provide stored in this folder. This may include:
 
 - Markdown content such as this text
 - Point data (CSV, GeoJSON)

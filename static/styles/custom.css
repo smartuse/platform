@@ -41,9 +41,10 @@ body {
 .page-meta .author {
 	margin-top: 0px;
 }
-
-.map-description {
-	margin: 2em;
+.page-summary {
+  text-align: center;
+  margin: 1em;
+  font-size: 110%;
 }
 
 .page-content {
@@ -53,11 +54,18 @@ body {
 }
 
 .item .description {
+  opacity: 0.7;
+  
   background: white;
   display: inline-block;
   padding: 0.5em 1em;
   vertical-align: bottom;
   text-align: left;
+
+  position: absolute;
+  margin-top: -4em;
+  margin-left: -20%;
+  width: 40%;
 }
 
 .item img, .item .map {

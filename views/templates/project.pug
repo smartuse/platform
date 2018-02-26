@@ -41,9 +41,9 @@ html
           =meta.updated
       .o-grid__cell--width-35.o-grid--bottom.o-grid--right
         .nav
-          a.help(href='/help')
+          a.help(href='https://smartuse.ch')
             button(alt='Help') &#63;
-          a.share(href='/discuss')
+          a.share(href='https://twitter.com/smartuseproject')
             button Share & discuss
       .o-grid__cell--width-15
 
@@ -54,6 +54,12 @@ html
       .o-grid__cell
         rg-pagination
       .o-grid__cell--width-15
+
+    .o-grid
+      .o-grid__cell--width-20
+      .o-grid__cell.page-summary
+        =meta.summary
+      .o-grid__cell--width-20
 
     .o-grid
       .o-grid__cell--width-20

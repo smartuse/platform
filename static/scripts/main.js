@@ -53,9 +53,10 @@ Zepto(function($){
         });
       }
 
-      item.append('<div class="description">'
-      + '<small>' + res.name + '</small><br>'
-      + res.description + '</div>')
+      if (res.name.length>1 && res.description.length>1)
+        item.append('<div class="description">'
+        + '<small>' + res.name + '</small><br>'
+        + res.description + '</div>')
     });
 
     var tags = riot.mount('rg-pagination', {
