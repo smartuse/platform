@@ -1,13 +1,11 @@
 ---
 title: Die funktionale Region
+summary: "Nutzung um den HB Zürich"
 template: templates/project.pug
-name: "smartuse-swisscom"
 author: "Swisscom"
-mapinfo: "Nutzung um den HB Zürich"
 categories:
  - nutzung
  - featured
-"date-created": "2018-02-20"
 updated: "Februar 2018"
 resources:
  -

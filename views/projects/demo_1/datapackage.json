@@ -1,34 +1,141 @@
 {
-  "name": "smartuse-sample",
-  "categories": [
-    "trees", "government", "featured"
-  ],
+  "name": "smartuse-metrobild2",
   "date-created": "2018-01-01",
   "date-updated": "2018-01-01",
   "resources": [
     {
-      "name": "treedensity-zurich",
-      "description": "A sample dataset courtesy of Thorben",
-      "path": "data/TreeDensity-Zurich.geojson",
+      "name": "oev-edges",
+      "description": "ÖV S-Bahn Linien",
+      "author": "",
+      "link": "",
+      "path": "data/00-oev-edges.geojson",
       "spatial-profile": "simple-vector",
+      "type": "line",
+      "linewidth": 1,
+      "color": "#000",
       "format": "geojson",
       "view": {
-        "lat": 0.5, "lon": 42.1, "zoom": 19.1
+        "lat": 0.5,
+        "lon": 42.1,
+        "zoom": 19.1
+      }
+    },
+    {
+      "name": "oev-stations",
+      "description": "ÖV S-Bahn Haltestellen",
+      "author": "",
+      "link": "",
+      "path": "data/00-oev-stations.geojson",
+      "spatial-profile": "simple-vector",
+      "type": "filled-circle",
+      "linewidth": 1,
+      "color": "#000",
+      "fillcolor": "#000",
+      "format": "geojson",
+      "view": {
+        "lat": 0.5,
+        "lon": 42.1,
+        "zoom": 19.1
+      }
+    },
+    {
+      "name": "geschossflaechen-reserve-industrie",
+      "description": "Geschossflaechenreserven Industriezonen",
+      "author": "Amtliche Vermessung Kanton Zürich",
+      "link": "",
+      "path": "data/01-geschossflaechen-industrie.geojson",
+      "spatial-profile": "simple-vector",
+      "type": "filled-square",
+      "format": "geojson",
+      "view": {
+        "lat": 0.5,
+        "lon": 42.1,
+        "zoom": 19.1
       },
       "legend": [
         {
           "type": "range",
-          "min": 0, "max": 255,
-          "caption": "The range of tree sizes, measured in cm"
+          "min": 0,
+          "max": 2646,
+          "caption": "Geschossflächenreserven in 1000 m2"
         }
       ]
     },
     {
-      "name": "office-locations-geojson",
-      "description": "Sample data in GeoJSON format",
-      "path": "data/lat-lon.geojson",
+      "name": "geschossflaechen-reserve-misch",
+      "description": "Geschossflaechenreserven Mischzonen",
+      "author": "Amtliche Vermessung Kanton Zürich",
+      "link": "",
+      "path": "data/01-geschossflaechen-misch.geojson",
       "spatial-profile": "simple-vector",
-      "format": "geojson"
+      "type": "filled-square",
+      "format": "geojson",
+      "view": {
+        "lat": 0.5,
+        "lon": 42.1,
+        "zoom": 19.1
+      },
+      "legend": [
+        {
+          "type": "range",
+          "min": 0,
+          "max": 2646,
+          "caption": "Geschossflächenreserven in 1000 m2"
+        }
+      ]
+    },
+    {
+      "name": "geschossflaechen-reserve-wohnen",
+      "description": "Geschossflaechenreserven Wohnzonen",
+      "author": "Amtliche Vermessung Kanton Zürich",
+      "link": "",
+      "path": "data/01-geschossflaechen-wohnen.geojson",
+      "spatial-profile": "simple-vector",
+      "type": "filled-square",
+      "format": "geojson",
+      "view": {
+        "lat": 0.5,
+        "lon": 42.1,
+        "zoom": 19.1
+      },
+      "legend": [
+        {
+          "type": "range",
+          "min": 0,
+          "max": 2646,
+          "caption": "Geschossflächenreserven in 1000 m2"
+        }
+      ]
+    },
+    {
+      "name": "geschossflaechen-reserve",
+      "description": "Geschossflaechenreserven",
+      "author": "Amtliche Vermessung Kanton Zürich",
+      "link": "",
+      "path": "data/01-geschossflaechen-reserve.geojson",
+      "spatial-profile": "simple-vector",
+      "type": "filled-square",
+      "format": "geojson",
+      "view": {
+        "lat": 0.5,
+        "lon": 42.1,
+        "zoom": 19.1
+      }
+    },
+    {
+      "name": "density-people",
+      "description": "Personendichte",
+      "author": "Copernicus Land Use, Urban Atlas",
+      "link": "",
+      "path": "data/02-personendichte.geojson",
+      "spatial-profile": "simple-vector",
+      "type": "filled-square",
+      "format": "geojson",
+      "view": {
+        "lat": 0.5,
+        "lon": 42.1,
+        "zoom": 19.1
+      }
     }
   ]
 }

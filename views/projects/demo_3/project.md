@@ -1,16 +1,14 @@
 ---
 title: Trends
+summary: "Räumliche Trends in der Metropolitanregion"
 template: templates/project.pug
-name: "smartuse-political"
 author: "HSA"
-mapinfo: "Räumliche Trends in der Metropolitanregion"
 categories:
  - bauland
  - politisch
  - wanderung
  - reserven
  - featured
-"date-created": "2018-02-20"
 updated: "Februar 2018"
 resources:
  -
@@ -158,7 +156,7 @@ compositions:
      - gemeinde99
    - oev-edges
    - oev-stations
- 
+
 ---
 
 Die Metropolitanregion Zürich besteht aus einer vielzahl an Gemeinden, die in ihrer Unterschiedlichkeit die Region ausmachen. Diese Zusammenstellung verdeutlicht die Abhängkeiten zwischen tatsächlich gebautem Raum, planerischer Intention und realer Nutzung.
