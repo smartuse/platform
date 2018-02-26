@@ -7,6 +7,21 @@
   "date-updated": "2018-01-01",
   "resources": [
     {
+      "name": "office-locations-geojson",
+      "description": "Sample data in GeoJSON format",
+      "path": "data/lat-lon.geojson",
+      "spatial-profile": "simple-vector",
+      "format": "geojson"
+    },
+    {
+      "name": "treedensity-zurich",
+      "description": "Tree densities in JPEG format",
+      "path": "preview/TreeDensity-100x100.png",
+      "format": "image"
+    }
+  ],
+  "testing": [
+    {
       "name": "treedensity-zurich",
       "description": "A sample dataset courtesy of Thorben",
       "path": "data/TreeDensity-Zurich.geojson",
@@ -22,13 +37,6 @@
           "caption": "The range of tree sizes, measured in cm"
         }
       ]
-    },
-    {
-      "name": "office-locations-geojson",
-      "description": "Sample data in GeoJSON format",
-      "path": "data/lat-lon.geojson",
-      "spatial-profile": "simple-vector",
-      "format": "geojson"
     }
   ]
 }

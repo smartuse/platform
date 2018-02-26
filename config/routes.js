@@ -13,11 +13,7 @@ const home = require('../app/controllers/home');
 module.exports = function (app, passport) {
 
   app.get('/', home.index);
-  app.get('/1', home.sample1);
-  app.get('/2', home.sample2);
-  app.get('/3', home.sample3);
-  app.get('/4', home.sample4);
-  app.get('/sample', home.sample);
+  app.get('/p/:uid', home.project);
 
   /**
    * Error handling

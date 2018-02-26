@@ -51,3 +51,55 @@ body {
 	margin-top: 1em;
 	padding-top: 1em;
 }
+
+.item .description {
+  background: white;
+  display: inline-block;
+  padding: 0.5em 1em;
+  vertical-align: bottom;
+  text-align: left;
+}
+
+.item img, .item .map {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  display: block;
+}
+
+/*
+	Theme controls how everything looks in Gallery CSS.
+*/
+.gallery {
+  position: relative;
+  width: 100%;
+}
+.gallery .control-button {
+  color: #ccc;
+  color: rgba(255, 255, 255, 0.4);
+}
+.gallery .control-button:hover {
+  color: white;
+  color: rgba(255, 255, 255, 0.8);
+}
+.gallery .item {
+  margin: 0px;
+  height: 400px;
+  overflow: hidden;
+  text-align: center;
+  background: #4d87e2;
+}
+.gallery .controls {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
+.gallery .control-button {
+  display: inline-block;
+  margin: 0 .02em;
+  font-size: 3em;
+  text-align: center;
+  text-decoration: none;
+  transition: color .1s;
+}
