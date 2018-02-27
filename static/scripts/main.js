@@ -71,7 +71,8 @@ Zepto(function($){
             "type": "geojson",
             "data": location.origin + filepath
         };
-        console.log(layer);
+
+        // console.log(layer);
 
         map.on('load', function () {
           map.addLayer(layer);

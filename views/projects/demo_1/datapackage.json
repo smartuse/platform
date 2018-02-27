@@ -4,6 +4,43 @@
   "date-updated": "2018-01-01",
   "resources": [
     {
+      "name": "geschossflaechen-reserve-industrie",
+      "description": "Geschossflaechenreserven Industriezonen",
+      "author": "Amtliche Vermessung Kanton Zürich",
+      "path": "preview/1-01-Geschossflaechenreserve-Industrie.png",
+      "format": "image"
+    },
+    {
+      "name": "geschossflaechen-reserve-misch",
+      "description": "Geschossflaechenreserven Mischzonen",
+      "author": "Amtliche Vermessung Kanton Zürich",
+      "path": "preview/1-02-Geschossflaechenreserve-Mischzonen.png",
+      "format": "image"
+    },
+    {
+      "name": "geschossflaechen-reserve-wohnen",
+      "description": "Geschossflaechenreserven Wohnzonen",
+      "author": "Amtliche Vermessung Kanton Zürich",
+      "path": "preview/1-03-Geschossflaechenreserve-Wohnen.png",
+      "format": "image"
+    },
+    {
+      "name": "geschossflaechen-reserve",
+      "description": "Geschossflaechenreserven",
+      "author": "Amtliche Vermessung Kanton Zürich",
+      "path": "preview/1-04-Geschossflaechenreserve-kombiniert.png",
+      "format": "image"
+    },
+    {
+      "name": "density-people",
+      "description": "Personendichte",
+      "author": "Copernicus Land Use, Urban Atlas",
+      "path": "preview/1-05-Personendichte-Wohnen-Arbeiten.png",
+      "format": "image"
+    }
+  ],
+  "basemaps": [
+    {
       "name": "oev-edges",
       "description": "ÖV S-Bahn Linien",
       "author": "",
@@ -37,7 +74,9 @@
         "lon": 42.1,
         "zoom": 19.1
       }
-    },
+    }
+  ],
+  "NOT_SHOWN": [
     {
       "name": "geschossflaechen-reserve-industrie",
       "description": "Geschossflaechenreserven Industriezonen",
@@ -45,13 +84,8 @@
       "link": "",
       "path": "data/01-geschossflaechen-industrie.geojson",
       "spatial-profile": "simple-vector",
-      "type": "filled-square",
+      "type": "fill",
       "format": "geojson",
-      "view": {
-        "lat": 0.5,
-        "lon": 42.1,
-        "zoom": 19.1
-      },
       "legend": [
         {
           "type": "range",
@@ -68,13 +102,8 @@
       "link": "",
       "path": "data/01-geschossflaechen-misch.geojson",
       "spatial-profile": "simple-vector",
-      "type": "filled-square",
+      "type": "fill",
       "format": "geojson",
-      "view": {
-        "lat": 0.5,
-        "lon": 42.1,
-        "zoom": 19.1
-      },
       "legend": [
         {
           "type": "range",
@@ -91,13 +120,8 @@
       "link": "",
       "path": "data/01-geschossflaechen-wohnen.geojson",
       "spatial-profile": "simple-vector",
-      "type": "filled-square",
+      "type": "fill",
       "format": "geojson",
-      "view": {
-        "lat": 0.5,
-        "lon": 42.1,
-        "zoom": 19.1
-      },
       "legend": [
         {
           "type": "range",
@@ -114,13 +138,8 @@
       "link": "",
       "path": "data/01-geschossflaechen-reserve.geojson",
       "spatial-profile": "simple-vector",
-      "type": "filled-square",
-      "format": "geojson",
-      "view": {
-        "lat": 0.5,
-        "lon": 42.1,
-        "zoom": 19.1
-      }
+      "type": "fill",
+      "format": "geojson"
     },
     {
       "name": "density-people",
@@ -129,13 +148,8 @@
       "link": "",
       "path": "data/02-personendichte.geojson",
       "spatial-profile": "simple-vector",
-      "type": "filled-square",
-      "format": "geojson",
-      "view": {
-        "lat": 0.5,
-        "lon": 42.1,
-        "zoom": 19.1
-      }
+      "type": "fill",
+      "format": "geojson"
     }
   ]
 }
