@@ -22,72 +22,71 @@ Zepto(function($){
         item.append('<div class="map" id="map-'+ii+'" />');
         filepath = (res.path.indexOf('http')<0) ?
           '/' + project_path + '/' + res.path : res.path;
-        $.getJSON(filepath, function(geojson) {
 
-          var lati = 47.38083877331195;
-          var long = 8.548545854583836;
-          var zoom = 9.28056836461962;
+        var lati = 47.38083877331195;
+        var long = 8.548545854583836;
+        var zoom = 9.28056836461962;
 
-          var map = new mapboxgl.Map({
-            container: 'map-' + ii,
-            style: 'mapbox://styles/mapbox/light-v9',
-            zoom: zoom,
-            center: { lat: lati, lng: long }
-          });
-
-          var layer = {
-            "id": res.name,
-            "type": res.type || "symbol"
-          };
-
-          if (layer.type == "line")
-            layer["paint"] = {
-                "line-color": res.color || "#888",
-                "line-width": res.linewidth || 3
-            };
-
-          if (layer.type == "circle")
-            layer["paint"] = {
-                "circle-color": res.fillcolor || "#000",
-                "circle-radius": res.fillradius || 2,
-            };
-
-          if (layer.type == "fill")
-            layer["paint"] = {
-                "fill-color": res.fillcolor || "#088",
-                "fill-opacity": res.fillopacity || 0.8,
-            };
-
-          if (layer.type == "symbol")
-            layer["layout"] = {
-                "icon-image": "{icon}-15",
-                "text-field": "{title}",
-                "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
-                "text-offset": [0, 0.6],
-                "text-anchor": "top"
-            };
-
-          layer["source"] = {
-              "type": "geojson",
-              "data": geojson
-          };
-
-          map.on('load', function () {
-            map.addLayer(layer);
-
-            if (res.view) {
-              map.setCenter({
-                lat: res.view.lat  || lati,
-                lng: res.view.lng  || long
-              });
-              map.setZoom(res.view.zoom || zoom);
-            }
-          });
-
-          maps[ii] = map;
-
+        var map = new mapboxgl.Map({
+          container: 'map-' + ii,
+          style: 'mapbox://styles/mapbox/light-v9',
+          zoom: zoom,
+          center: { lat: lati, lng: long }
         });
-      }
+
+        var layer = {
+          "id": res.name,
+          "type": res.type || "symbol",
+          'layout': {}
+        };
+
+        if (layer.type == "line")
+          layer["paint"] = {
+              "line-color": res.color || "#888",
+              "line-width": res.linewidth || 3
+          };
+
+        if (layer.type == "circle")
+          layer["paint"] = {
+              "circle-color": res.fillcolor || "#000",
+              "circle-radius": res.fillradius || 2,
+          };
+
+        if (layer.type == "fill")
+          layer["paint"] = {
+              "fill-color": res.fillcolor || "#088",
+              "fill-opacity": res.fillopacity || 0.8,
+          };
+
+        if (layer.type == "symbol")
+          layer["layout"] = {
+              "icon-image": "{icon}-15",
+              "text-field": "{title}",
+              "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+              "text-offset": [0, 0.6],
+              "text-anchor": "top"
+          };
+
+        layer["source"] = {
+            "type": "geojson",
+            "data": location.origin + filepath
+        };
+        console.log(layer);
+
+        map.on('load', function () {
+          map.addLayer(layer);
+
+          if (res.view) {
+            map.setCenter({
+              lat: res.view.lat  || lati,
+              lng: res.view.lng  || long
+            });
+            map.setZoom(res.view.zoom || zoom);
+          }
+        });
+
+        maps[ii] = map;
+      } // -geojson
 
       if (res.name.length>1 && res.description.length>1)
         item.append('<div class="description">'

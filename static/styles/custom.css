@@ -23,6 +23,9 @@ body {
 .o-page-header {
 	margin-bottom: 1em;
 	padding-bottom: 1em;
+
+  position: absolute;
+  right: 2em;
 }
 
 .nav button {
@@ -55,7 +58,7 @@ body {
 
 .item .description {
   opacity: 0.7;
-  
+
   background: white;
   display: inline-block;
   padding: 0.5em 1em;
@@ -72,6 +75,7 @@ body {
   width: 100%;
   height: 100%;
   background-size: cover;
+  background-position: top left;
   display: block;
 }
 
@@ -96,7 +100,7 @@ body {
 }
 .gallery .item {
   margin: 0px;
-  height: 400px;
+  height: 550px;
   overflow: hidden;
   text-align: center;
   background: #4d87e2;
