@@ -4,6 +4,29 @@
   "date-updated": "2018-01-01",
 	"resources": [
 		{
+			"name": "swisscom-hb-03-04",
+			"description": "Heatmap HB 03.00-04.00",
+			"author": "Swisscom",
+			"path": "preview/4-03-Swisscom-03h-04h-Night-Program.png",
+			"format": "image"
+		},
+		{
+			"name": "swisscom-hb-08-09",
+			"description": "Heatmap HB 08.00-09.00",
+			"author": "Swisscom",
+			"path": "preview/4-01-Swisscom-08h-09h-Day-Program.png",
+			"format": "image"
+		},
+		{
+			"name": "swisscom-hb-16-17",
+			"description": "Heatmap HB 16.00-17.00",
+			"author": "Swisscom",
+			"path": "preview/4-02-Swisscom-16h-17h-Day-Program.png",
+			"format": "image"
+		}
+	],
+	"NOT_SHOWN": [
+		{
 			"name": "day-program-passive",
 			"description": "Nutzungen Tag",
 			"author": "OpenStreetMap Contributors",
