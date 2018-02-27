@@ -12,7 +12,7 @@
       "spatial-profile": "simple-vector",
       "type": "line",
       "linewidth": 1,
-      "color": "#000",
+      "color": "#00f",
       "format": "geojson"
     },
     {
@@ -24,7 +24,7 @@
       "spatial-profile": "simple-vector",
       "type": "circle",
       "linewidth": 1,
-      "color": "#000",
+      "color": "#0f0",
       "fillcolor": "#000",
       "format": "geojson"
     },
@@ -35,7 +35,7 @@
       "link": "",
       "path": "data/01-pendlerorte.geojson",
       "spatial-profile": "simple-vector",
-      "type": "circle",
+      "type": "fill",
       "format": "geojson",
       "legend": [
         {
@@ -46,6 +46,31 @@
         }
       ]
     },
+    {
+      "name": "02-fischenthal-miv",
+      "description": "Fischenthal MIV Einzug",
+      "author": "Verkehrsamt Kanton Zürich",
+      "link": "https://afv.zh.ch/internet/volkswirtschaftsdirektion/afv/de/verkehrsgrundlagen/verkehrsnachfrage/verkehrsnachfrage_gemeinden.html",
+      "path": "data/02-fischenthal-miv.geojson",
+      "spatial-profile": "simple-vector",
+      "type": "fill",
+      "format": "geojson",
+      "view": {
+        "lon": 8.755558342453355, 
+        "lat": 47.40645424546216,
+        "zoom": 9.26
+      },
+      "legend": [
+        {
+          "type": "range",
+          "min": 0,
+          "max": 440,
+          "caption": "Ø Personenwege pro Werktag"
+        }
+      ]
+    }
+  ],
+  "NOT_SHOWN": [
     {
       "name": "02-fischenthal-outline",
       "description": "Fischenthal Outline",
@@ -59,29 +84,6 @@
         "lat": 47.33, "lon": 8.92, "zoom": 15
       }
     },
-    {
-      "name": "02-fischenthal-miv",
-      "description": "Fischenthal MIV Einzug",
-      "author": "Verkehrsamt Kanton Zürich",
-      "link": "https://afv.zh.ch/internet/volkswirtschaftsdirektion/afv/de/verkehrsgrundlagen/verkehrsnachfrage/verkehrsnachfrage_gemeinden.html",
-      "path": "data/02-fischenthal-miv.geojson",
-      "spatial-profile": "simple-vector",
-      "type": "fill",
-      "format": "geojson",
-      "view": {
-        "lat": 47.33, "lon": 8.92, "zoom": 15
-      },
-      "legend": [
-        {
-          "type": "range",
-          "min": 0,
-          "max": 440,
-          "caption": "Ø Personenwege pro Werktag"
-        }
-      ]
-    }
-  ],
-  "NOT_SHOWN": [
     {
       "name": "02-fischenthal-miv-cluster",
       "description": "Fischenthal MIV Cluster",
