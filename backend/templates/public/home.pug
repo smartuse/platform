@@ -1,0 +1,30 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    title=meta.title
+    script(src='/vendor/zepto-1.2.0.min.js')
+    script(src='/vendor/modernizr-3.5.0.min.js')
+    link(href='/vendor/blaze/blaze.min.css' rel='stylesheet')
+    link(href='/styles/custom.css' rel='stylesheet')
+    script(src='/scripts/main.js')
+  body
+    site-header
+      .o-page-header.o-container.o-container--large
+        .c-link.c-link--brand
+          a.logo(href='/') SmartUse
+
+    .o-grid
+      .o-grid__cell--width-15
+      .o-grid__cell.page-meta
+        h1
+          =meta.title
+      .o-grid__cell--width-15
+
+    .o-grid
+      .o-grid__cell--width-20
+      .o-grid__cell.page-content
+        !=content
+        hr
+        .dynamic-menu
+      .o-grid__cell--width-20

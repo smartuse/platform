@@ -2,7 +2,17 @@ var maps = {};
 
 Zepto(function($){
 
-  $.getJSON('/' + project_path + '/datapackage.json', function(datapackage) {
+  $('.dynamic-menu').each(function() {
+    var self = this;
+    $.getJSON('/api/projects', function(projects) {
+      $.each(projects, function() {
+        $(self).append('<a class="help" href="/project/' + this.id + '">' +
+          '<button>' + this.id + '</button></a>');
+      });
+    });
+  });
+
+  function load_DataPackage(datapackage) {
     gallery = $('.gallery'); //.html('<div class="controls"></div>');
     var rescount = datapackage.resources.length;
     gallery.addClass('items-' + rescount);
@@ -13,15 +23,15 @@ Zepto(function($){
       // gallery.find('.controls').append('<a href="#item-'+ii+'" class="control-button">•</a>');
       item = gallery.append('<figure class="item" />').find('.item:last-child');
 
-      if (res.format == 'image') {
+      if (res.mediatype.indexOf('image/')==0) {
         img = item.append('<img id="image-'+ii+'" />').find('img:last-child');
-        imgpath = '/' + project_path + '/' + res.path;
+        imgpath = project_path + '/' + res.path;
         img.attr('style', 'background-image:url('+imgpath+')');
 
-      } else if (res.format == 'geojson') {
+      } else if (res.mediatype == 'application/vnd.geo+json') {
         item.append('<div class="map" id="map-'+ii+'" />');
         filepath = (res.path.indexOf('http')<0) ?
-          '/' + project_path + '/' + res.path : res.path;
+          project_path + '/' + res.path : res.path;
 
         var lati = 47.38083877331195;
         var long = 8.548545854583836;
@@ -108,8 +118,13 @@ Zepto(function($){
     });
     location.href="#item-1";
 
-  });
-// .basemap#testmap
+  } //-load_DataPackage
+
+  if (typeof project_id != 'undefined') {
+    $.getJSON('/api/project/' + project_id, load_DataPackage);
+  } else if (typeof project_path != 'undefined') {
+    $.getJSON('/' + project_path + '/datapackage.json', load_DataPackage);
+  }
 
   // riot.mount('sample');
 

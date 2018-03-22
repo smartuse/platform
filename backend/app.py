@@ -1,4 +1,10 @@
-from flask import Flask, request, url_for
+from flask import Flask, Markup
+from flask import (
+    url_for,
+    request,
+    render_template,
+    send_from_directory
+)
 from flask_api import FlaskAPI
 from flask_sqlalchemy import SQLAlchemy
 
@@ -7,11 +13,13 @@ from flask_admin.contrib.geoa import ModelView
 
 from geoalchemy2.types import Geometry
 from geoalchemy2.shape import to_shape
-import geojson
+import geojson, markdown
 
 # Create application
-app = FlaskAPI(__name__)
+app = FlaskAPI(__name__, static_url_path='')
+app.debug = True
 app.config.from_pyfile('config.py')
+app.jinja_env.add_extension('pypugjs.ext.jinja.PyPugJSExtension')
 db = SQLAlchemy(app)
 
 # Create admin
@@ -54,7 +62,6 @@ class Project(db.Model):
             'date-created': self.created.strftime("%Y-%d-%m"),
             'date-updated': self.updated.strftime("%Y-%d-%m"),
             'summary': self.summary,
-            'details': self.details,
             'detail_url': request.host_url.rstrip('/') + url_for('project_detail', project_id=self.id)
         }
 
@@ -120,9 +127,9 @@ class Resource(db.Model):
         return r
 
 # Add views
-admin.add_view(ModelView(User, db.session, category='Users'))
-admin.add_view(ModelView(Resource, db.session, category='Datasets'))
-admin.add_view(ModelView(Project, db.session, category='Projects'))
+admin.add_view(ModelView(Resource, db.session))
+admin.add_view(ModelView(Project, db.session))
+admin.add_view(ModelView(User, db.session))
 
 # API views
 @app.route("/api/projects", methods=['GET'])
@@ -138,13 +145,44 @@ def project_detail(project_id):
     project = Project.query.filter_by(id=project_id).first_or_404()
     return {
         'data': project.dict(),
+        'details': project.details,
         'resources': [r.dict() for r in project.resources.all()]
     }
 
 # Flask views
 @app.route('/')
 def index():
-    return '<a href="/admin/">Admin</a> | <a href="/api/projects">Projects</a> | <a href="/api/resources">Resources</a>'
+    f = open('templates/public/index.md', 'r')
+    content = Markup(markdown.markdown(f.read()))
+    meta = { 'title': 'Home' }
+    return render_template('public/home.pug', **locals())
+
+@app.route("/project/<int:project_id>")
+def project_page(project_id):
+    project = Project.query.filter_by(id=project_id).first_or_404()
+    content = Markup(markdown.markdown(project.details))
+    meta = project.dict()
+    return render_template('public/project.pug', **locals())
+
+# Static paths
+@app.route('/img/<path:path>')
+def send_static_img(path):
+    return send_from_directory('../static/img', path)
+@app.route('/scripts/<path:path>')
+def send_static_scripts(path):
+    return send_from_directory('../static/scripts', path)
+@app.route('/styles/<path:path>')
+def send_static_styles(path):
+    return send_from_directory('../static/styles', path)
+@app.route('/tags/<path:path>')
+def send_static_tags(path):
+    return send_from_directory('../static/tags', path)
+@app.route('/vendor/<path:path>')
+def send_static_vendor(path):
+    return send_from_directory('../static/vendor', path)
+@app.route('/data/<path:path>')
+def send_static_data(path):
+    return send_from_directory('../views/projects', path)
 
 if __name__ == '__main__':
     db.create_all()
