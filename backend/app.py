@@ -1,9 +1,10 @@
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, request, url_for
 from flask_api import FlaskAPI
+from flask_sqlalchemy import SQLAlchemy
 
 import flask_admin as admin
 from flask_admin.contrib.geoa import ModelView
+
 from geoalchemy2.types import Geometry
 from geoalchemy2.shape import to_shape
 import geojson
@@ -48,11 +49,13 @@ class Project(db.Model):
     def dict(self):
         return {
             'id': self.id,
+            'name': 'smartuse-%d' % self.id,
             'title': self.title,
-            'created': self.created,
-            'updated': self.updated,
+            'date-created': self.created.strftime("%Y-%d-%m"),
+            'date-updated': self.updated.strftime("%Y-%d-%m"),
             'summary': self.summary,
-            'details': self.details
+            'details': self.details,
+            'detail_url': request.host_url.rstrip('/') + url_for('project_detail', project_id=self.id)
         }
 
 projects_resources = db.Table(
@@ -64,6 +67,10 @@ projects_resources = db.Table(
 SUPPORTED_FORMATS = (
     'png', 'jpg', 'geojson'
 )
+def get_media_type(fmt):
+    if fmt == 'png': return 'image/png'
+    if fmt == 'jpg': return 'image/jpeg'
+    if fmt == 'geojson': return 'application/vnd.geo+json'
 
 def get_features_geojson(name, objs):
     if objs is None:
@@ -78,7 +85,7 @@ def get_features_geojson(name, objs):
 
 class Resource(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(64), unique=True)
+    title = db.Column(db.String(64), unique=True)
     description = db.Column(db.UnicodeText)
     path = db.Column(db.Unicode(256))
     dataformat = db.Column(db.Enum(*SUPPORTED_FORMATS, name="dataformats"))
@@ -88,18 +95,29 @@ class Resource(db.Model):
     zoom = db.Column(db.Integer)
     features = db.Column(Geometry("MULTIPOLYGON"))
     def __repr__(self):
-        return self.name
+        return self.title
     def dict(self):
-        return {
+        r = {
             'id': self.id,
-            'name': self.name,
+            'name': "smartuse-resource-%d" % self.id,
+            'title': self.title,
             'description': self.description,
-            'path': self.path,
             'dataformat': self.dataformat,
-            'zoom': self.zoom,
-            'center': get_features_geojson(self.name + ' center', [self.center]),
-            'features': get_features_geojson(self.name, [self.features]),
+            'mediatype': get_media_type(self.dataformat)
         }
+        if self.path:
+            r['path'] = self.path
+        if self.center is not None:
+            r['data'] = {}
+            DEFAULT_ZOOM = 9
+            r['data']['zoom'] = self.zoom or DEFAULT_ZOOM
+            c = get_features_geojson(r['name']+'-center', [self.center])
+            r['data']['center'] = c
+        if self.features is not None:
+            if not 'data' in r: r['data'] = {}
+            f = get_features_geojson(r['name'], [self.features])
+            r['data']['features'] = f
+        return r
 
 # Add views
 admin.add_view(ModelView(User, db.session, category='Users'))
@@ -126,7 +144,7 @@ def project_detail(project_id):
 # Flask views
 @app.route('/')
 def index():
-    return '<a href="/admin/">Admin access</a>'
+    return '<a href="/admin/">Admin</a> | <a href="/api/projects">Projects</a> | <a href="/api/resources">Resources</a>'
 
 if __name__ == '__main__':
     db.create_all()
