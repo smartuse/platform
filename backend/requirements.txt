@@ -1,6 +1,8 @@
 Flask
 Flask-Admin
+Flask-API
 Flask-SQLAlchemy
 shapely
 geoalchemy2
+geojson
 psycopg2-binary

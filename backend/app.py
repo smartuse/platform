@@ -1,23 +1,22 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_api import FlaskAPI
 
 import flask_admin as admin
-from geoalchemy2.types import Geometry
 from flask_admin.contrib.geoa import ModelView
+from geoalchemy2.types import Geometry
+from geoalchemy2.shape import to_shape
+import geojson
 
 # Create application
-app = Flask(__name__)
+app = FlaskAPI(__name__)
 app.config.from_pyfile('config.py')
 db = SQLAlchemy(app)
-
-# Flask views
-@app.route('/')
-def index():
-    return '<a href="/admin/">Admin access</a>'
 
 # Create admin
 admin = admin.Admin(app, name='SmartUse', template_mode='bootstrap3')
 
+# Define tables and models
 projects_users = db.Table(
     'projects_users',
     db.Column('user_id', db.Integer(), db.ForeignKey('user.id')),
@@ -34,7 +33,7 @@ class User(db.Model):
     notes = db.Column(db.UnicodeText)
     projects = db.relationship('Project', secondary=projects_users,
         backref=db.backref('users', lazy='dynamic'))
-    def __unicode__(self):
+    def __repr__(self):
         return self.username
 
 class Project(db.Model):
@@ -44,8 +43,17 @@ class Project(db.Model):
     updated = db.Column(db.DateTime())
     summary = db.Column(db.Unicode(255))
     details = db.Column(db.UnicodeText)
-    def __unicode__(self):
+    def __repr__(self):
         return self.title
+    def dict(self):
+        return {
+            'id': self.id,
+            'title': self.title,
+            'created': self.created,
+            'updated': self.updated,
+            'summary': self.summary,
+            'details': self.details
+        }
 
 projects_resources = db.Table(
     'projects_resources',
@@ -56,6 +64,17 @@ projects_resources = db.Table(
 SUPPORTED_FORMATS = (
     'png', 'jpg', 'geojson'
 )
+
+def get_features_geojson(name, objs):
+    if objs is None:
+        return {}
+    features = [{'type': 'Feature',
+        'geometry': to_shape(o),
+        'properties': {'name': name}
+    } for o in objs]
+    return geojson.dumps(
+        {'type': 'FeatureCollection', 'features': features}
+    )
 
 class Resource(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -68,15 +87,48 @@ class Resource(db.Model):
     center = db.Column(Geometry("POINT"))
     zoom = db.Column(db.Integer)
     features = db.Column(Geometry("MULTIPOLYGON"))
+    def __repr__(self):
+        return self.name
+    def dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'description': self.description,
+            'path': self.path,
+            'dataformat': self.dataformat,
+            'zoom': self.zoom,
+            'center': get_features_geojson(self.name + ' center', [self.center]),
+            'features': get_features_geojson(self.name, [self.features]),
+        }
 
 # Add views
 admin.add_view(ModelView(User, db.session, category='Users'))
 admin.add_view(ModelView(Resource, db.session, category='Datasets'))
 admin.add_view(ModelView(Project, db.session, category='Projects'))
 
+# API views
+@app.route("/api/projects", methods=['GET'])
+def projects_list():
+    return [p.dict() for p in Project.query.limit(10).all()]
+
+@app.route("/api/resources", methods=['GET'])
+def resources_list():
+    return [r.dict() for r in Resource.query.limit(10).all()]
+
+@app.route("/api/project/<int:project_id>", methods=['GET'])
+def project_detail(project_id):
+    project = Project.query.filter_by(id=project_id).first_or_404()
+    return {
+        'data': project.dict(),
+        'resources': [r.dict() for r in project.resources.all()]
+    }
+
+# Flask views
+@app.route('/')
+def index():
+    return '<a href="/admin/">Admin access</a>'
+
 if __name__ == '__main__':
-
     db.create_all()
-
     # Start app
     app.run(debug=True)
