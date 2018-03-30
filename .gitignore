@@ -1,8 +1,10 @@
+notebooks/data
+
 node_modules
 npm-debug.log
 package-lock.json
 .env
 yarn-error.log
-
+.ipynb_checkpoints
 *.mp4
 .DS_Store
