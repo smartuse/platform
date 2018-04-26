@@ -72,12 +72,14 @@ projects_resources = db.Table(
 )
 
 SUPPORTED_FORMATS = (
-    'png', 'jpg', 'geojson'
+    'png', 'jpg', 'geojson', 'datapackage', 'embed'
 )
 def get_media_type(fmt):
     if fmt == 'png': return 'image/png'
     if fmt == 'jpg': return 'image/jpeg'
     if fmt == 'geojson': return 'application/vnd.geo+json'
+    if fmt == 'datapackage': return 'application/vnd.datapackage+json'
+    return fmt
 
 def get_features_geojson(name, objs):
     if objs is None:

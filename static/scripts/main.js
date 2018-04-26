@@ -12,10 +12,23 @@ Zepto(function($){
     });
   });
 
+  function load_extDataPackage(resource) {
+    // load external data packages
+    $.each(datapackage.resources, function(i, res) {
+      if (res.mediatype == 'application/vnd.datapackage+json') {
+        $.getJSON(res.path, function() {
+          load_DataPackage(datapackage)
+        });
+      }
+    });
+  }
+
   function load_DataPackage(datapackage) {
+
     gallery = $('.gallery'); //.html('<div class="controls"></div>');
     var rescount = datapackage.resources.length;
     gallery.addClass('items-' + rescount);
+
     // console.log(datapackage);
     $.each(datapackage.resources, function(i, res) {
       var ii = i + 1;
@@ -128,6 +141,7 @@ Zepto(function($){
 
   // riot.mount('sample');
 
-  mapboxgl.accessToken = 'pk.eyJ1Ijoic21hcnR1c2UiLCJhIjoiY2pkNGowcGdzMHhpbzMzcWp3eGYydGhmMiJ9.k9QyYo-2pFvyyFDJiz16UA';
+  if (typeof mapboxgl !== 'undefined')
+    mapboxgl.accessToken = 'pk.eyJ1Ijoic21hcnR1c2UiLCJhIjoiY2pkNGowcGdzMHhpbzMzcWp3eGYydGhmMiJ9.k9QyYo-2pFvyyFDJiz16UA';
 
 });
