@@ -10,10 +10,13 @@ from flask_sqlalchemy import SQLAlchemy
 
 import flask_admin as admin
 from flask_admin.contrib.geoa import ModelView
+from flask_admin.contrib.fileadmin import FileAdmin
 
 from geoalchemy2.types import Geometry
 from geoalchemy2.shape import to_shape
 import geojson, markdown
+
+import os.path as ospath
 
 # Create application
 app = FlaskAPI(__name__, static_url_path='')
@@ -96,12 +99,12 @@ class Resource(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(64), unique=True)
     description = db.Column(db.UnicodeText)
-    path = db.Column(db.Unicode(256))
+    path = db.Column(db.Unicode(256), doc="Use the Data tab to upload files")
     dataformat = db.Column(db.Enum(*SUPPORTED_FORMATS, name="dataformats"))
     projects = db.relationship('Project', secondary=projects_resources,
         backref=db.backref('resources', lazy='dynamic'))
-    center = db.Column(Geometry("POINT"))
     zoom = db.Column(db.Integer)
+    center = db.Column(Geometry("POINT"))
     features = db.Column(Geometry("MULTIPOLYGON"))
     def __repr__(self):
         return self.title
@@ -132,6 +135,10 @@ class Resource(db.Model):
 admin.add_view(ModelView(Resource, db.session))
 admin.add_view(ModelView(Project, db.session))
 admin.add_view(ModelView(User, db.session))
+
+# Upload views
+upload_path = ospath.join(ospath.dirname(__file__), '..', 'uploads')
+admin.add_view(FileAdmin(upload_path, '/uploads/', name="Data"))
 
 # API views
 @app.route("/api/projects", methods=['GET'])
@@ -185,6 +192,9 @@ def send_static_vendor(path):
 @app.route('/data/<path:path>')
 def send_static_data(path):
     return send_from_directory('../views/projects', path)
+@app.route('/uploads/<path:path>')
+def send_uploads(path):
+    return send_from_directory('../uploads', path)
 
 if __name__ == '__main__':
     db.create_all()
