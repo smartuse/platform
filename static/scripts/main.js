@@ -12,6 +12,7 @@ Zepto(function($){
     });
   });
 
+  // WIP
   function load_extDataPackage(resource) {
     // load external data packages
     $.each(datapackage.resources, function(i, res) {
@@ -40,6 +41,9 @@ Zepto(function($){
         img = item.append('<img id="image-'+ii+'" />').find('img:last-child');
         imgpath = project_path + '/' + res.path;
         img.attr('style', 'background-image:url('+imgpath+')');
+
+      } else if (res.mediatype == 'application/html') {
+        item.append('<iframe id="frame-'+ii+'" src="' + res.path + '"/>');
 
       } else if (res.mediatype == 'application/vnd.geo+json') {
         item.append('<div class="map" id="map-'+ii+'" />');

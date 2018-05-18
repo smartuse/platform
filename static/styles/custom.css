@@ -71,12 +71,13 @@ body {
   width: 40%;
 }
 
-.item img, .item .map {
+.item img, .item iframe, .item .map {
   width: 100%;
   height: 100%;
   background-size: cover;
   background-position: top left;
   display: block;
+  border: none;
 }
 
 .item .map canvas {

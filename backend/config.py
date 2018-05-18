@@ -2,7 +2,7 @@
 SECRET_KEY = 'd578a8c9b30e'
 
 # database connection
-SQLALCHEMY_DATABASE_URI = 'postgres://nzvvqwnd:FcVvbpm5qhujaaZZobK8sp3h6Qe1tenU@dumbo.db.elephantsql.com:5432/nzvvqwnd'
+SQLALCHEMY_DATABASE_URI = 'postgres://fjmehnha:FJimrMverMOxHvqZj8tPRA-P5MCVnUde@dumbo.db.elephantsql.com:5432/fjmehnha'
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 # development settings
