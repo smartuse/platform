@@ -43,13 +43,14 @@ Zepto(function($){
     gallery = $('.gallery'); //.html('<div class="controls"></div>');
     var rescount = 0;
 
-    // console.log(datapackage);
-    $.each(datapackage.resources, function(i, res) {
-      var ii = i + 1;
+    function add_gallery_item(ii) {
       gallery.append('<div id="item-'+ii+'" class="control-operator"></div>');
       // gallery.find('.controls').append('<a href="#item-'+ii+'" class="control-button">•</a>');
-      item = gallery.append('<figure class="item" />').find('.item:last-child');
+      return gallery.append('<figure class="item" />').find('.item:last-child');
+    }
 
+    // console.log(datapackage);
+    $.each(datapackage.resources, function(i, res) {
       if (typeof(res.mediatype) == 'undefined')
         res.mediatype = get_media_type(res.format);
 
@@ -62,18 +63,24 @@ Zepto(function($){
 
       } else if (res.mediatype.indexOf('image/')==0) {
         rescount = rescount + 1;
-        img = item.append('<img id="image-'+ii+'" />').find('img:last-child');
+        item = add_gallery_item(rescount);
+
+        img = item.append('<img id="image-'+rescount+'" />').find('img:last-child');
         imgpath = get_project_path(res.path);
         img.attr('style', 'background-image:url('+imgpath+')');
 
       } else if (res.mediatype == 'application/html') {
         rescount = rescount + 1;
+        item = add_gallery_item(rescount);
+
         imgpath = get_project_path(res.path);
-        item.append('<iframe id="frame-'+ii+'" src="' + imgpath + '"/>');
+        item.append('<iframe id="frame-'+rescount+'" src="' + imgpath + '"/>');
 
       } else if (res.mediatype == 'application/vnd.geo+json') {
         rescount = rescount + 1;
-        item.append('<div class="map" id="map-'+ii+'" />');
+        item = add_gallery_item(rescount);
+
+        item.append('<div class="map" id="map-'+rescount+'" />');
         filepath = get_project_path(res.path);
 
         var lati = 47.38083877331195;
@@ -81,7 +88,7 @@ Zepto(function($){
         var zoom = 9.28056836461962;
 
         var map = new mapboxgl.Map({
-          container: 'map-' + ii,
+          container: 'map-' + rescount,
           style: 'mapbox://styles/mapbox/light-v9',
           zoom: zoom,
           center: { lat: lati, lng: long }
@@ -139,7 +146,7 @@ Zepto(function($){
           }
         });
 
-        maps[ii] = map;
+        maps[rescount] = map;
       } // -geojson
 
       if (res.name.length>1 && res.description.length>1)
