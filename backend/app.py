@@ -42,11 +42,22 @@ class User(db.Model):
     email = db.Column(db.Unicode(128))
     phone = db.Column(db.Unicode(32))
     organisation = db.Column(db.Unicode(128))
+    url = db.Column(db.Unicode(255))
+    logo = db.Column(db.Unicode(255))
     notes = db.Column(db.UnicodeText)
     projects = db.relationship('Project', secondary=projects_users,
         backref=db.backref('users', lazy='dynamic'))
     def __repr__(self):
         return self.username
+    def dict(self):
+        return {
+            'id': self.id,
+            'username': self.username,
+            'fullname': self.fullname,
+            'organisation': self.organisation,
+            'url': self.url,
+            'logo': self.logo
+        }
 
 class Project(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -61,6 +72,7 @@ class Project(db.Model):
         return {
             'id': self.id,
             'name': 'smartuse-%d' % self.id,
+            'text': self.title,
             'title': self.title,
             'date-created': self.created.strftime("%Y-%d-%m"),
             'date-updated': self.updated.strftime("%Y-%d-%m"),
@@ -104,8 +116,6 @@ class Resource(db.Model):
     dataformat = db.Column(db.Enum(*SUPPORTED_FORMATS, name="dataformats"))
     projects = db.relationship('Project', secondary=projects_resources,
         backref=db.backref('resources', lazy='dynamic'))
-    zoom = db.Column(db.Integer)
-    center = db.Column(Geometry("POINT"))
     features = db.Column(Geometry("MULTIPOLYGON"))
     def __repr__(self):
         return self.title
@@ -120,12 +130,6 @@ class Resource(db.Model):
         }
         if self.path:
             r['path'] = self.path
-        if self.center is not None:
-            r['data'] = {}
-            DEFAULT_ZOOM = 9
-            r['data']['zoom'] = self.zoom or DEFAULT_ZOOM
-            c = get_features_geojson(r['name']+'-center', [self.center])
-            r['data']['center'] = c
         if self.features is not None:
             if not 'data' in r: r['data'] = {}
             f = get_features_geojson(r['name'], [self.features])
@@ -156,6 +160,7 @@ def project_detail(project_id):
     return {
         'data': project.dict(),
         'details': project.details,
+        'author': project.users.first().dict(),
         'resources': [r.dict() for r in project.resources.all()]
     }
 
@@ -172,6 +177,7 @@ def project_page(project_id):
     project = Project.query.filter_by(id=project_id).first_or_404()
     content = Markup(markdown.markdown(project.details))
     meta = project.dict()
+    author = project.users.first().dict()
     return render_template('public/project.pug', **locals())
 
 # Static paths

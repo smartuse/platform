@@ -3,12 +3,20 @@ html
   head
     meta(charset='utf-8')
     title=meta.title
+
+    link(rel='icon' href='static/favicon.ico')
+    link(rel='manifest' href='static/manifest.json')
     script(src='/vendor/zepto-1.2.0.min.js')
     script(src='/vendor/modernizr-3.5.0.min.js')
+    script(src='/vendor/riot+compiler.min.js')
+    script(src='/vendor/riotgear.min.js')
+    link(href='/vendor/blaze-1.1.3.min.css' rel='stylesheet')
     link(href='/vendor/blaze/blaze.min.css' rel='stylesheet')
     link(href='/styles/custom.css' rel='stylesheet')
+
     script(src='/scripts/main.js')
   body
+    rg-drawer
     site-header
       .o-page-header.o-container.o-container--large
         .c-link.c-link--brand
@@ -25,6 +33,4 @@ html
       .o-grid__cell--width-20
       .o-grid__cell.page-content
         !=content
-        hr
-        .dynamic-menu
       .o-grid__cell--width-20

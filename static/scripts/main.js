@@ -2,13 +2,26 @@ var maps = {};
 
 Zepto(function($){
 
-  $('.dynamic-menu').each(function() {
+  $('rg-drawer').each(function() {
     var self = this;
     $.getJSON('/api/projects', function(projects) {
-      $.each(projects, function() {
-        $(self).append('<a class="help" href="/project/' + this.id + '">' +
-          '<button>' + this.id + '</button></a>');
-      });
+      $('.c-link--brand a').click(function(e) {
+        e.preventDefault();
+
+        var tag = riot.mount('rg-drawer', {
+          drawer: {
+            header: 'Select project',
+            isvisible: true,
+            position: 'top',
+            items: projects
+          }
+        });
+        tag[0].on('select', function (item) {
+          location.href='/project/' + item.id;
+        });
+
+        return false;
+      })
     });
   });
 
@@ -86,7 +99,7 @@ Zepto(function($){
               "line-width": res.linewidth || 3
           };
 
-        if (layer.type == "circle")pagination__controls
+        if (layer.type == "circle")
           layer["paint"] = {
               "circle-color": res.fillcolor || "#000",
               "circle-radius": res.fillradius || 2,
@@ -162,7 +175,6 @@ Zepto(function($){
     $.getJSON('/' + project_path + '/datapackage.json', load_DataPackage);
   }
 
-  // riot.mount('sample');
 
   if (typeof mapboxgl !== 'undefined')
     mapboxgl.accessToken = 'pk.eyJ1Ijoic21hcnR1c2UiLCJhIjoiY2pkNGowcGdzMHhpbzMzcWp3eGYydGhmMiJ9.k9QyYo-2pFvyyFDJiz16UA';

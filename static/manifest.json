@@ -1,0 +1,10 @@
+{
+  "name": "SmartUse",
+  "icons": [
+    {
+      "src": "img/icon.png",
+      "type": "image\/png",
+      "density": "1.0"
+    }
+  ]
+}

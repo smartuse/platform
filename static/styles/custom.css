@@ -1,8 +1,19 @@
 body {
   font-family: "Roboto", sans-serif;
 }
+.c-link-author {
+  padding: 10px 10px 0px 10px;
+}
+.c-link-author img {
+    height: 100%;
+    width: 100%;
+}
 .c-link--brand {
-	/* text-align: right; */
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  transform: scale(0.7);
+  background: white;
 }
 .logo {
 	background: url("/img/SmartUse-Logo.png") left center no-repeat;
@@ -57,7 +68,7 @@ body {
 }
 
 .item .description {
-  opacity: 0.7;
+  opacity: 1.0;
 
   background: white;
   display: inline-block;
@@ -66,8 +77,10 @@ body {
   text-align: left;
 
   position: absolute;
+  bottom: 0px;
   margin-top: -4em;
   margin-left: -20%;
+  height: auto;
   width: 40%;
 }
 
