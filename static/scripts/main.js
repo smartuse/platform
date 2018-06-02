@@ -12,23 +12,23 @@ Zepto(function($){
     });
   });
 
-  // WIP
-  function load_extDataPackage(resource) {
-    // load external data packages
-    $.each(datapackage.resources, function(i, res) {
-      if (res.mediatype == 'application/vnd.datapackage+json') {
-        $.getJSON(res.path, function() {
-          load_DataPackage(datapackage)
-        });
-      }
-    });
+  function get_project_path(url) {
+      return (url.indexOf('http')<0) ?
+        project_path + '/' + url : url;
+  }
+  function get_media_type(fmt) {
+      if (fmt == 'image') return 'image/png';
+      if (fmt == 'png') return 'image/png';
+      if (fmt == 'jpg') return 'image/jpeg';
+      if (fmt == 'geojson') return 'application/vnd.geo+json';
+      if (fmt == 'datapackage') return 'application/vnd.datapackage+json';
+      if (fmt == 'embed') return 'application/html';
   }
 
   function load_DataPackage(datapackage) {
 
     gallery = $('.gallery'); //.html('<div class="controls"></div>');
-    var rescount = datapackage.resources.length;
-    gallery.addClass('items-' + rescount);
+    var rescount = 0;
 
     // console.log(datapackage);
     $.each(datapackage.resources, function(i, res) {
@@ -37,18 +37,31 @@ Zepto(function($){
       // gallery.find('.controls').append('<a href="#item-'+ii+'" class="control-button">•</a>');
       item = gallery.append('<figure class="item" />').find('.item:last-child');
 
-      if (res.mediatype.indexOf('image/')==0) {
+      if (typeof(res.mediatype) == 'undefined')
+        res.mediatype = get_media_type(res.format);
+
+      if (res.mediatype == 'application/vnd.datapackage+json') {
+        pp = get_project_path(res.path);
+        $.getJSON(get_project_path(res.path), function(dp) {
+          project_path = pp.substring(0, pp.lastIndexOf('/')+1);
+          load_DataPackage(dp);
+        });
+
+      } else if (res.mediatype.indexOf('image/')==0) {
+        rescount = rescount + 1;
         img = item.append('<img id="image-'+ii+'" />').find('img:last-child');
-        imgpath = project_path + '/' + res.path;
+        imgpath = get_project_path(res.path);
         img.attr('style', 'background-image:url('+imgpath+')');
 
       } else if (res.mediatype == 'application/html') {
-        item.append('<iframe id="frame-'+ii+'" src="' + res.path + '"/>');
+        rescount = rescount + 1;
+        imgpath = get_project_path(res.path);
+        item.append('<iframe id="frame-'+ii+'" src="' + imgpath + '"/>');
 
       } else if (res.mediatype == 'application/vnd.geo+json') {
+        rescount = rescount + 1;
         item.append('<div class="map" id="map-'+ii+'" />');
-        filepath = (res.path.indexOf('http')<0) ?
-          project_path + '/' + res.path : res.path;
+        filepath = get_project_path(res.path);
 
         var lati = 47.38083877331195;
         var long = 8.548545854583836;
@@ -73,7 +86,7 @@ Zepto(function($){
               "line-width": res.linewidth || 3
           };
 
-        if (layer.type == "circle")
+        if (layer.type == "circle")pagination__controls
           layer["paint"] = {
               "circle-color": res.fillcolor || "#000",
               "circle-radius": res.fillradius || 2,
@@ -96,7 +109,7 @@ Zepto(function($){
 
         layer["source"] = {
             "type": "geojson",
-            "data": location.origin + filepath
+            "data": filepath
         };
 
         // console.log(layer);
@@ -122,19 +135,24 @@ Zepto(function($){
         + res.description + '</div>')
     });
 
-    console.log(rescount);
-    var tags = riot.mount('rg-pagination', {
-      pagination: {
-        pages: rescount,
-        page: 1
-      }
-    });
-    tags[0].on('page', function (page) {
-      location.href="#item-" + page;
-      if (maps.hasOwnProperty(page))
-        maps[page].resize();
-    });
-    location.href="#item-1";
+    if (rescount > 0) {
+      console.log(rescount);
+      gallery.addClass('items-' + rescount);
+      var tags = riot.mount('rg-pagination', {
+        pagination: {
+          pages: rescount,
+          page: 1
+        }
+      });
+      tags[0].on('page', function (page) {
+        if (page < 1) { return tags[0].forward(); }
+        if (page > rescount) { return tags[0].back(); }
+        location.href="#item-" + page;
+        if (maps.hasOwnProperty(page))
+          maps[page].resize();
+      });
+      location.href="#item-1";
+    }
 
   } //-load_DataPackage
 
