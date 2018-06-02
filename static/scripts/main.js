@@ -122,6 +122,7 @@ Zepto(function($){
         + res.description + '</div>')
     });
 
+    console.log(rescount);
     var tags = riot.mount('rg-pagination', {
       pagination: {
         pages: rescount,

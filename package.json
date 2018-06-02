@@ -24,13 +24,13 @@
     "test": "./node_modules/.bin/cross-env NODE_ENV=test ./node_modules/.bin/babel-tape-runner test/test-*.js"
   },
   "devDependencies": {
-    "babel-eslint": "~8.2.1",
+    "babel-eslint": "~8.2.3",
     "babel-preset-stage-0": "~6.24.1",
     "babel-tape-runner": "~2.0.1",
-    "eslint": "~4.16.0",
-    "nodemon": "~1.14.11",
-    "supertest": "~3.0.0",
-    "tape": "~4.8.0"
+    "eslint": "~4.19.1",
+    "nodemon": "~1.17.5",
+    "supertest": "~3.1.0",
+    "tape": "~4.9.0"
   },
   "repository": {
     "type": "git",
@@ -42,5 +42,8 @@
     "mapping",
     "zurich",
     "switzerland"
-  ]
+  ],
+  "dependencies": {
+    "riotgear": "^3.5.0"
+  }
 }
