@@ -7,6 +7,7 @@ Zepto(function($){
     $.getJSON('/api/projects', function(projects) {
       $('.c-link--brand a').click(function(e) {
         e.preventDefault();
+        window.scrollTo(0, 0);
 
         var tag = riot.mount('rg-drawer', {
           drawer: {
