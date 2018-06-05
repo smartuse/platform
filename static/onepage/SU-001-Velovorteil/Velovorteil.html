@@ -220,7 +220,7 @@
 </div>
 <div id="map" class="">
 <div class="pin-topleft z100 dark fill-dark desktop" id="sidebar">
-  <div id="minimap" class="section mapboxgl-map"></div>
+ <!--  <div id="minimap" class="section mapboxgl-map"></div> -->
   <div class="pad1 section clearfix">
     <span class="small uppercase label strong">Darstellung</span>
     <div class="rounded-toggle fr col4">
@@ -281,7 +281,7 @@
   <fieldset class="pad1 section">
       <span class="fl small uppercase label quiet" style="line-height:18px">Skalierung <br>anpassen</span>
       <div class="col8 fr">
-        <input type="range" value="25" min="10" max="50" step="1" id="slider" class="col12">
+        <input type="range" value="25" min="5" max="100" step="1" id="slider" class="col12">
         <span class="fl small quiet uppercase">Minimal</span>
         <span class="fr small quiet uppercase">Maximieren</span>
       </div>
@@ -306,7 +306,7 @@ var map = new mapboxgl.Map({
     style: 'mapbox://styles/smartuse/cjhvsxei30byw2srwxhod48r6', //stylesheet location
     center: [8.513,47.378], // starting position
     hash: false,
-    zoom: 12.5, // starting zoom
+    zoom: 12.0, // starting zoom
     minZoom: 12,
     maxZoom:16,
       attributionControl: {
@@ -314,14 +314,16 @@ var map = new mapboxgl.Map({
     }
 });
 
-var minimap = new mapboxgl.Map({
-     container: 'minimap', // container id
-    style: 'mapbox://styles/smartuse/cji0b3mxu3sei2sr0grks2s5o', //stylesheet location
-    center: [8.513,47.378], // starting position
-    interactive: false,
-    hash: false,
-    zoom: 7
-});
+map.addControl(new mapboxgl.NavigationControl());
+
+// var minimap = new mapboxgl.Map({
+//      container: 'minimap', // container id
+//     style: 'mapbox://styles/smartuse/cji0b3mxu3sei2sr0grks2s5o', //stylesheet location
+//     center: [8.513,47.378], // starting position
+//     interactive: false,
+//     hash: false,
+//     zoom: 7
+// });
 
 // legend
 var scale = new mapboxgl.Map({
@@ -330,7 +332,7 @@ var scale = new mapboxgl.Map({
   center: [0,0], // starting position
   pitch:30,
   hash: false,
-  zoom: 12, // starting zoom
+  zoom: 10, // starting zoom
 });
 var km = 0.006383179578579702;
 var halfKm = 0.004495196886323735;
@@ -396,7 +398,10 @@ var tinySquare =
   var blockDensity = document.querySelector('#blockdensity');
   var mapObj = document.querySelector('#map');
   var canvas = document.querySelector('.mapboxgl-canvas-container.mapboxgl-interactive');
-  var currentPlace = 'zuerich-central';
+  var currentPlace = 'Zuerich-Central';
+
+  var placeLatLng = {'Zuerich-Central':[8.5399366,47.3770116], 'Seebach-Zentrum':[8.5437706,47.4197246], 'Niederhasli-Zentrum':[8.4813986,47.4803416], 'Neerach-Rathaus':[8.4673346,47.5110986], 'Volketswil-Zentrum':[8.6767616,47.3883476]};
+  
   // app state
   var currentBlock; //block id of current block to throttle geocoder
   var inspector = 'block';  //inspector mode (block, radius, none)
@@ -438,6 +443,20 @@ var tinySquare =
       'paint':{
         'fill-color':'#fff',
         'fill-opacity':1.0
+      },
+      'filter':["==","layer","Zuerich-Central"],  
+      }, 'mapbox-terrain-rgb')
+
+    .addLayer({
+      'id': 'namesExtrusion',
+      'type': 'fill-extrusion',
+      'source':'places',
+      'source-layer':'SU-001-MKZ-Places-Squares-3i8bfd',
+      'paint':{
+        'fill-extrusion-color':'#fff',
+        'fill-extrusion-height':1000,
+        'fill-extrusion-base':0,
+        'fill-extrusion-opacity':0,
       },
       'filter':["==","layer","Zuerich-Central"],  
       }, 'mapbox-terrain-rgb')
@@ -577,6 +596,7 @@ var tinySquare =
       .easeTo({pitch: state.pitch})
       .setPaintProperty('extrusions', 'fill-extrusion-opacity',state.extrusionopacity)
       .setPaintProperty('fills', 'fill-opacity',state.fillopacity)
+      .setPaintProperty('namesExtrusion', 'fill-extrusion-opacity',state.extrusionopacity)
 
     scale.fire('resize');
   }
@@ -613,6 +633,8 @@ var tinySquare =
     map.setFilter("fills",["==","layer",currentPlace])
     map.setFilter("extrusions",["==","layer",currentPlace])
     map.setFilter("names",["==","layer",currentPlace])
+    map.setFilter("namesExtrusion",["==","layer",currentPlace])
+    map.panTo(placeLatLng[place])
   }
 
   // function setInspector(mode){

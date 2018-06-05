@@ -34,17 +34,6 @@ html
           a(href=author.url)
             img(src=author.logo)
       .o-grid__cell.page-meta
-        h1
-          =meta.title
-        p.author
-          =author.organisation
-      .o-grid__cell--width-15
-
-    .o-grid
-      .o-grid__cell--width-15
-      .o-grid__cell.page-meta
-        p.date
-          =meta.updated
       .o-grid__cell--width-15
 
     .gallery
@@ -57,8 +46,21 @@ html
 
     .o-grid
       .o-grid__cell--width-20
-      .o-grid__cell.page-summary
-        =meta.summary
+      .o-grid__cell
+        h1
+          =meta.title
+        p.date
+          =meta.updated
+        p.description
+          =meta.summary
+      .o-grid
+        .o-grid__cell--width-5.authorImage
+          img(src=author.image)
+        .o-grid__cell.authorText
+          p.author
+            =author.organisation
+          p.authorPerson
+            =author.person
       .o-grid__cell--width-20
 
     .o-grid
