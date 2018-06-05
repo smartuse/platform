@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<!-- saved from url=(0035)https://www.mapbox.com/bites/00273/ -->
-<html><head>
+<html>
+<head>
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
@@ -235,7 +235,7 @@
     <div class="rounded-toggle fr col7">
       <select id="placeselector" name="placetoggle">
         <option value="Zuerich-Central">Zürich, Central</option>
-        <option value="Zuerich-Lindenplatz">Zürich, Lindenplatz</option>
+        <!-- <option value="Zuerich-Lindenplatz">Zürich, Lindenplatz</option> -->
         <option value="Seebach-Zentrum">Seebach, Zentrum</option>
         <option value="Niederhasli-Zentrum">Niederhasli, Zentrum</option>
         <option value="Neerach-Rathaus">Neerach, Rathaus</option>
@@ -288,10 +288,11 @@
   </fieldset>
 </div>
 <div class="pin-bottomright desktop" id="legends">
-  <div class="pin-bottomright dark pad1" id="colorscale" style="margin:10px">
+  <div class="pin-bottomright dark pad1" id="colorscale" style="margin:10px;">
     <div id="legend"></div>
-    <span class="fl small quiet uppercase">0 min. schneller</span>
-    <span class="fr small quiet uppercase" id="max">35min+ schneller</span>
+    <span class="fl small quiet uppercase">0 min</span>
+    <span class="fr small quiet uppercase" id="max">35min+</span>
+    <span class="center block small quiet uppercase">Velo schneller als ÖV</span>
   </div>
   <div id="scale" class="pin-bottomright dark mapboxgl-map">
     <div class="rcon small account z100 quiet center pin-bottom pad1y code" id="people">10 min schneller</div>
@@ -411,9 +412,9 @@ var tinySquare =
       'type':'vector',
       'url':'mapbox://smartuse.1pccndyh'
     })
-    .addSource('central-label', {
+    .addSource('places', {
       'type':'vector',
-      'url':'mapbox://smartuse.aue85k3j'
+      'url':'mapbox://smartuse.bqg2tkma'
     })
     .addSource('highlight', {
       'type':'geojson',
@@ -427,6 +428,35 @@ var tinySquare =
 
     //set up data layers
     map
+
+    .addLayer({
+      'id': 'names',
+      'type': 'fill',
+      'source':'places',
+      'source-layer':'SU-001-MKZ-Places-Squares-3i8bfd',
+      'visibility': 'visible',
+      'paint':{
+        'fill-color':'#fff',
+        'fill-opacity':1.0
+      },
+      'filter':["==","layer","Zuerich-Central"],  
+      }, 'mapbox-terrain-rgb')
+
+    .addLayer({
+      'id': 'namesText',
+      'type': 'symbol',
+      'source':'places',
+      'source-layer':'SU-001-MKZ-Places-Squares-3i8bfd',
+      'symbol-placement':'line',
+      'text-field': ["to-string", ["get", "name"]],
+      'text-font':["Arial"],
+      'text-size':16,
+      'text-anchor':"left",
+      'text-offset':[0.5,0],
+      'visibility': 'visible',
+      'filter':["==","layer","Zuerich-Central"],  
+      }, 'names')
+
     .addLayer({
       'id':'fills',
       'type':'fill',
@@ -438,7 +468,7 @@ var tinySquare =
         'fill-opacity':0.6
       },
       'filter':["==","layer","Zuerich-Central"],
-    }, 'mapbox-terrain-rgb')
+    }, 'names')
 
     .addLayer({
     	'id':'extrusions',
@@ -460,21 +490,9 @@ var tinySquare =
       //   //'fill-opacity-transition': {'duration':1000},
          //'fill-opacity':0
       //},
-    }, 'mapbox-terrain-rgb')
+    }, 'names')
 
-    .addLayer({
-      'id': 'label',
-      'type': 'symbol',
-      'source':'central-label',
-      'source-layer':'SU-001-Zuerich-Central-59ezna',
-      'text-field': ["to-string", ["get", "name"]],
-      'icon-image':'marker-11',
-      'color':'hsl(0, 0%, 100%)',
-      'text-font':["Roboto Bold","Arial Unicode MS Regular"],
-      'text-size':16,
-      'text-anchor':"left",
-      'text-offset':[0.5,0]
-      }, 'mapbox-terrain-rgb')
+    
     })
 
     // sync map to legend
@@ -554,7 +572,7 @@ var tinySquare =
   function tilt(eh){
     var state = !eh ? {pitch:0, klass:[''], extrusionopacity: 0, fillopacity:0.5} : {pitch:50, klass:['tilted'], extrusionopacity: 0.6, fillopacity:0}
 
-    document.querySelector('#legends').className = 'pin-bottomright scale '+state.klass[0]
+    //document.querySelector('#legends').className = 'pin-bottomright scale '+state.klass[0]
     map
       .easeTo({pitch: state.pitch})
       .setPaintProperty('extrusions', 'fill-extrusion-opacity',state.extrusionopacity)
@@ -594,6 +612,7 @@ var tinySquare =
     currentPlace = place
     map.setFilter("fills",["==","layer",currentPlace])
     map.setFilter("extrusions",["==","layer",currentPlace])
+    map.setFilter("names",["==","layer",currentPlace])
   }
 
   // function setInspector(mode){
