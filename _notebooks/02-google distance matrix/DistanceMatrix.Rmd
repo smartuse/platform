@@ -1,0 +1,218 @@
+---
+title: "Matrix"
+output: html_notebook
+---
+
+```{r}
+
+originX <- "47.36320283"
+originY <- "8.53340314"
+destinationX <- c("47.38799879")
+destinationY <- c("8.47828302")
+
+# pointPairs <- paste(gridPoints[1:1,3],gridPoints[1:1,2], sep = ",")
+# #points <- paste(pointPairs,collapse = "|")
+# 
+# dataDriving <- fromJSON(getURL(sprintf("https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=47.36320283,8.53340314&destinations=%s&mode=driving&key={API_KEY}", points)))[[3]][[1]]
+# dataWalking <- fromJSON(getURL(sprintf("https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=47.36320283,8.53340314&destinations=%s&mode=walking&key={API_KEY}", points)))[[3]][[1]]
+# dataBicycling <- fromJSON(getURL(sprintf("https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=47.36320283,8.53340314&destinations=%s&mode=bicycling&key={API_KEY}", points)))[[3]][[1]]
+# dataTransit <- fromJSON(getURL(sprintf("https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=47.36320283,8.53340314&destinations=%s&mode=transit&key={API_KEY}", points)))[[3]][[1]]
+
+# dataPoint <- data.frame("x"=originX,
+#            "y"=originY,
+#            "destX"=gridPoints[1:1,2],
+#            "destY"=gridPoints[1:1,3],
+#            "Driving m"=dataDriving[[1]][[1]][[1]][[2]],
+#            "Driving min"=dataDriving[[1]][[1]][[2]][[2]],
+#            "Bicycling m"=dataBicycling[[1]][[1]][[1]][[2]],
+#            "Bicycling min"=dataBicycling[[1]][[1]][[2]][[2]],
+#            "Transit m"=dataTransit[[1]][[1]][[1]][[2]],
+#            "Transit min"=dataTransit[[1]][[1]][[2]][[2]],
+#            "Walking m"=dataWalking[[1]][[1]][[1]][[2]],
+#            "Walking min"=dataWalking[[1]][[1]][[2]][[2]]
+#            )
+
+for(numberOfPoints in 501:10000){
+  pointPairs <- paste(gridPoints[numberOfPoints:numberOfPoints,3],gridPoints[numberOfPoints:numberOfPoints,2], sep = ",")
+points <- paste(pointPairs,collapse = "|")
+
+dataDriving <- fromJSON(getURL(sprintf("https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=47.36320283,8.53340314&destinations=%s&mode=driving&key={API_KEY}", points)))[[3]][[1]]
+dataWalking <- fromJSON(getURL(sprintf("https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=47.36320283,8.53340314&destinations=%s&mode=walking&key={API_KEY}", points)))[[3]][[1]]
+dataBicycling <- fromJSON(getURL(sprintf("https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=47.36320283,8.53340314&destinations=%s&mode=bicycling&key={API_KEY}", points)))[[3]][[1]]
+dataTransit <- fromJSON(getURL(sprintf("https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=47.36320283,8.53340314&destinations=%s&mode=transit&key={API_KEY}", points)))[[3]][[1]]
+
+if(dataTransit[[1]]=="ZERO_RESULTS"){
+  dataTransitDistance = Inf
+  dataTransitDuration = Inf
+} else {
+  dataTransitDistance = dataTransit[[1]][[1]][[1]][[2]]
+  dataTransitDuration = dataTransit[[1]][[1]][[2]][[2]]
+}
+
+if(dataBicycling[[1]]=="ZERO_RESULTS"){
+  dataBDistance = Inf
+  dataBDuration = Inf
+} else {
+  dataBDistance = dataBicycling[[1]][[1]][[1]][[2]]
+  dataBDuration = dataBicycling[[1]][[1]][[2]][[2]]
+}
+
+if(dataWalking[[1]]=="ZERO_RESULTS"){
+  dataWalkingDistance = Inf
+  dataWalkingDuration = Inf
+} else {
+  dataWalkingDistance = dataWalking[[1]][[1]][[1]][[2]]
+  dataWalkingDuration = dataWalking[[1]][[1]][[2]][[2]]
+}
+
+dataRow <- c(originX,
+           originY,
+           gridPoints[numberOfPoints:numberOfPoints,2],
+           gridPoints[numberOfPoints:numberOfPoints,3],
+           dataDriving[[1]][[1]][[1]][[2]],
+           dataDriving[[1]][[1]][[2]][[2]],
+           dataBDistance,
+           dataBDuration,
+           dataTransitDistance,
+           dataTransitDuration,
+           dataWalkingDistance,
+           dataWalkingDuration
+           )
+dataPoint <- rbind(dataPoint[1:numberOfPoints,],dataRow,dataPoint[-(1:numberOfPoints),])
+
+}
+
+View(dataPoint)
+
+```
+
+
+
+```{r}
+
+library(RJSONIO)
+library(RCurl)
+library(Matrix)
+library(foreach)
+
+destinationPoints <- data.frame("x"=c(8.5399366,8.5437706,8.4813986,8.4673346,8.6767616,8.4850518,8.5151529,8.5142333,8.5261612,8.7235155),"y"=c(47.3770116,47.4197246,47.4803416,47.5110986,47.3883476,47.3876176,47.3796559,47.3742395,47.385216,47.4992612))
+
+toTimestamp <- function(date){as.numeric(as.POSIXct(date,origin="1970-01-01",tz="UTC")) }
+
+columns <- c("originX","originY","destX","destY","bicycling","transit_w_morning","transit_w_night","transit_we","driving_peak","driving_offpeak")
+
+# REQUEST
+
+pointPairs <- paste(destinationPoints[,1], destinationPoints[,2], sep = ",")
+points <- paste(pointPairs,collapse = "|")
+
+departureTimesTransit <- c("transit_w_morning"=toTimestamp("2018-04-18 7:00"),"transit_w_night"=toTimestamp("2018-04-18 4:00"),"transit_we"=toTimestamp("2018-04-22 11:00"))
+departureTimesDriving <- c("driving_peak"=toTimestamp("2018-04-18 7:00"),"driving_offpeak"=toTimestamp("2018-04-18 14:00"))
+
+jsonData <- list()
+#matroxData <- data.frame("")
+
+modes <- c("bicycling","driving","transit")
+
+travelMatrix = matrix(
+  nrow=length(pointPairs)*length(pointPairs),
+  ncol=length(columns),
+  byrow = TRUE)
+
+dimnames(travelMatrix) = list(c(),columns)
+
+originXCells <- pointGridCSV[,2]
+originYCells <- pointGridCSV[,3]
+originPoints <- data.frame("x"=originXCells,"y"=originYCells)
+
+steps = nrow(originPoints) %/% 25
+
+# for(s in 1:10){
+#   lowerBound = ((s-1)*25)+1
+#   upperBound = s*25
+#   cells <- originPoints[lowerBound:upperBound,]
+#   cellPointPairs <- paste(cells[,1], cells[,2], sep = ",")
+#   cellPoints <- paste(cellPointPairs,collapse = "|")
+# }
+
+# for(mode in modes){
+#   if(mode == "bicycling"){
+#     requestURL <- sprintf("https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=%s&destinations=%s&mode=%s&key={API_KEY}", points, points, mode)
+#     #print(requestURL)
+#     data <- fromJSON(getURL(requestURL))
+#     rows <- data[[3]]
+#     for(o in seq(length(rows))){
+#       for(d in seq(length(rows[[o]][[1]]))){
+#         rowNumber <- (o-1)*10 + d
+#         travelMatrix[rowNumber,"originX"] = destinationPoints[o,1]
+#         travelMatrix[rowNumber,"originY"] = destinationPoints[o,2]
+#         travelMatrix[rowNumber,"destX"] = destinationPoints[d,1]
+#         travelMatrix[rowNumber,"destY"] = destinationPoints[d,2]
+#         travelMatrix[rowNumber,"bicycling"] = rows[[o]][[1]][[d]][[2]][[2]]
+#       }
+#     }
+#   }
+#   else if(mode == "transit") {
+#     for(i in seq(length(departureTimesTransit))){
+#       time = departureTimesTransit[[i]]
+#       key = names(departureTimesTransit)[i]
+#       requestURL <- sprintf("https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=%s&destinations=%s&mode=%s&departure_time=%s&key={API_KEY}", points, points, mode, time)
+#       #print(requestURL)
+#       data <- fromJSON(getURL(requestURL))
+#       rows <- data[[3]]
+#       for(o in seq(length(rows))){
+#         for(d in seq(length(rows[[o]][[1]]))){
+#           rowNumber <- (o-1)*10 + d
+#           travelMatrix[rowNumber,key] = rows[[o]][[1]][[d]][[2]][[2]]
+#         }
+#       }
+#       Sys.sleep(3)
+#     }
+#   }
+#   else if(mode == "driving") {
+#     for(i in seq(length(departureTimesDriving))){
+#       time = departureTimesDriving[[i]]
+#       key = names(departureTimesDriving)[i]
+#       requestURL <- sprintf("https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=%s&destinations=%s&mode=%s&departure_time=%s&key={API_KEY}", points, points, mode, time)
+#       #print(requestURL)
+#       data <- fromJSON(getURL(requestURL))
+#       rows <- data[[3]]
+#       for(o in seq(length(rows))){
+#         for(d in seq(length(rows[[o]][[1]]))){
+#           rowNumber <- (o-1)*10 + d
+#           travelMatrix[rowNumber,key] = rows[[o]][[1]][[d]][[3]][[2]]
+#         }
+#       }
+#       Sys.sleep(2)
+#     }
+#   }
+# }
+
+#travelMatrix
+
+
+```
+
+```{r}
+
+destinationPoints <- data.frame("x"=c(47.3770116,47.4197246,47.4803416,47.5110986,47.3883476,47.3876176,47.3796559,47.3742395,47.385216,47.4992612),"y"=c(8.5399366,8.5437706,8.4813986,8.4673346,8.6767616,8.4850518,8.5151529,8.5142333,8.5261612,8.7235155))
+pointPairs <- paste(destinationPoints[,1], destinationPoints[,2], sep = ",")
+columns <- c("originX","originY","destX","destY","bicycling","transit_w_morning","transit_w_night","transit_we","driving_peak","driving_offpeak")
+
+A = matrix(
+  nrow=length(pointPairs)*length(pointPairs),
+  ncol=length(columns),
+  byrow = TRUE)
+
+dimnames(A) = list(c(),columns)
+
+A[1,"originX"] = "Test"
+
+A
+
+```
+
+
+
+
+
