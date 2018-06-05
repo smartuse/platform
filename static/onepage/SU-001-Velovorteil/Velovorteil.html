@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>Bike vs. OEV</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.45.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.45.0/mapbox-gl.css' rel='stylesheet' />
+    <link href="base.css" rel="stylesheet">
+    <style>
+        body { margin:0; padding:0;}
+        #map { 
+            position:absolute; 
+            top:0; bottom:0; 
+            right:0; 
+            left:0; 
+            background:rgba(52,51,50,1);
+            overflow:hidden;
+        }
+        #sidebar, #colorscale {
+          width:300px;
+          z-index: 100;
+          background-color: #333;
+        }
+
+        #sidebar{
+          border-right:1px solid #000;
+          height:100%;
+        }
+        .section {
+          border-bottom:1px solid #1c1c1c;
+        }
+
+        .label {
+          line-height:25px;
+        }
+        #tooltip {
+          position:absolute;
+          z-index:100;
+          pointer-events:none;
+          display:none;
+          opacity:0;
+        }
+
+        .inspector:hover #tooltip {
+          opacity:1;
+          display:block;
+        }
+        .inspector .mapboxgl-canvas-container.mapboxgl-interactive {
+          cursor:none;
+        }
+        .dot {
+          width:5px;
+          height:5px;
+          background:white;
+          border-radius:2.5px;
+          position:absolute;
+        }
+        .line {
+          position:absolute;
+          height:0px;
+          width:30px;
+          transform:rotate(45deg);
+          border-top:3px solid #333;
+          transform-origin:left center;
+          z-index:-1;
+          margin-top:-1.5px;
+        }
+        .bubble{
+          background:#333;
+          color:white;
+          padding:6px;
+          margin:15px;
+        }
+        #legend {
+          height:20px;
+          width:100%;
+          background: -webkit-linear-gradient(left, #333 0%, #097685 30%, #9e0071 100%);
+        }
+
+        /* form elements & geocoder overrides*/
+
+        .mapboxgl-ctrl-geocoder {
+          min-width:0px;
+        }
+        .mapboxgl-ctrl-geocoder, .mapboxgl-ctrl-geocoder ul{
+          width:100%;
+          -webkit-filter:invert(100%);
+          color:white;
+        }
+        .mapboxgl-ctrl-geocoder ul > li.active > a,
+        .mapboxgl-ctrl-geocoder ul > li > a:hover {
+          color:#55e9ff;
+          font-weight:bold;
+          background:black;
+        }
+        .mapboxgl-ctrl-geocoder input[type='text'],
+        .mapboxgl-ctrl-geocoder input[type='text']:focus {
+          color:black;
+        }
+
+        ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+          color: #333;
+        }
+        .mapboxgl-ctrl-geocoder ul,
+        li.active {
+          background: black;
+          color: white;
+        }
+        .fill-dark .rounded-toggle {
+          background:#1c1c1c;
+          color:#222;
+          padding:0px;
+          margin:0px;
+        }
+        .dark .rounded-toggle > *{
+          color:#999;
+        }
+
+        #placeselector {
+          background-color: rgba(0,0,0,0.5);
+        }
+
+        .fill-dark .rounded-toggle input[type=radio]:checked + label{
+          background:#ccc;
+          color:black;
+          font-weight:bold;
+        }
+
+        .mapboxgl-ctrl-geocoder ul > li > a {
+          color:#ccc;
+        }
+        /* legend stuff */
+
+        #scale{
+          width:120px;
+          margin:10px;
+          height:120px;
+          z-index:-99;
+        }
+        #scale canvas{
+          overflow:hidden;
+          pointer-events:none;
+        }
+        .tilted #colorscale {
+          display:none;
+        }
+        .tilted #scale {
+          z-index:99;
+          background:rgba(0,0,0,0.75);
+          border-radius:50%;
+        }
+
+        #scale .mapboxgl-ctrl,
+        #minimap .mapboxgl-ctrl{
+          display:none;
+        }
+        .icon:not(.big):after,
+        .rcon:not(.big):after{
+          margin:0px;
+          font-size:18px;
+        }
+
+
+        #minimap{
+          height:220px;
+          cursor:crosshair;
+        }
+
+        .marker {
+          width:8px;
+          height:8px;
+          border-radius:50%;
+          border:2px solid #333;
+          background:#55e9ff;
+          cursor:pointer;
+          margin-left:-6px;
+          margin-top:-6px;
+          transition:all 0.2s;
+        }
+
+        .marker:hover{
+          background:orange;
+          width:16px;
+          height:16px;
+          margin-left:-10px;
+          margin-top:-10px;
+          border:2px solid white;
+        }
+        .mapboxgl-popup .mapboxgl-popup-tip{
+          opacity:0;
+        }
+        .mapboxgl-popup-content {
+          background:black;
+          padding:5px;
+        }
+
+        .mobile{
+          display:none;
+        }
+        @media (max-width: 800px) {
+          .desktop {
+            display: none;
+          }
+
+          .mobile{
+            display:block;
+          }
+          #map {
+            left:0px;
+          }
+        }
+    </style>
+</head>
+<body>
+<div class="mobile z100 dark pin-bottom center fill-dark pad1y">
+  Best experience on desktop
+</div>
+<div id="map" class="">
+<div class="pin-topleft z100 dark fill-dark desktop" id="sidebar">
+ <!--  <div id="minimap" class="section mapboxgl-map"></div> -->
+  <div class="pad1 section clearfix">
+    <span class="small uppercase label strong">Darstellung</span>
+    <div class="rounded-toggle fr col4">
+      <input id="pizza" type="radio" name="rtoggle" value="pizza" checked="checked">
+      <label for="pizza" class="col6 center" onclick="tilt(false)">2D</label>
+      <input id="penny" type="radio" name="rtoggle" value="penny">
+      <label for="penny" class="col6 center" onclick="tilt(true)">3D</label>
+    </div>
+  </div>
+  <div class="pad1 section clearfix">
+    <span class="small uppercase label quiet">Zielort</span>
+    <div class="rounded-toggle fr col7">
+      <select id="placeselector" name="placetoggle">
+        <option value="Zuerich-Central">Zürich, Central</option>
+        <!-- <option value="Zuerich-Lindenplatz">Zürich, Lindenplatz</option> -->
+        <option value="Seebach-Zentrum">Seebach, Zentrum</option>
+        <option value="Niederhasli-Zentrum">Niederhasli, Zentrum</option>
+        <option value="Neerach-Rathaus">Neerach, Rathaus</option>
+        <option value="Volketswil-Zentrum">Volketswil, Zentrum</option>
+      </select>
+    </div>
+  </div>
+  <div class="pad1 section clearfix ">
+    <span class="small uppercase label quiet">Strassen</span>
+    <div class="rounded-toggle fr col4">
+      <input id="roadson" type="radio" name="roads" value="roadson" checked="checked">
+      <label for="roadson" class="col6 center" onclick="toggleRoads(true)">AN</label>
+      <input id="roadsoff" type="radio" name="roads" value="roadsoff">
+      <label for="roadsoff" class="col6 center" onclick="toggleRoads(false)">AUS</label>
+    </div>
+  </div>
+  <div class="pad1 section clearfix">
+    <span class="small uppercase label quiet">Labels</span>
+    <div class="rounded-toggle fr col4">
+      <input id="labelon" type="radio" name="labels" value="labelon" checked="checked">
+      <label for="labelon" class="col6 center" onclick="toggleLabels(true)">AN</label>
+      <input id="labeloff" type="radio" name="labels" value="labeloff">
+      <label for="labeloff" class="col6 center" onclick="toggleLabels(false)">AUS</label>
+    </div>
+  </div>
+  <div class="pad1 section clearfix hidden">
+    <span class="small uppercase label quiet short">Inspector</span>
+    <div class="rounded-toggle fr col8">
+      <input id="none" type="radio" name="inspector" value="none">
+      <label for="none" class="col4 center" onclick="setInspector(&quot;none&quot;)">None</label>
+      <input id="radius" type="radio" name="inspector" value="radius">
+      <label for="radius" class="col4 center" onclick="setInspector(&quot;radius&quot;)">Radius</label>
+      <input id="block" type="radio" name="inspector" value="block" checked="checked">
+      <label for="block" class="col4 center" onclick="setInspector(&quot;block&quot;)">Block</label>
+    </div>
+  </div>
+  <div class="section clearfix checkbox-pill pill hidden">
+    <input type="checkbox" id="checkbox-penny" checked="checked">
+    <label for="checkbox-penny" class="button icon check col6 small uppercase label quiet">Labels</label>
+    <input type="checkbox" id="checkbox-pizza" checked="checked">
+    <label for="checkbox-pizza" class="button icon check col6 small uppercase label quiet">Roads</label>
+  </div>
+  <fieldset class="pad1 section">
+      <span class="fl small uppercase label quiet" style="line-height:18px">Skalierung <br>anpassen</span>
+      <div class="col8 fr">
+        <input type="range" value="25" min="5" max="100" step="1" id="slider" class="col12">
+        <span class="fl small quiet uppercase">Minimal</span>
+        <span class="fr small quiet uppercase">Maximieren</span>
+      </div>
+  </fieldset>
+</div>
+<div class="pin-bottomright desktop" id="legends">
+  <div class="pin-bottomright dark pad1" id="colorscale" style="margin:10px;">
+    <div id="legend"></div>
+    <span class="fl small quiet uppercase">0 min</span>
+    <span class="fr small quiet uppercase" id="max">35min+</span>
+    <span class="center block small quiet uppercase">Velo schneller als ÖV</span>
+  </div>
+  <div id="scale" class="pin-bottomright dark mapboxgl-map">
+    <div class="rcon small account z100 quiet center pin-bottom pad1y code" id="people">10 min schneller</div>
+  <div class="mapboxgl-canvas-container mapboxgl-interactive"><canvas class="mapboxgl-canvas" tabindex="0" width="120" height="120" style="position: absolute; width: 120px; height: 120px;"></canvas></div><div class="mapboxgl-control-container"><div class="mapboxgl-ctrl-top-left"></div><div class="mapboxgl-ctrl-top-right"></div><div class="mapboxgl-ctrl-bottom-left"></div><div class="mapboxgl-ctrl-bottom-right"><div class="mapboxgl-ctrl-attrib mapboxgl-ctrl"></div></div></div></div>
+</div>
+<script>
+mapboxgl.accessToken = 'pk.eyJ1Ijoic21hcnR1c2UiLCJhIjoiY2plOGw0dTdvMGE2cTJxcHIzOXc5MzN5cSJ9.2o7Xnvi97pwvoAkq4OKcIg';
+
+var map = new mapboxgl.Map({
+    container: 'map', // container id
+    style: 'mapbox://styles/smartuse/cjhvsxei30byw2srwxhod48r6', //stylesheet location
+    center: [8.513,47.378], // starting position
+    hash: false,
+    zoom: 12.0, // starting zoom
+    minZoom: 12,
+    maxZoom:16,
+      attributionControl: {
+      position: 'bottom-left'
+    }
+});
+
+map.addControl(new mapboxgl.NavigationControl());
+
+// var minimap = new mapboxgl.Map({
+//      container: 'minimap', // container id
+//     style: 'mapbox://styles/smartuse/cji0b3mxu3sei2sr0grks2s5o', //stylesheet location
+//     center: [8.513,47.378], // starting position
+//     interactive: false,
+//     hash: false,
+//     zoom: 7
+// });
+
+// legend
+var scale = new mapboxgl.Map({
+  container: 'scale', // container id
+  //  style: 'mapbox://styles/peterqliu/ciug08i80007t2inwzocmwno1', //stylesheet location
+  center: [0,0], // starting position
+  pitch:30,
+  hash: false,
+  zoom: 10, // starting zoom
+});
+var km = 0.006383179578579702;
+var halfKm = 0.004495196886323735;
+var tinySquare = 
+
+//set up legend
+  {
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "properties": {
+          "pkm2":16000
+        },
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [0, halfKm],
+              [halfKm,0],
+              [0,-halfKm],
+              [-halfKm,0],
+              [0, halfKm]
+            ]
+          ]
+        }
+      }
+    ]
+  };
+
+  scale.on('load', function(){
+    scale.addSource('square', {"type": "geojson", "data": tinySquare})
+    .addLayer({
+        'id':'extrusions',
+        'type':'fill',
+        'source':'square',
+        'paint':{
+          'fill-color':'#eee',
+          'fill-extrude-base':0,
+          'fill-extrude-height':{"stops": [[0,10],[1450000,20000]], "property": "pkm2", "base": 1},
+          'fill-opacity':0.75
+        },
+        'paint.tilted':{
+          'fill-opacity':0.9
+        }
+    })
+  })
+
+  //bind slider to scale-adjusting function
+  document.querySelector('#slider')
+    .addEventListener('change', function(){
+      setScale(parseInt(this.value))
+    })
+
+    document.querySelector('#placeselector')
+    .addEventListener('change', function(){
+      setPlace(this.value)
+    })
+
+  //oft-used DOM elements
+  var tooltip = document.querySelector('#tooltip');
+  var blockCount = document.querySelector('#blockcount');
+  var blockDensity = document.querySelector('#blockdensity');
+  var mapObj = document.querySelector('#map');
+  var canvas = document.querySelector('.mapboxgl-canvas-container.mapboxgl-interactive');
+  var currentPlace = 'Zuerich-Central';
+
+  var placeLatLng = {'Zuerich-Central':[8.5399366,47.3770116], 'Seebach-Zentrum':[8.5437706,47.4197246], 'Niederhasli-Zentrum':[8.4813986,47.4803416], 'Neerach-Rathaus':[8.4673346,47.5110986], 'Volketswil-Zentrum':[8.6767616,47.3883476]};
+  
+  // app state
+  var currentBlock; //block id of current block to throttle geocoder
+  var inspector = 'block';  //inspector mode (block, radius, none)
+
+  var emptyGeojson = {
+    "type": "FeatureCollection",
+    "features": []
+  };
+  map.on('load', function(){
+
+    //set up data sources
+    map.addSource('velovorteil', {
+      'type':'vector',
+      'url':'mapbox://smartuse.1pccndyh'
+    })
+    .addSource('places', {
+      'type':'vector',
+      'url':'mapbox://smartuse.bqg2tkma'
+    })
+    .addSource('highlight', {
+      'type':'geojson',
+      'data': emptyGeojson
+    })
+    .addSource('radiusHighlight', {
+      'type':'geojson',
+      'data': emptyGeojson
+    })
+
+
+    //set up data layers
+    map
+
+    .addLayer({
+      'id': 'names',
+      'type': 'fill',
+      'source':'places',
+      'source-layer':'SU-001-MKZ-Places-Squares-3i8bfd',
+      'visibility': 'visible',
+      'paint':{
+        'fill-color':'#fff',
+        'fill-opacity':1.0
+      },
+      'filter':["==","layer","Zuerich-Central"],  
+      }, 'mapbox-terrain-rgb')
+
+    .addLayer({
+      'id': 'namesExtrusion',
+      'type': 'fill-extrusion',
+      'source':'places',
+      'source-layer':'SU-001-MKZ-Places-Squares-3i8bfd',
+      'paint':{
+        'fill-extrusion-color':'#fff',
+        'fill-extrusion-height':1000,
+        'fill-extrusion-base':0,
+        'fill-extrusion-opacity':0,
+      },
+      'filter':["==","layer","Zuerich-Central"],  
+      }, 'mapbox-terrain-rgb')
+
+    .addLayer({
+      'id': 'namesText',
+      'type': 'symbol',
+      'source':'places',
+      'source-layer':'SU-001-MKZ-Places-Squares-3i8bfd',
+      'symbol-placement':'line',
+      'text-field': ["to-string", ["get", "name"]],
+      'text-font':["Arial"],
+      'text-size':16,
+      'text-anchor':"left",
+      'text-offset':[0.5,0],
+      'visibility': 'visible',
+      'filter':["==","layer","Zuerich-Central"],  
+      }, 'names')
+
+    .addLayer({
+      'id':'fills',
+      'type':'fill',
+      //'filter':['all', ['<', 'pkm2', 300000]],
+      'source':'velovorteil',
+      'source-layer':'MKZ-Erreichbarkeit-dzk7jz',
+      'paint':{
+        'fill-color':["interpolate",["linear"],["get", "DM-BA"],0,"hsl(0, 0%, 0%)",10,"hsl(187, 93%, 52%)",35,"hsl(317, 100%, 62%)"],
+        'fill-opacity':0.6
+      },
+      'filter':["==","layer","Zuerich-Central"],
+    }, 'names')
+
+    .addLayer({
+    	'id':'extrusions',
+      'type':'fill-extrusion',
+      //'filter':['all', ['>', 'p', 1], ['<', 'pkm2', 300000]],
+      'source':'velovorteil',
+      'source-layer':'MKZ-Erreichbarkeit-dzk7jz',
+      'paint':{
+        'fill-extrusion-height':["*",["get", "DM-BA"],25],
+        'fill-extrusion-base':0,
+        'fill-extrusion-color':["interpolate",["linear"],["get", "DM-BA"],0,"hsla(187, 0%, 34%, 0)",15,"hsl(187, 93%, 52%)",35,"hsl(317, 100%, 62%)"],
+        'fill-extrusion-opacity':0,
+      },
+      'filter':["==","layer","Zuerich-Central"],
+      //'paint':{
+      //   'fill-color':{"stops": [[0,'hsla(187, 0%, 34%, 0)'],[15,'hsl(187, 93%, 52%)'], [35,'hsl(317, 100%, 62%)']], "property": "DM-Velovorteil", "base": 0},
+      //   'fill-extrude-base':0,
+      //   'fill-extrude-height':{"stops": [[0,0],[30,15]], "property": "DM-Velovorteil", "base": 0},
+      //   //'fill-opacity-transition': {'duration':1000},
+         //'fill-opacity':0
+      //},
+    }, 'names')
+
+    
+    })
+
+    // sync map to legend
+
+    map
+      .on('rotate', function(){
+        scale
+          .setBearing(map.getBearing())
+      })
+      .on('zoom', function(){
+        var multiplier = map.getZoom()-12;
+        document.querySelector('#people').innerHTML = Math.ceil(4000*Math.pow(1/8, multiplier));
+      })
+      .on('move', function(){
+        scale
+          .setPitch(map.getPitch()*0.7) //fudge factor to get it to look right on the lower-left corner
+      })
+
+  //   // map tooltip functionality
+  //   map
+  //   .on('mousemove', function(e){
+
+
+  //     if (inspector === 'block'){
+  //       var features = map.queryRenderedFeatures(e.point, { layers: ["fills"] });
+  //       var ft = features[0];
+
+  //       var showTooltip = ft && ft.properties.p>0 && e.originalEvent.which===0;
+
+  //       if (showTooltip){
+  //         mapObj.classList = 'inspector'
+
+  //         tooltip.style.transform = 'translateX('+e.point.x+'px) translateY('+e.point.y+'px)'
+  //         blockCount.innerHTML = ft.properties.p
+  //         blockDensity.innerHTML = ft.properties.pkm2;
+
+  //         map.getSource('highlight').setData(ft)
+  //         canvas.style.cursor = 'mapboxgl-canvas-container mapboxgl-interactive inspector'
+
+  //         if (ft.properties.id !== currentBlock){
+  //           var coord = ft.geometry.coordinates[0][0];
+  //           var queryURL = 'https://api.mapbox.com/geocoding/v5/mapbox.places/'+coord+'.json?access_token=pk.eyJ1IjoicGV0ZXJxbGl1IiwiYSI6ImpvZmV0UEEifQ._D4bRmVcGfJvo1wjuOpA1g'
+  //           mapboxgl.util.getJSON(queryURL, function(err, resp){
+  //             currentBlock = ft.properties.id;
+  //             var address = resp.features[0].address+' '+resp.features[0].text;
+  //             document.querySelector('#address').innerHTML = 'Near '+ address.replace('undefined ', '');
+  //           })
+  //         }
+  //       }
+
+  //       else {
+  //         map.getSource('highlight').setData(emptyGeojson)
+  //         mapObj.classList = ''
+  //       }
+  //     }
+
+  //     if (inspector === 'radius'){
+  //       mapObj.classList = 'inspector'
+
+  //       var pt = map.unproject(e.point)
+  //       //var circle = (drawCircle([pt.lng, pt.lat],0.5));
+  //       //map.getSource('highlight').setData(circle)
+  //       updateBlocks(pt, 0.5)
+  //         tooltip.style.transform = 'translateX('+e.point.x+'px) translateY('+e.point.y+'px)'
+
+  //     }
+
+  //   })
+  //   .on('mouseout', function(){
+  //     map.getSource('radiusHighlight').setData(emptyGeojson)
+  //     map.getSource('highlight').setData(emptyGeojson)
+  //   })
+  //   setScale(2500000)
+  // })
+
+  //map tilt functionality
+  function tilt(eh){
+    var state = !eh ? {pitch:0, klass:[''], extrusionopacity: 0, fillopacity:0.5} : {pitch:50, klass:['tilted'], extrusionopacity: 0.6, fillopacity:0}
+
+    //document.querySelector('#legends').className = 'pin-bottomright scale '+state.klass[0]
+    map
+      .easeTo({pitch: state.pitch})
+      .setPaintProperty('extrusions', 'fill-extrusion-opacity',state.extrusionopacity)
+      .setPaintProperty('fills', 'fill-opacity',state.fillopacity)
+      .setPaintProperty('namesExtrusion', 'fill-extrusion-opacity',state.extrusionopacity)
+
+    scale.fire('resize');
+  }
+
+  // adjust scale
+  function setScale(max){
+    //max = 3950000-max;
+    //document.querySelector('#max').innerHTML = max+'+';
+    map.setPaintProperty('extrusions', 'fill-extrusion-height',["*",["get", "DM-BA"],max])
+    // map.setPaintProperty('fills', 'fill-color',{"stops": [[0,'#160e23'],[max*0.02,'#00617f'], [max*0.1,'#55e9ff']], "property": "pkm2", "base": 1})
+    // .setPaintProperty('extrusions', 'fill-color',{"stops": [[0,'#160e23'],[max*0.02,'#00617f'], [max*0.1,'#55e9ff']], "property": "pkm2", "base": 1})
+    // .setPaintProperty('extrusions', 'fill-extrude-height',{"stops": [[0,10],[max,20000]], "property": "pkm2", "base": 1})
+    // .setPaintProperty('highlighted_extrusion', 'fill-extrude-height',{"stops": [[0,10],[max,20000]], "property": "pkm2", "base": 1})
+  }
+
+  // show/hide labels
+  function toggleLabels(truthiness){
+    var visibility = truthiness ? 'visible' : 'none'
+    map.style.stylesheet.layers.forEach(function(layer){
+      if (layer.type === 'symbol') map.setLayoutProperty(layer.id, 'visibility', visibility)
+    })
+  }
+
+  // show/hide roads
+  function toggleRoads(truthiness){
+    var visibility = truthiness ? 'visible' : 'none'
+    map.style.stylesheet.layers.forEach(function(layer){
+      if (layer.type === 'line') map.setLayoutProperty(layer.id, 'visibility', visibility)
+    })
+  }
+
+  function setPlace(place){
+    currentPlace = place
+    map.setFilter("fills",["==","layer",currentPlace])
+    map.setFilter("extrusions",["==","layer",currentPlace])
+    map.setFilter("names",["==","layer",currentPlace])
+    map.setFilter("namesExtrusion",["==","layer",currentPlace])
+    map.panTo(placeLatLng[place])
+  }
+
+  // function setInspector(mode){
+  //   inspector = mode;
+  //   var klass = mode === 'none' ? '' : 'inspector'
+  //   mapObj.classList = klass;
+
+  //   if (mode === 'none') {
+  //     map.getSource('radiusHighlight').setData(emptyGeojson)
+  //     map.getSource('highlight').setData(emptyGeojson)
+  //   }
+  //   if (mode === 'radius') document.querySelector('#address').innerHTML = 'Within 500 meters of here'
+  // }
+
+  // function pointBuffer (pt, radius, units, resolution) {
+  //   var ring = []
+  //   var resMultiple = 360/resolution;
+  //   for(var i  = 0; i < resolution; i++) {
+  //     var spoke = turf.destination(pt, radius, i*resMultiple, units);
+  //     ring.push(spoke.geometry.coordinates);
+  //   }
+  //   if((ring[0][0] !== ring[ring.length-1][0]) && (ring[0][1] != ring[ring.length-1][1])) {
+  //     ring.push([ring[0][0], ring[0][1]]);
+  //   }
+  //   return turf.polygon([ring])
+  // }
+
+  // function drawCircle(center,radius){
+  //   var pt = turf.point(center);
+  //   var circle = pointBuffer(pt, radius, 'kilometers', 22)
+  //   circle.properties.bbox = turf.bbox(circle)
+  //   circle.properties.pkm2 = 0;
+  //   return circle
+  // }
+
+  // function drawRadiusCircle(){
+  //   var edgeX = turf.destination(turf.point([lnglat.lng, lnglat.lat]), radius, 90, 'kilometers');
+  //   var pixelRadius = (map.project(edgeX.geometry.coordinates).x-map.project(lnglat).x);
+
+  //   radiusCircle
+  //     .style({width: 2*pixelRadius+'px', height: 2*pixelRadius+'px'})
+  // }
+
+  // function updateBlocks(lnglat, radius){
+  //   var circle = drawCircle([lnglat.lng, lnglat.lat], radius)
+
+  //   //calculate extent of circle
+  //   var circleExtent = turf.bbox(circle);
+  //   var nw = map.project([circleExtent[0],circleExtent[1]]);
+  //   var se = map.project([circleExtent[2],circleExtent[3]]);
+  //   nw = [nw.x, nw.y];
+  //   se = [se.x, se.y];
+
+  //   //get blocks within the circle's extent
+  //   var geometryOutput = map.queryRenderedFeatures([nw,se],{ layers: ['fills'] });
+
+  //   var intersectedBlocks = [];
+  //   var totalPop = 0;
+
+  //   var ruler = cheapRuler(lnglat.lat, 'meters');
+  //   geometryOutput.forEach(function(poly){
+  //     var density = poly.properties.pkm2;
+  //     try {
+
+  //       var poly = turf.polygon(poly.geometry.coordinates);
+  //       poly.properties.bbox = turf.bbox(poly);
+
+  //       //calculate intersect only if it collides at all
+  //       var intersect = turf.intersect(poly, circle)
+  //       intersect.properties.pkm2 = density;
+
+  //       //if there is an intersect,
+  //       if (intersect !== undefined) {
+  //         // add intersected geometry to featurecollection
+  //         intersectedBlocks.push(intersect)
+
+  //         //add intersected population to the total
+  //         var blockPop = ruler.area(poly.geometry.coordinates)*density;
+  //         totalPop+= blockPop
+  //       }
+  //     } 
+
+  //     catch(e) {return;}
+  //   });
+
+  //   blockCount.innerHTML = parseInt(totalPop);
+  //   blockDensity.innerHTML = parseInt(totalPop/0.79);
+  //   map.getSource('radiusHighlight')
+  //     .setData(turf.featureCollection(intersectedBlocks));
+  // }
+</script>
+
+
+
+</body></html>

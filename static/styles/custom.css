@@ -2,15 +2,16 @@ body {
   font-family: "Roboto", sans-serif;
 }
 .c-link-author {
-  padding: 10px 10px 0px 10px;
+  padding: 30px 10px 0px 20px;
 }
 .c-link-author img {
     height: 100%;
-    width: 100%;
+    width: 80%;
+    max-width: 150px;
 }
 .c-link--brand {
   position: fixed;
-  bottom: 10px;
+  top: 10px;
   right: 10px;
   transform: scale(0.7);
   background: white;
@@ -55,6 +56,11 @@ body {
 .page-meta .author {
 	margin-top: 0px;
 }
+
+p.author {
+  margin-top: 0;
+}
+
 .page-summary {
   text-align: center;
   margin: 1em;
@@ -117,7 +123,7 @@ body {
   height: 550px;
   overflow: hidden;
   text-align: center;
-  background: #4d87e2;
+  background: #fff; /*#4d87e2*/
 }
 .gallery .controls {
   position: absolute;
@@ -132,4 +138,29 @@ body {
   text-align: center;
   text-decoration: none;
   transition: color .1s;
+}
+
+/* Project Page styling */
+
+.o-grid__cell .description {
+  margin: 0 0 20px 0;
+}
+
+.o-grid__cell--width-5 .authorImage {
+  width: 20px;
+}
+
+.o-grid__cell--width-5 .authorImage img {
+  width: 100%;
+}
+
+.o-grid__cell .authorText p.author {
+  margin: 0; 
+  color: #000;
+}
+
+.o-grid__cell .authorText p.authorPerson {
+  margin: 0; 
+  color: #949494;
+  font-size: 14px;
 }
