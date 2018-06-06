@@ -4,16 +4,28 @@ A land use mapping project focusing on the greater metropolitan area around Zuri
 
 ## Usage
 
-    $ git clone https://gitlab.com/loleg/smartuse.git
+Get a hold of **Python 3** and [Pipenv](https://github.com/pypa/pipenv) on your machine.
+
+    $ git clone https://gitlab.com/smartuse/smartuse.git
+
+To fetch the frontend assets, use npm or [yarn](https://yarnpkg.com/lang/en/):
+
     $ cd smartuse
-    $ npm install -g yarn
     $ yarn install
-    $ cp .env.example .env
-    $ yarn start
 
-The app will now be available at http://localhost:3000
+To install and start the backend:
 
-The splash page is at http://localhost:3000/splashpage/index.html
+    $ cd smartuse/backend
+    $ pipenv --three
+    $ pipenv install
+    $ python app.py
+
+The app will now be available at http://localhost:5000
+
+The splash page is at `static/splashpage/index.html`, to preview it:
+
+    $ cd smartuse/static
+    $ python -m http.server
 
 ## License
 
