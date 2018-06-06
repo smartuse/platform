@@ -53,14 +53,17 @@ html
           =meta.updated
         p.description
           =meta.summary
-      .o-grid
-        .o-grid__cell--width-5.authorImage
-          img(src=author.image)
-        .o-grid__cell.authorText
-          p.author
-            =author.organisation
-          p.authorPerson
-            =author.person
+      .o-grid__cell--width-20
+
+    .o-grid
+      .o-grid__cell--width-20
+      .o-grid__cell--width-7.authorImage
+        img(src=author.gravatar)
+      .o-grid__cell.authorText
+        a.fullname(href=author.url,target="_blank")
+          =author.fullname
+        .organisation
+          =author.organisation
       .o-grid__cell--width-20
 
     .o-grid

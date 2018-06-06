@@ -2,7 +2,7 @@ body {
   font-family: "Roboto", sans-serif;
 }
 .c-link-author {
-  padding: 30px 10px 0px 20px;
+  padding: 30px 10px 20px 20px;
 }
 .c-link-author img {
     height: 100%;
@@ -155,12 +155,12 @@ p.author {
 }
 
 .o-grid__cell .authorText p.author {
-  margin: 0; 
+  margin: 0;
   color: #000;
 }
 
 .o-grid__cell .authorText p.authorPerson {
-  margin: 0; 
+  margin: 0;
   color: #949494;
   font-size: 14px;
 }

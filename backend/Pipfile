@@ -1,0 +1,21 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[dev-packages]
+
+[packages]
+geojson = "*"
+"psycopg2-binary" = "*"
+pypugjs = "*"
+Flask = "*"
+Flask-Admin = "*"
+Flask-API = "*"
+Flask-SQLAlchemy = "*"
+Shapely = "*"
+"GeoAlchemy2" = "*"
+Markdown = "*"
+
+[requires]
+python_version = "3.5"

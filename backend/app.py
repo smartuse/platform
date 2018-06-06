@@ -12,9 +12,14 @@ import flask_admin as admin
 from flask_admin.contrib.geoa import ModelView
 from flask_admin.contrib.fileadmin import FileAdmin
 
+# Geoshapes in model
 from geoalchemy2.types import Geometry
 from geoalchemy2.shape import to_shape
 import geojson, markdown
+
+# Gravatar
+from urllib.parse import urlencode
+import hashlib
 
 import os.path as ospath
 
@@ -49,11 +54,20 @@ class User(db.Model):
         backref=db.backref('users', lazy='dynamic'))
     def __repr__(self):
         return self.username
+    def gravatar(self):
+        gr_size = 80
+        if self.email == "": return "/img/usericon.png"
+        email = self.email.lower().encode('utf-8')
+        gravatar_url = "https://www.gravatar.com/avatar/"
+        gravatar_url += hashlib.md5(email).hexdigest() + "?"
+        gravatar_url += urlencode({'s':str(gr_size)})
+        return gravatar_url
     def dict(self):
         return {
             'id': self.id,
             'username': self.username,
             'fullname': self.fullname,
+            'gravatar': self.gravatar(),
             'organisation': self.organisation,
             'url': self.url,
             'logo': self.logo
