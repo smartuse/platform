@@ -171,7 +171,7 @@ def resources_list():
 @app.route("/api/project/<int:project_id>", methods=['GET'])
 def project_detail(project_id):
     project = Project.query.filter_by(id=project_id).first_or_404()
-    resources = project.resources.all().order_by(Resource.title) # TODO: custom sort
+    resources = project.resources.order_by(Resource.title).all() # TODO: custom sort
     return {
         'data': project.dict(),
         'details': project.details,
