@@ -163,6 +163,65 @@ img.fullscreen {
   margin-right: 20px;
 }
 
+
+/* Home Page styling */
+
+.o-grid__cell input.c-field {
+  border-radius: 0;
+  border: 0.25px solid #ccc;
+  border-bottom: 1px solid #96a8b2;
+  font-size: 1.2em;
+}
+
+.o-grid__cell h3.projectTile {
+  margin: 10px 0 3px 0;
+}
+
+.o-grid__cell h3.projectTile a {
+  color: #4a76c2;
+  text-decoration: none;
+  margin-bottom: 20px;
+}
+
+.o-grid__cell h3.projectTile a {
+  color: #000;
+}
+
+.o.grid__cell .project-preview-card {
+  width: 100%;
+  height: 100px;
+  background-position: center center;
+  border-radius: 10px;
+  color: #fff;
+  padding: 1px 14px 0 0;
+  text-align: right;
+  background-size: cover;
+  text-align: right;
+}
+
+.su-001-bikelandscape {
+  background-image: url('https://alpha.smartuse.ch/admin/fileadmin/download/static/img/SU-001-Bikelandscape.png');
+}
+
+.su-002-urbanfootprint {
+  background-image: url('https://alpha.smartuse.ch/admin/fileadmin/download/static/img/SU-002-Urban-Footprint.png');
+}
+
+.o.grid__cell .project-preview-card p.author {
+  margin: 10px 0 0 0;
+}
+
+.o.grid__cell .project-preview-card p.authorPerson,.o.grid__cell .project-preview-card p.date {
+ margin: 0;
+}
+
+#map {
+  width: 100%;
+  height: 350px;
+  background-color: #000;
+  margin: 45px 15px;
+}
+
 /* Project Page styling */
 
 .o-grid__cell .description {
