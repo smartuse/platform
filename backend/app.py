@@ -171,11 +171,12 @@ def resources_list():
 @app.route("/api/project/<int:project_id>", methods=['GET'])
 def project_detail(project_id):
     project = Project.query.filter_by(id=project_id).first_or_404()
+    resources = project.resources.all().order_by(Resource.title) # TODO: custom sort
     return {
         'data': project.dict(),
         'details': project.details,
         'author': project.users.first().dict(),
-        'resources': [r.dict() for r in project.resources.all()]
+        'resources': [r.dict() for r in resources]
     }
 
 # Flask views
