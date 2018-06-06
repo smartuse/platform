@@ -177,18 +177,26 @@ Zepto(function($){
 
   } //-load_DataPackage
 
+  // Load selected project
   if (typeof project_id != 'undefined') {
     $.getJSON('/api/project/' + project_id, load_DataPackage);
   } else if (typeof project_path != 'undefined') {
     $.getJSON('/' + project_path + '/datapackage.json', load_DataPackage);
   }
 
+  // Full screen mode
+  function requestFullScreen() {
+    element = document.body;
+    var requestMethod = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen;
+    if (requestMethod) { requestMethod.call(element); }
+  }
   $('img.fullscreen').click(function(e) {
     e.preventDefault();
     if ($(this).hasClass('active')) {
       $('.gallery').removeClass('fullscreen');
       $(this).removeClass('active');
     } else {
+      requestFullScreen();
       $('.gallery').addClass('fullscreen');
       $(this).addClass('active');
     }
