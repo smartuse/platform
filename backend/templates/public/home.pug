@@ -14,6 +14,11 @@ html
     link(href='/vendor/blaze/blaze.min.css' rel='stylesheet')
     link(href='/styles/custom.css' rel='stylesheet')
 
+    link(rel="apple-touch-icon-precomposed" href="/img/apple-touch-iphone.png")
+    link(rel="apple-touch-icon-precomposed" sizes="72x72" href="/img/apple-touch-ipad.png")
+    link(rel="apple-touch-icon-precomposed" sizes="114x114" href="/img/apple-touch-iphone4.png")
+    link(rel="apple-touch-icon-precomposed" sizes="144x144" href="/img/apple-touch-ipad-retina.png")
+
     script(src='/scripts/main.js')
   body
     rg-drawer
@@ -32,5 +37,56 @@ html
     .o-grid
       .o-grid__cell--width-20
       .o-grid__cell.page-content
+        .o-grid
+          .o-grid__cell--width-20
+          .o-grid__cell page-content
+          h1
+            Smart Use – Die funktionale Region
+          p
+            Das Projekt «Smart Use» ist eine laufende Kooperation zwischen der Metropolitankonferenz Zürich und der ARGE Smart Use, bestehend aus Joris Van Wezemael, Hosoya Schaefer Architects und Datalets.ch.
+          hr
+          h2
+            Projekte
+            .o-grid
+              .o-grid__cell
+                input.c-field(placeholder="Suche" type="text")
+            .o-grid
+              .o-grid__cell
+                h3.projectTile
+                  a(href="/project/4")
+                    E-Bike Landscape
+                .project-preview-card.su-001-bikelandscape
+                  p.author
+                    SmartUse ARGE
+                  p.authorPerson
+                    Thorben Westerhuys
+                  p.date
+                    31.05.2018
+              .o-grid__cell
+                h3.projectTile
+                  a(href="/project/1")
+                    Urban Footprint
+                .project-preview-card.su-002-urbanfootprint
+                  p.author
+                    SmartUse ARGE
+                  p.authorPerson
+                    Nils Havelka
+                  p.date
+                    01.06.2018
+              .o-grid__cell
+                h3.projectTile
+                  a(href="/project/3")
+                    Tangram
+                .project-preview-card.su-002-tangram
+                  p.author
+                    SmartUse ARGE
+                  p.authorPerson
+                    Oleg Lavrovsky
+                  p.date
+                    28.05.2018
+
+        #map
+
         !=content
+
       .o-grid__cell--width-20
