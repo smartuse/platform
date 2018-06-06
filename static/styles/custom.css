@@ -1,6 +1,10 @@
 body {
   font-family: "Roboto", sans-serif;
 }
+.author-header {
+  min-height: 100px;
+  background: white;
+}
 .c-link-author {
   padding: 30px 10px 20px 20px;
 }
@@ -10,7 +14,6 @@ body {
     max-width: 150px;
 }
 .c-link--brand {
-  position: fixed;
   top: 10px;
   right: 10px;
   transform: scale(0.7);
@@ -25,6 +28,7 @@ body {
 	margin: 0px;
 	font-size: 0px;
 	margin-top: 15px;
+  z-index: 1000;
 }
 
 .basemap {
@@ -148,7 +152,7 @@ img.fullscreen {
   background: white;
 }
 .gallery.fullscreen {
-  height: 90%;
+  height: 900%;
   top: 10%;
   position: absolute;
   background: white;
