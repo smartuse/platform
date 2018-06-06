@@ -9,14 +9,14 @@ h1,
 p,
 a,
 
-.videocontainer 
+.videocontainer
 {
 	padding: 0;
 	margin: 0;
    	display: block;
 }
 
-.videocontainer video 
+.videocontainer video
 {
     width: 100%;
 	height: auto;
@@ -191,9 +191,9 @@ body {
 }
 
 /* iPhone 4 to 8 -- Portrait and Landscape */
-@media only screen 
-  and (min-device-width: 320px) 
-  and (max-device-width: 667px) 
+@media only screen
+  and (min-device-width: 320px)
+  and (max-device-width: 667px)
   and (-webkit-min-device-pixel-ratio: 2) {
 
   	#logoCol {
@@ -254,9 +254,9 @@ body {
 }
 
 /* iPhone 6+ to 8+ -- Portrait and Landscape */
-@media only screen 
-  and (min-device-width: 414px) 
-  and (max-device-width: 736px) 
+@media only screen
+  and (min-device-width: 414px)
+  and (max-device-width: 736px)
   and (-webkit-min-device-pixel-ratio: 3) {
 
   	#logoCol {
@@ -322,10 +322,10 @@ body {
 }
 
 /* iPhone X -- Portrait and Landscape */
-@media only screen 
-  and (min-device-width: 375px) 
-  and (max-device-width: 812px) 
-  and (-webkit-min-device-pixel-ratio: 3) { 
+@media only screen
+  and (min-device-width: 375px)
+  and (max-device-width: 812px)
+  and (-webkit-min-device-pixel-ratio: 3) {
 
   	#logoCol {
 		display: block;
@@ -393,10 +393,10 @@ body {
 /* ----------- iPad 1, 2, Mini and Air ----------- */
 
 /* Portrait */
-@media only screen 
-  and (min-device-width: 768px) 
-  and (max-device-width: 1024px) 
-  and (orientation: portrait) 
+@media only screen
+  and (min-device-width: 768px)
+  and (max-device-width: 1024px)
+  and (orientation: portrait)
   and (-webkit-min-device-pixel-ratio: 1) {
 
   	#videooverlay {
@@ -418,9 +418,9 @@ body {
 }
 
 /* Portrait */
-@media only screen 
-  and (min-device-width: 768px) 
-  and (max-device-width: 1024px) 
+@media only screen
+  and (min-device-width: 768px)
+  and (max-device-width: 1024px)
   and (-webkit-min-device-pixel-ratio: 2) {
 
   	#videooverlay {

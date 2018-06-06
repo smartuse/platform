@@ -140,6 +140,23 @@ p.author {
   transition: color .1s;
 }
 
+img.fullscreen {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  z-index: 1000;
+  background: white;
+}
+.gallery.fullscreen {
+  height: 90%;
+  top: 10%;
+  position: absolute;
+  background: white;
+}
+.gallery.fullscreen figure {
+  height: 100%;
+}
+
 /* Project Page styling */
 
 .o-grid__cell .description {
@@ -163,4 +180,15 @@ p.author {
   margin: 0;
   color: #949494;
   font-size: 14px;
+}
+
+
+/* Mobile rendering */
+@media only screen
+  and (max-device-width: 812px) {
+
+  .c-link .logo {
+     width: 138px;
+    height: 50px;
+  }
 }

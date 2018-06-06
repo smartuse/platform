@@ -152,7 +152,7 @@ Zepto(function($){
 
       if (res.name.length>1 && res.description.length>1)
         item.append('<div class="description">'
-        + '<small>' + res.name + '</small><br>'
+        + '<small>' + res.title + '</small><br>'
         + res.description + '</div>')
     });
 
@@ -183,6 +183,16 @@ Zepto(function($){
     $.getJSON('/' + project_path + '/datapackage.json', load_DataPackage);
   }
 
+  $('img.fullscreen').click(function(e) {
+    e.preventDefault();
+    if ($(this).hasClass('active')) {
+      $('.gallery').removeClass('fullscreen');
+      $(this).removeClass('active');
+    } else {
+      $('.gallery').addClass('fullscreen');
+      $(this).addClass('active');
+    }
+  });
 
   if (typeof mapboxgl !== 'undefined')
     mapboxgl.accessToken = 'pk.eyJ1Ijoic21hcnR1c2UiLCJhIjoiY2pkNGowcGdzMHhpbzMzcWp3eGYydGhmMiJ9.k9QyYo-2pFvyyFDJiz16UA';
