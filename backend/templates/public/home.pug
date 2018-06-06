@@ -23,14 +23,52 @@ html
           a.logo(href='/') SmartUse
 
     .o-grid
-      .o-grid__cell--width-15
+      .o-grid__cell.o-grid__cell--width-15
       .o-grid__cell.page-meta
         h1
           =meta.title
-      .o-grid__cell--width-15
+      .o-grid__cell.o-grid__cell--width-15
 
     .o-grid
-      .o-grid__cell--width-20
+      .o-grid__cell.o-grid__cell--width-20
       .o-grid__cell.page-content
         !=content
-      .o-grid__cell--width-20
+      .o-grid__cell.o-grid__cell--width-20
+
+    .o-grid
+      .o-grid__cell.o-grid__cell--width-20
+      .o-grid__cell.project-list
+        each project in projects
+          .o-grid
+            .c-card.o-grid__cell.o-grid__cell--width-100
+              .c-card__header
+                img(src='/img/usermap.jpg',align='right')
+                h2.c-heading
+                  =project.title
+                each user in project.users
+                  span= user.organisation
+              .c-card__body
+                .c-paragraph
+                  =project.summary
+                .c-input-group
+                  a.c-button.c-button--block.c-button--success(href='/project/{{ project.id }}')
+                    span Open
+                  a.c-button.c-button--block.c-button--brand(href='/admin/project/edit/?id={{ project.id }}')
+                    span Edit
+      .o-grid__cell.o-grid__cell--width-20
+
+    hr
+    .o-grid
+      .o-grid__cell.o-grid__cell--width-20
+      .o-grid__cell.footer
+        .c-input-group
+          a.c-button.c-button--brand(href='/admin/') Administration
+          a.c-button.c-button--info(href='mailto:info@smartuse.ch') Get support
+        p
+          span &copy; 2018 &nbsp;
+          a(href='https://smartuse.ch/') SmartUse ARGE
+          &nbsp; &bull; Developer API:
+          a(href='/api/projects/') Projects
+          /
+          a(href='/api/resources/') Resources
+      .o-grid__cell.o-grid__cell--width-20

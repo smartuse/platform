@@ -6,8 +6,10 @@ SQLALCHEMY_DATABASE_URI = 'postgres://fjmehnha:FJimrMverMOxHvqZj8tPRA-P5MCVnUde@
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 # development settings
-# SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://smartuse_geo:smartuse_geo@localhost/smartuse_geo'
-# SQLALCHEMY_ECHO = True
+import os
+if 'DEBUG' in os.environ and os.environ['DEBUG']:
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://localhost/smartuse'
+    SQLALCHEMY_ECHO = True
 
 # credentials for loading map tiles from mapbox
 MAPBOX_MAP_ID = 'petrusjvr.mbhn4pjj'

@@ -91,7 +91,7 @@ class Project(db.Model):
             'date-created': self.created.strftime("%Y-%d-%m"),
             'date-updated': self.updated.strftime("%Y-%d-%m"),
             'summary': self.summary,
-            'detail_url': request.host_url.rstrip('/') + url_for('project_detail', project_id=self.id)
+            'detail_url': request.host_url.rstrip('/') + url_for('project_detail', project_id=self.id),
         }
 
 projects_resources = db.Table(
@@ -183,6 +183,7 @@ def project_detail(project_id):
 def index():
     f = open('templates/public/index.md', 'r')
     content = Markup(markdown.markdown(f.read()))
+    projects = Project.query.all()
     meta = { 'title': 'Home' }
     return render_template('public/home.pug', **locals())
 

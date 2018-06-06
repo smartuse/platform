@@ -195,6 +195,7 @@ Zepto(function($){
     if ($(this).hasClass('active')) {
       $('.gallery').removeClass('fullscreen');
       $(this).removeClass('active');
+      if (document.exitFullscreen) { document.exitFullscreen(); }
     } else {
       requestFullScreen();
       $('.gallery').addClass('fullscreen');

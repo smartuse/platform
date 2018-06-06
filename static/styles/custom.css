@@ -157,6 +157,12 @@ img.fullscreen {
   height: 100%;
 }
 
+/* Project List (home) styling */
+
+.project-list .o-grid__cell {
+  margin-right: 20px;
+}
+
 /* Project Page styling */
 
 .o-grid__cell .description {
