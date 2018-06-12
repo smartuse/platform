@@ -154,8 +154,8 @@ img.fullscreen {
   background: white;
 }
 .gallery.fullscreen {
-  height: 90%;
-  top: 10%;
+  height: 85%;
+  top: 15%;
   position: absolute;
   background: white;
 }
