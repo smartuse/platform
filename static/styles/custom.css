@@ -1,3 +1,5 @@
+html { background: #fff; }
+
 body {
   font-family: "Roboto", sans-serif; height: 100%;
 }
@@ -191,10 +193,6 @@ img.fullscreen {
 }
 
 /* Project Page styling */
-
-.project-page .o-grid {
-  background: #fff;
-}
 
 .o-grid__cell .description {
   margin: 0 0 20px 0;
