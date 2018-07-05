@@ -96,6 +96,11 @@ p.author {
   width: 40%;
 }
 
+.sidebar-nav ul, .sidebar-nav li {
+  list-style: none; margin-left: 0; padding-left: 0; margin-bottom: 1em;
+}
+.sidebar-nav a { color: black; font-weight: bold; }
+
 .item img, .item iframe, .item .map {
   width: 100%;
   height: 100%;

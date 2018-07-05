@@ -53,8 +53,6 @@ html
     .o-grid
       .o-grid__cell--width-20
       .o-grid__cell
-        h1
-          =meta.title
         p.date
           =meta.updated
         p.description
@@ -62,18 +60,23 @@ html
       .o-grid__cell--width-20
 
     .o-grid
-      .o-grid__cell--width-20
-      .o-grid__cell--width-7.authorImage
-        img(src=author.gravatar)
-      .o-grid__cell.authorText
-        a.fullname(href=author.url,target="_blank")
-          =author.fullname
-        .organisation
-          =author.organisation
-      .o-grid__cell--width-20
+      .o-grid__cell--width-10
+      .o-grid__cell--width-10.sidebar-nav
+        h3
+          =meta.title
+        ul
+      .o-grid__cell.page-scroll
+        .o-grid
+          .o-grid__cell--width-7.authorImage
+            img(src=author.gravatar)
+          .o-grid__cell.authorText
+            a.fullname(href=author.url,target="_blank")
+              =author.fullname
+            .organisation
+              =author.organisation
 
-    .o-grid
-      .o-grid__cell--width-20
-      .o-grid__cell.page-content
-        !=content
+        .page-content
+          !=content
+        .resource-content
+
       .o-grid__cell--width-20

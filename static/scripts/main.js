@@ -150,10 +150,15 @@ Zepto(function($){
         maps[rescount] = map;
       } // -geojson
 
-      if (res.name.length>1 && res.description.length>1)
-        item.append('<div class="description">'
-        + '<small>' + res.title + '</small><br>'
-        + res.description + '</div>')
+      if (res.name.length>1 && res.description.length>1) {
+        $('.resource-content').append(
+          '<div class="description" id="' + res.name + '">'
+        + '<h2>' + (res.title || res.name) + '</h2><p>'
+        + res.description + '</p></div>');
+        $('.sidebar-nav ul').append(
+          '<li><a href="#' + res.name + '">' + (res.title || res.name) + '</a></li>'
+        );
+      }
     });
 
     if (rescount > 0) {
