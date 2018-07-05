@@ -208,6 +208,9 @@ Zepto(function($){
     }
   });
 
+  // Sticky navigation
+  var sticky = new Sticky('.sticky');
+
   if (typeof mapboxgl !== 'undefined')
     mapboxgl.accessToken = 'pk.eyJ1Ijoic21hcnR1c2UiLCJhIjoiY2pkNGowcGdzMHhpbzMzcWp3eGYydGhmMiJ9.k9QyYo-2pFvyyFDJiz16UA';
 

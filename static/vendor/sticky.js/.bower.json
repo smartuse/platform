@@ -1,0 +1,32 @@
+{
+  "name": "sticky.js",
+  "description": "Sticky elements",
+  "main": "dist/sticky.compile.js",
+  "authors": [
+    "rgalus <biuro@rafalgalus.pl>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "sticky",
+    "javascript"
+  ],
+  "homepage": "https://github.com/rgalus/sticky-js",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "version": "1.2.0",
+  "_release": "1.2.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "1.2.0",
+    "commit": "802ed32f98d0abe5947507f23418b247e5ef58b8"
+  },
+  "_source": "https://github.com/rgalus/sticky-js.git",
+  "_target": "^1.2.0",
+  "_originalSource": "sticky.js",
+  "_direct": true
+}
