@@ -7,8 +7,8 @@ from flask import (
 )
 from flask_api import FlaskAPI
 from flask_sqlalchemy import SQLAlchemy
-
 import flask_admin as admin
+from flask_admin.model import BaseModelView
 from flask_admin.contrib.geoa import ModelView
 from flask_admin.contrib.fileadmin import FileAdmin
 
@@ -20,8 +20,10 @@ import geojson, markdown
 # Gravatar
 from urllib.parse import urlencode
 import hashlib
-
 import os.path as ospath
+
+# Locals
+from util import *
 
 # Create application
 app = FlaskAPI(__name__, static_url_path='')
@@ -40,17 +42,46 @@ projects_users = db.Table(
     db.Column('project_id', db.Integer(), db.ForeignKey('project.id'))
 )
 
+class Organisation(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.Unicode(128))
+    url = db.Column(db.Unicode(255))
+    logo = db.Column(db.Unicode(255))
+
+class Project(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(64), unique=True)
+    created = db.Column(db.DateTime())
+    updated = db.Column(db.DateTime())
+    summary = db.Column(db.Unicode(255))
+    details = db.Column(db.UnicodeText)
+
+    column_exclude_list = ('summary', 'details')
+
+    def __repr__(self):
+        return self.title
+    def dict(self):
+        return {
+            'id': self.id,
+            'name': 'smartuse-%d' % self.id,
+            'text': self.title,
+            'title': self.title,
+            'date-created': self.created.strftime("%Y-%d-%m"),
+            'date-updated': self.updated.strftime("%Y-%d-%m"),
+            'summary': self.summary,
+            'detail_url': request.host_url.rstrip('/') + url_for('project_detail', project_id=self.id),
+        }
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.Unicode(16))
     fullname = db.Column(db.Unicode(128))
     email = db.Column(db.Unicode(128))
     phone = db.Column(db.Unicode(32))
-    organisation = db.Column(db.Unicode(128))
-    url = db.Column(db.Unicode(255))
-    logo = db.Column(db.Unicode(255))
     notes = db.Column(db.UnicodeText)
-    projects = db.relationship('Project', secondary=projects_users,
+    organisation_id = db.Column(db.Integer, db.ForeignKey(Organisation.id))
+    organisation = db.relationship(Organisation, backref=db.backref('user', cascade="all, delete-orphan", single_parent=True))
+    projects = db.relationship(Project, secondary=projects_users,
         backref=db.backref('users', lazy='dynamic'))
     def __repr__(self):
         return self.username
@@ -73,54 +104,14 @@ class User(db.Model):
             'logo': self.logo
         }
 
-class Project(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(64), unique=True)
-    created = db.Column(db.DateTime())
-    updated = db.Column(db.DateTime())
-    summary = db.Column(db.Unicode(255))
-    details = db.Column(db.UnicodeText)
-    def __repr__(self):
-        return self.title
-    def dict(self):
-        return {
-            'id': self.id,
-            'name': 'smartuse-%d' % self.id,
-            'text': self.title,
-            'title': self.title,
-            'date-created': self.created.strftime("%Y-%d-%m"),
-            'date-updated': self.updated.strftime("%Y-%d-%m"),
-            'summary': self.summary,
-            'detail_url': request.host_url.rstrip('/') + url_for('project_detail', project_id=self.id),
-        }
-
 projects_resources = db.Table(
     'projects_resources',
     db.Column('project_id', db.Integer(), db.ForeignKey('project.id')),
     db.Column('resource_id', db.Integer(), db.ForeignKey('resource.id'))
 )
-
 SUPPORTED_FORMATS = (
     'png', 'jpg', 'geojson', 'datapackage', 'embed'
 )
-def get_media_type(fmt):
-    if fmt == 'png': return 'image/png'
-    if fmt == 'jpg': return 'image/jpeg'
-    if fmt == 'geojson': return 'application/vnd.geo+json'
-    if fmt == 'datapackage': return 'application/vnd.datapackage+json'
-    if fmt == 'embed': return 'application/html'
-    return fmt
-
-def get_features_geojson(name, objs):
-    if objs is None:
-        return {}
-    features = [{'type': 'Feature',
-        'geometry': to_shape(o),
-        'properties': {'name': name}
-    } for o in objs]
-    return geojson.dumps(
-        {'type': 'FeatureCollection', 'features': features}
-    )
 
 class Resource(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -130,7 +121,7 @@ class Resource(db.Model):
     dataformat = db.Column(db.Enum(*SUPPORTED_FORMATS, name="dataformats"))
     projects = db.relationship('Project', secondary=projects_resources,
         backref=db.backref('resources', lazy='dynamic'))
-    features = db.Column(Geometry("MULTIPOLYGON"))
+    # features = db.Column(Geometry("MULTIPOLYGON"))
     def __repr__(self):
         return self.title
     def dict(self):
@@ -151,9 +142,19 @@ class Resource(db.Model):
         return r
 
 # Add views
-admin.add_view(ModelView(Resource, db.session))
-admin.add_view(ModelView(Project, db.session))
-admin.add_view(ModelView(User, db.session))
+ResourceView = ModelView(Resource, db.session)
+ResourceView.column_list = ['title', 'dataformat', 'projects']
+admin.add_view(ResourceView)
+
+ProjectView = ModelView(Project, db.session)
+ProjectView.column_list = ('title', 'created', 'updated')
+admin.add_view(ProjectView)
+
+UserView = ModelView(User, db.session)
+UserView.column_list = ('username', 'fullname', 'organisation')
+admin.add_view(UserView)
+
+admin.add_view(ModelView(Organisation, db.session))
 
 # Upload views
 upload_path = ospath.join(ospath.dirname(__file__), '..', 'uploads')

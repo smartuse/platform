@@ -8,8 +8,8 @@ SQLALCHEMY_TRACK_MODIFICATIONS = False
 # development settings
 import os
 if 'DEBUG' in os.environ and os.environ['DEBUG']:
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://localhost/smartuse'
-    SQLALCHEMY_ECHO = True
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://oleg:smartuse@127.0.0.1/smartuse'
+    SQLALCHEMY_ECHO = False
 
 # credentials for loading map tiles from mapbox
 MAPBOX_MAP_ID = 'petrusjvr.mbhn4pjj'

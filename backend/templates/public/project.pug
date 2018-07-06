@@ -60,9 +60,9 @@ html
           =meta.summary
       .o-grid__cell--width-20
 
-    .o-grid
+    .o-grid(data-sticky-container)
       .o-grid__cell--width-10
-      .o-grid__cell--width-10.sidebar-nav.sticky
+      .o-grid__cell--width-10.sidebar-nav.sticky(data-margin-top="20",data-sticky-for="1023",data-sticky-class="is-sticky")
         h3
           =meta.title
         ul
