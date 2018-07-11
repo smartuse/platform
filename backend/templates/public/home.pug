@@ -29,17 +29,16 @@ block content
   .o-grid
     .o-grid__cell.o-grid__cell--width-20
     .o-grid__cell.project-list
-      .o-grid.o-grid--top
-        each project in projects
-          .c-card.o-grid__cell.o-grid__cell--width-49.o-grid__cell--top
-            a(href='/project/{{ project.id }}')
-              .c-card__header
-                img(src='/img/usermap.jpg',align='right')
-                h2.c-heading
-                  =project.title
-                each user in project.users
-                  span= user.organisation
-              .c-card__body
-                .c-paragraph
-                  =project.summary
+      each project in projects
+        .c-card
+          a(href='/project/{{ project.id }}')
+            .c-card__header
+              img(src='/img/usermap.jpg',align='right')
+              h2.c-heading
+                =project.title
+              each user in project.users
+                span= user.organisation
+            .c-card__body
+              .c-paragraph
+                =project.summary
     .o-grid__cell.o-grid__cell--width-20
