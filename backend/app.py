@@ -187,10 +187,12 @@ def resources_list():
 def project_detail(project_id):
     project = Project.query.filter_by(id=project_id).first_or_404()
     resources = project.resources.order_by(Resource.title).all() # TODO: custom sort
+    author = project.users.first()
+    if author is not None: author = author.dict()
     return {
         'data': project.dict(),
         'details': project.details,
-        'author': project.users.first().dict(),
+        'author': author,
         'resources': [r.dict() for r in resources]
     }
 
