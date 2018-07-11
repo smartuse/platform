@@ -173,17 +173,17 @@ p.author {
 
 /* Project List (home) styling */
 
-.project-list .o-grid__cell {
+.project-list .c-card {
   box-shadow: 1px 1px 3px grey;
   margin-right: 7px;
   margin-top: 0px;
 }
-.project-list .o-grid__cell a {
+.project-list .c-card a {
   text-decoration: none;
   color: black;
 }
-.project-list .o-grid__cell a:hover { color: blue; }
-.project-list .o-grid__cell:hover { box-shadow: 1px 1px 3px black; }
+.project-list .c-card a:hover { color: blue; }
+.project-list .c-card:hover { box-shadow: 1px 1px 3px black; }
 
 /* Home Page styling */
 
