@@ -13,14 +13,31 @@ To fetch the frontend assets, use npm or [yarn](https://yarnpkg.com/lang/en/):
     $ cd smartuse
     $ yarn install
 
-To install and start the backend:
+To install dependencies, use pip or [pipenv](https://github.com/pypa/pipenv):
 
     $ cd smartuse/backend
     $ pipenv --three
     $ pipenv install
-    $ python app.py
+
+If you would like to use a local Postgres database, enable development mode:
+
+    $ export FLASK_DEBUG=1
+
+To initialize and/or migrate the database:
+
+    $ flask db init
+    $ flask db migrate
+    $ flask db upgrade
+
+To start the backend:
+
+    $ export FLASK_APP=app.py
+    $ export FLASK_ENV=development
+    $ flask run
 
 The app will now be available at http://localhost:5000
+
+## Static files
 
 The splash page is at `static/splashpage/index.html`, to preview it:
 

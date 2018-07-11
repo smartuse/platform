@@ -7,6 +7,8 @@ from flask import (
 )
 from flask_api import FlaskAPI
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
+
 import flask_admin as admin
 from flask_admin.model import BaseModelView
 from flask_admin.contrib.geoa import ModelView
@@ -23,14 +25,16 @@ import hashlib
 import os.path as ospath
 
 # Locals
-from util import *
+from .util import *
 
 # Create application
 app = FlaskAPI(__name__, static_url_path='')
 app.debug = True
 app.config.from_pyfile('config.py')
 app.jinja_env.add_extension('pypugjs.ext.jinja.PyPugJSExtension')
+
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
 # Create admin
 admin = admin.Admin(app, name='SmartUse', template_mode='bootstrap3')

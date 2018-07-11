@@ -7,7 +7,7 @@ SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 # development settings
 import os
-if 'DEBUG' in os.environ and os.environ['DEBUG']:
+if 'FLASK_DEBUG' in os.environ and os.environ['FLASK_DEBUG']:
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://oleg:smartuse@127.0.0.1/smartuse'
     SQLALCHEMY_ECHO = False
 

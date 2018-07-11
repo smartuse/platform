@@ -1,6 +1,7 @@
 Flask
 Flask-Admin
 Flask-API
+Flask-Migrate
 Flask-SQLAlchemy
 shapely
 geoalchemy2

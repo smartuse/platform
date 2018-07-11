@@ -16,6 +16,7 @@ Flask-SQLAlchemy = "*"
 Shapely = "*"
 "GeoAlchemy2" = "*"
 Markdown = "*"
+flask-migrate = "*"
 
 [requires]
 python_version = "3.5"
