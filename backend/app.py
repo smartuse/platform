@@ -21,7 +21,7 @@ import geojson, markdown
 
 # Gravatar
 from urllib.parse import urlencode
-import hashlib, codecs
+import hashlib, codecs, datetime
 import os.path as ospath
 from os import urandom
 
@@ -66,8 +66,8 @@ class Organisation(db.Model):
 class Project(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(64), unique=True)
-    created = db.Column(db.DateTime())
-    updated = db.Column(db.DateTime())
+    created = db.Column(db.DateTime(), default=datetime.datetime.now())
+    updated = db.Column(db.DateTime(), default=datetime.datetime.now())
     summary = db.Column(db.Unicode(255))
     details = db.Column(db.UnicodeText)
 
@@ -199,7 +199,8 @@ def project_detail(project_id):
 def index():
     f = open('templates/public/index.md', 'r')
     content = Markup(markdown.markdown(f.read()))
-    projects = Project.query.all()
+    projects = Project.query.filter_by(is_featured=False).all()
+    featured = Project.query.filter_by(is_featured=True).first()
     meta = { 'title': 'Home' }
     return render_template('public/home.pug', **locals())
 

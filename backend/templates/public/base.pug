@@ -33,14 +33,13 @@ html
 
   body
     block top
-      rg-drawer
+      // top of the page
 
     block header
       site-header
         .o-page-header.o-container.o-container--large
           .c-link.c-link--brand
             a.logo(href='/') SmartUse
-            img.fullscreen(src='/img/fullscreen.png',width=30)
 
     block subheader
       //- used for author details etc.
@@ -57,8 +56,8 @@ html
       .o-grid__cell.o-grid__cell--width-20
       .o-grid__cell.footer
         .c-input-group
-          a.c-button(href='/') Dashboard
-          a.c-button.c-button--info(href='mailto:info@smartuse.ch') Get support
+          a.c-button.c-button--success(href='/') Home
+          a.c-button.c-button--info(href='mailto:info@smartuse.ch') Send feedback
           a.c-button.c-button--brand(href='https://smartuse.ch/') SmartUse ARGE
           a.c-button(href='/admin/') Administration
         p

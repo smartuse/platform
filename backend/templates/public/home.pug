@@ -1,30 +1,45 @@
 extends public/base.pug
 
+block head
+  script project_id=#{featured.id}; project_path='/uploads';
+
 block content
-  .o-grid
+  .o-grid.featured
+    .o-grid__cell.o-grid__cell--width-20
+    .o-grid__cell.featured
+      .gallery
+    .o-grid__cell.o-grid__cell--width-20
+
+  .o-grid.featured
+    .o-grid__cell.o-grid__cell--width-20
+    .o-grid__cell.page-content
+      b
+        !=featured.summary
+      p
+        !=featured.details
+    .o-grid__cell.o-grid__cell--width-20
+
+  .o-grid.home-page
     .o-grid__cell.o-grid__cell--width-20
     .o-grid__cell.page-content
       !=content
+      hr
     .o-grid__cell.o-grid__cell--width-20
 
   .o-grid
     .o-grid__cell.o-grid__cell--width-20
     .o-grid__cell.project-list
-      each project in projects
-        .o-grid
-          .c-card.o-grid__cell.o-grid__cell--width-100
-            .c-card__header
-              img(src='/img/usermap.jpg',align='right')
-              h2.c-heading
-                =project.title
-              each user in project.users
-                span= user.organisation
-            .c-card__body
-              .c-paragraph
-                =project.summary
-              .c-input-group
-                a.c-button.c-button--block.c-button--success(href='/project/{{ project.id }}')
-                  span Open
-                a.c-button.c-button--block.c-button--brand(href='/admin/project/edit/?id={{ project.id }}')
-                  span Edit
+      .o-grid.o-grid--top
+        each project in projects
+          .c-card.o-grid__cell.o-grid__cell--width-49.o-grid__cell--top
+            a(href='/project/{{ project.id }}')
+              .c-card__header
+                img(src='/img/usermap.jpg',align='right')
+                h2.c-heading
+                  =project.title
+                each user in project.users
+                  span= user.organisation
+              .c-card__body
+                .c-paragraph
+                  =project.summary
     .o-grid__cell.o-grid__cell--width-20

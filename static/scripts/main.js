@@ -197,14 +197,14 @@ Zepto(function($){
     var requestMethod = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen;
     if (requestMethod) { requestMethod.call(element); }
   }
-  $('img.fullscreen').click(function(e) {
+  $('.fullscreen-button').click(function(e) {
     e.preventDefault();
     if ($(this).hasClass('active')) {
       $('.gallery').removeClass('fullscreen');
       $(this).removeClass('active');
-      if (document.exitFullscreen) { document.exitFullscreen(); }
+      // if (document.exitFullscreen) { document.exitFullscreen(); }
     } else {
-      requestFullScreen();
+      // requestFullScreen();
       $('.gallery').addClass('fullscreen');
       $(this).addClass('active');
     }

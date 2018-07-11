@@ -151,16 +151,19 @@ p.author {
   transition: color .1s;
 }
 
-img.fullscreen {
+.fullscreen-button {
   width: 30px;
   height: 30px;
+  right: 3px; top: 3px;
   position: absolute;
-  z-index: 1000;
   background: white;
 }
+.fullscreen-button.active {
+  z-index: 1000;
+}
 .gallery.fullscreen {
-  height: 85%;
-  top: 15%;
+  height: 89%;
+  top: 10%;
   position: absolute;
   background: white;
 }
@@ -171,8 +174,16 @@ img.fullscreen {
 /* Project List (home) styling */
 
 .project-list .o-grid__cell {
-  margin-right: 20px;
+  box-shadow: 1px 1px 3px grey;
+  margin-right: 7px;
+  margin-top: 0px;
 }
+.project-list .o-grid__cell a {
+  text-decoration: none;
+  color: black;
+}
+.project-list .o-grid__cell a:hover { color: blue; }
+.project-list .o-grid__cell:hover { box-shadow: 1px 1px 3px black; }
 
 /* Home Page styling */
 

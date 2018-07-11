@@ -3,6 +3,10 @@ extends public/base.pug
 block head
   script project_id=#{meta.id}; project_path='/uploads';
 
+block top
+  rg-drawer
+  img.fullscreen-button(src='/img/fullscreen.png',width=30)
+
 block subheader
   .o-grid.author-header
     .o-grid__cell--width-15
