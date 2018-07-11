@@ -128,16 +128,12 @@ projects_resources = db.Table(
     db.Column('project_id', db.Integer(), db.ForeignKey('project.id')),
     db.Column('resource_id', db.Integer(), db.ForeignKey('resource.id'))
 )
-SUPPORTED_FORMATS = (
-    'png', 'jpg', 'geojson', 'datapackage', 'embed'
-)
 
 class Resource(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(64), unique=True)
     description = db.Column(db.UnicodeText)
     path = db.Column(db.Unicode(256), doc="Use the Data tab to upload files")
-    dataformat = db.Column(db.Enum(*SUPPORTED_FORMATS, name="dataformats"))
     projects = db.relationship('Project', secondary=projects_resources,
         backref=db.backref('resources', lazy='dynamic'))
     # features = db.Column(Geometry("MULTIPOLYGON"))
@@ -149,8 +145,7 @@ class Resource(db.Model):
             'name': "smartuse-resource-%d" % self.id,
             'title': self.title,
             'description': self.description,
-            'dataformat': self.dataformat,
-            'mediatype': get_media_type(self.dataformat)
+            'mediatype': get_media_type(self.path)
         }
         if self.path:
             r['path'] = self.path
