@@ -163,8 +163,8 @@ Zepto(function($){
       }
     });
 
-    if (rescount > 0) {
-      console.log(rescount);
+    if (rescount > 0 && $('rg-pagination').length > 0) {
+      // console.log(rescount);
       gallery.addClass('items-' + rescount);
       var tags = riot.mount('rg-pagination', {
         pagination: {

@@ -177,11 +177,15 @@ admin.add_view(FileAdmin(upload_path, '/uploads/', name="Data"))
 # API views
 @app.route("/api/projects", methods=['GET'])
 def projects_list():
-    return [p.dict() for p in Project.query.limit(10).all()]
+    return [p.dict() for p in Project.query.filter_by(is_hidden=False).limit(10).all()]
 
 @app.route("/api/resources", methods=['GET'])
 def resources_list():
     return [r.dict() for r in Resource.query.limit(10).all()]
+
+@app.route("/api/organisations", methods=['GET'])
+def organisations_list():
+    return [o.dict() for o in Organisation.query.limit(10).all()]
 
 @app.route("/api/project/<int:project_id>", methods=['GET'])
 def project_detail(project_id):
