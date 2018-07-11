@@ -183,7 +183,10 @@ p.author {
   color: black;
 }
 .project-list .c-card a:hover { color: blue; }
-.project-list .c-card:hover { box-shadow: 1px 1px 3px black; z-index: 10; }
+.project-list .c-card:hover {
+  box-shadow: 1px 1px 3px black;
+  z-index: 10; display: inline-table;
+}
 
 /* Home Page styling */
 
