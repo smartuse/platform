@@ -1,72 +1,30 @@
-doctype html
-html
-  head
-    meta(charset='utf-8')
-    title=meta.title
+extends public/base.pug
 
-    link(rel='icon' href='static/favicon.ico')
-    link(rel='manifest' href='static/manifest.json')
-    script(src='/vendor/zepto-1.2.0.min.js')
-    script(src='/vendor/modernizr-3.5.0.min.js')
-    script(src='/vendor/riot+compiler.min.js')
-    script(src='/vendor/riotgear.min.js')
-    link(href='/vendor/blaze-1.1.3.min.css',rel='stylesheet')
-    link(href='/vendor/blaze/blaze.min.css',rel='stylesheet')
-    link(href='/styles/custom.css',rel='stylesheet')
+block content
+  .o-grid
+    .o-grid__cell.o-grid__cell--width-20
+    .o-grid__cell.page-content
+      !=content
+    .o-grid__cell.o-grid__cell--width-20
 
-    link(rel="apple-touch-icon-precomposed",href="/img/apple-touch-iphone.png")
-    link(rel="apple-touch-icon-precomposed",sizes="72x72",href="/img/apple-touch-ipad.png")
-    link(rel="apple-touch-icon-precomposed",sizes="114x114",href="/img/apple-touch-iphone4.png")
-    link(rel="apple-touch-icon-precomposed",sizes="144x144",href="/img/apple-touch-ipad-retina.png")
-
-    script(src='/scripts/main.js')
-  body
-    rg-drawer
-    site-header
-      .o-page-header.o-container.o-container--large
-        .c-link.c-link--brand
-          a.logo(href='/') SmartUse
-
-    .o-grid
-      .o-grid__cell.o-grid__cell--width-20
-      .o-grid__cell.page-content
-        !=content
-      .o-grid__cell.o-grid__cell--width-20
-
-    .o-grid
-      .o-grid__cell.o-grid__cell--width-20
-      .o-grid__cell.project-list
-        each project in projects
-          .o-grid
-            .c-card.o-grid__cell.o-grid__cell--width-100
-              .c-card__header
-                img(src='/img/usermap.jpg',align='right')
-                h2.c-heading
-                  =project.title
-                each user in project.users
-                  span= user.organisation
-              .c-card__body
-                .c-paragraph
-                  =project.summary
-                .c-input-group
-                  a.c-button.c-button--block.c-button--success(href='/project/{{ project.id }}')
-                    span Open
-                  a.c-button.c-button--block.c-button--brand(href='/admin/project/edit/?id={{ project.id }}')
-                    span Edit
-      .o-grid__cell.o-grid__cell--width-20
-
-    hr
-    .o-grid
-      .o-grid__cell.o-grid__cell--width-20
-      .o-grid__cell.footer
-        .c-input-group
-          a.c-button.c-button--brand(href='/admin/') Administration
-          a.c-button.c-button--info(href='mailto:info@smartuse.ch') Get support
-        p
-          span &copy; 2018 &nbsp;
-          a(href='https://smartuse.ch/') SmartUse ARGE
-          &nbsp; &bull; Developer API:
-          a(href='/api/projects') Projects
-          &nbsp;~
-          a(href='/api/resources') Resources
-      .o-grid__cell.o-grid__cell--width-20
+  .o-grid
+    .o-grid__cell.o-grid__cell--width-20
+    .o-grid__cell.project-list
+      each project in projects
+        .o-grid
+          .c-card.o-grid__cell.o-grid__cell--width-100
+            .c-card__header
+              img(src='/img/usermap.jpg',align='right')
+              h2.c-heading
+                =project.title
+              each user in project.users
+                span= user.organisation
+            .c-card__body
+              .c-paragraph
+                =project.summary
+              .c-input-group
+                a.c-button.c-button--block.c-button--success(href='/project/{{ project.id }}')
+                  span Open
+                a.c-button.c-button--block.c-button--brand(href='/admin/project/edit/?id={{ project.id }}')
+                  span Edit
+    .o-grid__cell.o-grid__cell--width-20

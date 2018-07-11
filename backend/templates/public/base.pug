@@ -1,0 +1,67 @@
+//- base template
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    title=meta.title
+
+    link(rel='icon' href='static/favicon.ico')
+    link(rel='manifest' href='static/manifest.json')
+    script(src='/vendor/zepto-1.2.0.min.js')
+    script(src='/vendor/modernizr-3.5.0.min.js')
+    script(src='/vendor/riot+compiler.min.js')
+    script(src='/vendor/riotgear.min.js')
+    script(src='/vendor/sticky.js/sticky.min.js')
+    link(href='/vendor/blaze-1.1.3.min.css',rel='stylesheet')
+    link(href='/vendor/blaze/blaze.min.css',rel='stylesheet')
+
+    link(href='/vendor/gallery.prefixed.css',rel='stylesheet')
+    link(href='https://fonts.googleapis.com/css?family=Roboto:100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic',rel='stylesheet')
+    script(src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.0/mapbox-gl.js')
+    link(href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.0/mapbox-gl.css',rel='stylesheet')
+
+    link(rel="apple-touch-icon-precomposed",href="/img/apple-touch-iphone.png")
+    link(rel="apple-touch-icon-precomposed",sizes="72x72",href="/img/apple-touch-ipad.png")
+    link(rel="apple-touch-icon-precomposed",sizes="114x114",href="/img/apple-touch-iphone4.png")
+    link(rel="apple-touch-icon-precomposed",sizes="144x144",href="/img/apple-touch-ipad-retina.png")
+
+    block head
+      //- additional scripts and styles
+
+    link(href='/styles/custom.css',rel='stylesheet')
+    script(src='/scripts/main.js')
+
+  body
+    block top
+      rg-drawer
+
+    block header
+      site-header
+        .o-page-header.o-container.o-container--large
+          .c-link.c-link--brand
+            a.logo(href='/') SmartUse
+            img.fullscreen(src='/img/fullscreen.png',width=30)
+
+    block subheader
+      //- used for author details etc.
+
+    block content
+      //- main page content
+
+    hr
+
+    block footer
+      //- additional page footer
+
+    .o-grid
+      .o-grid__cell.o-grid__cell--width-20
+      .o-grid__cell.footer
+        .c-input-group
+          a.c-button(href='/') Dashboard
+          a.c-button.c-button--info(href='mailto:info@smartuse.ch') Get support
+          a.c-button.c-button--brand(href='https://smartuse.ch/') SmartUse ARGE
+          a.c-button(href='/admin/') Administration
+        p
+          span &nbsp; &copy; 2018 &nbsp;
+          a(href='https://www.metropolitanraum-zuerich.ch/home.html') Metropolitanraum Zürich
+      .o-grid__cell.o-grid__cell--width-20

@@ -21,8 +21,9 @@ import geojson, markdown
 
 # Gravatar
 from urllib.parse import urlencode
-import hashlib
+import hashlib, codecs
 import os.path as ospath
+from os import urandom
 
 # Locals
 from .util import *
@@ -38,8 +39,6 @@ migrate = Migrate(app, db)
 
 # Create admin
 admin = admin.Admin(app, name='SmartUse', template_mode='bootstrap3')
-login_manager = LoginManager()
-login_manager.init_app(app)
 
 # Define tables and models
 projects_users = db.Table(
@@ -72,13 +71,19 @@ class Project(db.Model):
     summary = db.Column(db.Unicode(255))
     details = db.Column(db.UnicodeText)
 
-    column_exclude_list = ('summary', 'details')
+    is_hidden = db.Column(db.Boolean(), default=False)
+    is_featured = db.Column(db.Boolean(), default=False)
+    token_edit = db.Column(db.String(64), default=codecs.encode(urandom(12), 'hex').decode())
+
+    column_exclude_list = ('summary', 'details', 'token_edit')
 
     def __repr__(self):
         return self.title
     def dict(self):
         return {
             'id': self.id,
+            'hidden': self.is_hidden,
+            'featured': self.is_featured,
             'name': 'smartuse-%d' % self.id,
             'text': self.title,
             'title': self.title,
@@ -118,10 +123,6 @@ class User(db.Model):
             'organisation': self.organisation.dict(),
         }
 
-@login_manager.user_loader
-def load_user(user_id):
-    return User.get(user_id)
-    
 projects_resources = db.Table(
     'projects_resources',
     db.Column('project_id', db.Integer(), db.ForeignKey('project.id')),
