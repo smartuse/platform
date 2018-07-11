@@ -52,6 +52,16 @@ class Organisation(db.Model):
     url = db.Column(db.Unicode(255))
     logo = db.Column(db.Unicode(255))
 
+    def __repr__(self):
+        return self.name
+    def dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'url': self.url,
+            'logo': self.logo
+        }
+
 class Project(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(64), unique=True)
@@ -103,9 +113,7 @@ class User(db.Model):
             'username': self.username,
             'fullname': self.fullname,
             'gravatar': self.gravatar(),
-            'organisation': self.organisation,
-            'url': self.url,
-            'logo': self.logo
+            'organisation': self.organisation.dict(),
         }
 
 projects_resources = db.Table(
@@ -139,10 +147,10 @@ class Resource(db.Model):
         }
         if self.path:
             r['path'] = self.path
-        if self.features is not None:
-            if not 'data' in r: r['data'] = {}
-            f = get_features_geojson(r['name'], [self.features])
-            r['data']['features'] = f
+        # if self.features is not None:
+        #     if not 'data' in r: r['data'] = {}
+        #     f = get_features_geojson(r['name'], [self.features])
+        #     r['data']['features'] = f
         return r
 
 # Add views

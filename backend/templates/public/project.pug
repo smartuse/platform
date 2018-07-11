@@ -38,8 +38,8 @@ html
     .o-grid.author-header
       .o-grid__cell--width-15
         .c-link-author
-          a(href=author.url)
-            img(src=author.logo)
+          a(href=author.organisation.url)
+            img(src=author.organisation.logo,title=author.organisation.name)
       .o-grid__cell.page-meta
       .o-grid__cell--width-15
 
@@ -74,7 +74,7 @@ html
             a.fullname(href=author.url,target="_blank")
               =author.fullname
             .organisation
-              =author.organisation
+              =author.organisation.name
 
         .page-content
           !=content

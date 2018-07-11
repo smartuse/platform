@@ -11,7 +11,7 @@ Zepto(function($){
 
         var tag = riot.mount('rg-drawer', {
           drawer: {
-            header: 'Select project',
+            header: '<< DASHBOARD',
             isvisible: true,
             position: 'top',
             items: projects
@@ -20,7 +20,9 @@ Zepto(function($){
         tag[0].on('select', function (item) {
           location.href='/project/' + item.id;
         });
-
+        $('rg-drawer .heading').click(function() {
+          location.href='/';
+        }).css('cursor', 'pointer');
         return false;
       })
     });
