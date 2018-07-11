@@ -12,3 +12,5 @@ yarn-error.log
 .ipynb_checkpoints
 *.mp4
 .DS_Store
+
+backend/run.sh

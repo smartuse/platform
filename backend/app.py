@@ -38,6 +38,8 @@ migrate = Migrate(app, db)
 
 # Create admin
 admin = admin.Admin(app, name='SmartUse', template_mode='bootstrap3')
+login_manager = LoginManager()
+login_manager.init_app(app)
 
 # Define tables and models
 projects_users = db.Table(
@@ -116,6 +118,10 @@ class User(db.Model):
             'organisation': self.organisation.dict(),
         }
 
+@login_manager.user_loader
+def load_user(user_id):
+    return User.get(user_id)
+    
 projects_resources = db.Table(
     'projects_resources',
     db.Column('project_id', db.Integer(), db.ForeignKey('project.id')),

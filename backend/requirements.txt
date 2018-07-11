@@ -3,6 +3,7 @@ Flask-Admin
 Flask-API
 Flask-Migrate
 Flask-SQLAlchemy
+flask-login
 shapely
 geoalchemy2
 geojson
