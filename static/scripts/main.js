@@ -156,9 +156,9 @@ Zepto(function($){
         $('.resource-content').append(
           '<div class="description" id="' + res.name + '">'
         + '<a name="anchor-' + rescount + '"></a>'
-        + '<h2>📌 ' //'<a href="#item-' + rescount + '">'
+        + '<h3>📌 ' //'<a href="#item-' + rescount + '">'
         + (res.title || res.name)
-        + '</h2><p>'
+        + '</h3><p>'
         + res.description + '</p></div>');
         // $('.story-nav ul').append(
         //   '<li><a href="#' + res.name + '">' + (res.title || res.name) + '</a></li>'
@@ -228,6 +228,17 @@ Zepto(function($){
   }
   setStoryLayout();
   $(window).resize(setStoryLayout);
+
+  // Interactive search
+  $('input.search').on('input', function() {
+    var $cards = $('.project-list .c-card');
+    var q = $(this).val().toLowerCase();
+    if (q.length < 3) return $cards.show();
+    $cards.hide().forEach(function(item) {
+      if ($(item).text().toLowerCase().indexOf(q) >= 0)
+        $(item).show();
+    });
+  });
 
   if (typeof mapboxgl !== 'undefined')
     mapboxgl.accessToken = 'pk.eyJ1Ijoic21hcnR1c2UiLCJhIjoiY2pkNGowcGdzMHhpbzMzcWp3eGYydGhmMiJ9.k9QyYo-2pFvyyFDJiz16UA';

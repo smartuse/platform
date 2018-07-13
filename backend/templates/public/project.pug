@@ -29,13 +29,14 @@ block content
   .story.fixed
     .o-grid
       .o-grid__cell--width-20
-      .o-grid__cell
+      .o-grid__cell.page-meta
+        h1
+          =meta.title
         p.date
-          =meta.updated
+          span Updated:&nbsp;
+          =updated
         p.description
           =meta.summary
-        h3
-          =meta.title
         if author
           .o-grid
             .o-grid__cell--width-7.authorImage

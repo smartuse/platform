@@ -22,7 +22,7 @@ body {
   margin-right: 10px;
 	font-size: 0px;
 }
-.o-page-header {
+.fixed .o-page-header {
   margin-top: -15px;
   float: right;
 }
@@ -47,9 +47,14 @@ body {
 	background: white;
 }
 
+.page-meta p { margin: 0; }
 p.author {
   margin-top: 0;
 }
+p.date {
+  float: right;
+}
+p.date span { color: #999; }
 
 .page-summary {
   text-align: center;
@@ -92,6 +97,7 @@ p.author {
 }
 .story-nav a { color: black; font-weight: bold; }
 */
+input.search { font-size: 140%; }
 
 .item img, .item iframe, .item .map {
   width: 100%;

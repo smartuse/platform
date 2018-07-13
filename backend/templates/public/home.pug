@@ -1,28 +1,26 @@
 extends public/base.pug
 
 block head
-  script project_id=#{featured.id}; project_path='/uploads';
+  if featured
+    script project_id=#{featured.id}; project_path='/uploads';
 
 block content
   .o-grid.featured
     .o-grid__cell.o-grid__cell--width-20
     .o-grid__cell
       .gallery
+      h5
+        !=featured.title
+      b
+        !=featured.summary
     .o-grid__cell.o-grid__cell--width-20
 
   .o-grid.featured
     .o-grid__cell.o-grid__cell--width-20
     .o-grid__cell.page-content
-      b
-        !=featured.summary
-      p
-        !=featured.details
-    .o-grid__cell.o-grid__cell--width-20
-
-  .o-grid.home-page
-    .o-grid__cell.o-grid__cell--width-20
-    .o-grid__cell.page-content
       !=content
+      center
+        input.search(name='q',placeholder='Search ...')
       hr
     .o-grid__cell.o-grid__cell--width-20
 
