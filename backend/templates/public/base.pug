@@ -11,7 +11,6 @@ html
     script(src='/vendor/modernizr-3.5.0.min.js')
     script(src='/vendor/riot+compiler.min.js')
     script(src='/vendor/riotgear.min.js')
-    script(src='/vendor/sticky.js/sticky.min.js')
     link(href='/vendor/blaze-1.1.3.min.css',rel='stylesheet')
     link(href='/vendor/blaze/blaze.min.css',rel='stylesheet')
 
@@ -33,34 +32,23 @@ html
 
   body
     block top
-      // top of the page
-
-    block header
-      site-header
-        .o-page-header.o-container.o-container--large
-          .c-link.c-link--brand
-            a.logo(href='/') SmartUse
-
-    block subheader
-      //- used for author details etc.
+      .o-page-header.o-container.o-container--large
+        .c-link.c-link--brand
+          a.logo(href='/') SmartUse
 
     block content
       //- main page content
 
-    hr
-
     block footer
-      //- additional page footer
-
-    .o-grid
-      .o-grid__cell.o-grid__cell--width-20
-      .o-grid__cell.footer
-        .c-input-group
-          a.c-button.c-button--success(href='/') Home
-          a.c-button.c-button--info(href='mailto:info@smartuse.ch') Send feedback
-          a.c-button.c-button--brand(href='https://smartuse.ch/') SmartUse ARGE
-          a.c-button(href='/admin/') Administration
-        p
-          span &nbsp; &copy; 2018 &nbsp;
-          a(href='https://www.metropolitanraum-zuerich.ch/home.html') Metropolitanraum Zürich
-      .o-grid__cell.o-grid__cell--width-20
+      .o-grid.footer
+        .o-grid__cell.o-grid__cell--width-20
+        .o-grid__cell.footer-container
+          .c-input-group
+            a.c-button.c-button--success(href='/') Home
+            a.c-button.c-button--info(href='mailto:info@smartuse.ch') Send feedback
+            a.c-button.c-button--brand(href='https://smartuse.ch/') SmartUse ARGE
+            a.c-button(href='/admin/') Administration
+          p
+            span &nbsp; &copy; 2018 &nbsp;
+            a(href='https://www.metropolitanraum-zuerich.ch/home.html') Metropolitanraum Zürich
+        .o-grid__cell.o-grid__cell--width-20

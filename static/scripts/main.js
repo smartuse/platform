@@ -11,7 +11,7 @@ Zepto(function($){
 
         var tag = riot.mount('rg-drawer', {
           drawer: {
-            header: '<< DASHBOARD',
+            header: 'Projects',
             isvisible: true,
             position: 'top',
             items: projects
@@ -155,11 +155,12 @@ Zepto(function($){
       if (res.name.length>1 && res.description.length>1) {
         $('.resource-content').append(
           '<div class="description" id="' + res.name + '">'
+        + '<a name="anchor-' + rescount + '"></a>'
         + '<h2>' + (res.title || res.name) + '</h2><p>'
         + res.description + '</p></div>');
-        $('.sidebar-nav ul').append(
-          '<li><a href="#' + res.name + '">' + (res.title || res.name) + '</a></li>'
-        );
+        // $('.story-nav ul').append(
+        //   '<li><a href="#' + res.name + '">' + (res.title || res.name) + '</a></li>'
+        // );
       }
     });
 
@@ -178,6 +179,8 @@ Zepto(function($){
         location.href="#item-" + page;
         if (maps.hasOwnProperty(page))
           maps[page].resize();
+        smoothScroll($('.story'), $('.story').scrollTop()
+          + $('a[name="anchor-' + page + '"]').offset().top, 600);
       });
       location.href="#item-1";
     }
@@ -202,16 +205,27 @@ Zepto(function($){
     if ($(this).hasClass('active')) {
       $('.gallery').removeClass('fullscreen');
       $(this).removeClass('active');
+      $('.gallery-nav.fixed,.story.fixed').removeClass('hidden');
       // if (document.exitFullscreen) { document.exitFullscreen(); }
     } else {
       // requestFullScreen();
       $('.gallery').addClass('fullscreen');
       $(this).addClass('active');
+      $('.gallery-nav.fixed,.story.fixed').addClass('hidden');
     }
   });
 
-  // Sticky navigation
-  var sticky = new Sticky('.sticky');
+  // Adjust page sizes
+  function setStoryLayout() {
+    var sh = $(window).height()
+           - $('.gallery').height()
+           - $('.footer').height()
+           - $('site-header').height()
+           - 14;
+    // $('.story').css('height', sh + 'px');
+  }
+  setStoryLayout();
+  $(window).resize(setStoryLayout);
 
   if (typeof mapboxgl !== 'undefined')
     mapboxgl.accessToken = 'pk.eyJ1Ijoic21hcnR1c2UiLCJhIjoiY2pkNGowcGdzMHhpbzMzcWp3eGYydGhmMiJ9.k9QyYo-2pFvyyFDJiz16UA';

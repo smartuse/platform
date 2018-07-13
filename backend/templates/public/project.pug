@@ -2,60 +2,68 @@ extends public/base.pug
 
 block head
   script project_id=#{meta.id}; project_path='/uploads';
+  script(src='/vendor/zepto.smoothscroll.js')
 
 block top
   rg-drawer
-  img.fullscreen-button(src='/img/fullscreen.png',width=30)
-
-block subheader
-  if author
-    if author.organisation
-      .o-grid.author-header
-        .o-grid__cell--width-15
-          .c-link-author
-            a(href=author.organisation.url)
-              img(src=author.organisation.logo,title=author.organisation.name)
-        .o-grid__cell.page-meta
-        .o-grid__cell--width-15
 
 block content
-  .gallery
+  .fullscreen-button
+  .gallery.fixed
 
-  .o-grid
-    .o-grid__cell--width-15
-    .o-grid__cell
-      rg-pagination
-    .o-grid__cell--width-15
+  .gallery-nav.fixed
+    .o-page-header.o-container.o-container--large
+      .c-link.c-link--brand
+        a.logo(href='/') SmartUse
+    if author
+      if author.organisation
+        .c-link-author
+          a(href=author.organisation.url)
+            img(src=author.organisation.logo,title=author.organisation.name)
+    .o-grid.gallery-page
+      .o-grid__cell--width-15
+      .o-grid__cell
+        rg-pagination
+      .o-grid__cell--width-15
 
-  .o-grid
-    .o-grid__cell--width-20
-    .o-grid__cell
-      p.date
-        =meta.updated
-      p.description
-        =meta.summary
-    .o-grid__cell--width-20
-
-  .o-grid(data-sticky-container)
-    .o-grid__cell--width-10
-    .o-grid__cell--width-10.sidebar-nav.sticky(data-margin-top="20",data-sticky-for="1023",data-sticky-class="is-sticky")
-      h3
-        =meta.title
-      ul
-    .o-grid__cell.page-scroll
-      if author
-        if author.organisation
+  .story.fixed
+    .o-grid
+      .o-grid__cell--width-20
+      .o-grid__cell
+        p.date
+          =meta.updated
+        p.description
+          =meta.summary
+        h3
+          =meta.title
+        if author
           .o-grid
             .o-grid__cell--width-7.authorImage
               img(src=author.gravatar)
             .o-grid__cell.authorText
               a.fullname(href=author.url,target="_blank")
                 =author.fullname
-              .organisation
-                =author.organisation.name
+              if author.organisation
+                .organisation
+                  =author.organisation.name
+      .o-grid__cell--width-20
 
-      .page-content
-        !=content
-      .resource-content
+    .o-grid
+      .o-grid__cell--width-20
+      .o-grid__cell
+        .page-content
+          !=content
+        .resource-content
 
-    .o-grid__cell--width-20
+        p.page-footer
+          span &nbsp; &copy; 2018 &nbsp;
+          a(href='https://www.metropolitanraum-zuerich.ch/home.html') Metropolitanraum Zürich
+          span &nbsp; | &nbsp;
+          a(href='/') Home
+          span &nbsp; | &nbsp;
+          a(href='#top') Go to top
+
+      .o-grid__cell--width-20
+
+block footer
+  //- blank

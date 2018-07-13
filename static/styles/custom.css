@@ -1,11 +1,8 @@
-html { background: #fff; }
-
+html { background: #fff; overflow-x: hidden; }
+.hidden { display: none; }
 body {
-  font-family: "Roboto", sans-serif; height: 100%;
-}
-.author-header {
-  min-height: 100px;
-  background: white;
+  font-family: "Roboto", sans-serif;
+  height: 100%;
 }
 .c-link-author {
   padding: 30px 10px 20px 20px;
@@ -15,12 +12,6 @@ body {
     width: 80%;
     max-width: 150px;
 }
-.c-link--brand {
-  top: 10px;
-  right: 10px;
-  transform: scale(0.7);
-  background: white;
-}
 .logo {
 	background: url("/img/SmartUse-Logo.png") left center no-repeat;
 	background-size: cover;
@@ -28,22 +19,22 @@ body {
 	width: 193px;
 	height: 70px;
 	margin: 0px;
+  margin-right: 10px;
 	font-size: 0px;
-	margin-top: 15px;
-  z-index: 1000;
+}
+.o-page-header {
+  margin-top: -15px;
+  float: right;
+}
+
+.page-footer {
+  margin-top: 5em;
+  margin-bottom: 50em;
 }
 
 .basemap {
-  width: 100%; height: 550px;
+  width: 100%; height: 40%;
   background-color: lightgreen;
-}
-
-.o-page-header {
-	margin-bottom: 1em;
-	padding-bottom: 1em;
-
-  position: absolute;
-  right: 2em;
 }
 
 .nav button {
@@ -54,13 +45,6 @@ body {
 	font-size: 120%;
 	border: 1px solid #999;
 	background: white;
-}
-
-.page-meta h1 {
-	margin-bottom: 0px;
-}
-.page-meta .author {
-	margin-top: 0px;
 }
 
 p.author {
@@ -96,10 +80,12 @@ p.author {
   width: 40%;
 }
 
-.sidebar-nav ul, .sidebar-nav li {
+/*
+.story-nav ul, .story-nav li {
   list-style: none; margin-left: 0; padding-left: 0; margin-bottom: 1em;
 }
-.sidebar-nav a { color: black; font-weight: bold; }
+.story-nav a { color: black; font-weight: bold; }
+*/
 
 .item img, .item iframe, .item .map {
   width: 100%;
@@ -118,8 +104,10 @@ p.author {
 	Theme controls how everything looks in Gallery CSS.
 */
 .gallery {
-  position: relative;
   width: 100%;
+  height: 400px;
+  top: 0px;
+  overflow: hidden;
 }
 .gallery .control-button {
   color: #ccc;
@@ -131,7 +119,7 @@ p.author {
 }
 .gallery .item {
   margin: 0px;
-  height: 550px;
+  height: 100%;
   overflow: hidden;
   text-align: center;
   background: #fff; /*#4d87e2*/
@@ -152,18 +140,22 @@ p.author {
 }
 
 .fullscreen-button {
-  width: 30px;
-  height: 30px;
-  right: 3px; top: 3px;
+  width: 40px;
+  height: 36px;
+  background: white url('/img/fullscreen.png') no-repeat 50% 50%;
+  background-size: contain;
+  z-index: 2;
   position: absolute;
-  background: white;
+  top: 0px; right: 0px;
+  border: 2px solid #fff;
+  border-radius: 3px;
 }
 .fullscreen-button.active {
-  z-index: 1000;
+  border: 4px solid #fff;
 }
 .gallery.fullscreen {
-  height: 89%;
-  top: 10%;
+  height: 100% !important;
+  top: 0% !important;
   position: absolute;
   background: white;
 }
@@ -236,6 +228,21 @@ p.author {
   font-size: 14px;
 }
 
+/* Fixed rendering */
+.fixed {
+  position: absolute;
+  width: 100%; overflow: hidden;
+}
+.gallery.fixed {
+  height: 40%; top: 0px;
+}
+.gallery-nav.fixed {
+  height: 84px; top: 40%; z-index: 10;
+}
+.story.fixed {
+  height: 50%; bottom: 0%;
+  overflow-y: scroll;
+}
 
 /* Mobile rendering */
 @media only screen
