@@ -215,7 +215,8 @@ def project_page(project_id):
     project = Project.query.filter_by(id=project_id).first_or_404()
     content = Markup(markdown.markdown(project.details))
     meta = project.dict()
-    author = project.users.first().dict()
+    author = project.users.first()
+    if author is not None: author = author.dict()
     return render_template('public/project.pug', **locals())
 
 # Static paths

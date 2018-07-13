@@ -8,13 +8,15 @@ block top
   img.fullscreen-button(src='/img/fullscreen.png',width=30)
 
 block subheader
-  .o-grid.author-header
-    .o-grid__cell--width-15
-      .c-link-author
-        a(href=author.organisation.url)
-          img(src=author.organisation.logo,title=author.organisation.name)
-    .o-grid__cell.page-meta
-    .o-grid__cell--width-15
+  if author
+    if author.organisation
+      .o-grid.author-header
+        .o-grid__cell--width-15
+          .c-link-author
+            a(href=author.organisation.url)
+              img(src=author.organisation.logo,title=author.organisation.name)
+        .o-grid__cell.page-meta
+        .o-grid__cell--width-15
 
 block content
   .gallery
@@ -41,14 +43,16 @@ block content
         =meta.title
       ul
     .o-grid__cell.page-scroll
-      .o-grid
-        .o-grid__cell--width-7.authorImage
-          img(src=author.gravatar)
-        .o-grid__cell.authorText
-          a.fullname(href=author.url,target="_blank")
-            =author.fullname
-          .organisation
-            =author.organisation.name
+      if author
+        if author.organisation
+          .o-grid
+            .o-grid__cell--width-7.authorImage
+              img(src=author.gravatar)
+            .o-grid__cell.authorText
+              a.fullname(href=author.url,target="_blank")
+                =author.fullname
+              .organisation
+                =author.organisation.name
 
       .page-content
         !=content
