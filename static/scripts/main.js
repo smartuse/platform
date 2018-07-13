@@ -1,4 +1,4 @@
-var maps = {};
+var maps = {}, paginationtag = null;
 
 Zepto(function($){
 
@@ -156,7 +156,9 @@ Zepto(function($){
         $('.resource-content').append(
           '<div class="description" id="' + res.name + '">'
         + '<a name="anchor-' + rescount + '"></a>'
-        + '<h2>' + (res.title || res.name) + '</h2><p>'
+        + '<h2>📌 ' //'<a href="#item-' + rescount + '">'
+        + (res.title || res.name)
+        + '</h2><p>'
         + res.description + '</p></div>');
         // $('.story-nav ul').append(
         //   '<li><a href="#' + res.name + '">' + (res.title || res.name) + '</a></li>'
@@ -167,15 +169,15 @@ Zepto(function($){
     if (rescount > 0 && $('rg-pagination').length > 0) {
       // console.log(rescount);
       gallery.addClass('items-' + rescount);
-      var tags = riot.mount('rg-pagination', {
+      paginationtag = riot.mount('rg-pagination', {
         pagination: {
           pages: rescount,
           page: 1
         }
       });
-      tags[0].on('page', function (page) {
-        if (page < 1) { return tags[0].forward(); }
-        if (page > rescount) { return tags[0].back(); }
+      paginationtag[0].on('page', function (page) {
+        if (page < 1) { return paginationtag[0].forward(); }
+        if (page > rescount) { return paginationtag[0].back(); }
         location.href="#item-" + page;
         if (maps.hasOwnProperty(page))
           maps[page].resize();

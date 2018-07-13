@@ -63,6 +63,12 @@ p.author {
 	padding-top: 1em;
 }
 
+.description h2 a {
+  text-decoration: none;
+  color: #555;
+  border-bottom: 1px dashed #555;
+}
+
 .item .description {
   opacity: 1.0;
 
