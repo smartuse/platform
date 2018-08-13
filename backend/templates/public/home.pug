@@ -5,6 +5,12 @@ block head
     script project_id=#{featured.id}; project_path='/uploads';
 
 block content
+  .o-grid
+    .o-grid__cell.o-grid__cell--width-20
+    .o-grid__cell.page-content.home-content
+      !=content
+    .o-grid__cell.o-grid__cell--width-20
+
   a.o-grid.featured(href='/project/{{ featured.id }}')
     .o-grid__cell.o-grid__cell--width-20
     .o-grid__cell
@@ -18,7 +24,6 @@ block content
   .o-grid
     .o-grid__cell.o-grid__cell--width-20
     .o-grid__cell.page-content
-      !=content
       center
         input.search(name='q',placeholder='Search ...')
       hr

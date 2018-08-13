@@ -195,6 +195,19 @@ input.search { font-size: 140%; }
 
 /* Home Page styling */
 
+.home-content {
+  background: url(https://smartuse.ch/media/SmartUse.jpg) no-repeat top;
+  background-size: cover;
+  margin-top: -50px;
+}
+.home-content p {
+  background: white;
+  padding: 11px;
+  opacity: 0.9;
+  margin-top: 50px;
+}
+.home-content p * { color: black; }
+
 .o-grid.featured { margin-top: 2em; }
 
 a.featured, a.featured h5, a.featured p
