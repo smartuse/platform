@@ -5,7 +5,7 @@ block head
     script project_id=#{featured.id}; project_path='/uploads';
 
 block content
-  .o-grid.featured
+  a.o-grid.featured(href='/project/{{ featured.id }}')
     .o-grid__cell.o-grid__cell--width-20
     .o-grid__cell
       .gallery
@@ -15,7 +15,7 @@ block content
         !=featured.summary
     .o-grid__cell.o-grid__cell--width-20
 
-  .o-grid.featured
+  .o-grid
     .o-grid__cell.o-grid__cell--width-20
     .o-grid__cell.page-content
       !=content

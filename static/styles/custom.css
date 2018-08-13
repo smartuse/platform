@@ -16,11 +16,12 @@ body {
 	background: url("/img/SmartUse-Logo.png") left center no-repeat;
 	background-size: cover;
 	display: inline-block;
-	width: 193px;
-	height: 70px;
+	width: 123px;
+	height: 45px;
 	margin: 0px;
   margin-right: 10px;
 	font-size: 0px;
+  zoom: 0.9;
 }
 .fixed .o-page-header {
   margin-top: -15px;
@@ -193,6 +194,11 @@ input.search { font-size: 140%; }
 }
 
 /* Home Page styling */
+
+.o-grid.featured { margin-top: 2em; }
+
+a.featured, a.featured h5, a.featured p
+{ text-decoration: none; color: black; }
 
 .o-grid__cell input.c-field {
   border-radius: 0;

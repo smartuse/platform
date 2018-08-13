@@ -2,8 +2,10 @@ var maps = {}, paginationtag = null;
 
 Zepto(function($){
 
+  // Load the project menu
   $('rg-drawer').each(function() {
     var self = this;
+    return; // Or don't..
     $.getJSON('/api/projects', function(projects) {
       $('.c-link--brand a').click(function(e) {
         e.preventDefault();
