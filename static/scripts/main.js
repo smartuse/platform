@@ -158,7 +158,8 @@ Zepto(function($){
         $('.resource-content').append(
           '<div class="description" id="' + res.name + '">'
         + '<a name="anchor-' + rescount + '"></a>'
-        + '<h3>📌 ' //'<a href="#item-' + rescount + '">'
+        + '<h3>' //'<a href="#item-' + rescount + '">'
+        + '<i class="material-icons">layers</i>'
         + (res.title || res.name)
         + '</h3><p>'
         + res.description + '</p></div>');
