@@ -15,11 +15,6 @@ block content
     .o-page-header.o-container.o-container--large
       .c-link.c-link--brand
         a.logo(href='/') SmartUse
-    if author
-      if author.organisation
-        .c-link-author
-          a(href=author.organisation.url)
-            img(src=author.organisation.logo,title=author.organisation.name)
     .o-grid.gallery-page
       .o-grid__cell--width-15
       .o-grid__cell
@@ -37,17 +32,26 @@ block content
           =updated
         p.description
           =meta.summary
-        if author
-          .o-grid
-            .o-grid__cell--width-7.authorImage
-              img(src=author.gravatar)
-            .o-grid__cell.authorText
-              a.fullname(href=author.url,target="_blank")
-                =author.fullname
-              if author.organisation
-                .organisation
-                  =author.organisation.name
       .o-grid__cell--width-20
+
+    if author
+      .o-grid
+        if author.organisation
+          .o-grid__cell--width-7.authorImage
+            a(href=author.organisation.url)
+              img(src=author.organisation.logo,title=author.organisation.name)
+        else
+          .o-grid__cell--width-7.authorImage
+            img(src=author.gravatar)
+        .o-grid__cell.authorText
+          if author.organisation
+            a(href=author.organisation.url)
+              .organisation
+                =author.organisation.name
+          else
+            a.fullname(href=author.url,target="_blank")
+              =author.fullname
+        .o-grid__cell--width-20
 
     .o-grid
       .o-grid__cell--width-20
@@ -55,7 +59,25 @@ block content
         .page-content
           !=content
         .resource-content
+      .o-grid__cell--width-20
 
+    if author.organisation
+      .o-grid
+        .o-grid__cell--width-7.authorImage
+          img(src=author.gravatar)
+        .o-grid__cell.authorText
+          p
+            a.fullname(href=author.url,target="_blank")
+              =author.fullname
+          p
+            a(href=author.organisation.url)
+              .organisation
+                =author.organisation.name
+        .o-grid__cell--width-20
+
+    .o-grid
+      .o-grid__cell--width-20
+      .o-grid__cell
         p.page-footer
           span &nbsp; &copy; 2018 &nbsp;
           a(href='https://www.metropolitanraum-zuerich.ch/home.html') Metropolitanraum Zürich
@@ -63,7 +85,6 @@ block content
           a(href='/') Home
           span &nbsp; | &nbsp;
           a(href='#top') Go to top
-
       .o-grid__cell--width-20
 
 block footer
