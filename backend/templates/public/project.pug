@@ -16,7 +16,12 @@ block content
       .c-link.c-link--brand
         a.logo(href='/') SmartUse
     .o-grid.gallery-page
-      .o-grid__cell--width-15
+      .o-grid__cell--width-15.o-grid--center.authorImage
+        if author.organisation
+          a(href=author.organisation.url,target="_blank")
+            img(src=author.organisation.logo,title=author.organisation.name)
+        else
+          img(src=author.gravatar)
       .o-grid__cell
         rg-pagination
       .o-grid__cell--width-15
@@ -32,26 +37,14 @@ block content
           =updated
         p.description
           =meta.summary
-      .o-grid__cell--width-20
-
-    if author
-      .o-grid
-        .o-grid__cell--width-20
-        if author.organisation
-          .o-grid__cell--width-7.authorImage
-            a(href=author.organisation.url,target="_blank")
-              img(src=author.organisation.logo,title=author.organisation.name)
-        else
-          .o-grid__cell--width-7.authorImage
-            img(src=author.gravatar)
-        .o-grid__cell.authorText
+        p.authorText
           if author.organisation
             a(href=author.organisation.url,target="_blank")
               .organisation
                 =author.organisation.name
-          p.fullname
+          .fullname
             =author.fullname
-        .o-grid__cell--width-20
+      .o-grid__cell--width-20
 
     .o-grid
       .o-grid__cell--width-20

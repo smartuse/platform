@@ -119,12 +119,15 @@ class User(db.Model):
         gravatar_url += urlencode({'s':str(gr_size)})
         return gravatar_url
     def dict(self):
+        organisation = {}
+        if not self.organisation is None:
+            organisation = self.organisation.dict()
         return {
             'id': self.id,
             'username': self.username,
             'fullname': self.fullname,
             'gravatar': self.gravatar(),
-            'organisation': self.organisation.dict(),
+            'organisation': organisation,
         }
 
 projects_resources = db.Table(

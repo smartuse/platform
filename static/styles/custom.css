@@ -239,7 +239,14 @@ a.featured, a.featured h5, a.featured p
 .o-grid__cell .description {
   margin: 0 0 20px 0;
 }
-
+.gallery-nav .authorImage {
+  text-align: center;
+  padding-top: 10px;
+  max-height: 100px;
+}
+.gallery-nav .authorImage img {
+  height: 55px;
+}
 .o-grid__cell--width-5 .authorImage {
   width: 20px;
 }
