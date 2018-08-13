@@ -17,7 +17,11 @@ from flask_admin.contrib.fileadmin import FileAdmin
 # Geoshapes in model
 from geoalchemy2.types import Geometry
 from geoalchemy2.shape import to_shape
-import geojson, markdown
+import geojson
+
+# Rich text formatting
+import markdown
+MARKDOWN_EXT = ['markdown.extensions.tables']
 
 # Gravatar
 from urllib.parse import urlencode
@@ -214,7 +218,7 @@ def index():
 @app.route("/project/<int:project_id>")
 def project_page(project_id):
     project = Project.query.filter_by(id=project_id).first_or_404()
-    content = Markup(markdown.markdown(project.details))
+    content = Markup(markdown.markdown(project.details, extensions=MARKDOWN_EXT))
     meta = project.dict()
     updated = meta['date-updated']
     author = project.users.first()
