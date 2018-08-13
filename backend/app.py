@@ -205,8 +205,9 @@ def project_detail(project_id):
 def index():
     f = open('templates/public/index.md', 'r')
     content = Markup(markdown.markdown(f.read()))
-    projects = Project.query.filter_by(is_featured=False).all()
-    featured = Project.query.filter_by(is_featured=True).first()
+    nothidden = Project.query.filter_by(is_hidden=False)
+    projects = nothidden.filter_by(is_featured=False).all()
+    featured = nothidden.filter_by(is_featured=True).first()
     meta = { 'title': 'Home' }
     return render_template('public/home.pug', **locals())
 
