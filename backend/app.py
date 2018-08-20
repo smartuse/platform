@@ -13,6 +13,7 @@ import flask_admin as admin
 from flask_admin.model import BaseModelView
 from flask_admin.contrib.geoa import ModelView
 from flask_admin.contrib.fileadmin import FileAdmin
+from flask_admin.form import ImageUploadField
 
 # Geoshapes in model
 from geoalchemy2.types import Geometry
@@ -40,6 +41,9 @@ app.jinja_env.add_extension('pypugjs.ext.jinja.PyPugJSExtension')
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
+
+screenshot_path = ospath.join(ospath.dirname(__file__), '..', 'screenshots')
+upload_path = ospath.join(ospath.dirname(__file__), '..', 'uploads')
 
 # Create admin
 admin = admin.Admin(app, name='SmartUse', template_mode='bootstrap3')
@@ -75,11 +79,12 @@ class Project(db.Model):
     summary = db.Column(db.Unicode(255))
     details = db.Column(db.UnicodeText)
 
+    screenshot = db.Column(db.String(256), doc="Use the Data tab to upload a screenshot")
+
     is_hidden = db.Column(db.Boolean(), default=False)
     is_featured = db.Column(db.Boolean(), default=False)
-    token_edit = db.Column(db.String(64), default=codecs.encode(urandom(12), 'hex').decode())
 
-    column_exclude_list = ('summary', 'details', 'token_edit')
+    token_edit = db.Column(db.String(64), default=codecs.encode(urandom(12), 'hex').decode())
 
     def __repr__(self):
         return self.title
@@ -167,9 +172,13 @@ ResourceView = ModelView(Resource, db.session)
 ResourceView.column_list = ['title', 'dataformat', 'projects']
 admin.add_view(ResourceView)
 
-ProjectView = ModelView(Project, db.session)
-ProjectView.column_list = ('title', 'created', 'updated')
-admin.add_view(ProjectView)
+class ProjectView(ModelView):
+    column_list = ('title', 'created', 'updated')
+    form_extra_fields = {
+        'screenshot': ImageUploadField('Screenshot', base_path=screenshot_path,
+              thumbnail_size=(256, 256, True))
+    }
+admin.add_view(ProjectView(Project, db.session))
 
 UserView = ModelView(User, db.session)
 UserView.column_list = ('username', 'fullname', 'organisation')
@@ -177,8 +186,6 @@ admin.add_view(UserView)
 
 admin.add_view(ModelView(Organisation, db.session))
 
-# Upload views
-upload_path = ospath.join(ospath.dirname(__file__), '..', 'uploads')
 admin.add_view(FileAdmin(upload_path, '/uploads/', name="Data"))
 
 # API views
