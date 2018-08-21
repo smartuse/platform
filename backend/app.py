@@ -115,6 +115,7 @@ class Project(db.Model):
     token_edit = db.Column(db.String(64), default=codecs.encode(urandom(12), 'hex').decode())
 
     def thumb(self):
+        if not self.screenshot: return ''
         name, _ = ospath.splitext(self.screenshot)
         return secure_filename('%s_thumb.jpg' % name)
     def __repr__(self):
