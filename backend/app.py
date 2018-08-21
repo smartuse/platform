@@ -40,7 +40,7 @@ app.jinja_env.add_extension('pypugjs.ext.jinja.PyPugJSExtension')
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
-DEFAULT_THUMB = '/img/usermap.jpg'
+DEFAULT_THUMB = '../img/usermap.jpg'
 screenshot_path = ospath.join(ospath.dirname(__file__), '..', 'screenshots')
 upload_path = ospath.join(ospath.dirname(__file__), '..', 'uploads')
 
