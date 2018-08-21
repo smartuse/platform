@@ -36,8 +36,9 @@ block content
         p.date
           span Updated:&nbsp;
           =updated
-        p.description
-          =meta.summary
+        if meta.summary
+          p.description
+            =meta.summary
         p.authorText
           if author.organisation
             a(href=author.organisation.url,target="_blank")

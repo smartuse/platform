@@ -192,6 +192,10 @@ input.search { font-size: 140%; }
   box-shadow: 1px 1px 3px black;
   z-index: 10; display: inline-table;
 }
+.project-list .project-thumb {
+  width: 128px; height: 128px;
+  margin: 0px 20px 20px 0;
+}
 
 /* Home Page styling */
 

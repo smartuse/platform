@@ -36,14 +36,15 @@ block content
         .c-card
           a(href='/project/{{ project.id }}')
             .c-card__header
-              //- img(src='/img/usermap.jpg',align='right')
+              img.project-thumb(src='/screenshots/{{ project.thumb() }}',align='left')
               h2.c-heading
                 =project.title
               each user in project.users
                 span= user.organisation
-            .c-card__body
-              .c-paragraph
-                =project.summary
+            if project.summary
+              .c-card__body
+                .c-paragraph
+                  =project.summary
     .o-grid__cell.o-grid__cell--width-20
 
   hr

@@ -3,8 +3,9 @@ from flask import (
     url_for,
     request,
     render_template,
-    send_from_directory
+    send_from_directory,
 )
+from werkzeug import secure_filename
 from flask_api import FlaskAPI
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -86,6 +87,9 @@ class Project(db.Model):
 
     token_edit = db.Column(db.String(64), default=codecs.encode(urandom(12), 'hex').decode())
 
+    def thumb(self):
+        name, _ = ospath.splitext(self.screenshot)
+        return secure_filename('%s_thumb.jpg' % name)
     def __repr__(self):
         return self.title
     def dict(self):
@@ -257,6 +261,9 @@ def send_static_data(path):
 @app.route('/uploads/<path:path>')
 def send_uploads(path):
     return send_from_directory('../uploads', path)
+@app.route('/screenshots/<path:path>')
+def send_screenshots(path):
+    return send_from_directory('../screenshots', path)
 
 if __name__ == '__main__':
     db.create_all()
