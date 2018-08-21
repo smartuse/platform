@@ -40,6 +40,7 @@ app.jinja_env.add_extension('pypugjs.ext.jinja.PyPugJSExtension')
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
+DEFAULT_THUMB = '/img/usermap.jpg'
 screenshot_path = ospath.join(ospath.dirname(__file__), '..', 'screenshots')
 upload_path = ospath.join(ospath.dirname(__file__), '..', 'uploads')
 
@@ -115,7 +116,7 @@ class Project(db.Model):
     token_edit = db.Column(db.String(64), default=codecs.encode(urandom(12), 'hex').decode())
 
     def thumb(self):
-        if not self.screenshot: return ''
+        if not self.screenshot: return DEFAULT_THUMB
         name, _ = ospath.splitext(self.screenshot)
         return secure_filename('%s_thumb.jpg' % name)
     def __repr__(self):
