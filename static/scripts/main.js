@@ -54,6 +54,7 @@ Zepto(function($){
         + '</div></div>'
       ).find('.container:last-child');
       gallery = container.find('.gallery');
+      if (gallery.length === 0) gallery = $('.gallery');
       description = container.find('.description');
       description.append(
         '<div class="resource-header"><a name="anchor-' + rescount + '"></a>'
