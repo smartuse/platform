@@ -31,9 +31,6 @@ import hashlib, codecs, datetime
 import os.path as ospath
 from os import urandom
 
-# Locals
-from .util import *
-
 # Create application
 app = FlaskAPI(__name__, static_url_path='')
 app.debug = True
@@ -55,6 +52,36 @@ projects_users = db.Table(
     db.Column('user_id', db.Integer(), db.ForeignKey('user.id')),
     db.Column('project_id', db.Integer(), db.ForeignKey('project.id'))
 )
+
+# ------------ Helper functions ------------
+
+def get_media_type(filename):
+    if filename.endswith('.gif'):
+        return 'image/gif'
+    if filename.endswith('.png'):
+        return 'image/png'
+    if filename.endswith('.jpg') or filename.endswith('.jpeg'):
+        return 'image/jpeg'
+    if filename.endswith('.geojson') or filename.endswith('.json'):
+        return 'application/vnd.geo+json'
+    if filename.endswith('datapackage.json'):
+        return 'application/vnd.datapackage+json'
+    if filename.startswith('http'):
+        return 'application/html'
+    return None
+
+def get_features_geojson(name, objs):
+    if objs is None:
+        return {}
+    features = [{'type': 'Feature',
+        'geometry': to_shape(o),
+        'properties': {'name': name}
+    } for o in objs]
+    return geojson.dumps(
+        {'type': 'FeatureCollection', 'features': features}
+    )
+
+# -------- Models ---------------
 
 class Organisation(db.Model):
     id = db.Column(db.Integer, primary_key=True)
