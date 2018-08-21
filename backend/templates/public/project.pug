@@ -8,20 +8,11 @@ block top
   rg-drawer
 
 block content
-  .fullscreen-button
-  .gallery.fixed
+  .o-page-header.o-container.o-container--large
+    .c-link.c-link--brand
+      a.logo(href='/') SmartUse
 
-  .gallery-nav.fixed
-    .o-page-header.o-container.o-container--large
-      .c-link.c-link--brand
-        a.logo(href='/') SmartUse
-    .o-grid.gallery-page
-      .o-grid__cell--width-15
-      .o-grid__cell.o-grid--center
-        rg-pagination
-      .o-grid__cell--width-15
-
-  .story.fixed
+  .story
     .o-grid
       .o-grid__cell--width-20
       .o-grid__cell.page-meta
@@ -53,8 +44,9 @@ block content
       .o-grid__cell
         .page-content
           !=content
-        .page-content.resource-content
       .o-grid__cell--width-20
+
+    .resource-content
 
     if author.organisation
       .o-grid

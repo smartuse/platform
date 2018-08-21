@@ -30,32 +30,44 @@ Zepto(function($){
     });
   });
 
-  function get_project_path(url) {
-      return (url.indexOf('http')<0) ?
-        project_path + '/' + url : url;
-  }
-  function get_media_type(fmt) {
-      if (fmt == 'image') return 'image/png';
-      if (fmt == 'png') return 'image/png';
-      if (fmt == 'jpg') return 'image/jpeg';
-      if (fmt == 'geojson') return 'application/vnd.geo+json';
-      if (fmt == 'datapackage') return 'application/vnd.datapackage+json';
-      if (fmt == 'embed') return 'application/html';
-  }
-
   function load_DataPackage(datapackage) {
-
-    gallery = $('.gallery'); //.html('<div class="controls"></div>');
     var rescount = 0;
 
-    function add_gallery_item(ii) {
-      gallery.append('<div id="item-'+ii+'" class="control-operator"></div>');
+    function add_gallery_item(gallery, ii) {
+      // gallery.append('<div id="item-'+ii+'" class="control-operator"></div>');
       // gallery.find('.controls').append('<a href="#item-'+ii+'" class="control-button">•</a>');
-      return gallery.append('<figure class="item" />').find('.item:last-child');
+      return gallery.append('<div class="fullscreen-button"></div><figure class="item" />').find('.item:last-child');
     }
 
     // console.log(datapackage);
     $.each(datapackage.resources, function(i, res) {
+
+      if (res.name.length<2) return;
+
+      container = $('.resource-content').append(
+        '<div class="container">'
+        + '<div class="gallery"></div>'
+        + '<div class="o-grid" id="' + res.name + '">'
+        + '<div class="o-grid__cell--width-20"></div>'
+        + '<div class="o-grid__cell"><div class="description"></div></div>'
+        + '<div class="o-grid__cell--width-20"></div>'
+        + '</div></div>'
+      ).find('.container:last-child');
+      gallery = container.find('.gallery');
+      description = container.find('.description');
+      description.append(
+        '<div class="resource-header"><a name="anchor-' + rescount + '"></a>'
+        + '<h3>' //'<a href="#item-' + rescount + '">'
+        // + '<i class="material-icons">layers</i>'
+        + (res.title || res.name)
+        + '</h3></div>'
+      );
+      if (res.description.length>1)
+        description.append('<p>'+ res.description + '</p>');
+      // $('.story-nav ul').append(
+      //   '<li><a href="#' + res.name + '">' + (res.title || res.name) + '</a></li>'
+      // );
+
       if (typeof(res.mediatype) == 'undefined')
         res.mediatype = get_media_type(res.format);
 
@@ -68,7 +80,7 @@ Zepto(function($){
 
       } else if (res.mediatype.indexOf('image/')==0) {
         rescount = rescount + 1;
-        item = add_gallery_item(rescount);
+        item = add_gallery_item(gallery, rescount);
 
         img = item.append('<img id="image-'+rescount+'" />').find('img:last-child');
         imgpath = get_project_path(res.path);
@@ -76,14 +88,14 @@ Zepto(function($){
 
       } else if (res.mediatype == 'application/html') {
         rescount = rescount + 1;
-        item = add_gallery_item(rescount);
+        item = add_gallery_item(gallery, rescount);
 
         imgpath = get_project_path(res.path);
         item.append('<iframe id="frame-'+rescount+'" src="' + imgpath + '"/>');
 
       } else if (res.mediatype == 'application/vnd.geo+json') {
         rescount = rescount + 1;
-        item = add_gallery_item(rescount);
+        item = add_gallery_item(gallery, rescount);
 
         item.append('<div class="map" id="map-'+rescount+'" />');
         filepath = get_project_path(res.path);
@@ -153,25 +165,11 @@ Zepto(function($){
 
         maps[rescount] = map;
       } // -geojson
-
-      if (res.name.length>1 && res.description.length>1) {
-        $('.resource-content').append(
-          '<div class="description" id="' + res.name + '">'
-        + '<a name="anchor-' + rescount + '"></a>'
-        + '<h3>' //'<a href="#item-' + rescount + '">'
-        + '<i class="material-icons">layers</i>'
-        + (res.title || res.name)
-        + '</h3><p>'
-        + res.description + '</p></div>');
-        // $('.story-nav ul').append(
-        //   '<li><a href="#' + res.name + '">' + (res.title || res.name) + '</a></li>'
-        // );
-      }
-    });
+    }); // -each resources
 
     if (rescount > 0 && $('rg-pagination').length > 0) {
       // console.log(rescount);
-      gallery.addClass('items-' + rescount);
+      // gallery.addClass('items-' + rescount);
       paginationtag = riot.mount('rg-pagination', {
         pagination: {
           pages: rescount,
@@ -190,6 +188,8 @@ Zepto(function($){
       location.href="#item-1";
     }
 
+    initFullScreen();
+
   } //-load_DataPackage
 
   // Load selected project
@@ -198,39 +198,8 @@ Zepto(function($){
   } else if (typeof project_path != 'undefined') {
     $.getJSON('/' + project_path + '/datapackage.json', load_DataPackage);
   }
-
-  // Full screen mode
-  function requestFullScreen() {
-    element = document.body;
-    var requestMethod = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen;
-    if (requestMethod) { requestMethod.call(element); }
-  }
-  $('.fullscreen-button').click(function(e) {
-    e.preventDefault();
-    if ($(this).hasClass('active')) {
-      $('.gallery').removeClass('fullscreen');
-      $(this).removeClass('active');
-      $('.gallery-nav.fixed,.story.fixed').removeClass('hidden');
-      // if (document.exitFullscreen) { document.exitFullscreen(); }
-    } else {
-      // requestFullScreen();
-      $('.gallery').addClass('fullscreen');
-      $(this).addClass('active');
-      $('.gallery-nav.fixed,.story.fixed').addClass('hidden');
-    }
-  });
-
-  // Adjust page sizes
-  function setStoryLayout() {
-    var sh = $(window).height()
-           - $('.gallery').height()
-           - $('.footer').height()
-           - $('site-header').height()
-           - 14;
-    // $('.story').css('height', sh + 'px');
-  }
-  setStoryLayout();
-  $(window).resize(setStoryLayout);
+  // setStoryLayout();
+  // $(window).resize(setStoryLayout);
 
   // Interactive search
   $('input.search').on('input', function() {

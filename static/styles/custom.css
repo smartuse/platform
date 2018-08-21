@@ -2,7 +2,8 @@ html { background: #fff; overflow-x: hidden; }
 .hidden { display: none; }
 body {
   font-family: "Roboto", sans-serif;
-  height: 100%;
+  /* height: 100%;  */
+  margin: 2em 0;
 }
 .c-link-author {
   padding: 30px 10px 20px 20px;
@@ -22,6 +23,7 @@ body {
   margin-right: 10px;
 	font-size: 0px;
   zoom: 0.9;
+  float: right;
 }
 .fixed .o-page-header {
   margin-top: -15px;
@@ -30,7 +32,8 @@ body {
 
 .page-footer {
   margin-top: 5em;
-  margin-bottom: 50em;
+  text-align: center;
+  /* margin-bottom: 50em; */
 }
 
 .basemap {
@@ -166,14 +169,11 @@ input.search { font-size: 140%; }
 .fullscreen-button.active {
   border: 4px solid #fff;
 }
-.gallery.fullscreen {
+figure.fullscreen {
   height: 100% !important;
-  top: 0% !important;
-  position: absolute;
+  top: 0px !important;
+  position: fixed !important;
   background: white;
-}
-.gallery.fullscreen figure {
-  height: 100%;
 }
 
 /* Project List (home) styling */
@@ -280,6 +280,9 @@ a.featured, a.featured h5, a.featured p
 }
 .gallery-nav.fixed {
   height: 84px; top: 40%; z-index: 10;
+}
+.story {
+  clear: both;
 }
 .story.fixed {
   height: 50%; bottom: 0%;
