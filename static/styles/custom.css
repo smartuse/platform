@@ -200,7 +200,7 @@ figure.fullscreen {
 /* Home Page styling */
 
 .home-content {
-  background: url(https://smartuse.ch/media/SmartUse.jpg) no-repeat top;
+  background: url(/img/SmartUse_header.jpg) no-repeat top;
   background-size: cover;
   margin-top: -50px;
 }
