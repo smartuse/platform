@@ -185,11 +185,12 @@ class Resource(db.Model):
     def __repr__(self):
         return self.title
     def dict(self):
+        content = Markup(markdown.markdown(self.description, extensions=MARKDOWN_EXT))
         r = {
             'id': self.id,
             'name': "smartuse-resource-%d" % self.id,
             'title': self.title,
-            'description': self.description,
+            'description': content,
             'mediatype': get_media_type(self.path)
         }
         if self.path:
