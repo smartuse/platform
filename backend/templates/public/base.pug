@@ -42,9 +42,47 @@ html
       //- main page content
 
     block footer
-      .o-grid.footer
+      .o-grid.footer-primary
         .o-grid__cell.o-grid__cell--width-20
-        .o-grid__cell.footer-container
+        .o-grid__cell.newsletter
+          p Immer auf dem Laufenden bleiben? Einfach für unseren Newsletter anmelden:
+          form(method='post', data-name='Immer auf dem Laufenden bleiben? Einfach für unseren Newsletter anmelden:')
+            .form-fields
+              p
+                input(name='EMAIL', placeholder='E-Mail-Adresse', required='', style='background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABHklEQVQ4EaVTO26DQBD1ohQWaS2lg9JybZ+AK7hNwx2oIoVf4UPQ0Lj1FdKktevIpel8AKNUkDcWMxpgSaIEaTVv3sx7uztiTdu2s/98DywOw3Dued4Who/M2aIx5lZV1aEsy0+qiwHELyi+Ytl0PQ69SxAxkWIA4RMRTdNsKE59juMcuZd6xIAFeZ6fGCdJ8kY4y7KAuTRNGd7jyEBXsdOPE3a0QGPsniOnnYMO67LgSQN9T41F2QGrQRRFCwyzoIF2qyBuKKbcOgPXdVeY9rMWgNsjf9ccYesJhk3f5dYT1HX9gR0LLQR30TnjkUEcx2uIuS4RnI+aj6sJR0AM8AaumPaM/rRehyWhXqbFAA9kh3/8/NvHxAYGAsZ/il8IalkCLBfNVAAAAABJRU5ErkJggg=="); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;', type='email')
+                input(name='FNAME', placeholder='Vorname', type='text')
+                input(name='LNAME', placeholder='Nachname', type='text')
+        .o-grid__cell.o-grid__cell--width-20
+      .o-grid.footer-secondary
+        .o-grid__cell.o-grid__cell--width-20
+        .o-grid__cell
+          .footer-logos
+            a.footer-logo(href='https://smartuse.ch/')
+              img(src='/img/SmartUse-Logo.png', alt='SmartUse')
+            .supporters
+              h6 Mit Ünterstutzung von
+              a(href='http://metropolitanraum-zuerich.ch/', rel='external')
+                img(src='/img/logo_MK_white.png', alt='Metropolitanraum Zürich')
+          .footer-info
+            p
+              a(href='/terms-of-use/') Terms of use
+              |
+              a(href='/privacy-policy/') Privacy policy
+            ul.footer-links
+              li
+                a(href='https://gitter.im/smartuse/chat', rel='external')
+                  svg
+                    use(xlink:href='#icon-gitter')
+                  span.text Chat
+              li
+                a(href='https://gitlab.com/smartuse', rel='external')
+                  svg
+                    use(xlink:href='#icon-github')
+                  span.text GitLab
+        .o-grid__cell.o-grid__cell--width-20
+      .o-grid.footer-tertiary
+        .o-grid__cell.o-grid__cell--width-20
+        .o-grid__cell
           .c-input-group
             a.c-button.c-button--success(href='/') Home
             a.c-button.c-button--info(href='mailto:info@smartuse.ch') Send feedback

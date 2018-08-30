@@ -4,17 +4,18 @@ block head
   if featured
     script project_id=#{featured.id}; project_path='/uploads';
 
+block top
+  .home-page
+    .c-link.c-link--brand
+      a.logo(href='/') SmartUse
+      p Die funktionale Region
+
 block content
-  .o-grid
-    .o-grid__cell.o-grid__cell--width-20
-    .o-grid__cell.page-content.home-content
-      !=content
-    .o-grid__cell.o-grid__cell--width-20
+  .gallery
 
   a.o-grid.featured(href='/project/{{ featured.id }}')
     .o-grid__cell.o-grid__cell--width-20
     .o-grid__cell
-      .gallery
       h5
         !=featured.title
       b
@@ -36,7 +37,7 @@ block content
         .c-card
           a(href='/project/{{ project.id }}')
             .c-card__header
-              img.project-thumb(src='/screenshots/{{ project.thumb() }}',align='left')
+              img.project-thumb(src='{{ project.thumb() }}',align='left')
               h2.c-heading
                 =project.title
               each user in project.users
@@ -48,3 +49,9 @@ block content
     .o-grid__cell.o-grid__cell--width-20
 
   hr
+
+  .o-grid
+    .o-grid__cell.o-grid__cell--width-20
+    .o-grid__cell.page-content.home-content
+      !=content
+    .o-grid__cell.o-grid__cell--width-20

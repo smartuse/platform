@@ -100,6 +100,11 @@ class Project(db.Model):
     updated = db.Column(db.DateTime(), default=datetime.datetime.now())
     summary = db.Column(db.Unicode(255))
     details = db.Column(db.UnicodeText)
+    notes = db.Column(db.UnicodeText)
+
+    organisation_id = db.Column(db.Integer, db.ForeignKey(Organisation.id))
+    organisation = db.relationship(Organisation,
+        backref=db.backref('project', cascade="all, delete-orphan", single_parent=True))
 
     screenshot = db.Column(db.String(256), doc="Use the Data tab to upload a screenshot")
 
@@ -111,7 +116,7 @@ class Project(db.Model):
     def thumb(self):
         if not self.screenshot: return DEFAULT_THUMB
         name, _ = ospath.splitext(self.screenshot)
-        return secure_filename('%s_thumb.jpg' % name)
+        return '/screenshots/' + secure_filename('%s_thumb.jpg' % name)
     def __repr__(self):
         return self.title
     def dict(self):
@@ -120,11 +125,12 @@ class Project(db.Model):
             'hidden': self.is_hidden,
             'featured': self.is_featured,
             'name': 'smartuse-%d' % self.id,
-            'text': self.title,
-            'title': self.title,
+            'text': self.title, 'title': self.title,
+            'screenshot': self.thumb(),
             'date-created': self.created.strftime("%Y-%d-%m"),
             'date-updated': self.updated.strftime("%Y-%d-%m"),
             'summary': self.summary,
+            'notes': self.notes,
             'detail_url': request.host_url.rstrip('/') + url_for('project_detail', project_id=self.id),
         }
 
@@ -142,8 +148,10 @@ class User(db.Model):
     email = db.Column(db.Unicode(128))
     phone = db.Column(db.Unicode(32))
     notes = db.Column(db.UnicodeText)
+    biography = db.Column(db.UnicodeText)
     organisation_id = db.Column(db.Integer, db.ForeignKey(Organisation.id))
-    organisation = db.relationship(Organisation, backref=db.backref('user', cascade="all, delete-orphan", single_parent=True))
+    organisation = db.relationship(Organisation,
+        backref=db.backref('user', cascade="all, delete-orphan", single_parent=True))
     projects = db.relationship(Project, secondary=projects_users,
         backref=db.backref('users', lazy='dynamic'))
     def __repr__(self):
@@ -179,6 +187,7 @@ class Resource(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(64), unique=True)
     description = db.Column(db.UnicodeText)
+    notes = db.Column(db.UnicodeText)
     path = db.Column(db.Unicode(256), doc="Use the Data tab to upload files")
     projects = db.relationship('Project', secondary=projects_resources,
         backref=db.backref('resources', lazy='dynamic'))
@@ -186,12 +195,18 @@ class Resource(db.Model):
     def __repr__(self):
         return self.title
     def dict(self):
-        content = Markup(markdown.markdown(self.description, extensions=MARKDOWN_EXT))
+        content = ''
+        notes = ''
+        if self.description:
+            content = Markup(markdown.markdown(self.description, extensions=MARKDOWN_EXT))
+        if self.notes:
+            notes = Markup(markdown.markdown(self.notes, extensions=MARKDOWN_EXT))
         r = {
             'id': self.id,
             'name': "smartuse-resource-%d" % self.id,
             'title': self.title,
             'description': content,
+            'notes': notes,
             'mediatype': get_media_type(self.path)
         }
         if self.path:
@@ -202,10 +217,15 @@ class Resource(db.Model):
         #     r['data']['features'] = f
         return r
 
-# Add views
-ResourceView = ModelView(Resource, db.session)
-ResourceView.column_list = ['title', 'dataformat', 'projects']
-admin.add_view(ResourceView)
+# ----------- Admin views -----------
+
+UserView = ModelView(User, db.session)
+UserView.column_list = ('username', 'fullname', 'organisation')
+admin.add_view(UserView)
+
+admin.add_view(FileAdmin(upload_path, '/uploads/', name="Data"))
+
+admin.add_view(ModelView(Organisation, db.session, name="Organisations"))
 
 class ProjectView(ModelView):
     column_list = ('title', 'created', 'updated')
@@ -213,15 +233,11 @@ class ProjectView(ModelView):
         'screenshot': ImageUploadField('Screenshot', base_path=screenshot_path,
               thumbnail_size=(256, 256, True))
     }
-admin.add_view(ProjectView(Project, db.session))
+admin.add_view(ProjectView(Project, db.session, name="Packages"))
 
-UserView = ModelView(User, db.session)
-UserView.column_list = ('username', 'fullname', 'organisation')
-admin.add_view(UserView)
-
-admin.add_view(ModelView(Organisation, db.session))
-
-admin.add_view(FileAdmin(upload_path, '/uploads/', name="Data"))
+ResourceView = ModelView(Resource, db.session, name="Resources")
+ResourceView.column_list = ['title', 'dataformat', 'projects']
+admin.add_view(ResourceView)
 
 # API views
 @app.route("/api/projects", methods=['GET'])
@@ -266,8 +282,8 @@ def project_page(project_id):
     content = Markup(markdown.markdown(project.details, extensions=MARKDOWN_EXT))
     meta = project.dict()
     updated = meta['date-updated']
-    author = project.users.first()
-    if author is not None: author = author.dict()
+    authors = [author.dict() for author in project.users]
+    resources = [res.dict() for res in project.resources]
     return render_template('public/project.pug', **locals())
 
 # Static paths

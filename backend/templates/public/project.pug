@@ -16,12 +16,10 @@ block content
     .o-grid
       .o-grid__cell--width-20
       .o-grid__cell.page-meta
-        .authorImage
-          if author.organisation
-            a(href=author.organisation.url,target="_blank")
-              img(src=author.organisation.logo,title=author.organisation.name)
-          else
-            img(src=author.gravatar)
+        if organisation
+          .authorImage
+            a(href=organisation.url,target="_blank")
+              img(src=organisation.logo,title=organisation.name)
         h1
           =meta.title
         p.date
@@ -30,13 +28,11 @@ block content
         if meta.summary
           p.description
             =meta.summary
-        p.authorText
-          if author.organisation
-            a(href=author.organisation.url,target="_blank")
+        if organisation
+          p.authorText
+            a(href=organisation.url,target="_blank")
               .organisation
-                =author.organisation.name
-          .fullname
-            =author.fullname
+                =organisation.name
       .o-grid__cell--width-20
 
     .o-grid
@@ -48,32 +44,62 @@ block content
 
     .resource-content
 
-    if author.organisation
-      .o-grid
-        .o-grid__cell--width-20
-        .o-grid__cell--width-7.authorImage
-          img(src=author.gravatar)
-        .o-grid__cell.authorText
-          p
-            a.fullname(href=author.url,target="_blank")
-              =author.fullname
-          p
-            a(href=author.organisation.url)
-              .organisation
-                =author.organisation.name
-        .o-grid__cell--width-20
+    .o-grid
+      .o-grid__cell--width-20
+      .o-grid__cell
+        .resource-summary
+          .h2 Resources
+          p The following data sources were used in this project:
+          each resource in resources
+            .c-card
+              .c-card__header
+                h5.c-heading
+                  =resource.title
+              .c-card__body
+                if resource.notes
+                  .c-paragraph.resource-notes
+                    =resource.notes
+                .c-input-group
+                  a(href='{{ resource.path }}' download).c-button.c-button--block.c-button--info
+                    span Download
+
+        .c-card.embedding
+          .c-card
+            .c-card__header
+              .c-input-group(style='float:right')
+                a(href='#').c-button.c-button--success
+                  span Share
+              img.project-thumb(src='{{ project.thumb() }}',align='left')
+              h2.c-heading
+                =project.title
+              each user in project.users
+                span= user.organisation
+            if project.summary
+              .c-card__body
+                .c-paragraph
+                  =project.summary
+      .o-grid__cell--width-20
+
+    hr
 
     .o-grid
       .o-grid__cell--width-20
       .o-grid__cell
-        p.page-footer
-          span &nbsp; &copy; 2018 &nbsp;
-          a(href='https://www.metropolitanraum-zuerich.ch/home.html') Metropolitanraum Zürich
-          span &nbsp; | &nbsp;
-          a(href='/') Home
-          span &nbsp; | &nbsp;
-          a(href='#top') Go to top
+        .o-grid
+          each author in authors
+            .o-grid__cell--width-15.authorImage
+              img(src=author.gravatar)
+            .o-grid__cell--width-20.authorText
+              p
+                a.fullname(href=author.url,target="_blank")
+                  =author.fullname
+              if author.organisation
+                p
+                  a(href=author.organisation.url)
+                    .organisation
+                      =author.organisation.name
+              if author.biography
+                p.biography
+                  =author.biography
+            .o-grid__cell--width-5
       .o-grid__cell--width-20
-
-block footer
-  //- blank
