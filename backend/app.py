@@ -235,10 +235,12 @@ class ProjectView(ModelView):
             thumbnail_size=(256, 256, True))
     }
     inline_models = [Resource]
+    can_export = True
 admin.add_view(ProjectView(Project, db.session, name="Projects (Data Packages)"))
 
 class ResourceView(ModelView):
     column_list = ('title', 'path')
+    can_export = True
 admin.add_view(ResourceView(Resource, db.session, name="Resources"))
 
 # API views
