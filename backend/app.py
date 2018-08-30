@@ -233,11 +233,12 @@ class ProjectView(ModelView):
         'screenshot': ImageUploadField('Screenshot', base_path=screenshot_path,
               thumbnail_size=(256, 256, True))
     }
-admin.add_view(ProjectView(Project, db.session, name="Packages"))
+    inline_models = [Resource]
+admin.add_view(ProjectView(Project, db.session, name="Projects (Data Packages)"))
 
-ResourceView = ModelView(Resource, db.session, name="Resources")
-ResourceView.column_list = ['title', 'dataformat', 'projects']
-admin.add_view(ResourceView)
+class ResourceView(ModelView):
+    column_list = ('title', 'path')
+admin.add_view(ResourceView(Resource, db.session, name="Resources"))
 
 # API views
 @app.route("/api/projects", methods=['GET'])
