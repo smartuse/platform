@@ -230,8 +230,9 @@ admin.add_view(ModelView(Organisation, db.session, name="Organisations"))
 class ProjectView(ModelView):
     column_list = ('title', 'created', 'updated')
     form_extra_fields = {
-        'screenshot': ImageUploadField('Screenshot', base_path=screenshot_path,
-              thumbnail_size=(256, 256, True))
+        'screenshot': ImageUploadField('Screenshot',
+            base_path=screenshot_path, url_relative_path='/screenshots/',
+            thumbnail_size=(256, 256, True))
     }
     inline_models = [Resource]
 admin.add_view(ProjectView(Project, db.session, name="Projects (Data Packages)"))
