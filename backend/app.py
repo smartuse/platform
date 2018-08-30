@@ -47,13 +47,6 @@ upload_path = ospath.join(ospath.dirname(__file__), '..', 'uploads')
 # Create admin
 admin = admin.Admin(app, name='SmartUse', template_mode='bootstrap3')
 
-# Define tables and models
-projects_users = db.Table(
-    'projects_users',
-    db.Column('user_id', db.Integer(), db.ForeignKey('user.id')),
-    db.Column('project_id', db.Integer(), db.ForeignKey('project.id'))
-)
-
 # ------------ Helper functions ------------
 
 def get_media_type(filename):
@@ -135,6 +128,13 @@ class Project(db.Model):
             'detail_url': request.host_url.rstrip('/') + url_for('project_detail', project_id=self.id),
         }
 
+# Many-to-many relationship
+projects_users = db.Table(
+    'projects_users',
+    db.Column('user_id', db.Integer(), db.ForeignKey('user.id')),
+    db.Column('project_id', db.Integer(), db.ForeignKey('project.id'))
+)
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.Unicode(16))
@@ -168,6 +168,7 @@ class User(db.Model):
             'organisation': organisation,
         }
 
+# Many-to-many relationship
 projects_resources = db.Table(
     'projects_resources',
     db.Column('project_id', db.Integer(), db.ForeignKey('project.id')),

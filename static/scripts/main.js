@@ -36,7 +36,8 @@ Zepto(function($){
     function add_gallery_item(gallery, ii) {
       // gallery.append('<div id="item-'+ii+'" class="control-operator"></div>');
       // gallery.find('.controls').append('<a href="#item-'+ii+'" class="control-button">•</a>');
-      return gallery.append('<div class="fullscreen-button"></div><figure class="item" />').find('.item:last-child');
+      if (gallery.attr('fullscreen')) gallery.append('<div class="fullscreen-button"></div>');
+      return gallery.append('<figure class="item" />').find('.item:last-child');
     }
 
     // console.log(datapackage);
@@ -46,7 +47,7 @@ Zepto(function($){
 
       container = $('.resource-content').append(
         '<div class="container">'
-        + '<div class="gallery"></div>'
+        + '<div class="gallery" fullscreen=1></div>'
         + '<div class="o-grid" id="' + res.name + '">'
         + '<div class="o-grid__cell--width-20"></div>'
         + '<div class="o-grid__cell"><div class="description"></div></div>'

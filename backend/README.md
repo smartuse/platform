@@ -1,6 +1,6 @@
 ## SmartUse
 
-A land use mapping project focusing on the greater metropolitan area around Zurich, Switzerland (Metropolitankonferenz Zürich).
+A land use mapping project focusing on the greater metropolitan area around Zurich, Switzerland (Metropolitankonferenz Zürich). For more information, visit [smartuse.ch](https://smartuse.ch)
 
 ## Usage
 
@@ -19,9 +19,12 @@ To install dependencies, use pip or [pipenv](https://github.com/pypa/pipenv):
     $ pipenv --three
     $ pipenv install
 
-If you would like to use a local Postgres database, enable development mode:
+Configure your **PostgreSQL** database, and [Mapbox](https://www.mapbox.com/help/how-access-tokens-work/) access tokens to render GeoJSON:
 
-    $ export FLASK_DEBUG=1
+    $ export DATABASE_URI="postgresql+psycopg2://user:password@127.0.0.1/smartuse"
+    $ export SECRET_KEY="12345"
+    $ export MAPBOX_ID="abcd.1234"
+    $ export MAPBOX_TOKEN="pk.abcd.1234"
 
 To initialize and/or migrate the database:
 
@@ -31,18 +34,12 @@ To initialize and/or migrate the database:
 
 To start the backend:
 
-    $ export FLASK_APP=app.py
     $ export FLASK_ENV=development
+    $ export FLASK_DEBUG=1
+    $ export FLASK_APP=app.py
     $ flask run
 
 The app will now be available at http://localhost:5000
-
-## Static files
-
-The splash page is at `static/splashpage/index.html`, to preview it:
-
-    $ cd smartuse/static
-    $ python -m http.server
 
 ## License
 

@@ -24,11 +24,13 @@ function initFullScreen() {
     e.preventDefault();
     if ($(this).hasClass('active')) {
       $(this).removeClass('active').next().removeClass('fullscreen');
+      $('html').removeClass('fullscreen');
       // $('.gallery-nav.fixed,.story.fixed').removeClass('hidden');
       // if (document.exitFullscreen) { document.exitFullscreen(); }
     } else {
       // requestFullScreen();
       $(this).addClass('active').next().addClass('fullscreen');
+      $('html').addClass('fullscreen');
       // $('.gallery-nav.fixed,.story.fixed').addClass('hidden');
     }
   });
