@@ -7,6 +7,13 @@ Eine nachhaltige Transformation urbaner Landschaften kann aber nur dann gelingen
 Raumentwicklung von einer «hardwareorientierten» Angebotsplanung hin zu einem «softwareorientierten»
 Gebrauchsmanagement wandelt.
 
+Sehe auch:
+
+- [README in English](README.md)
+- [README für das Web-applikation](backend/README.md)
+- [README für den UI (Frontend)](site/README.md)
+- [Technische Übersicht](docs/README.md)
+
 ## Ausgangslage
 
 Lange stand bei Fragen zur Siedlungsentwicklung die

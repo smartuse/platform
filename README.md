@@ -1,8 +1,15 @@
 ![](http://www.metropolitanraum-zuerich.ch/assets/images/e/Smart%20Use-c3c550de.jpg)
 
-# Smart Use - Land, Growth and Big Data
+# SmartUse - Land, Growth and Big Data
 
 The growth of the economy and demographics has until now required the continued expansion of infrastructure and settlement space. The sustainable transformation of urban landscapes can only succeed today, however, when spatial development transitions from a "hardware-oriented" planning of offers, to a "software-oriented" approach in land use management.
+
+See also:
+
+- [README auf Deutsch](README.de.md)
+- [README for Web application](backend/README.md)
+- [README for site frontend](site/README.md)
+- [Technical Report](docs/README.md)
 
 ## Starting point
 

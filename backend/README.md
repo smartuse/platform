@@ -1,17 +1,14 @@
-## SmartUse
+# SmartUse backend
 
-A land use mapping project focusing on the greater metropolitan area around Zurich, Switzerland (Metropolitankonferenz Zürich). For more information, visit [smartuse.ch](https://smartuse.ch)
+A web application for collecting and sharing maps using geospatial Data Packages. Part of SmartUse, a pilot land use mapping project focusing on the greater metropolitan area around Zurich, Switzerland (Metropolitankonferenz Zürich). For more information, see the README in the parent folder, or visit [smartuse.ch](https://smartuse.ch).
+
+Technical details on getting the backend running follow. See also details on updating the frontend in the [static README](../static/README.md).
 
 ## Usage
 
 Get a hold of **Python 3** and [Pipenv](https://github.com/pypa/pipenv) on your machine.
 
     $ git clone https://gitlab.com/smartuse/smartuse.git
-
-To fetch the frontend assets, use npm or [yarn](https://yarnpkg.com/lang/en/):
-
-    $ cd smartuse
-    $ yarn install
 
 To install dependencies, use pip or [pipenv](https://github.com/pypa/pipenv):
 
@@ -43,4 +40,4 @@ The app will now be available at http://localhost:5000
 
 ## License
 
-MIT - details in [LICENSE](LICENSE) file.
+MIT - details in [LICENSE](../LICENSE) file.

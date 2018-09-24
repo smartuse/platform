@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="297mm"
+   height="210mm"
+   viewBox="0 0 297 210"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.2 (5c3e80d, 2017-08-06)"
+   sodipodi:docname="technical-list.svg"
+   inkscape:export-filename="D:\Tresor\Documents\Datalets\Clients\SmartUse\technical-list.png"
+   inkscape:export-xdpi="200.05524"
+   inkscape:export-ydpi="200.05524">
+  <defs
+     id="defs2">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="15.737102 : 185.50345 : 1"
+       inkscape:vp_y="0 : 999.99995 : 0"
+       inkscape:vp_z="84.953853 : 166.57639 : 1"
+       inkscape:persp3d-origin="105.00001 : 98.999995 : 1"
+       id="perspective4504" />
+    <clipPath
+       id="clipEmfPath1"
+       clipPathUnits="userSpaceOnUse">
+      <path
+         id="path4960"
+         d="  M 44.959667,0   L 0.079999407,70.319479   L 44.319672,76.319435   L 123.51909,68.319494   z" />
+    </clipPath>
+    <pattern
+       y="0"
+       x="0"
+       height="6"
+       width="6"
+       patternUnits="userSpaceOnUse"
+       id="EMFhbasepattern" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.56314373"
+     inkscape:cx="559.64919"
+     inkscape:cy="178.94618"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1057"
+     inkscape:window-x="1912"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:snap-global="false">
+    <inkscape:grid
+       type="xygrid"
+       id="grid4587" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-87)">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:6.69728041px;line-height:4.18580008px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.167432px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="228.99982"
+       y="101.25943"
+       id="text4874"><tspan
+         sodipodi:role="line"
+         x="228.99983"
+         y="101.25943"
+         style="font-weight:normal;line-height:1.20000005em;text-align:end;text-anchor:end;fill:#0055d4;stroke-width:0.167432px"
+         id="tspan4876">Liste der angewendeten technischen Lösungen</tspan></text>
+    <g
+       id="g4947"
+       transform="translate(-13.229165)">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4935"
+         d="M 73.855461,89.48137 V 294.29324"
+         style="fill:none;fill-rule:evenodd;stroke:#00aad4;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <rect
+         ry="0.26136443"
+         y="110.47874"
+         x="71.609169"
+         height="2.4247448"
+         width="4.4925838"
+         id="rect4937"
+         style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#00aad4;stroke-width:0.28897288;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <rect
+         ry="0.26136443"
+         y="267.6413"
+         x="71.609169"
+         height="2.4247448"
+         width="4.4925838"
+         id="rect4941"
+         style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#00aad4;stroke-width:0.28897288;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    </g>
+    <g
+       id="g4995"
+       transform="translate(4.2532706,3.1899529)">
+      <path
+         transform="matrix(0.15941804,0,0,0.15941804,269.28126,277.0518)"
+         inkscape:connector-curvature="0"
+         style="fill:#f2f2f2;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.19999111px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         clip-path="url(#clipEmfPath1)"
+         d="M 44.959667,0 0.07999941,70.319479 44.319672,76.319435 Z"
+         id="path4966" />
+      <path
+         transform="matrix(0.15941804,0,0,0.15941804,269.28126,277.0518)"
+         inkscape:connector-curvature="0"
+         style="fill:#e6e6e6;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.19999111px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         clip-path="url(#clipEmfPath1)"
+         d="M 44.959667,0 44.319672,76.319435 123.51909,68.319494 Z"
+         id="path4968" />
+      <path
+         transform="matrix(0.15941804,0,0,0.15941804,269.28126,277.0518)"
+         inkscape:connector-curvature="0"
+         style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         clip-path="url(#clipEmfPath1)"
+         d="M 85.759365,56.71958 C 87.519352,52.319612 88.159347,48.079644 87.599351,43.919675 86.799357,38.239717 83.999378,33.279753 79.119414,28.879786 74.879445,25.039815 70.15948,22.639832 65.039518,21.59984 60.79955,20.639847 56.559581,20.23985 52.319612,20.23985 c -9.35993,0 -17.199872,1.999985 -23.519825,5.919956 -6.239954,3.839972 -9.039933,8.639936 -8.559937,14.159895 0.159999,1.759987 1.039992,3.279976 2.479982,4.719965 1.35999,1.279991 2.71998,1.919986 4.159969,2.159984 h 0.479996 c -0.159998,-0.08 -0.719994,-0.479996 -1.599988,-1.35999 -1.199991,-1.119991 -1.759987,-2.559981 -1.839986,-4.239968 -0.239998,-4.959963 2.959978,-9.359931 9.519929,-13.199902 6.639951,-3.919971 14.239895,-5.919957 22.799831,-5.919957 3.279976,0 6.479952,0.319998 9.679929,1.039993 3.279975,0.719994 6.639951,2.63998 9.759927,5.679958 3.919971,3.759972 6.159955,8.07994 6.879949,13.039903 0.559996,4.319968 -0.08,8.879934 -1.999985,13.599899 -4.799964,11.839913 -14.79989,18.559863 -29.919778,19.999852 -1.119992,0.08 -2.159984,0.159999 -3.279976,0.159999 -6.639951,0 -11.839912,-2.319983 -15.519885,-6.879949 l 0.479997,-0.399997 c 5.199961,-4.959963 16.959874,-14.479893 25.279812,-10.399923 4.639966,2.079985 1.999986,4.159969 4.959964,1.919986 4.799964,-5.839957 -9.039933,-10.559922 -16.399879,-6.959949 -6.479952,2.159984 -13.199902,9.039933 -16.319879,12.799906 -1.039992,-1.919986 -2.399982,-5.359961 -3.99997,-10.239925 -0.959993,-3.359975 -2.079985,-4.959963 -3.039978,-4.959963 -2.079984,0 -3.919971,2.799979 -5.599958,8.399938 -1.35999,5.119962 -1.839987,8.879934 -1.43999,11.519915 0.159999,1.27999 0.559996,2.559981 1.199991,3.599973 0.879994,1.35999 1.839987,1.999985 3.119977,1.999985 2.319983,0 5.599959,-1.919986 9.919927,-5.599958 4.799964,5.039962 11.679913,7.279946 20.879845,6.879949 6.79995,-0.399997 12.959904,-1.759987 18.319864,-4.15997 7.919942,-3.599973 13.439901,-9.199931 16.559878,-16.799875 M 27.999793,68.319494 c -2.959978,3.359975 -5.43996,5.519959 -7.679944,6.559951 -0.879993,-1.199991 -1.359989,-2.71998 -1.599988,-4.479966 -0.559996,-3.999971 0.639996,-8.879935 3.679973,-14.319894 0.559996,2.399982 1.039992,4.319968 1.519989,5.519959 0.799994,1.919985 2.159984,4.159969 4.07997,6.71995 M 27.519796,47.119651 c 0,0.08 -0.08,0.159999 -0.159999,0.08 0.08,0 0.08,0 0.159999,-0.08 z"
+         id="path4970" />
+      <path
+         transform="matrix(0.15941804,0,0,0.15941804,269.28126,277.0518)"
+         inkscape:connector-curvature="0"
+         style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:1.67998755px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         clip-path="url(#clipEmfPath1)"
+         d="m 49.839631,68.159495 c 0,2.71998 -2.239984,4.959963 -4.959963,4.959963 -2.79998,0 -4.959964,-2.239983 -4.959964,-4.959963 0,-2.71998 2.159984,-4.959963 4.959964,-4.959963 2.719979,0 4.959963,2.239983 4.959963,4.959963 z"
+         id="path4972" />
+      <path
+         inkscape:connector-curvature="0"
+         style="fill:none;stroke:#6dc0ed;stroke-width:0.16579354px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 269.29402,288.26199 7.0526,0.9565 12.62582,-1.27533 v 0"
+         id="path4974" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:10.58333302px;line-height:6.61458302px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';text-align:start;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#6dc0ed;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="260.34891"
+       y="295.40372"
+       id="text4999"><tspan
+         sodipodi:role="line"
+         id="tspan4997"
+         x="260.34891"
+         y="295.40372"
+         style="font-size:2.46944451px;text-align:start;text-anchor:start;fill:#6dc0ed;fill-opacity:1;stroke-width:0.26458332px">DATALETS.CH</tspan></text>
+    <text
+       id="text5003"
+       y="295.40372"
+       x="282.04471"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:10.58333302px;line-height:6.61458302px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';text-align:start;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#6dc0ed;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       xml:space="preserve"><tspan
+         style="font-size:2.46944451px;text-align:start;text-anchor:start;fill:#6dc0ed;fill-opacity:1;stroke-width:0.26458332px"
+         y="295.40372"
+         x="282.04471"
+         id="tspan5001"
+         sodipodi:role="line">26.2.2018</tspan></text>
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot5011"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:40px;line-height:25px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       transform="matrix(0.26458333,0,0,0.26458333,0,87)"><flowRegion
+         id="flowRegion5013"><rect
+           id="rect5015"
+           width="828.65369"
+           height="588.81012"
+           x="267.1243"
+           y="129.86852" /></flowRegion><flowPara
+         id="flowPara5017"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:32px;line-height:1.39999998em;font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:start;text-anchor:start"><flowSpan
+   style="font-weight:bold"
+   id="flowSpan5756">Agile</flowSpan> software development (Trello)</flowPara><flowPara
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:32px;line-height:1.39999998em;font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:start;text-anchor:start"
+         id="flowPara5750"><flowSpan
+   style="font-weight:bold"
+   id="flowSpan5758">Open</flowSpan> source platform (Node.js)</flowPara><flowPara
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:32px;line-height:1.39999998em;font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:start;text-anchor:start"
+         id="flowPara5748"><flowSpan
+   style="font-weight:bold"
+   id="flowSpan5760">Current</flowSpan> geodata standards (GeoJSON)</flowPara><flowPara
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:32px;line-height:1.39999998em;font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:start;text-anchor:start"
+         id="flowPara5737"><flowSpan
+   style="font-weight:bold"
+   id="flowSpan5762">Frictionless</flowSpan> metadata standards (Data Package)</flowPara><flowPara
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:32px;line-height:1.39999998em;font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:start;text-anchor:start"
+         id="flowPara5025"><flowSpan
+   style="font-weight:bold"
+   id="flowSpan5764">Scalable</flowSpan> object storage (Crate)</flowPara><flowPara
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:32px;line-height:1.39999998em;font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:start;text-anchor:start"
+         id="flowPara5035"><flowSpan
+   style="font-weight:bold"
+   id="flowSpan5766">Collaborative</flowSpan> revision control (GitLab)</flowPara><flowPara
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:32px;line-height:1.39999998em;font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:start;text-anchor:start"
+         id="flowPara5031"><flowSpan
+   style="font-weight:bold"
+   id="flowSpan5768">Object</flowSpan> data modelling (Mongoose)</flowPara><flowPara
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:32px;line-height:1.39999998em;font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:start;text-anchor:start"
+         id="flowPara5027"><flowSpan
+   style="font-weight:bold"
+   id="flowSpan5772">Fast </flowSpan>document indexing (MongoDB)</flowPara><flowPara
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:32px;line-height:1.39999998em;font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:start;text-anchor:start"
+         id="flowPara5021"><flowSpan
+   style="font-weight:bold"
+   id="flowSpan5774">Accessible</flowSpan> RESTful web API (Restify)</flowPara><flowPara
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:32px;line-height:1.39999998em;font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:start;text-anchor:start"
+         id="flowPara5023"><flowSpan
+   style="font-weight:bold"
+   id="flowSpan5776">Secure </flowSpan>web hosting (Nginx)</flowPara><flowPara
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:32px;line-height:1.39999998em;font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:start;text-anchor:start"
+         id="flowPara5019"><flowSpan
+   style="font-weight:bold"
+   id="flowSpan5778">Reactive</flowSpan> web components (Riot.js)</flowPara><flowPara
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:32px;line-height:1.39999998em;font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:start;text-anchor:start"
+         id="flowPara5735"><flowSpan
+   style="font-weight:bold"
+   id="flowSpan5780">Responsive </flowSpan>mobile site (Blaze UI)</flowPara></flowRoot>  </g>
+</svg>
