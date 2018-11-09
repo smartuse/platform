@@ -3,6 +3,7 @@ var maps = {}, paginationtag = null;
 Zepto(function($){
 
   // Load the project menu
+  /*
   $('rg-drawer').each(function() {
     var self = this;
     return; // Or don't..
@@ -29,6 +30,7 @@ Zepto(function($){
       })
     });
   });
+  */
 
   function load_DataPackage(datapackage) {
     var rescount = 0;
@@ -169,6 +171,7 @@ Zepto(function($){
       } // -geojson
     }); // -each resources
 
+    /*
     if (rescount > 0 && $('rg-pagination').length > 0) {
       // console.log(rescount);
       // gallery.addClass('items-' + rescount);
@@ -189,6 +192,7 @@ Zepto(function($){
       });
       location.href="#item-1";
     }
+    */
 
     initFullScreen();
 
