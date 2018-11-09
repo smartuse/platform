@@ -1,0 +1,38 @@
+version: '2'
+
+services:
+  web:
+    restart: always
+    build: ./backend
+    expose:
+     - "8000"
+    env_file: .env
+    command: /usr/local/bin/gunicorn -w 2 -b :8000 app:app
+    depends_on:
+     - postgres
+    volumes:
+     - uploads-data:/opt/uploads
+
+  nginx:
+    restart: always
+    build: ./nginx
+    ports:
+      - "80:80"
+    volumes_from:
+      - web
+    depends_on:
+      - web
+
+  postgres:
+    image: postgres:latest
+    restart: always
+    volumes:
+      - postgres-data:/var/lib/postgresql
+    expose:
+      - "5432"
+
+volumes:
+  postgres-data:
+    driver: local
+  uploads-data:
+    driver: local

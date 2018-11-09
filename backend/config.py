@@ -11,5 +11,6 @@ if 'DATABASE_URI' in os.environ:
     SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URI']
 
 # credentials for loading map tiles from mapbox
-MAPBOX_MAP_ID = os.environ['MAPBOX_ID']
-MAPBOX_ACCESS_TOKEN = os.environ['MAPBOX_TOKEN']
+if 'MAPBOX_ID' in os.environ:
+	MAPBOX_MAP_ID = os.environ['MAPBOX_ID']
+	MAPBOX_ACCESS_TOKEN = os.environ['MAPBOX_TOKEN']

@@ -9,3 +9,4 @@ geojson
 psycopg2-binary
 pypugjs
 markdown
+gunicorn
