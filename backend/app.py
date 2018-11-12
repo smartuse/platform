@@ -248,6 +248,10 @@ admin.add_view(FileAdmin(upload_path, '/uploads/', name="Data"))
 def projects_list():
     return [p.dict() for p in Project.query.filter_by(is_hidden=False).limit(10).all()]
 
+@app.route("/api/projects/featured", methods=['GET'])
+def projects_list():
+    return [p.dict() for p in Project.query.filter_by(is_hidden=False,is_featured=True).limit(10).all()]
+
 @app.route("/api/resources", methods=['GET'])
 def resources_list():
     return [r.dict() for r in Resource.query.limit(10).all()]
@@ -272,6 +276,10 @@ def project_detail(project_id):
 # Flask views
 @app.route('/')
 def index():
+    return render_template('theme/frontend.html')
+
+@app.route('/')
+def index_old():
     f = open('templates/public/index.md', 'r')
     content = Markup(markdown.markdown(f.read()))
     nothidden = Project.query.filter_by(is_hidden=False)
@@ -306,6 +314,11 @@ def send_static_tags(path):
 @app.route('/vendor/<path:path>')
 def send_static_vendor(path):
     return send_from_directory('../static/vendor', path)
+
+@app.route('/theme/<path:path>')
+def send_static_theme(path):
+    return send_from_directory('../static/theme', path)
+
 @app.route('/data/<path:path>')
 def send_static_data(path):
     return send_from_directory('../views/projects', path)
