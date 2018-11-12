@@ -3,83 +3,85 @@ doctype html
 html
   head
     meta(charset='utf-8')
-    title=meta.title
+    title='SmartUse Beta'
 
     link(rel='icon' href='static/favicon.ico')
     link(rel='manifest' href='static/manifest.json')
-    script(src='/vendor/zepto-1.2.0.min.js')
-    script(src='/vendor/modernizr-3.5.0.min.js')
 
-    link(href='/vendor/gallery.prefixed.css',rel='stylesheet')
+    meta(name='viewport' content='width=device-width, initial-scale=1')
+    meta(http-equiv='X-UA-Compatible' content='IE=edge')
+
+    link(rel='stylesheet' href='/theme/bootstrap.css' media='screen')
+
     link(href='https://fonts.googleapis.com/css?family=Roboto:100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic',rel='stylesheet')
     link(href='https://fonts.googleapis.com/icon?family=Material+Icons',rel='stylesheet')
-    script(src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.0/mapbox-gl.js')
-    link(href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.0/mapbox-gl.css',rel='stylesheet')
 
     link(rel="apple-touch-icon-precomposed",href="/img/apple-touch-iphone.png")
     link(rel="apple-touch-icon-precomposed",sizes="72x72",href="/img/apple-touch-ipad.png")
     link(rel="apple-touch-icon-precomposed",sizes="114x114",href="/img/apple-touch-iphone4.png")
     link(rel="apple-touch-icon-precomposed",sizes="144x144",href="/img/apple-touch-ipad-retina.png")
 
+    link(rel='stylesheet' href='/theme/custom.css')
+    //link(href='/styles/custom.css',rel='stylesheet')
+
     block head
       //- additional scripts and styles
 
-    link(href='/styles/custom.css',rel='stylesheet')
-    script(src='/scripts/util.js')
-    script(src='/scripts/main.js')
-
   body
+    block nav
+      .navbar.navbar-expand-lg.fixed-top.navbar-dark.bg-primary
+        .container
+          a.navbar-brand(href='/')
+            img(src='/theme/SmartUse-Logo-White.png' width='150px')
+          button.navbar-toggler(type='button' data-toggle='collapse' data-target='\#navbarResponsive' aria-controls='navbarResponsive' aria-expanded='false' aria-label='Toggle navigation')
+            span.navbar-toggler-icon
+          #navbarResponsive.collapse.navbar-collapse
+            ul.navbar-nav
+              li.nav-item
+                a.nav-link(href='/#about') About
+              li.nav-item
+                a.nav-link(href='/browse') Beta
+              li.nav-item
+                a.nav-link(href='mailto:info@smartuse.ch') Contact
+
     block top
-      .o-page-header.o-container.o-container--large
-        .c-link.c-link--brand
-          a.logo(href='/') SmartUse
 
     block content
       //- main page content
 
     block footer
-      .o-grid.footer-primary
-        .o-grid__cell.o-grid__cell--width-20
-        .o-grid__cell.newsletter
-          p Immer auf dem Laufenden bleiben? Einfach für unseren Newsletter anmelden:
-          form(method='post', data-name='Immer auf dem Laufenden bleiben? Einfach für unseren Newsletter anmelden:')
-            .form-fields
-              p
-                input(name='EMAIL', placeholder='E-Mail-Adresse', required='', style='background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABHklEQVQ4EaVTO26DQBD1ohQWaS2lg9JybZ+AK7hNwx2oIoVf4UPQ0Lj1FdKktevIpel8AKNUkDcWMxpgSaIEaTVv3sx7uztiTdu2s/98DywOw3Dued4Who/M2aIx5lZV1aEsy0+qiwHELyi+Ytl0PQ69SxAxkWIA4RMRTdNsKE59juMcuZd6xIAFeZ6fGCdJ8kY4y7KAuTRNGd7jyEBXsdOPE3a0QGPsniOnnYMO67LgSQN9T41F2QGrQRRFCwyzoIF2qyBuKKbcOgPXdVeY9rMWgNsjf9ccYesJhk3f5dYT1HX9gR0LLQR30TnjkUEcx2uIuS4RnI+aj6sJR0AM8AaumPaM/rRehyWhXqbFAA9kh3/8/NvHxAYGAsZ/il8IalkCLBfNVAAAAABJRU5ErkJggg=="); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;', type='email')
-                input(name='FNAME', placeholder='Vorname', type='text')
-                input(name='LNAME', placeholder='Nachname', type='text')
-        .o-grid__cell.o-grid__cell--width-20
-
-      .o-grid.footer-secondary
-        .o-grid__cell.o-grid__cell--width-20
-        .o-grid__cell
-          .footer-logos
-            a.footer-logo(href='https://smartuse.ch/')
-              img(src='/img/SmartUse-Logo.png', alt='SmartUse')
-            .supporters
-              h6 Mit Ünterstutzung von
-              a(href='http://metropolitanraum-zuerich.ch/', rel='external')
-                img(src='/img/logo_MK_white.png', alt='Metropolitanraum Zürich')
-          .footer-info
+      .container#footer
+        .row
+          .col-md-4
+            h4 Immer auf dem Laufenden bleiben?
+            p.small Einfach f&uuml;r unseren Newsletter anmelden:
+            form(method='post', data-name='Immer auf dem Laufenden bleiben? Einfach für unseren Newsletter anmelden:')
+              .form-fields
+                p
+                  input.form-control(name='EMAIL', placeholder='E-Mail-Adresse', required='', style='background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABHklEQVQ4EaVTO26DQBD1ohQWaS2lg9JybZ+AK7hNwx2oIoVf4UPQ0Lj1FdKktevIpel8AKNUkDcWMxpgSaIEaTVv3sx7uztiTdu2s/98DywOw3Dued4Who/M2aIx5lZV1aEsy0+qiwHELyi+Ytl0PQ69SxAxkWIA4RMRTdNsKE59juMcuZd6xIAFeZ6fGCdJ8kY4y7KAuTRNGd7jyEBXsdOPE3a0QGPsniOnnYMO67LgSQN9T41F2QGrQRRFCwyzoIF2qyBuKKbcOgPXdVeY9rMWgNsjf9ccYesJhk3f5dYT1HX9gR0LLQR30TnjkUEcx2uIuS4RnI+aj6sJR0AM8AaumPaM/rRehyWhXqbFAA9kh3/8/NvHxAYGAsZ/il8IalkCLBfNVAAAAABJRU5ErkJggg=="); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;', type='email')
+                p
+                  input.form-control(name='FNAME', placeholder='Vorname', type='text')
+                p
+                  input.form-control(name='LNAME', placeholder='Nachname', type='text')
+                p
+                  button.btn.btn-secondary(type="submit") OK
+          .col-md-8.footer-info
+            // include:markdown-it index.md
             p
-              a(href='/terms-of-use/') Terms of use
-              |
-              a(href='/privacy-policy/') Privacy policy
-            ul.footer-links
-              li
-                a(href='https://gitter.im/smartuse/talk', rel='external')
-                  .icon-gitter
-                  span.text Talk
-              li
-                a(href='https://gitlab.com/smartuse', rel='external')
-                  .icon-gitlab
-                  span.text GitLab
-        .o-grid__cell.o-grid__cell--width-20
+              | SmartUse ist ein Kooperationsprojekt der Metropolitankonferenz Z&uuml;rich
+            p
+              img(src='/theme/logo_MK_white.png' width='200px')
+            p.small
+              | und eine Zusammenarbeit von
+            ul.small
+              li Joris Van Wezemael, ETH
+              li Hosoya Schaefer Architects
+              li Datalets.ch
 
-      .o-grid.footer-tertiary
-        .o-grid__cell.o-grid__cell--width-20
-        .o-grid__cell
-          p
-            span &nbsp; &copy; 2018 &nbsp;
-            a(href='https://www.metropolitanraum-zuerich.ch/home.html') Metropolitanraum Zürich
-        .o-grid__cell.o-grid__cell--width-20
+    script(src='/vendor/zepto-1.2.0.min.js')
+    script(src='/vendor/modernizr-3.5.0.min.js')
+
+    script(src='/scripts/util.js')
+
+    block scripts
+      //- additional resources

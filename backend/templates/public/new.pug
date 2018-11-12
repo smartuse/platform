@@ -1,0 +1,123 @@
+doctype html
+head
+  meta(charset='utf-8')
+  title SmartUse.ch
+  meta(name='viewport' content='width=device-width, initial-scale=1')
+  meta(http-equiv='X-UA-Compatible' content='IE=edge')
+  link(rel='stylesheet' href='/theme/bootstrap.css' media='screen')
+  link(rel='stylesheet' href='/theme/custom.css')
+.navbar.navbar-expand-lg.fixed-top.navbar-dark.bg-primary
+  .container
+    a.navbar-brand(href='/')
+      img(src='/theme/SmartUse-Logo-White.png' width='150px')
+    button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarResponsive' aria-controls='navbarResponsive' aria-expanded='false' aria-label='Toggle navigation')
+      span.navbar-toggler-icon
+    #navbarResponsive.collapse.navbar-collapse
+      ul.navbar-nav
+        li.nav-item
+          a.nav-link(href='/') Home
+        li.nav-item
+          a.nav-link(href='/about/') About
+        li.nav-item
+          a.nav-link(href='/blog/') Blog
+        li.nav-item
+          a.nav-link(href='/contact/') Contact
+.container-fluid.no-padding.padding-bottom
+  img.img-fluid.w-100(src='/theme/SmartUse_header.jpg' alt='SmartUse Header')
+.container
+  // content
+  .row
+    .col-md-12
+      h1
+        | SMARTUSE
+        small
+          br
+          | Die funktionale Region
+  hr
+  .row
+    .col-md-12
+      .text.section
+        h3 Die Idee
+        p
+          | Unser Ziel ist ein Werkzeug und Netzwerk fu&#x308;r Planer (Kantone, Gemeinden, Sta&#x308;dte),
+          | &ldquo;Planungsnahe&rdquo;
+          | (Architekturbu&#x308;ros, Planungsbu&#x308;ros) und die Zivilgesellschaft. Es bringt zusammen, zeigt auf
+          | und
+          | ermo&#x308;glicht so nachhaltige Ansa&#x308;tze fu&#x308;r den Wirtschafts- und Lebensraum zu gestalten und als
+          | Bindeglied zwischen Top-down Planung und Bottom-up Partizipation zu agieren.
+        p
+      .text.section
+        h3 Smart Use
+        p
+          | &laquo;Smart&raquo; vernetzen (Akteure, Daten, Werkzeuge, Fragen), &laquo;Smart&raquo; verdichten, &laquo;Smart&raquo; nutzen, statt
+          | teuer bauen. Das Projekt &laquo;Smart Use&raquo; ist eine laufende Kooperation zwischen der
+          | Metropolitankonferenz Zu&#x308;rich und der ARGE Smart Use, bestehend aus Joris van Wezemael, Hosoya
+          | Schaefer Architects und Datalets.ch.
+        p
+      div
+        p
+          | Smart Use ist ein Kooperationsprogramm der
+          a(href='https://www.metropolitanraum-zuerich.ch/themen/kooperationsprogramm/smart-use-raum-wachstum-und-big-data.html' target='_blank') metropolitan konferenz z&uuml;rich
+  hr
+  .row
+    .col-md-12
+      h3 DAS TEAM
+  .row
+    .col-md-4
+      h4
+        a(href='http://www.hosoyaschaefer.com' target='_blank') Hosoya Schaefer Architects
+      ul
+        li Markus Schaefer
+        li Nils Havelka
+        li Thorben Westerhuys
+    .col-md-4
+      h4
+        a(href='https://www.datalets.ch' target='_blank') Datalets.ch
+      ul
+        li Oleg Lavrovsky
+    .col-md-4
+      h4 ETH
+      ul
+        li Joris van Wezemael
+  // end content
+hr
+footer#footer
+  .container
+    .row
+      .col-md-4
+        h4 Immer auf dem Laufenden bleiben?
+        p.small Einfach f&uuml;r unseren Newsletter anmelden:
+        form(method='post', data-name='Immer auf dem Laufenden bleiben? Einfach für unseren Newsletter anmelden:')
+          .form-fields
+            p
+              input(name='EMAIL', placeholder='E-Mail-Adresse', required='', style='background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABHklEQVQ4EaVTO26DQBD1ohQWaS2lg9JybZ+AK7hNwx2oIoVf4UPQ0Lj1FdKktevIpel8AKNUkDcWMxpgSaIEaTVv3sx7uztiTdu2s/98DywOw3Dued4Who/M2aIx5lZV1aEsy0+qiwHELyi+Ytl0PQ69SxAxkWIA4RMRTdNsKE59juMcuZd6xIAFeZ6fGCdJ8kY4y7KAuTRNGd7jyEBXsdOPE3a0QGPsniOnnYMO67LgSQN9T41F2QGrQRRFCwyzoIF2qyBuKKbcOgPXdVeY9rMWgNsjf9ccYesJhk3f5dYT1HX9gR0LLQR30TnjkUEcx2uIuS4RnI+aj6sJR0AM8AaumPaM/rRehyWhXqbFAA9kh3/8/NvHxAYGAsZ/il8IalkCLBfNVAAAAABJRU5ErkJggg=="); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;', type='email')
+              input(name='FNAME', placeholder='Vorname', type='text')
+              input(name='LNAME', placeholder='Nachname', type='text')
+      .col-md-8
+        h4 Was ist Smartuse?
+        p.small
+          | Unser Ziel ist ein Werkzeug und Netzwerk fu&#x308;r Planer (Kantone, Gemeinden,
+          | Sta&#x308;dte), &ldquo;Planungsnahe&rdquo; (Architekturbu&#x308;ros, Planungsbu&#x308;ros) und die
+          | Zivilgesellschaft. Es bringt zusammen, zeigt auf und ermo&#x308;glicht so nachhaltige
+          | Ansa&#x308;tze fu&#x308;r den Wirtschafts- und Lebensraum zu gestalten und als Bindeglied
+          | zwischen Top-down Planung und Bottom-up Partizipation zu agieren.
+        p.small
+          | &laquo;Smart&raquo; vernetzen (Akteure, Daten, Werkzeuge, Fragen), &laquo;Smart&raquo; verdichten,
+          | &laquo;Smart&raquo; nutzen, statt teuer bauen.
+        p.small
+          | SmartUse ist ein Kooperationsprojekt der Metropolitankonferenz Z&uuml;rich
+        p
+          img(src='/theme/logo_MK_white.png' width='200px')
+        p.small
+          | und eine Zusammenarbeit von
+        ul.small
+          li Joris Van Wezemael, ETH
+          li Hosoya Schaefer Architects
+          li Datalets.ch
+// scripts
+script(src='/scripts/vendor/zepto-1.2.0.min.js')
+script(src='/scripts/vendor/zepto.smoothscroll.js')
+script(src='/theme/modernizr-3.5.0.min.js')
+script(src='/theme/bootstrap.min.js')
+script(src='/theme/glider.js')
+script(src='/theme/custom.js')

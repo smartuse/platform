@@ -1,67 +1,64 @@
 extends public/base.pug
 
-block head
+block scripts
   script project_id=#{meta.id}; project_path='/uploads';
   script(src='/vendor/zepto.smoothscroll.js')
-
-block top
-  rg-drawer
+  script(src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.0/mapbox-gl.js')
+  link(href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.0/mapbox-gl.css',rel='stylesheet')
+  script(src='/scripts/main.js')
 
 block content
-  .o-page-header.o-container.o-container--large
-    .c-link.c-link--brand
-      a.logo(href='/') SmartUse
+  .container(style="margin:100px")
 
-  .story
-    .o-grid
-      .o-grid__cell--width-20
-      .o-grid__cell.page-meta
-        if organisation
-          .authorImage
-            a(href=organisation.url,target="_blank")
-              img(src=organisation.logo,title=organisation.name)
-        h1
-          =meta.title
-        p.date
-          span Updated:&nbsp;
-          =updated
-        if meta.summary
-          p.description
-            =meta.summary
-        if organisation
-          p.authorText
-            a(href=organisation.url,target="_blank")
-              .organisation
-                =organisation.name
-      .o-grid__cell--width-20
+  .container-fluid.no-padding.story
+    .container
+      .row
+        .col-md-12.center.page-meta
+          if organisation
+            .authorImage
+              a(href=organisation.url,target="_blank")
+                img(src=organisation.logo,title=organisation.name)
+          h1
+            =meta.title
+          p.date
+            span Updated:&nbsp;
+            =updated
+          if meta.summary
+            p.description
+              =meta.summary
+          if organisation
+            p.authorText
+              a(href=organisation.url,target="_blank")
+                .organisation
+                  =organisation.name
 
-    .o-grid
-      .o-grid__cell--width-20
-      .o-grid__cell
-        .page-content
-          !=content
-      .o-grid__cell--width-20
+      .row
+        .col-md-12
+          .page-content
+            !=content
 
-    .resource-content
+      .row
+        .col-md-12
+          .resource-content
 
-    .o-grid
-      .o-grid__cell--width-20
-      .o-grid__cell
-        .resource-summary
-          .h2 Resources
-          p The following data sources were used in this project:
-          each resource in resources
-            .c-card
-              .c-card__header
-                h5.c-heading
-                  =resource.title
-              .c-card__body
-                if resource.notes
-                  .c-paragraph.resource-notes
-                    =resource.notes
-                .c-input-group
-                  a(href='{{ resource.path }}' download).c-button.c-button--block.c-button--info
-                    span Download
+      hr
+      .row
+        .col-md-12
+          .resource-summary
+            .h2 Resources
+            p The following data sources were used in this project:
+            each resource in resources
+              .c-card
+                .c-card__header
+                  h5.c-heading
+                    =resource.title
+                .c-card__body
+                  if resource.notes
+                    .c-paragraph.resource-notes
+                      =resource.notes
+                  .c-input-group
+                    a(href='{{ resource.path }}' download).c-button.c-button--block.c-button--info
+                      span Download
 
         .c-card.embedding
           .c-card
@@ -78,18 +75,15 @@ block content
               .c-card__body
                 .c-paragraph
                   =project.summary
-      .o-grid__cell--width-20
 
-    hr
+      hr
 
-    .o-grid
-      .o-grid__cell--width-20
-      .o-grid__cell
-        .o-grid
+      .row
+        .col-md-12
           each author in authors
-            .o-grid__cell--width-15.authorImage
+            .authorImage
               img(src=author.gravatar)
-            .o-grid__cell--width-20.authorText
+            .authorText
               p
                 a.fullname(href=author.url,target="_blank")
                   =author.fullname
@@ -101,5 +95,3 @@ block content
               if author.biography
                 p.biography
                   =author.biography
-            .o-grid__cell--width-5
-      .o-grid__cell--width-20

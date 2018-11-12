@@ -2,36 +2,6 @@ var maps = {}, paginationtag = null;
 
 Zepto(function($){
 
-  // Load the project menu
-  /*
-  $('rg-drawer').each(function() {
-    var self = this;
-    return; // Or don't..
-    $.getJSON('/api/projects', function(projects) {
-      $('.c-link--brand a').click(function(e) {
-        e.preventDefault();
-        window.scrollTo(0, 0);
-
-        var tag = riot.mount('rg-drawer', {
-          drawer: {
-            header: 'Projects',
-            isvisible: true,
-            position: 'top',
-            items: projects
-          }
-        });
-        tag[0].on('select', function (item) {
-          location.href='/project/' + item.id;
-        });
-        $('rg-drawer .heading').click(function() {
-          location.href='/';
-        }).css('cursor', 'pointer');
-        return false;
-      })
-    });
-  });
-  */
-
   function load_DataPackage(datapackage) {
     var rescount = 0;
 
@@ -207,18 +177,37 @@ Zepto(function($){
   // setStoryLayout();
   // $(window).resize(setStoryLayout);
 
-  // Interactive search
-  $('input.search').on('input', function() {
-    var $cards = $('.project-list .c-card');
-    var q = $(this).val().toLowerCase();
-    if (q.length < 3) return $cards.show();
-    $cards.hide().forEach(function(item) {
-      if ($(item).text().toLowerCase().indexOf(q) >= 0)
-        $(item).show();
-    });
-  });
-
   if (typeof mapboxgl !== 'undefined')
-    mapboxgl.accessToken = 'pk.eyJ1Ijoic21hcnR1c2UiLCJhIjoiY2pkNGowcGdzMHhpbzMzcWp3eGYydGhmMiJ9.k9QyYo-2pFvyyFDJiz16UA';
+  mapboxgl.accessToken = 'pk.eyJ1Ijoic21hcnR1c2UiLCJhIjoiY2pkNGowcGdzMHhpbzMzcWp3eGYydGhmMiJ9.k9QyYo-2pFvyyFDJiz16UA';
 
+
+    // Load the project menu
+    /*
+    $('rg-drawer').each(function() {
+      var self = this;
+      return; // Or don't..
+      $.getJSON('/api/projects', function(projects) {
+        $('.c-link--brand a').click(function(e) {
+          e.preventDefault();
+          window.scrollTo(0, 0);
+
+          var tag = riot.mount('rg-drawer', {
+            drawer: {
+              header: 'Projects',
+              isvisible: true,
+              position: 'top',
+              items: projects
+            }
+          });
+          tag[0].on('select', function (item) {
+            location.href='/project/' + item.id;
+          });
+          $('rg-drawer .heading').click(function() {
+            location.href='/';
+          }).css('cursor', 'pointer');
+          return false;
+        })
+      });
+    });
+    */
 });

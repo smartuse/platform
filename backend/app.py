@@ -249,7 +249,7 @@ def projects_list():
     return [p.dict() for p in Project.query.filter_by(is_hidden=False).limit(10).all()]
 
 @app.route("/api/projects/featured", methods=['GET'])
-def projects_list():
+def projects_list_featured():
     return [p.dict() for p in Project.query.filter_by(is_hidden=False,is_featured=True).limit(10).all()]
 
 @app.route("/api/resources", methods=['GET'])
@@ -276,7 +276,11 @@ def project_detail(project_id):
 # Flask views
 @app.route('/')
 def index():
-    return render_template('theme/frontend.html')
+    return render_template('public/home.pug')
+
+@app.route('/browse')
+def index_browse():
+    return render_template('public/browse.pug')
 
 @app.route('/')
 def index_old():
