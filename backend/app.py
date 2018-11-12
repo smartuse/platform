@@ -223,8 +223,6 @@ UserView = ModelView(User, db.session)
 UserView.column_list = ('username', 'fullname', 'organisation')
 admin.add_view(UserView)
 
-admin.add_view(FileAdmin(upload_path, '/uploads/', name="Data"))
-
 admin.add_view(ModelView(Organisation, db.session, name="Organisations"))
 
 class ProjectView(ModelView):
@@ -242,6 +240,8 @@ class ResourceView(ModelView):
     column_list = ('title', 'path')
     can_export = True
 admin.add_view(ResourceView(Resource, db.session, name="Resources"))
+
+admin.add_view(FileAdmin(upload_path, '/uploads/', name="Data"))
 
 # API views
 @app.route("/api/projects", methods=['GET'])
