@@ -10,8 +10,8 @@ Gebrauchsmanagement wandelt.
 Sehe auch:
 
 - [README in English](README.md)
-- [README für das Web-applikation](backend/README.md)
-- [README für den UI (Frontend)](site/README.md)
+- [README für die Web-applikation](backend/README.md)
+- [README für das UserInterface (Frontend)](static/README.md)
 - [Technische Übersicht](docs/README.md)
 
 ## Ausgangslage
