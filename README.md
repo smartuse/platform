@@ -8,7 +8,7 @@ See also:
 
 - [README auf Deutsch](README.de.md)
 - [README for Web application](backend/README.md)
-- [README for site frontend](site/README.md)
+- [README for site frontend](static/README.md)
 - [Technical Report](docs/README.md)
 
 ## Starting point
