@@ -42,13 +42,10 @@ block content
           .resource-content
 
       .row.project-authors
-        .col-md-12
-          .h2 Authors
-        each author in authors
-          .col-md-2
-            .authorImage
+        .col-md-12.text-right
+          each author in authors
+            .author
               img(src=author.gravatar)
-            .authorText
               p
                 a.fullname(href=author.url,target="_blank")
                   =author.fullname
@@ -84,15 +81,17 @@ block content
         .col-md-6
           .card.border-secondary.mb-3.embedding
             .card-header
-              button.btn.btn-primary.btn-sm(type="button" href='#') Share
+              a.btn.btn-primary.btn-sm(type="button" target='_blank' href='https://twitter.com/intent/tweet?text={{ project.title }}&hashtags=smartuse&url={{ project.url }}' id='share-project') Share
+              button.btn.btn-primary.btn-sm(type="button" href='#' id='embed-project') Embed
             |
-            .card-body(style="background:white")
-              h4.card-title
-                =project.title
-              |
-              img.project-thumb(src='{{ project.thumb() }}',align='left')
-              each user in project.users
-                b
-                  =user.organisation
-              p.card-text
-                =project.summary
+            .card-body
+              a(href='{{ project.url }}')
+                h4.card-title
+                  =project.title
+                |
+                img.project-thumb(src='{{ project.thumb() }}',align='left')
+                each user in project.users
+                  b
+                    =user.organisation
+                p.card-text
+                  =project.summary

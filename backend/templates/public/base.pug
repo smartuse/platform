@@ -5,8 +5,8 @@ html
     meta(charset='utf-8')
     title='SmartUse Beta'
 
-    link(rel='icon' href='static/favicon.ico')
-    link(rel='manifest' href='static/manifest.json')
+    link(rel='icon' href='/static/favicon.ico')
+    link(rel='manifest' href='/static/manifest.json')
 
     meta(name='viewport' content='width=device-width, initial-scale=1')
     meta(http-equiv='X-UA-Compatible' content='IE=edge')
@@ -78,6 +78,11 @@ html
                   input.form-control(name='LNAME', placeholder='Nachname', type='text')
                 p
                   button.btn.btn-secondary(type="submit") OK
+
+          .col-md-4.text-right
+            p.small
+              | Version 0.1.0 Beta
+            button.btn.btn-primary.btn-sm(type="button" href='/admin') Administration
 
     script(src='/vendor/zepto-1.2.0.min.js')
     script(src='/vendor/modernizr-3.5.0.min.js')

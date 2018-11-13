@@ -1,17 +1,9 @@
-html { background: #fff; overflow-x: hidden; }
+html { background: #333; overflow-x: hidden; }
 .hidden { display: none; }
 body {
   font-family: "Roboto", sans-serif;
   /* height: 100%;  */
   /* margin: 2em 0; */
-}
-.c-link-author {
-  padding: 30px 10px 20px 20px;
-}
-.c-link-author img {
-    height: 100%;
-    width: 80%;
-    max-width: 150px;
 }
 .logo {
 	background: url("/img/SmartUse-Logo.png") left center no-repeat;
@@ -247,34 +239,34 @@ a.featured, a.featured h5, a.featured p
 
 /* Project Page styling */
 
-.o-grid__cell .description {
-  margin: 0 0 20px 0;
+.project-authors, .resource-summary {
+	clear: both;
 }
-.gallery-nav .authorImage {
-  text-align: center;
-  padding-top: 10px;
-  max-height: 100px;
+.author {
+	width: 20em;
+	text-align: left;
+	float: right;
 }
-.gallery-nav .authorImage img {
+.author img {
   height: 55px;
+	float: left;
+	padding-right: 1em;
 }
-.o-grid__cell--width-5 .authorImage {
-  width: 20px;
+.author .fullname {
+	font-weight: bold;
+}
+.author p {
+  margin: 0; display: inline-block;
+}
+.author p, .author a {
+  color: #333;
 }
 
-.o-grid__cell--width-5 .authorImage img {
-  width: 100%;
+.embedding .card-body {
+	background: white;
 }
-
-.o-grid__cell .authorText p.author {
-  margin: 0;
-  color: #000;
-}
-
-.o-grid__cell .authorText p.authorPerson {
-  margin: 0;
-  color: #949494;
-  font-size: 14px;
+.embedding .card-body a {
+	color: black;
 }
 
 /* Fixed rendering */

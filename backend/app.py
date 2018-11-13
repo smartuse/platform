@@ -119,6 +119,9 @@ class Project(db.Model):
         return '/screenshots/' + secure_filename('%s_thumb.jpg' % name)
     def __repr__(self):
         return self.title
+    @property
+    def url(self):
+        return request.host_url.rstrip('/') + url_for('project_page', project_id=self.id)
     def dict(self):
         return {
             'id': self.id,
@@ -131,6 +134,7 @@ class Project(db.Model):
             'date-updated': self.updated.strftime("%Y-%d-%m"),
             'summary': self.summary,
             'notes': self.notes,
+            'url': self.url,
             'detail_url': request.host_url.rstrip('/') + url_for('project_detail', project_id=self.id),
         }
 

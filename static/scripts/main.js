@@ -210,4 +210,10 @@ Zepto(function($){
       });
     });
     */
+
+  $('#embed-project').click(function() {
+    var html = $(this).parents('.embedding').find('.card-body').html();
+    window.prompt('Copy this code to embed:', html.trim().replace(/  /g, ' '));
+  });
+
 });
