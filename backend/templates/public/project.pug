@@ -1,95 +1,54 @@
 extends public/base.pug
 
-block head
+block scripts
   script project_id=#{meta.id}; project_path='/uploads';
   script(src='/vendor/zepto.smoothscroll.js')
-
-block top
-  rg-drawer
+  script(src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.0/mapbox-gl.js')
+  link(href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.0/mapbox-gl.css',rel='stylesheet')
+  script(src='/scripts/main.js')
 
 block content
-  .o-page-header.o-container.o-container--large
-    .c-link.c-link--brand
-      a.logo(href='/') SmartUse
+  .container(style="margin:100px")
 
-  .story
-    .o-grid
-      .o-grid__cell--width-20
-      .o-grid__cell.page-meta
-        if organisation
-          .authorImage
-            a(href=organisation.url,target="_blank")
-              img(src=organisation.logo,title=organisation.name)
-        h1
-          =meta.title
-        p.date
-          span Updated:&nbsp;
-          =updated
-        if meta.summary
-          p.description
-            =meta.summary
-        if organisation
-          p.authorText
-            a(href=organisation.url,target="_blank")
-              .organisation
-                =organisation.name
-      .o-grid__cell--width-20
+  .container-fluid.no-padding.story
+    .container
+      .row
+        .col-md-12.center.page-meta
+          if organisation
+            .authorImage
+              a(href=organisation.url,target="_blank")
+                img(src=organisation.logo,title=organisation.name)
+          h1
+            =meta.title
+          p.date
+            span Updated:&nbsp;
+            =updated
+          if meta.summary
+            p.description
+              =meta.summary
+          if organisation
+            p.authorText
+              a(href=organisation.url,target="_blank")
+                .organisation
+                  =organisation.name
 
-    .o-grid
-      .o-grid__cell--width-20
-      .o-grid__cell
-        .page-content
-          !=content
-      .o-grid__cell--width-20
+      .row
+        .col-md-12
+          .page-content
+            !=content
 
-    .resource-content
+      .row
+        .col-md-12
+          .resource-content
 
-    .o-grid
-      .o-grid__cell--width-20
-      .o-grid__cell
-        .resource-summary
-          .h2 Resources
-          p The following data sources were used in this project:
-          each resource in resources
-            .c-card
-              .c-card__header
-                h5.c-heading
-                  =resource.title
-              .c-card__body
-                if resource.notes
-                  .c-paragraph.resource-notes
-                    =resource.notes
-                .c-input-group
-                  a(href='{{ resource.path }}' download).c-button.c-button--block.c-button--info
-                    span Download
-
-        .c-card.embedding
-          .c-card
-            .c-card__header
-              .c-input-group(style='float:right')
-                a(href='#').c-button.c-button--success
-                  span Share
-              img.project-thumb(src='{{ project.thumb() }}',align='left')
-              h2.c-heading
-                =project.title
-              each user in project.users
-                span= user.organisation
-            if project.summary
-              .c-card__body
-                .c-paragraph
-                  =project.summary
-      .o-grid__cell--width-20
-
-    hr
-
-    .o-grid
-      .o-grid__cell--width-20
-      .o-grid__cell
-        .o-grid
-          each author in authors
-            .o-grid__cell--width-15.authorImage
+      .row.project-authors
+        .col-md-12
+          .h2 Authors
+        each author in authors
+          .col-md-2
+            .authorImage
               img(src=author.gravatar)
-            .o-grid__cell--width-20.authorText
+            .authorText
               p
                 a.fullname(href=author.url,target="_blank")
                   =author.fullname
@@ -101,5 +60,39 @@ block content
               if author.biography
                 p.biography
                   =author.biography
-            .o-grid__cell--width-5
-      .o-grid__cell--width-20
+
+
+      .row
+        .col-md-12.resource-summary
+          .h2 Data sources
+          .list-group
+            each resource in resources
+              .list-group-item.list-group-item-action.flex-column.align-items-start.active
+                .d-flex.w-100.justify-content-between
+                  h5.mb-1
+                    =resource.title
+                  button.btn.btn-primary.btn-sm(type="button" href='{{ resource.path }}' download) Download
+                  small
+                    =resource.mediatype
+                if resource.notes
+                  p.mb-1
+                    =resource.notes
+
+      hr
+      .row
+        .col-md-3
+        .col-md-6
+          .card.border-secondary.mb-3.embedding
+            .card-header
+              button.btn.btn-primary.btn-sm(type="button" href='#') Share
+            |
+            .card-body(style="background:white")
+              h4.card-title
+                =project.title
+              |
+              img.project-thumb(src='{{ project.thumb() }}',align='left')
+              each user in project.users
+                b
+                  =user.organisation
+              p.card-text
+                =project.summary

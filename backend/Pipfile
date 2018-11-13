@@ -17,6 +17,8 @@ Shapely = "*"
 "GeoAlchemy2" = "*"
 Markdown = "*"
 flask-migrate = "*"
+gunicorn = "*"
+pillow = "*"
 
 [requires]
-python_version = "3.5"
+python_version = "3.7"

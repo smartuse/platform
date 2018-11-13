@@ -44,7 +44,6 @@
     "switzerland"
   ],
   "dependencies": {
-    "riotgear": "^3.5.0",
     "sticky-js": "^1.2.0"
   }
 }

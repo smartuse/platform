@@ -223,8 +223,6 @@ UserView = ModelView(User, db.session)
 UserView.column_list = ('username', 'fullname', 'organisation')
 admin.add_view(UserView)
 
-admin.add_view(FileAdmin(upload_path, '/uploads/', name="Data"))
-
 admin.add_view(ModelView(Organisation, db.session, name="Organisations"))
 
 class ProjectView(ModelView):
@@ -243,10 +241,16 @@ class ResourceView(ModelView):
     can_export = True
 admin.add_view(ResourceView(Resource, db.session, name="Resources"))
 
+admin.add_view(FileAdmin(upload_path, '/uploads/', name="Data"))
+
 # API views
 @app.route("/api/projects", methods=['GET'])
 def projects_list():
-    return [p.dict() for p in Project.query.filter_by(is_hidden=False).limit(10).all()]
+    return [p.dict() for p in Project.query.filter_by(is_hidden=False).limit(50).all()]
+
+@app.route("/api/projects/featured", methods=['GET'])
+def projects_list_featured():
+    return [p.dict() for p in Project.query.filter_by(is_hidden=False,is_featured=True).limit(10).all()]
 
 @app.route("/api/resources", methods=['GET'])
 def resources_list():
@@ -272,6 +276,14 @@ def project_detail(project_id):
 # Flask views
 @app.route('/')
 def index():
+    return render_template('public/home.pug')
+
+@app.route('/browse')
+def index_browse():
+    return render_template('public/browse.pug')
+
+@app.route('/')
+def index_old():
     f = open('templates/public/index.md', 'r')
     content = Markup(markdown.markdown(f.read()))
     nothidden = Project.query.filter_by(is_hidden=False)
@@ -306,6 +318,11 @@ def send_static_tags(path):
 @app.route('/vendor/<path:path>')
 def send_static_vendor(path):
     return send_from_directory('../static/vendor', path)
+
+@app.route('/theme/<path:path>')
+def send_static_theme(path):
+    return send_from_directory('../static/theme', path)
+
 @app.route('/data/<path:path>')
 def send_static_data(path):
     return send_from_directory('../views/projects', path)

@@ -3,9 +3,11 @@ Flask-Admin
 Flask-API
 Flask-Migrate
 Flask-SQLAlchemy
-shapely
 geoalchemy2
 geojson
+gunicorn
+markdown
+Pillow
 psycopg2-binary
 pypugjs
-markdown
+shapely
