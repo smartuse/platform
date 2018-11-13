@@ -69,8 +69,8 @@ block content
                   h5.mb-1
                     =resource.title
                   .btn-group(role="group")
-                    a.btn.btn-secondary.btn-sm(type="button" href='{{ resource.path }}' download) Download
-                    a.btn.btn-secondary.btn-sm(type="button" href='{{ project.detail_url }}') Data Package
+                    a.btn.btn-primary.btn-sm(type="button" href='{{ resource.path }}' download) Download
+                    a.btn.btn-primary.btn-sm(type="button" href='{{ project.detail_url }}') Data Package
                   small
                     =resource.mediatype
                 if resource.notes
