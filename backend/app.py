@@ -122,6 +122,9 @@ class Project(db.Model):
     @property
     def url(self):
         return request.host_url.rstrip('/') + url_for('project_page', project_id=self.id)
+    @property
+    def detail_url(self):
+        return request.host_url.rstrip('/') + url_for('project_detail', project_id=self.id)
     def dict(self):
         return {
             'id': self.id,
@@ -135,7 +138,7 @@ class Project(db.Model):
             'summary': self.summary,
             'notes': self.notes,
             'url': self.url,
-            'detail_url': request.host_url.rstrip('/') + url_for('project_detail', project_id=self.id),
+            'detail_url': self.detail_url,
         }
 
 # Many-to-many relationship
