@@ -68,7 +68,7 @@ block content
                 .d-flex.w-100.justify-content-between
                   h5.mb-1
                     =resource.title
-                  button.btn.btn-primary.btn-sm(type="button" href='{{ resource.path }}' download) Download
+                  a.btn.btn-primary.btn-sm(type="button" href='{{ resource.path }}' download) Download
                   small
                     =resource.mediatype
                 if resource.notes
