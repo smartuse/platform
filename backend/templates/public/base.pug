@@ -21,8 +21,8 @@ html
     link(rel="apple-touch-icon-precomposed",sizes="114x114",href="/img/apple-touch-iphone4.png")
     link(rel="apple-touch-icon-precomposed",sizes="144x144",href="/img/apple-touch-ipad-retina.png")
 
-    link(rel='stylesheet' href='/theme/custom.css')
-    //link(href='/styles/custom.css',rel='stylesheet')
+    link(rel='stylesheet',href='/theme/custom.css')
+    link(rel='stylesheet',href='/styles/smartuse.css')
 
     block head
       //- additional scripts and styles
@@ -52,6 +52,19 @@ html
     block footer
       .container#footer
         .row
+          .col-md-4.footer-info
+            // include:markdown-it index.md
+            p
+              | SmartUse ist ein Kooperationsprojekt der Metropolitankonferenz Z&uuml;rich
+            p
+              img(src='/theme/logo_MK_white.png' width='200px')
+            p.small
+              | und eine Zusammenarbeit von
+            ul.small
+              li Joris Van Wezemael, ETH
+              li Hosoya Schaefer Architects
+              li Datalets.ch
+
           .col-md-4
             h4 Immer auf dem Laufenden bleiben?
             p.small Einfach f&uuml;r unseren Newsletter anmelden:
@@ -65,23 +78,12 @@ html
                   input.form-control(name='LNAME', placeholder='Nachname', type='text')
                 p
                   button.btn.btn-secondary(type="submit") OK
-          .col-md-8.footer-info
-            // include:markdown-it index.md
-            p
-              | SmartUse ist ein Kooperationsprojekt der Metropolitankonferenz Z&uuml;rich
-            p
-              img(src='/theme/logo_MK_white.png' width='200px')
-            p.small
-              | und eine Zusammenarbeit von
-            ul.small
-              li Joris Van Wezemael, ETH
-              li Hosoya Schaefer Architects
-              li Datalets.ch
 
     script(src='/vendor/zepto-1.2.0.min.js')
     script(src='/vendor/modernizr-3.5.0.min.js')
 
     script(src='/scripts/util.js')
+    script(src='/theme/custom.js')
 
     block scripts
       //- additional resources

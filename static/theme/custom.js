@@ -18,13 +18,13 @@
     $("#source-modal").modal();
   });
 
-  $('.bs-component [data-toggle="popover"]').popover();
-  $('.bs-component [data-toggle="tooltip"]').tooltip();
+  // $('.bs-component [data-toggle="popover"]').popover();
+  // $('.bs-component [data-toggle="tooltip"]').tooltip();
 
-  $(".bs-component").hover(function(){
+  $(".bs-component").on('mouseover', function(){
     $(this).append($button);
     $button.show();
-  }, function(){
+  }).on('mouseout', function(){
     $button.hide();
   });
 

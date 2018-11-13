@@ -246,7 +246,7 @@ admin.add_view(FileAdmin(upload_path, '/uploads/', name="Data"))
 # API views
 @app.route("/api/projects", methods=['GET'])
 def projects_list():
-    return [p.dict() for p in Project.query.filter_by(is_hidden=False).limit(10).all()]
+    return [p.dict() for p in Project.query.filter_by(is_hidden=False).limit(50).all()]
 
 @app.route("/api/projects/featured", methods=['GET'])
 def projects_list_featured():

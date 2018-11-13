@@ -41,46 +41,11 @@ block content
         .col-md-12
           .resource-content
 
-      hr
-      .row
+      .row.project-authors
         .col-md-12
-          .resource-summary
-            .h2 Resources
-            p The following data sources were used in this project:
-            each resource in resources
-              .c-card
-                .c-card__header
-                  h5.c-heading
-                    =resource.title
-                .c-card__body
-                  if resource.notes
-                    .c-paragraph.resource-notes
-                      =resource.notes
-                  .c-input-group
-                    a(href='{{ resource.path }}' download).c-button.c-button--block.c-button--info
-                      span Download
-
-        .c-card.embedding
-          .c-card
-            .c-card__header
-              .c-input-group(style='float:right')
-                a(href='#').c-button.c-button--success
-                  span Share
-              img.project-thumb(src='{{ project.thumb() }}',align='left')
-              h2.c-heading
-                =project.title
-              each user in project.users
-                span= user.organisation
-            if project.summary
-              .c-card__body
-                .c-paragraph
-                  =project.summary
-
-      hr
-
-      .row
-        .col-md-12
-          each author in authors
+          .h2 Authors
+        each author in authors
+          .col-md-2
             .authorImage
               img(src=author.gravatar)
             .authorText
@@ -95,3 +60,39 @@ block content
               if author.biography
                 p.biography
                   =author.biography
+
+
+      .row
+        .col-md-12.resource-summary
+          .h2 Data sources
+          .list-group
+            each resource in resources
+              .list-group-item.list-group-item-action.flex-column.align-items-start.active
+                .d-flex.w-100.justify-content-between
+                  h5.mb-1
+                    =resource.title
+                  button.btn.btn-primary.btn-sm(type="button" href='{{ resource.path }}' download) Download
+                  small
+                    =resource.mediatype
+                if resource.notes
+                  p.mb-1
+                    =resource.notes
+
+      hr
+      .row
+        .col-md-3
+        .col-md-6
+          .card.border-secondary.mb-3.embedding
+            .card-header
+              button.btn.btn-primary.btn-sm(type="button" href='#') Share
+            |
+            .card-body(style="background:white")
+              h4.card-title
+                =project.title
+              |
+              img.project-thumb(src='{{ project.thumb() }}',align='left')
+              each user in project.users
+                b
+                  =user.organisation
+              p.card-text
+                =project.summary

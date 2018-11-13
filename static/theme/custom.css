@@ -107,10 +107,12 @@ pre {
 .progress{
 	margin-bottom:10px
 }
-#footer{
-	margin:5em 0
-}
 
+#footer {
+	margin-top: 2em;
+	border-top: 1px solid #ddd;
+	padding-top: 1em;
+}
 
 .splash{
 	padding:12em 0 6em;

@@ -23,11 +23,11 @@ Zepto(function($){
 
   // Load other projects
   $('#projects').each(function() {
-    var $container = $(this);
+    var $container = $(this).addClass('project-list');
     $.getJSON('/api/projects', function(projects) {
       $.each(projects, function() {
         $container.append(
-        '<div class="col-md-4">' +
+        '<div class="col-md-4 project-card">' +
           '<a href="/project/' + this.id + '">' +
             '<div class="card text-white mb-3">' +
               '<div class="card-header">' +
@@ -63,7 +63,7 @@ Zepto(function($){
 
   // Interactive search
   $('input.search').on('input', function() {
-    var $cards = $('.project-list .c-card');
+    var $cards = $('.project-list .project-card');
     var q = $(this).val().toLowerCase();
     if (q.length < 3) return $cards.show();
     $cards.hide().forEach(function(item) {

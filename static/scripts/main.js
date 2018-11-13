@@ -31,10 +31,10 @@ Zepto(function($){
       description = container.find('.description');
       description.append(
         '<div class="resource-header"><a name="anchor-' + rescount + '"></a>'
-        + '<h3>' //'<a href="#item-' + rescount + '">'
+        + '<h5>' //'<a href="#item-' + rescount + '">'
         // + '<i class="material-icons">layers</i>'
         + (res.title || res.name)
-        + '</h3></div>'
+        + '</h5></div>'
       );
       if (res.description.length>1)
         description.append('<p>'+ res.description + '</p>');
