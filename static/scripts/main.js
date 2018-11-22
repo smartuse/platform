@@ -15,29 +15,33 @@ Zepto(function($){
     // console.log(datapackage);
     $.each(datapackage.resources, function(i, res) {
 
-      if (res.name.length<2) return;
+      if (!(res.name || res.title)) return;
 
       container = $('.resource-content').append(
-        '<div class="container">'
+        '<div class="resource-container">'
         + '<div class="gallery" fullscreen=1></div>'
-        + '<div class="o-grid" id="' + res.name + '">'
-        + '<div class="o-grid__cell--width-20"></div>'
-        + '<div class="o-grid__cell"><div class="description"></div></div>'
-        + '<div class="o-grid__cell--width-20"></div>'
-        + '</div></div>'
-      ).find('.container:last-child');
+        + '<div class="container" id="' + res.name + '">'
+          + '<div class="description"></div>'
+        + '</div>'
+      + '</div>'
+      ).find('.resource-container:last-child');
+
       gallery = container.find('.gallery');
       if (gallery.length === 0) gallery = $('.gallery');
+
       description = container.find('.description');
       description.append(
         '<div class="resource-header"><a name="anchor-' + rescount + '"></a>'
-        + '<h5>' //'<a href="#item-' + rescount + '">'
+        //'<a href="#item-' + rescount + '">'
         // + '<i class="material-icons">layers</i>'
         + (res.title || res.name)
-        + '</h5></div>'
+        + '</div>'
       );
       if (res.description.length>1)
-        description.append('<p>'+ res.description + '</p>');
+        description.append(res.description);
+
+        console.log(res);
+
       // $('.story-nav ul').append(
       //   '<li><a href="#' + res.name + '">' + (res.title || res.name) + '</a></li>'
       // );

@@ -5,6 +5,7 @@ body {
   /* height: 100%;  */
   /* margin: 2em 0; */
 }
+p { font-size: 120%; }
 .logo {
 	background: url("/img/SmartUse-Logo.png") left center no-repeat;
 	background-size: cover;
@@ -70,7 +71,12 @@ p.date span { color: #999; }
   border-bottom: 1px dashed #555;
 }
 .resource-header {
-	color: #999;
+	color: #777;
+	font-size: 200%;
+	margin: 0.5em 0px;
+}
+.resource-container .container {
+	margin: 0 10%;
 }
 .resource-summary,.project-authors {
 	margin-top: 2em;
