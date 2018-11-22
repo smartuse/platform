@@ -40,13 +40,13 @@ Zepto(function($){
       if (res.description.length>1)
         description.append(res.description);
 
-        console.log(res);
+        // console.log(res);
 
       // $('.story-nav ul').append(
       //   '<li><a href="#' + res.name + '">' + (res.title || res.name) + '</a></li>'
       // );
 
-      if (typeof(res.mediatype) == 'undefined')
+      if (typeof(res.mediatype) == 'undefined' || res.mediatype === null)
         res.mediatype = get_media_type(res.format);
 
       if (res.mediatype == 'application/vnd.datapackage+json') {
