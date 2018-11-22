@@ -21,7 +21,7 @@ Zepto(function($){
     });
   });
 
-  // Load other projects
+  // Load all projects
   $('#projects').each(function() {
     var $container = $(this).addClass('project-list');
     $.getJSON('/api/projects', function(projects) {
@@ -33,7 +33,7 @@ Zepto(function($){
               '<div class="card-header">' +
                 this.title + '</div>' +
               '<div class="card-body">' +
-                '<img src="' + this.screenshot + '" width="100" align="left" style="padding-right:1em">' +
+                '<img src="' + this.thumbnail + '" width="100" align="left" style="padding-right:1em">' +
                 '<p class="card-text">' +
                   this.summary + '</p>' +
               '</div>' +

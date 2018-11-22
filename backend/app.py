@@ -113,10 +113,12 @@ class Project(db.Model):
 
     token_edit = db.Column(db.String(64), default=codecs.encode(urandom(12), 'hex').decode())
 
-    def thumb(self):
+    def thumb(self, as_thumbnail=True):
         if not self.screenshot: return DEFAULT_THUMB
         name, _ = ospath.splitext(self.screenshot)
-        return '/screenshots/' + secure_filename('%s_thumb.jpg' % name)
+        if as_thumbnail:
+            return '/screenshots/' + secure_filename('%s_thumb.jpg' % name)
+        return '/screenshots/' + secure_filename('%s.jpg' % name)
     def __repr__(self):
         return self.title
     @property
@@ -132,7 +134,8 @@ class Project(db.Model):
             'featured': self.is_featured,
             'name': 'smartuse-%d' % self.id,
             'text': self.title, 'title': self.title,
-            'screenshot': self.thumb(),
+            'screenshot': self.thumb(False),
+            'thumbnail': self.thumb(),
             'date-created': self.created.strftime("%Y-%d-%m"),
             'date-updated': self.updated.strftime("%Y-%d-%m"),
             'summary': self.summary,
