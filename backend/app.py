@@ -56,7 +56,7 @@ def get_media_type(filename):
         return 'image/png'
     if filename.endswith('.jpg') or filename.endswith('.jpeg'):
         return 'image/jpeg'
-    if filename.endswith('.geojson') or filename.endswith('.json'):
+    if filename.endswith('.geojson'):
         return 'application/vnd.geo+json'
     if filename.endswith('datapackage.json'):
         return 'application/vnd.datapackage+json'
