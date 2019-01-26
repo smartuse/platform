@@ -248,3 +248,6 @@ pre {
 	background: white; color: black;
 	padding: 2em 0;
 }
+.story a {
+	color: darkblue;
+}

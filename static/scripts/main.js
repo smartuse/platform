@@ -2,7 +2,7 @@ var maps = {}, paginationtag = null;
 
 Zepto(function($){
 
-  function load_DataPackage(datapackage) {
+  function load_DataPackage(datapackage, container) {
     var rescount = 0;
 
     function add_gallery_item(container, ii) {
@@ -20,13 +20,15 @@ Zepto(function($){
 
       if (!(res.name || res.title)) return;
 
-      container = $('.resource-content').append(
-        '<div class="resource-container">'
-        + '<div class="container" id="' + res.name + '">'
-          + '<div class="description"></div>'
+      if (typeof(container) === typeof(undefined)) {
+        container = $('.resource-content').append(
+          '<div class="resource-container">'
+          + '<div class="container" id="' + res.name + '">'
+            + '<div class="description"></div>'
+          + '</div>'
         + '</div>'
-      + '</div>'
-      ).find('.resource-container:last-child');
+        ).find('.resource-container:last-child');
+      }
 
       description = container.find('.description');
       description.append(
@@ -52,7 +54,7 @@ Zepto(function($){
         pp = get_project_path(res.path);
         $.getJSON(get_project_path(res.path), function(dp) {
           project_path = pp.substring(0, pp.lastIndexOf('/')+1);
-          load_DataPackage(dp);
+          load_DataPackage(dp, container);
         });
 
       } else if (res.mediatype.indexOf('image/')==0) {
