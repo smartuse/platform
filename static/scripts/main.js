@@ -5,7 +5,10 @@ Zepto(function($){
   function load_DataPackage(datapackage) {
     var rescount = 0;
 
-    function add_gallery_item(gallery, ii) {
+    function add_gallery_item(container, ii) {
+      container.prepend('<div class="gallery" fullscreen=1></div>');
+      gallery = container.find('.gallery');
+      if (gallery.length === 0) gallery = $('.gallery');
       // gallery.append('<div id="item-'+ii+'" class="control-operator"></div>');
       // gallery.find('.controls').append('<a href="#item-'+ii+'" class="control-button">•</a>');
       if (gallery.attr('fullscreen')) gallery.append('<div class="fullscreen-button"></div>');
@@ -19,15 +22,11 @@ Zepto(function($){
 
       container = $('.resource-content').append(
         '<div class="resource-container">'
-        + '<div class="gallery" fullscreen=1></div>'
         + '<div class="container" id="' + res.name + '">'
           + '<div class="description"></div>'
         + '</div>'
       + '</div>'
       ).find('.resource-container:last-child');
-
-      gallery = container.find('.gallery');
-      if (gallery.length === 0) gallery = $('.gallery');
 
       description = container.find('.description');
       description.append(
@@ -58,7 +57,7 @@ Zepto(function($){
 
       } else if (res.mediatype.indexOf('image/')==0) {
         rescount = rescount + 1;
-        item = add_gallery_item(gallery, rescount);
+        item = add_gallery_item(container, rescount);
 
         img = item.append('<img id="image-'+rescount+'" />').find('img:last-child');
         imgpath = get_project_path(res.path);
@@ -66,14 +65,14 @@ Zepto(function($){
 
       } else if (res.mediatype == 'application/html') {
         rescount = rescount + 1;
-        item = add_gallery_item(gallery, rescount);
+        item = add_gallery_item(container, rescount);
 
         imgpath = get_project_path(res.path);
         item.append('<iframe id="frame-'+rescount+'" src="' + imgpath + '"/>');
 
       } else if (res.mediatype == 'application/vnd.geo+json') {
         rescount = rescount + 1;
-        item = add_gallery_item(gallery, rescount);
+        item = add_gallery_item(container, rescount);
 
         item.append('<div class="map" id="map-'+rescount+'" />');
         filepath = get_project_path(res.path);
