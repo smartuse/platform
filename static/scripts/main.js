@@ -20,14 +20,14 @@ Zepto(function($){
 
       if (!(res.name || res.title)) return;
 
-      if (typeof(container) === typeof(undefined)) {
+      if (typeof(container) !== 'object') {
         container = $('.resource-content').append(
           '<div class="resource-container">'
           + '<div class="container" id="' + res.name + '">'
             + '<div class="description"></div>'
           + '</div>'
         + '</div>'
-        ).find('.resource-container:last-child');
+        ).find('.resource-container:last-child').find('.container');
       }
 
       description = container.find('.description');
@@ -52,8 +52,8 @@ Zepto(function($){
 
       if (res.mediatype == 'application/vnd.datapackage+json') {
         pp = get_project_path(res.path);
-        $.getJSON(get_project_path(res.path), function(dp) {
-          project_path = pp.substring(0, pp.lastIndexOf('/')+1);
+        $.getJSON(pp, function(dp) {
+          // project_path = pp.substring(0, pp.lastIndexOf('/')+1);
           load_DataPackage(dp, container);
         });
 
@@ -144,6 +144,8 @@ Zepto(function($){
 
         maps[rescount] = map;
       } // -geojson
+
+      container = false;
     }); // -each resources
 
     /*

@@ -161,9 +161,10 @@ input.search { font-size: 140%; }
   background: white url('/img/fullscreen.png') no-repeat 50% 50%;
   background-size: contain;
   z-index: 2;
-  position: absolute;
+  /*position: absolute;
   top: 0px;
-	right: -20px;
+	right: -20px;*/
+	float: right;
   border: 2px solid #fff;
   border-radius: 3px;
 }
