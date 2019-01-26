@@ -55,7 +55,7 @@ Zepto(function($){
       if (res.mediatype == 'application/vnd.datapackage+json') {
         pp = get_project_path(res.path);
         $.getJSON(pp, function(dp) {
-          // project_path = pp.substring(0, pp.lastIndexOf('/')+1);
+          project_path = pp.substring(0, pp.lastIndexOf('/')+1);
           load_DataPackage(dp, container);
         });
 
