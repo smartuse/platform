@@ -2,7 +2,7 @@ var maps = {}, paginationtag = null;
 
 Zepto(function($){
 
-  function load_DataPackage(datapackage, container) {
+  function load_DataPackage(datapackage, top_container) {
     var rescount = 0;
 
     function add_gallery_item(container, ii) {
@@ -20,7 +20,9 @@ Zepto(function($){
 
       if (!(res.name || res.title)) return;
 
-      if (typeof(container) !== 'object') {
+      if (typeof(top_container) == 'object') {
+        container = top_container;
+      } else {
         container = $('.resource-content').append(
           '<div class="resource-container">'
           + '<div class="container" id="' + res.name + '">'
