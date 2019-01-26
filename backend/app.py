@@ -328,6 +328,9 @@ def send_static_tags(path):
 @app.route('/vendor/<path:path>')
 def send_static_vendor(path):
     return send_from_directory('../static/vendor', path)
+@app.route('/meta/<path:path>')
+def send_static_meta(path):
+    return send_from_directory('../static/meta', path)
 
 @app.route('/theme/<path:path>')
 def send_static_theme(path):
