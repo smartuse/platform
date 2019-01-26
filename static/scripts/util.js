@@ -33,6 +33,9 @@ function initFullScreen() {
       $('html').addClass('fullscreen');
       // $('.gallery-nav.fixed,.story.fixed').addClass('hidden');
     }
+    // Resize the maps
+    if (typeof(maps) !== typeof(undefined))
+      $.each(maps, function() { this.resize(); });
   });
 }
 

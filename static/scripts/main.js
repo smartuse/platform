@@ -89,7 +89,8 @@ Zepto(function($){
           container: 'map-' + rescount,
           style: 'mapbox://styles/mapbox/light-v9',
           zoom: zoom,
-          center: { lat: lati, lng: long }
+          center: { lat: lati, lng: long },
+          trackResize: true
         });
 
         var layer = {
