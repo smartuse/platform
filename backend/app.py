@@ -309,7 +309,8 @@ def project_page(project_id):
     meta = project.dict()
     updated = meta['date-updated']
     authors = [author.dict() for author in project.users]
-    resources = [res.dict() for res in project.resources]
+    resources = sorted([res.dict() for res in project.resources],
+        key=lambda res: res['id'])
     return render_template('public/project.pug', **locals())
 
 # Static paths
