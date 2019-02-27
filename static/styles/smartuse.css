@@ -43,9 +43,19 @@ body {
 	background: white;
 }
 
-.side-info {
+.side-info, .page-content, .resource-container {
 	border: 1px solid #aaa;
 	padding: 1em;
+}
+
+.resource-container {
+	margin: 1em 0;
+}
+.resource-container::before {
+	content: '#1';
+	float: left;
+
+	margin-left: -4em;
 }
 
 .side-info h3 {
@@ -53,7 +63,13 @@ body {
 	font-size: 15pt;
 }
 
-.page-meta p { margin: 0; }
+.page-meta {
+	margin-bottom: 2em;
+}
+
+.page-meta p {
+	margin: 0;
+}
 p.author {
   margin-top: 0;
 }
@@ -67,12 +83,6 @@ p.author {
   text-align: center;
   margin: 1em;
   font-size: 110%;
-}
-
-.page-content {
-	border-top: 1px solid #ddd;
-	margin-top: 1em;
-	padding-top: 1em;
 }
 
 .description h2 a {
