@@ -307,7 +307,9 @@ def project_page(project_id):
     project = Project.query.filter_by(id=project_id).first_or_404()
     content = Markup(markdown.markdown(project.details, extensions=MARKDOWN_EXT))
     meta = project.dict()
+    created = meta['date-created']
     updated = meta['date-updated']
+    version = 1.2
     authors = [author.dict() for author in project.users]
     resources = sorted([res.dict() for res in project.resources],
         key=lambda res: res['id'])

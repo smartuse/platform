@@ -43,14 +43,25 @@ body {
 	background: white;
 }
 
+.side-info {
+	border: 1px solid #aaa;
+	padding: 1em;
+}
+
+.side-info h3 {
+	margin: 0;
+	font-size: 15pt;
+}
+
 .page-meta p { margin: 0; }
 p.author {
   margin-top: 0;
 }
-p.date {
-  float: right;
+
+.timestamp div {
+  margin: 0;
 }
-p.date span { color: #999; }
+.timestamp span { color: #999; }
 
 .page-summary {
   text-align: center;

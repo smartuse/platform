@@ -13,24 +13,53 @@ block content
   .container-fluid.no-padding.story
     .container
       .row
-        .col-md-12.center.page-meta
+        .col-md-8.page-meta
           if organisation
             .authorImage
               a(href=organisation.url,target="_blank")
                 img(src=organisation.logo,title=organisation.name)
           h1
             =meta.title
-          p.date
-            span Updated:&nbsp;
-            =updated
           if meta.summary
             p.description
               =meta.summary
+
+        .col-md-4.side-info
+          .timestamp
+            .created
+              span Publiziert am:&nbsp;
+              =created
+            .updated
+              span Aktualisiert am:&nbsp;
+              =updated
+            .version
+              span Version:&nbsp;
+              =version
+
           if organisation
+            h3 Sammlung
             p.authorText
               a(href=organisation.url,target="_blank")
                 .organisation
                   =organisation.name
+
+          if authors
+            h3 Authoren
+            .project-authors
+              each author in authors
+                .author
+                  img(src=author.gravatar)
+                  p
+                    a.fullname(href=author.url,target="_blank")
+                      =author.fullname
+                  if author.organisation
+                    p
+                      a(href=author.organisation.url)
+                        .organisation
+                          =author.organisation.name
+                  if author.biography
+                    p.biography
+                      =author.biography
 
       .row
         .col-md-12
@@ -40,24 +69,6 @@ block content
       .row
         .col-md-12
           .resource-content
-
-      .row.project-authors
-        .col-md-12.text-right
-          each author in authors
-            .author
-              img(src=author.gravatar)
-              p
-                a.fullname(href=author.url,target="_blank")
-                  =author.fullname
-              if author.organisation
-                p
-                  a(href=author.organisation.url)
-                    .organisation
-                      =author.organisation.name
-              if author.biography
-                p.biography
-                  =author.biography
-
 
       .row
         .col-md-12.resource-summary
