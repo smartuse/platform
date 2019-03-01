@@ -1,6 +1,6 @@
 var maps = {}, paginationtag = null;
 
-Zepto(function($){
+jQuery(function($){
 
   function load_DataPackage(datapackage, top_container) {
     var rescount = 0;
@@ -11,7 +11,7 @@ Zepto(function($){
       if (gallery.length === 0) gallery = $('.gallery');
       // gallery.append('<div id="item-'+ii+'" class="control-operator"></div>');
       // gallery.find('.controls').append('<a href="#item-'+ii+'" class="control-button">•</a>');
-      if (gallery.attr('fullscreen')) gallery.append('<div class="fullscreen-button"></div>');
+      if (gallery.attr('fullscreen')) gallery.append('<div title="Vollbild" class="fullscreen-button"></div>');
       return gallery.append('<figure class="item" />').find('.item:last-child');
     }
 
@@ -23,12 +23,23 @@ Zepto(function($){
       if (typeof(top_container) == 'object') {
         container = top_container;
       } else {
-        container = $('.resource-content').append(
-          '<div class="resource-container">'
-          + '<div class="container" id="' + res.name + '">'
-            + '<div class="description"></div>'
+        var $resourceContent = $('.resource-content');
+        var count = $resourceContent.find('.resource-container').length + 1;
+        container = $resourceContent.append(
+          '<div class="resource-counter">' + count + '</div>'
+
+        + '<div class="resource-container">'
+          + '<div class="container row" id="' + res.name + '">'
+            + '<div class="description col-md-9"></div>'
+
+            + '<div class="resource-datasets col-md-3">'
+              + '<h5 class="mb-1">' + 'Datengrundlage' + '</h5>'
+              + '<small>' + res.name + '</small>'
+            + '</div>'
+
           + '</div>'
         + '</div>'
+
         ).find('.resource-container:last-child').find('.container');
       }
 

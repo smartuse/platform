@@ -28,7 +28,7 @@ block content
         .col-md-8
           .page-content
             !=content
-            
+
         .col-md-4.side-info
           .timestamp
             .created
@@ -94,7 +94,7 @@ block content
         .col-md-6
           .card.border-secondary.mb-3.embedding
             .card-header
-              a.btn.btn-primary.btn-sm(type="button" target='_blank' href='https://twitter.com/intent/tweet?text={{ project.title }}&hashtags=smartuse&url={{ project.url }}' id='share-project') Share
+              a.btn.btn-primary.btn-sm(type="button" target='_blank' href='https://twitter.com/intent/tweet?text={{ project.title }}&hashtags=smartuse&url={{ project.url }}' id='share-project') Tweet
               button.btn.btn-primary.btn-sm(type="button" href='#' id='embed-project') Embed
             |
             .card-body
@@ -108,6 +108,3 @@ block content
                     =user.organisation
                 p.card-text
                   =project.summary
-
-          .just-comments(data-apikey='cf409ec0-91b0-43d9-bf89-84d3d03b4bb7')
-            script(async='' src='https://just-comments.com/w.js')

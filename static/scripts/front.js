@@ -1,6 +1,6 @@
 var maps = {}, paginationtag = null;
 
-Zepto(function($){
+jQuery(function($){
 
   // Load featured projects
   $('#featured').each(function() {
@@ -29,7 +29,7 @@ Zepto(function($){
         $container.append(
         '<div class="col-md-4 project-card">' +
           '<a href="/project/' + this.id + '">' +
-            '<div class="card text-white mb-3">' +
+            '<div class="card mb-3">' +
               '<div class="card-header">' +
                 this.title + '</div>' +
               '<div class="card-body">' +
