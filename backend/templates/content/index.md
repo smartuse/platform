@@ -11,7 +11,7 @@ Partizipation zu agieren.
 
 SmartUse ist ein Kooperationsprojekt der Metropolitankonferenz Zürich
 
-[![Image](https://smartuse.ch/wp-content/uploads/2018/08/logo_MK_white.png)](https://www.metropolitanraum-zuerich.ch/)
+[![Image](https://smartuse.ch/wp-content/uploads/2018/08/logo_MK_black.png)](https://www.metropolitanraum-zuerich.ch/)
 
 und eine Zusammenarbeit von
 
