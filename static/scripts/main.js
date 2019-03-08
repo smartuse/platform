@@ -35,8 +35,14 @@ jQuery(function($){
             + '<div class="description col-md-9"></div>'
 
             + '<div class="resource-datasets col-md-3">'
-              + '<h5 class="mb-1">' + 'Datengrundlage' + '</h5>'
-              + '<small>' + res.name + '</small>'
+
+            + (typeof res.author !== 'undefined' ?
+              '<a href="#resourcesummary">'
+                + '<h5 class="mb-1">' + 'Datengrundlage' + '</h5>'
+              + '</a>'
+              + '<p class="res-author">' + res.author + '</p>'
+              : '')
+
             + '</div>'
 
           + '</div>'

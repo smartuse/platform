@@ -69,29 +69,33 @@ block content
         .col-md-12
           .resource-content
 
-      .row
+      #resourcesummary.row
         .col-md-12.resource-summary
-          .h2 Data sources
+          .h2 Resourcen
           .list-group
             each resource in resources
-              .list-group-item.list-group-item-action.flex-column.align-items-start.active
+              .list-group-item.list-group-item-action.flex-column.align-items-start
                 .d-flex.w-100.justify-content-between
                   h5.mb-1
                     =resource.title
-                  .btn-group(role="group")
-                    a.btn.btn-primary.btn-sm(type="button" href='{{ resource.path }}' download) Download
-                    a.btn.btn-primary.btn-sm(type="button" href='{{ project.detail_url }}') Data Package
-                  small
-                    =resource.mediatype
-                if resource.notes
-                  p.mb-1
+                  .download-buttons.btn-group(role="group")
+                    a.btn.btn-primary.btn-sm(type="button" href='{{ resource.path }}' download)
+                      i.fas.fa-arrow-down
+                      | &nbsp; Herunterladen
+                    a.btn.btn-primary.btn-sm(type="button" href='{{ project.detail_url }}')
+                      i.fas.fa-cogs
+                      | &nbsp;
+                      =resource.mediatype
+              if resource.notes
+                .list-group-item
+                  p.resource-notes
                     =resource.notes
 
   #share.modal(tabindex='-1', role='dialog')
     .modal-dialog(role='document')
       .modal-content
         .modal-header
-          h5.modal-title Share
+          // h5.modal-title Share
           button.close(type='button', data-dismiss='modal', aria-label='Close')
             span(aria-hidden='true') ×
         .modal-body
