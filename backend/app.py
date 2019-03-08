@@ -19,7 +19,7 @@ from flask_admin.form import ImageUploadField
 # Geoshapes in model
 from geoalchemy2.types import Geometry
 from geoalchemy2.shape import to_shape
-import geojson
+import geojson, json
 
 # Project formatting
 import arrow
@@ -32,8 +32,6 @@ import hashlib, codecs, datetime
 import os.path as ospath
 from os import urandom
 
-from .workflow import *
-
 # Create application
 app = FlaskAPI(__name__, static_url_path='')
 app.debug = True
@@ -43,9 +41,12 @@ app.jinja_env.add_extension('pypugjs.ext.jinja.PyPugJSExtension')
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
-DEFAULT_THUMB = '../img/usermap.jpg'
+# Various presets
+with open(ospath.join(ospath.dirname(__file__), 'templates','presets','project-status.json'), "r") as f:
+    project_statuses = json.load(f)
 screenshot_path = ospath.join(ospath.dirname(__file__), '..', 'screenshots')
 upload_path = ospath.join(ospath.dirname(__file__), '..', 'uploads')
+DEFAULT_THUMB = '../img/usermap.jpg'
 
 # Create admin
 admin = admin.Admin(app, name='SmartUse', template_mode='bootstrap3')
@@ -326,8 +327,8 @@ def project_page(project_id):
     meta = project.dict()
     created = arrow.get(meta['date-created']).humanize()
     updated = arrow.get(meta['date-updated']).format('DD.MM.YYYY')
-    if project.status in ProjectStatus:
-        status = ProjectStatus[project.status]
+    if project.status in project_statuses:
+        status = project_statuses[project.status]
         status['class'] = 'fas fa-' + status['icon']
     else:
         status = None
