@@ -1,7 +1,7 @@
 from flask import Flask, Markup
 from flask import (
     url_for,
-    request,
+    request, redirect,
     render_template,
     send_from_directory,
 )
@@ -104,7 +104,7 @@ class Project(db.Model):
     summary = db.Column(db.Unicode(255))
     details = db.Column(db.UnicodeText)
 
-    status = db.Column(db.String(16))
+    status = db.Column(db.String(16), doc="review, labs, collect, present, publish")
     notes = db.Column(db.UnicodeText)
 
     organisation_id = db.Column(db.Integer, db.ForeignKey(Organisation.id))
@@ -133,7 +133,7 @@ class Project(db.Model):
     def detail_url(self):
         return request.host_url.rstrip('/') + url_for('project_detail', project_id=self.id)
     def dict(self):
-        return {
+        d = {
             'id': self.id,
             'hidden': self.is_hidden,
             'featured': self.is_featured,
@@ -149,6 +149,9 @@ class Project(db.Model):
             'url': self.url,
             'detail_url': self.detail_url,
         }
+        if self.organisation:
+            d['organisation'] = self.organisation.name
+        return d
 
 # Many-to-many relationship
 projects_users = db.Table(
@@ -263,10 +266,13 @@ admin.add_view(FileAdmin(upload_path, '/uploads/', name="Data"))
 # API views
 @app.route("/api/projects", methods=['GET'])
 def projects_list():
-    return [p.dict() for p in Project.query.filter_by(is_hidden=False).limit(50).all()]
+    return [p.dict() for p in Project.query.filter_by(is_hidden=False,is_featured=False).limit(50).all()]
 @app.route("/api/projects/featured", methods=['GET'])
 def projects_list_featured():
     return [p.dict() for p in Project.query.filter_by(is_hidden=False,is_featured=True).limit(10).all()]
+@app.route("/api/projects/all", methods=['GET'])
+def projects_list_all():
+    return [p.dict() for p in Project.query.filter_by(is_hidden=False).limit(10).all()]
 @app.route("/api/projects/by/<string:BY_TYPE>", methods=['GET'])
 def projects_list_by_type(BY_TYPE):
     return [p.dict() for p in Project.query.filter_by(is_hidden=False,status=BY_TYPE).limit(10).all()]
@@ -292,24 +298,26 @@ def project_detail(project_id):
         'resources': [r.dict() for r in resources]
     }
 
+def get_file(filename):
+    f = open('templates/content/%s' % filename, 'r')
+    return f.read()
+
+def get_md(filename):
+    t = get_file('%s.md' % filename)
+    return Markup(markdown.markdown(t))
+
 # Flask views
+@app.route('/about')
+def index_about():  return render_template('public/about.pug')
+@app.route('/join')
+def index_join():   return render_template('public/join.pug')
 @app.route('/')
-def index():
-    return render_template('public/home.pug')
-
+def index_root():
+    return render_template('public/browse.pug',
+        headline=get_md('home-headline'),
+        content=get_file('home-content.html'))
 @app.route('/browse')
-def index_browse():
-    return render_template('public/browse.pug')
-
-@app.route('/')
-def index_old():
-    f = open('templates/public/index.md', 'r')
-    content = Markup(markdown.markdown(f.read()))
-    nothidden = Project.query.filter_by(is_hidden=False)
-    projects = nothidden.filter_by(is_featured=False).all()
-    featured = nothidden.filter_by(is_featured=True).first()
-    meta = { 'title': 'Home' }
-    return render_template('public/home.pug', **locals())
+def index_browse(): return redirect(url_for('index_root'))
 
 @app.route("/project/<int:project_id>")
 def project_page(project_id):

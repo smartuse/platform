@@ -40,15 +40,20 @@ html
           #navbarResponsive.collapse.navbar-collapse
             ul.navbar-nav
               li.nav-item
-                a.nav-link(href='/#about') About
+                a.nav-link(href='/about') Übersicht
               li.nav-item
-                a.nav-link(href='/browse') Beta
+                a.nav-link(href='/join') Mitmachen
               li.nav-item
-                a.nav-link(href='https://smartuse.ch/upload') Upload
+                a.nav-link(href='https://github.com/smartuse')
+                  | Notebooks
+                  |
+                  i.fas.fa-external-link-alt
               li.nav-item
-                a.nav-link(href='mailto:info@smartuse.ch') Contact
+                a.nav-link(href='#footer') Kontakt
 
     block top
+
+    .container(style="margin:150px")
 
     block content
       //- main page content
@@ -62,14 +67,13 @@ html
               | SmartUse ist ein Kooperationsprojekt der Metropolitankonferenz Z&uuml;rich
             p
               img(src='/img/logo_MK_black.png' width='200px')
-            p.small
-              | und eine Zusammenarbeit von
-            ul.small
-              li Joris Van Wezemael, ETH
-              li Hosoya Schaefer Architects
-              li Datalets.ch
 
           .col-md-4
+            h3 Kontakt
+            p.small
+              a(href='https://www.metropolitanraum-zuerich.ch/kontakt.html', target='_blank', class='contact')
+                i.far.fa-envelope-open
+                | &nbsp; Geschäftsstelle des Vereins Metropolitanraum Zürich
             h4 Immer auf dem Laufenden bleiben?
             p.small Einfach f&uuml;r unseren Newsletter anmelden:
             form(method='post', data-name='Immer auf dem Laufenden bleiben? Einfach für unseren Newsletter anmelden:')

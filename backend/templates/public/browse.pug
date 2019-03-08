@@ -9,29 +9,37 @@ block head
   //link(href='/vendor/gallery.prefixed.css',rel='stylesheet')
 
 block content
-  .container(style="margin:100px")
+  .container.padding-top.padding-bottom
+    .row
+      .col-md-12
+        .text.section.welcome
+          = headline
 
   //.container-fluid.no-padding.padding-bottom
   .container.padding-bottom
+    .row
+      .col-md-12
+        h1 Kooperationsprojekte
+        // i.fas.fa-cogs
     .row
       .col-md-12.center
         .glider-contain#featured
           .dots
           a.glider-prev «
           a.glider-next »
-
+    #projects-featured.row
   .container
+    .row
+      .col-md-12
+        h1 SmartUse Labs
+        // i.fas.fa-flask
     .row
       .col-md-12.center
         input.form-control.form-control-lg.search(name='q',placeholder='Search ...')
-        hr
+    #projects.row
 
-    .row
-      .col-md-12.center
-        h1 Studien
-    #projects-main.row
-
-    .row
-      .col-md-12.center
-        h1 Labs
-    #projects-labs.row
+  .container-fluid.bg-primary.home-content
+    .container
+      .row
+        .col-md-12.text
+          = content|safe

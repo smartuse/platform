@@ -1,22 +1,11 @@
 extends public/base.pug
 
 block content
-  .container-fluid.no-padding.padding-bottom
-    img.img-fluid.w-100(src='/img/SmartUse_header.jpg' alt='SmartUse Header')
-  .container#about
-    // content
-    .row
-      .col-md-12
-        h1
-          | SMARTUSE
-          small
-            br
-            | Die funktionale Region
-    hr
+  .container.padding-top
     .row
       .col-md-12
         .text.section
-          h3 Die Idee
+          h1 Die Idee
           p
             | Unser Ziel ist ein Werkzeug und Netzwerk fu&#x308;r Planer (Kantone, Gemeinden, Sta&#x308;dte),
             | &ldquo;Planungsnahe&rdquo;
@@ -32,17 +21,36 @@ block content
             | statt teuer bauen. Das Projekt &laquo;Smart Use&raquo; ist eine laufende Kooperation zwischen der
             | Metropolitankonferenz Zu&#x308;rich und der ARGE Smart Use, bestehend aus Joris van Wezemael, Hosoya
             | Schaefer Architects und Datalets.ch.
-    hr
+
+  .container-fluid.no-padding.bg-primary.home-content
+    img.img-fluid.w-100(src='/img/SmartUse_header.jpg' alt='SmartUse Header')
+    .container
+      .row
+        .col-md-12.text
+          h1 Arbeitsrapport 2018
+          p Sunt aliquip aliqua elit minim cupidatat occaecat ad culpa ipsum ad eiusmod labore. Occaecat esse aute proident elit in officia ullamco eu. Occaecat adipisicing et est in fugiat duis cillum est esse veniam in aliqua. Ullamco aliqua veniam occaecat nulla ad. Ea tempor ex sint culpa aliquip anim aliquip culpa veniam nulla.
+          p Laboris veniam aute excepteur sunt in pariatur excepteur duis. Commodo nisi incididunt sint aute in exercitation. Aliquip tempor occaecat commodo nulla ullamco. Elit cillum irure culpa veniam quis. Ad aliqua ex minim ut in excepteur cupidatat cupidatat deserunt laboris reprehenderit et do officia. Incididunt sunt dolor culpa cupidatat do consectetur laborum commodo.
+          center
+            a(href="#")
+              h1(style='color:white')
+                i.fas.fa-file-download
+                | &nbsp;
+                small
+                  b Herunterladen
+                  br
+                  sup (PDF, 10 MB)
+
+  .container.padding-top
     .row
       .col-md-12
-        h3 DAS TEAM
+        h2 Das Team
     .row
       .col-md-4
         h4
           a(href='http://www.hosoyaschaefer.com' target='_blank') Hosoya Schaefer Architects
         ul
           li Markus Schaefer
-          li Nils Havelka
+          li Viktoria Molnar
           li Thorben Westerhuys
       .col-md-4
         h4
@@ -54,3 +62,12 @@ block content
           a(href='https://www.ethz.ch' target='_blank') ETH Zürich
         ul
           li Joris van Wezemael
+
+  // .container#about
+    .row
+      .col-md-12
+        h1
+          | SMARTUSE
+          small
+            br
+            | Die funktionale Region

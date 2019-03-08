@@ -22,6 +22,21 @@ body {
   float: right;
 }
 
+.welcome {
+	font-size: 160%;
+	line-height: 150%;
+}
+.home-content {
+	margin: 4em 0;
+}
+.home-content .text {
+	margin: 2em 0;
+	color: white;
+}
+.home-content .text img {
+	margin: 2em 0;
+}
+
 .page-footer {
   margin-top: 5em;
   text-align: center;
@@ -245,7 +260,8 @@ html.fullscreen {
 
 .project-list .project-card { padding-top: 1em; }
 .project-list .project-card a { text-decoration: none; }
-.project-list .project-card:hover { background: blue; }
+.project-list .project-card .card-text { color: #555; }
+.project-list .project-card:hover { background: #ddd; }
 .project-thumb {
   width: 128px; height: 128px;
   margin: 0px 20px 20px 0;

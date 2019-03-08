@@ -21,49 +21,49 @@ jQuery(function($){
     });
   });
 
-  // Load all projects
-  $('#projects-main').each(function() {
+  function getProjectCard(t, with_screenshot) {
+    if (typeof with_screenshot === 'undefined')
+      with_screenshot = true;
+    return '' +
+    '<div class="col-md-4 project-card">' +
+      '<a href="/project/' + t.id + '">' +
+        '<div class="card mb-3">' +
+          '<div class="card-header ">' +
+            '<b class="title">' + t.title + '</b>' +
+            (typeof t.organisation === 'undefined' ? '' :
+            '<div class="organisation">' + t.organisation + '</div>') +
+            '</div>' +
+          '<div class="card-body">' +
+            (with_screenshot ?
+              '<img src="' + t.thumbnail + '" width="100" align="left" style="padding-right:1em">'
+              : '') +
+            '<p class="card-text">' +
+              t.summary + '</p>' +
+          '</div>' +
+        '</div>' +
+      '</a>' +
+    '</div>'
+  }
+
+  // Load main projects
+  $('#projects-featured').each(function() {
     var $container = $(this).addClass('project-list');
-    $.getJSON('/api/projects/by/present', function(projects) {
+    $.getJSON('/api/projects/featured', function(projects) {
       $.each(projects, function() {
         $container.append(
-        '<div class="col-md-4 project-card">' +
-          '<a href="/project/' + this.id + '">' +
-            '<div class="card mb-3">' +
-              '<div class="card-header">' +
-                this.title + '</div>' +
-              '<div class="card-body">' +
-                '<img src="' + this.thumbnail + '" width="100" align="left" style="padding-right:1em">' +
-                '<p class="card-text">' +
-                  this.summary + '</p>' +
-              '</div>' +
-            '</div>' +
-          '</a>' +
-        '</div>'
+          getProjectCard(this, false)
         );
       });
     });
   });
 
-  // Load all projects
-  $('#projects-labs').each(function() {
+  // Load other projects
+  $('#projects').each(function() {
     var $container = $(this).addClass('project-list');
-    $.getJSON('/api/projects/by/labs', function(projects) {
+    $.getJSON('/api/projects', function(projects) {
       $.each(projects, function() {
         $container.append(
-        '<div class="col-md-4 project-card">' +
-          '<a href="/project/' + this.id + '">' +
-            '<div class="card mb-3">' +
-              '<div class="card-header">' +
-                this.title + '</div>' +
-              '<div class="card-body">' +
-                '<img src="' + this.thumbnail + '" width="100" align="left" style="padding-right:1em">' +
-                '<p class="card-text">' +
-                  this.summary + '</p>' +
-              '</div>' +
-            '</div>' +
-          '</a>' +
-        '</div>'
+          getProjectCard(this)
         );
       });
     });
@@ -87,7 +87,7 @@ jQuery(function($){
 
   // Interactive search
   $('input.search').on('input', function() {
-    var $cards = $('.project-list .project-card');
+    var $cards = $('#projects .project-card');
     var q = $(this).val().toLowerCase();
     if (q.length < 3) return $cards.show();
     $cards.hide().forEach(function(item) {
