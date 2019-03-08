@@ -1,4 +1,4 @@
-html { background: #333; overflow-x: hidden; }
+/*html { background: #333; overflow-x: hidden; }*/
 .hidden { display: none; }
 body {
   font-family: "Roboto", sans-serif;
@@ -44,9 +44,13 @@ body {
 }
 
 .resource-container {
-	border: 1px solid #aaa;
-	margin: 1em 0;
-	padding: 1em;
+	margin: 3em 0em;
+
+	border-style: solid;
+	border-width: 10px 0px 10px 10px;
+	border-color: white transparent transparent #008cba;
+
+	padding-left: 10px;
 }
 
 .resource-counter::before {
@@ -58,18 +62,32 @@ body {
 	font-size: 2em;
 }
 
-.side-info h3 {
-	margin: 0;
+.side-info .organisation-name {
 	font-size: 15pt;
+	text-decoration: underline;
+}
+
+.story {
+	background: white; color: black;
+	padding: 2em 0;
+}
+.story p > a {
+	color: darkblue;
+}
+
+.story .page-meta h1 {
+	font-weight: 500;
 }
 
 .page-meta {
-	margin-bottom: 2em;
+	margin: 2em 0;
 }
 
 .page-meta p {
 	margin: 0;
+	color: #555;
 }
+
 p.author {
   margin-top: 0;
 }
@@ -95,7 +113,7 @@ p.author {
 	font-size: 150%;
 	margin: 0.5em 0px;
 }
-.resource-summary,.project-authors {
+.resource-summary {
 	margin-top: 2em;
 }
 
@@ -176,10 +194,10 @@ input.search { font-size: 140%; }
   transition: color .1s;
 }
 
-.fullscreen-button {
+.side-button {
   width: 40px;
   height: 36px;
-  background: white url('/img/fullscreen.png') no-repeat 50% 50%;
+  background: white url('/img/fullscreen-black.png') no-repeat 50% 50%;
   background-size: contain;
   z-index: 2;
   /*position: absolute;
@@ -190,10 +208,18 @@ input.search { font-size: 140%; }
 
 	float: left;
 	position: absolute;
-	margin-left: -4em;
-	margin-top: 2em;
+	cursor: pointer;
+
+	margin-left: -67px;
+	margin-top: 3em;
+
+	opacity: 0.7;
 }
-.fullscreen-button.active {
+.side-button.share-button {
+	background-image: url('/img/share-black.png');
+	margin-top: 6em;
+}
+.side-button.active {
   border: 4px solid #fff;
   box-shadow: 3px 3px 3px grey;
   position: fixed;
@@ -202,6 +228,7 @@ input.search { font-size: 140%; }
 	left: 10px;
 	z-index: 1112;
 }
+
 figure.fullscreen {
 	background: white;
   top: 0px !important;
@@ -268,6 +295,13 @@ a.featured, a.featured h5, a.featured p
 
 /* Project Page styling */
 
+.organisation-image {
+	float: right;
+	width: 256px;
+}
+.project-authors, .resource-datasets {
+	margin-top: 1em;
+}
 .project-authors, .resource-summary {
 	clear: both;
 }
@@ -289,6 +323,13 @@ a.featured, a.featured h5, a.featured p
 }
 .author p, .author a {
   color: #333;
+}
+
+.share-buttons {
+	margin: 1em 0;
+}
+.share-buttons i {
+	margin-right: 1em;
 }
 
 .embedding .card-body {
@@ -325,4 +366,17 @@ a.featured, a.featured h5, a.featured p
      width: 138px;
     height: 50px;
   }
+
+	.side-button {
+		margin: 0px;
+		position: absolute;
+		z-index: 2000;
+		background-color: transparent;
+		border-color: transparent;
+	}
+	.resource-counter {
+		float: left;
+		display: block;
+		margin-left: 0.6em;
+	}
 }

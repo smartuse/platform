@@ -21,7 +21,8 @@ from geoalchemy2.types import Geometry
 from geoalchemy2.shape import to_shape
 import geojson
 
-# Rich text formatting
+# Project formatting
+import arrow
 import markdown
 MARKDOWN_EXT = ['markdown.extensions.tables']
 
@@ -307,9 +308,10 @@ def project_page(project_id):
     project = Project.query.filter_by(id=project_id).first_or_404()
     content = Markup(markdown.markdown(project.details, extensions=MARKDOWN_EXT))
     meta = project.dict()
-    created = meta['date-created']
-    updated = meta['date-updated']
-    version = 1.2
+    created = arrow.get(meta['date-created']).humanize()
+    updated = arrow.get(meta['date-updated']).format('DD.MM.YYYY')
+    # version = 1.2
+    organisation = project.organisation
     authors = [author.dict() for author in project.users]
     resources = sorted([res.dict() for res in project.resources],
         key=lambda res: res['id'])

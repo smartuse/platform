@@ -11,7 +11,9 @@ jQuery(function($){
       if (gallery.length === 0) gallery = $('.gallery');
       // gallery.append('<div id="item-'+ii+'" class="control-operator"></div>');
       // gallery.find('.controls').append('<a href="#item-'+ii+'" class="control-button">•</a>');
-      if (gallery.attr('fullscreen')) gallery.append('<div title="Vollbild" class="fullscreen-button"></div>');
+      gallery.append('<div title="Share" class="side-button share-button"></div>');
+      if (gallery.attr('fullscreen'))
+        gallery.append('<div title="Vollbild" class="side-button fullscreen-button"></div>');
       return gallery.append('<figure class="item" />').find('.item:last-child');
     }
 
@@ -232,9 +234,10 @@ jQuery(function($){
     });
     */
 
-  $('#embed-project').click(function() {
-    var html = $(this).parents('.embedding').find('.card-body').html();
-    window.prompt('Copy this code to embed:', html.trim().replace(/  /g, ' '));
-  });
+    // Enable project-wide sharing button
+    $('#embed-project').click(function() {
+      var html = $(this).parents('.modal').find('.card-body').html();
+      window.prompt('Copy this code to embed:', html.trim().replace(/  /g, ' '));
+    });
 
 });

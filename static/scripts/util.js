@@ -37,6 +37,10 @@ function initFullScreen() {
     if (typeof(maps) !== typeof(undefined))
       $.each(maps, function() { this.resize(); });
   });
+  $('.share-button').click(function(e) {
+    e.preventDefault();
+    $('#share').modal('show');
+  });
 }
 
 // Adjust page sizes
