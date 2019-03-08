@@ -66,6 +66,10 @@ body {
 	font-size: 15pt;
 	text-decoration: underline;
 }
+.side-info div {
+  margin: 0;
+}
+.side-info span { color: #999; }
 
 .story {
 	background: white; color: black;
@@ -91,11 +95,6 @@ body {
 p.author {
   margin-top: 0;
 }
-
-.timestamp div {
-  margin: 0;
-}
-.timestamp span { color: #999; }
 
 .page-summary {
   text-align: center;

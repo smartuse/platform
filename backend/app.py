@@ -32,6 +32,8 @@ import hashlib, codecs, datetime
 import os.path as ospath
 from os import urandom
 
+from .workflow import *
+
 # Create application
 app = FlaskAPI(__name__, static_url_path='')
 app.debug = True
@@ -101,6 +103,8 @@ class Project(db.Model):
     updated = db.Column(db.DateTime(), default=datetime.datetime.now())
     summary = db.Column(db.Unicode(255))
     details = db.Column(db.UnicodeText)
+
+    status = db.Column(db.String(16))
     notes = db.Column(db.UnicodeText)
 
     organisation_id = db.Column(db.Integer, db.ForeignKey(Organisation.id))
@@ -139,6 +143,7 @@ class Project(db.Model):
             'thumbnail': self.thumb(),
             'date-created': self.created.strftime("%Y-%d-%m"),
             'date-updated': self.updated.strftime("%Y-%d-%m"),
+            'status': self.status,
             'summary': self.summary,
             'notes': self.notes,
             'url': self.url,
@@ -200,6 +205,7 @@ class Resource(db.Model):
     description = db.Column(db.UnicodeText)
     notes = db.Column(db.UnicodeText)
     path = db.Column(db.Unicode(256), doc="Use the Data tab to upload files")
+    is_embed = db.Column(db.Boolean(), default=False)
     projects = db.relationship('Project', secondary=projects_resources,
         backref=db.backref('resources', lazy='dynamic'))
     # features = db.Column(Geometry("MULTIPOLYGON"))
@@ -258,10 +264,12 @@ admin.add_view(FileAdmin(upload_path, '/uploads/', name="Data"))
 @app.route("/api/projects", methods=['GET'])
 def projects_list():
     return [p.dict() for p in Project.query.filter_by(is_hidden=False).limit(50).all()]
-
 @app.route("/api/projects/featured", methods=['GET'])
 def projects_list_featured():
     return [p.dict() for p in Project.query.filter_by(is_hidden=False,is_featured=True).limit(10).all()]
+@app.route("/api/projects/by/<string:BY_TYPE>", methods=['GET'])
+def projects_list_by_type(BY_TYPE):
+    return [p.dict() for p in Project.query.filter_by(is_hidden=False,status=BY_TYPE).limit(10).all()]
 
 @app.route("/api/resources", methods=['GET'])
 def resources_list():
@@ -310,6 +318,11 @@ def project_page(project_id):
     meta = project.dict()
     created = arrow.get(meta['date-created']).humanize()
     updated = arrow.get(meta['date-updated']).format('DD.MM.YYYY')
+    if project.status in ProjectStatus:
+        status = ProjectStatus[project.status]
+        status['class'] = 'fas fa-' + status['icon']
+    else:
+        status = None
     # version = 1.2
     organisation = project.organisation
     authors = [author.dict() for author in project.users]

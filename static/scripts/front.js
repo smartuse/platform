@@ -22,9 +22,33 @@ jQuery(function($){
   });
 
   // Load all projects
-  $('#projects').each(function() {
+  $('#projects-main').each(function() {
     var $container = $(this).addClass('project-list');
-    $.getJSON('/api/projects', function(projects) {
+    $.getJSON('/api/projects/by/present', function(projects) {
+      $.each(projects, function() {
+        $container.append(
+        '<div class="col-md-4 project-card">' +
+          '<a href="/project/' + this.id + '">' +
+            '<div class="card mb-3">' +
+              '<div class="card-header">' +
+                this.title + '</div>' +
+              '<div class="card-body">' +
+                '<img src="' + this.thumbnail + '" width="100" align="left" style="padding-right:1em">' +
+                '<p class="card-text">' +
+                  this.summary + '</p>' +
+              '</div>' +
+            '</div>' +
+          '</a>' +
+        '</div>'
+        );
+      });
+    });
+  });
+
+  // Load all projects
+  $('#projects-labs').each(function() {
+    var $container = $(this).addClass('project-list');
+    $.getJSON('/api/projects/by/labs', function(projects) {
       $.each(projects, function() {
         $container.append(
         '<div class="col-md-4 project-card">' +
