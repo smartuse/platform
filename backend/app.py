@@ -142,8 +142,8 @@ class Project(db.Model):
             'text': self.title, 'title': self.title,
             'screenshot': self.thumb(False),
             'thumbnail': self.thumb(),
-            'date-created': self.created.strftime("%Y-%d-%m"),
-            'date-updated': self.updated.strftime("%Y-%d-%m"),
+            'date-created': self.created.strftime("%d.%m.%Y"),
+            'date-updated': self.updated.strftime("%d.%m.%Y"),
             'status': self.status,
             'summary': self.summary,
             'notes': self.notes,
@@ -325,8 +325,8 @@ def project_page(project_id):
     project = Project.query.filter_by(id=project_id).first_or_404()
     content = Markup(markdown.markdown(project.details, extensions=MARKDOWN_EXT))
     meta = project.dict()
-    created = arrow.get(meta['date-created']).humanize()
-    updated = arrow.get(meta['date-updated']).format('DD.MM.YYYY')
+    created = arrow.get(meta['date-created'], 'DD.MM.YYYY').humanize()
+    updated = arrow.get(meta['date-updated'], 'DD.MM.YYYY').format('DD.MM.YYYY')
     if project.status in project_statuses:
         status = project_statuses[project.status]
         status['class'] = 'fas fa-' + status['icon']
