@@ -51,14 +51,15 @@ jQuery(function($){
         ).find('.resource-container:last-child').find('.container');
       }
 
-      description = container.find('.description');
-      description.append(
+      container.prepend(
         '<div class="resource-header"><a name="anchor-' + rescount + '"></a>'
         //'<a href="#item-' + rescount + '">'
         // + '<i class="material-icons">layers</i>'
         + (res.title || res.name)
         + '</div>'
       );
+
+      description = container.find('.description');
       if (res.description.length>1)
         description.append(res.description);
 

@@ -40,14 +40,9 @@ html
           #navbarResponsive.collapse.navbar-collapse
             ul.navbar-nav
               li.nav-item
-                a.nav-link(href='/about') Übersicht
+                a.nav-link(href='/#about') Übersicht
               li.nav-item
-                a.nav-link(href='/join') Mitmachen
-              li.nav-item
-                a.nav-link(href='https://github.com/smartuse')
-                  | Notebooks
-                  |
-                  i.fas.fa-external-link-alt
+                a.nav-link(href='/#join') Mitmachen!
               li.nav-item
                 a.nav-link(href='#footer') Kontakt
 
@@ -89,7 +84,12 @@ html
 
           .col-md-4.text-right
             p.small
-              | Version 0.1.0 Beta
+              | Version 1.0.0
+
+            a.btn.btn-primary(href='https://github.com/smartuse')
+              | Quellcode
+              |
+              i.fas.fa-external-link-alt
             a.btn.btn-primary.btn-sm(type="button" href='/admin') Administration
 
     script(src='/vendor/jquery-3.2.1.min.js')
