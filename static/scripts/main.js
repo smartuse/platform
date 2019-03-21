@@ -60,19 +60,19 @@ jQuery(function($){
       );
 
       description = container.find('.description');
-      if (res.description.length>1)
+      if (res.description && res.description.length>1)
         description.append(res.description);
 
-      if (res.pipeline.length>1) {
+      if (res.pipeline && res.pipeline.length>1) {
         description.append('<div class="mermaid" id="mermaid' + res.id + '"></div>');
         var graph = mermaid.render('mermaid' + res.id, 'graph LR;' + res.pipeline,
           function (svgCode, bindFunctions) { $('#mermaid' + res.id).html(svgCode); });
-        }
+      }
 
       datasets = container.find('.resource-datasets');
-      if (res.license.length>1)
+      if (res.license && res.license.length>1)
         datasets.append('<p class="license"><i class="fas fa-certificate"></i> ' + res.license + '</p>');
-      if (res.doc_url.length>1)
+      if (res.doc_url && res.doc_url.length>1)
         datasets.append('<p class="doc_url"><a href="' + res.doc_url + '"><i class="fas fa-book-open"></i> Details</a></p>');
 
 
