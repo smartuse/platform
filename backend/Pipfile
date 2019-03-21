@@ -19,6 +19,7 @@ Markdown = "*"
 flask-migrate = "*"
 gunicorn = "*"
 pillow = "*"
+arrow = "*"
 
 [requires]
 python_version = "3.7"

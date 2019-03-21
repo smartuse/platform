@@ -5,87 +5,122 @@ block scripts
   script(src='/vendor/zepto.smoothscroll.js')
   script(src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.0/mapbox-gl.js')
   link(href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.0/mapbox-gl.css',rel='stylesheet')
+  script(src='https://unpkg.com/mermaid@8.0.0/dist/mermaid.min.js')
   script(src='/scripts/main.js')
 
 block content
-  .container(style="margin:100px")
-
   .container-fluid.no-padding.story
     .container
       .row
-        .col-md-12.center.page-meta
+        .col-md-12.page-meta
           if organisation
-            .authorImage
+            .organisation-image
               a(href=organisation.url,target="_blank")
                 img(src=organisation.logo,title=organisation.name)
           h1
             =meta.title
-          p.date
-            span Updated:&nbsp;
-            =updated
           if meta.summary
             p.description
               =meta.summary
-          if organisation
-            p.authorText
-              a(href=organisation.url,target="_blank")
-                .organisation
-                  =organisation.name
 
       .row
-        .col-md-12
+        .col-md-8
           .page-content
             !=content
+
+        .col-md-4.side-info
+          if category
+            .project-category
+              // span Category:&nbsp;
+              b
+                i(class=category.class) &nbsp;
+                =category.text
+          .timestamp
+            .created
+              span Publiziert:&nbsp;
+              =created
+            .updated
+              span Aktualisiert:&nbsp;
+              =updated
+            //
+              .version
+                span Version:&nbsp;
+                =version
+
+          if project.organisation
+            p.project-organisation
+              a(href=organisation.url,target="_blank")
+                .organisation-name
+                  =organisation.name
+
+          if authors
+            .project-authors
+              each author in authors
+                .author
+                  img(src=author.gravatar)
+                  p
+                    a.fullname(href=author.url,target="_blank")
+                      =author.fullname
+                  if author.organisation
+                    p
+                      a(href=author.organisation.url)
+                        .organisation
+                          =author.organisation.name
+                  if author.biography
+                    p.biography
+                      =author.biography
 
       .row
         .col-md-12
           .resource-content
 
-      .row.project-authors
-        .col-md-12.text-right
-          each author in authors
-            .author
-              img(src=author.gravatar)
-              p
-                a.fullname(href=author.url,target="_blank")
-                  =author.fullname
-              if author.organisation
-                p
-                  a(href=author.organisation.url)
-                    .organisation
-                      =author.organisation.name
-              if author.biography
-                p.biography
-                  =author.biography
-
-
-      .row
+      #resourcesummary.row
         .col-md-12.resource-summary
-          .h2 Data sources
+          .h2 Resourcen
           .list-group
             each resource in resources
-              .list-group-item.list-group-item-action.flex-column.align-items-start.active
+              .list-group-item.list-group-item-action.flex-column.align-items-start
                 .d-flex.w-100.justify-content-between
                   h5.mb-1
                     =resource.title
-                  .btn-group(role="group")
-                    a.btn.btn-primary.btn-sm(type="button" href='{{ resource.path }}' download) Download
-                    a.btn.btn-primary.btn-sm(type="button" href='{{ project.detail_url }}') Data Package
-                  small
-                    =resource.mediatype
-                if resource.notes
-                  p.mb-1
+                  .download-buttons.btn-group(role="group")
+                    a.btn.btn-primary.btn-sm(type="button" href='{{ resource.path }}' download)
+                      i.fas.fa-arrow-down
+                      | &nbsp; Herunterladen
+                    a.btn.btn-primary.btn-sm(type="button" href='{{ project.detail_url }}')
+                      i.fas.fa-cogs
+                      | &nbsp;
+                      =resource.mediatype
+              if resource.notes
+                .list-group-item
+                  p.resource-notes
                     =resource.notes
 
-      hr
-      .row
-        .col-md-3
-        .col-md-6
+  #share.modal(tabindex='-1', role='dialog')
+    .modal-dialog(role='document')
+      .modal-content
+        .modal-header
+          // h5.modal-title Share
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') ×
+        .modal-body
+          p Share the story with your network using these buttons:
+          .share-buttons
+            a.btn.btn-primary.btn-sm(type="button" target='_blank' href='https://twitter.com/intent/tweet?text={{ project.title }}&hashtags=smartuse&url={{ project.url }}')
+              i.fab.fa-twitter
+              | Twitter
+            a.btn.btn-primary.btn-sm(type="button" target='_blank' href='https://www.facebook.com/sharer.php?u={{ project.url }}')
+              i.fab.fa-facebook
+              | Facebook
+            a.btn.btn-primary.btn-sm(type="button" href='mailto:?subject=SmartUse+Share&body=Check out this link: {{ project.url }}')
+              i.far.fa-envelope-open
+              | Email
+          p You can also use this button to get code for embedding this project elsewhere, like in your blog:
+          .share-buttons
+            button.btn.btn-primary.btn-sm(type="button" href='#' id='embed-project')
+              i.far.fa-file-alt
+              | Embed
           .card.border-secondary.mb-3.embedding
-            .card-header
-              a.btn.btn-primary.btn-sm(type="button" target='_blank' href='https://twitter.com/intent/tweet?text={{ project.title }}&hashtags=smartuse&url={{ project.url }}' id='share-project') Share
-              button.btn.btn-primary.btn-sm(type="button" href='#' id='embed-project') Embed
-            |
             .card-body
               a(href='{{ project.url }}')
                 h4.card-title
@@ -97,3 +132,5 @@ block content
                     =user.organisation
                 p.card-text
                   =project.summary
+        .modal-footer
+          button.btn.btn-secondary(type='button', data-dismiss='modal') OK

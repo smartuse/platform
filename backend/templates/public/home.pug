@@ -1,56 +1,53 @@
 extends public/base.pug
 
+block scripts
+  script(src='/scripts/front.js')
+  script(src='/vendor/glider.js')
+
+block head
+  link(href='/vendor/glider.min.css',rel='stylesheet')
+  //link(href='/vendor/gallery.prefixed.css',rel='stylesheet')
+
 block content
-  .container-fluid.no-padding.padding-bottom
-    img.img-fluid.w-100(src='/theme/SmartUse_header.jpg' alt='SmartUse Header')
-  .container#about
-    // content
+  .container.padding-top.padding-bottom
     .row
       .col-md-12
-        h1
-          | SMARTUSE
-          small
-            br
-            | Die funktionale Region
-    hr
+        .text.section#welcome
+          = headline
+
+  //.container-fluid.no-padding.padding-bottom
+  .container.padding-bottom
+    .row
+      .col-md-12.center
+        .glider-contain#featured
+          .dots
+          a.glider-prev «
+          a.glider-next »
+    #projects-featured.row
+    .row.padding-top
+      .col-md-12.center
+        br
+        form(action='/search')
+          input.form-control.form-control-lg.search(name='q',placeholder='Search ...')
+
+  .container-fluid.bg-secondary#about
+    .container.padding-top.padding-bottom
+      .row
+        .col-md-12
+          br
+          .text.section
+            = about
+
+  .container.padding-top
     .row
       .col-md-12
-        .text.section
-          h3 Die Idee
-          p
-            | Unser Ziel ist ein Werkzeug und Netzwerk fu&#x308;r Planer (Kantone, Gemeinden, Sta&#x308;dte),
-            | &ldquo;Planungsnahe&rdquo;
-            | (Architekturbu&#x308;ros, Planungsbu&#x308;ros) und die Zivilgesellschaft. Es bringt zusammen, zeigt auf
-            | und
-            | ermo&#x308;glicht so nachhaltige Ansa&#x308;tze fu&#x308;r den Wirtschafts- und Lebensraum zu gestalten und als
-            | Bindeglied zwischen Top-down Planung und Bottom-up Partizipation zu agieren.
-          p
-        .text.section
-          p
-            | &laquo;Smart&raquo; vernetzen (Akteure, Daten, Werkzeuge, Fragen), &laquo;Smart&raquo; verdichten,&nbsp;
-            b &laquo;Smart&raquo; nutzen,&nbsp;
-            | statt teuer bauen. Das Projekt &laquo;Smart Use&raquo; ist eine laufende Kooperation zwischen der
-            | Metropolitankonferenz Zu&#x308;rich und der ARGE Smart Use, bestehend aus Joris van Wezemael, Hosoya
-            | Schaefer Architects und Datalets.ch.
-    hr
-    .row
-      .col-md-12
-        h3 DAS TEAM
-    .row
-      .col-md-4
-        h4
-          a(href='http://www.hosoyaschaefer.com' target='_blank') Hosoya Schaefer Architects
-        ul
-          li Markus Schaefer
-          li Nils Havelka
-          li Thorben Westerhuys
-      .col-md-4
-        h4
-          a(href='https://www.datalets.ch' target='_blank') Datalets.ch
-        ul
-          li Oleg Lavrovsky
-      .col-md-4
-        h4
-          a(href='https://www.ethz.ch' target='_blank') ETH Zürich
-        ul
-          li Joris van Wezemael
+        br
+        h1 Aktuell
+        br
+    #projects.row
+
+  .container-fluid.bg-primary.home-content
+    .container
+      .row
+        .col-md-12.text#bottom
+          = bottom|safe

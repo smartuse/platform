@@ -1,0 +1,29 @@
+{
+    "review":  {
+        "icon": "clipboard-check",
+        "text": "Wird geprüft" },
+    "labs":    {
+        "icon": "flask",
+        "text": "Labs" },
+    "collect": {
+        "icon": "briefcase",
+        "text": "Aggregiert" },
+    "verify":  {
+        "icon": "check-circle",
+        "text": "Verifiziert" },
+    "clean":   {
+        "icon": "check-double",
+        "text": "Gereignigt" },
+    "analyse": {
+        "icon": "receipt",
+        "text": "Analysiert" },
+    "present": {
+        "icon": "map",
+        "text": "Visualisiert" },
+    "publish":   {
+        "icon": "map-signs",
+        "text": "Publiziert" },
+    "archive": {
+        "icon": "calendar-times",
+        "text": "Archiviert" }
+}

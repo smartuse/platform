@@ -33,6 +33,13 @@ function initFullScreen() {
       $('html').addClass('fullscreen');
       // $('.gallery-nav.fixed,.story.fixed').addClass('hidden');
     }
+    // Resize the maps
+    if (typeof(maps) !== typeof(undefined))
+      $.each(maps, function() { this.resize(); });
+  });
+  $('.share-button').click(function(e) {
+    e.preventDefault();
+    $('#share').modal('show');
   });
 }
 

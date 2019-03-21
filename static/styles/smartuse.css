@@ -1,4 +1,4 @@
-html { background: #333; overflow-x: hidden; }
+/*html { background: #333; overflow-x: hidden; }*/
 .hidden { display: none; }
 body {
   font-family: "Roboto", sans-serif;
@@ -22,6 +22,21 @@ body {
   float: right;
 }
 
+#welcome {
+	font-size: 160%;
+	line-height: 150%;
+}
+.home-content {
+	margin: 4em 0;
+}
+.home-content .text {
+	margin: 2em 0;
+	color: white;
+}
+.home-content .text img {
+	margin: 2em 0;
+}
+
 .page-footer {
   margin-top: 5em;
   text-align: center;
@@ -43,25 +58,64 @@ body {
 	background: white;
 }
 
-.page-meta p { margin: 0; }
+.resource-container {
+	margin: 3em 0em;
+
+	border-style: solid;
+	border-width: 10px 0px 10px 10px;
+	border-color: white transparent transparent #008cba;
+
+	padding-left: 10px;
+}
+
+.resource-counter::before {
+	content: '#';
+}
+.resource-counter {
+	color: #999;
+	float: left;
+	margin-left: -1.5em;
+	font-size: 2em;
+}
+
+.side-info .organisation-name {
+	font-size: 15pt;
+	text-decoration: underline;
+}
+.side-info div {
+  margin: 0;
+}
+.side-info span { color: #999; }
+
+.story {
+	background: white; color: black;
+	padding: 2em 0;
+}
+.story p > a {
+	color: darkblue;
+}
+
+.story .page-meta h1 {
+	font-weight: 500;
+}
+
+.page-meta {
+	margin: 2em 0;
+}
+
+.page-meta p {
+	margin: 0;
+	color: #555;
+}
+
 p.author {
   margin-top: 0;
 }
-p.date {
-  float: right;
-}
-p.date span { color: #999; }
 
 .page-summary {
   text-align: center;
   margin: 1em;
   font-size: 110%;
-}
-
-.page-content {
-	border-top: 1px solid #ddd;
-	margin-top: 1em;
-	padding-top: 1em;
 }
 
 .description h2 a {
@@ -70,11 +124,13 @@ p.date span { color: #999; }
   border-bottom: 1px dashed #555;
 }
 .resource-header {
-	color: #777;
+	color: #000;
 	font-size: 150%;
-	margin: 0.5em 0px;
+	/*margin: 0.5em 0px;*/
+	margin: -1.8em 0 0;
+	position: absolute;
 }
-.resource-summary,.project-authors {
+.resource-summary {
 	margin-top: 2em;
 }
 
@@ -124,6 +180,7 @@ input.search { font-size: 140%; }
   height: 400px;
   top: 0px;
   overflow: hidden;
+	margin-bottom: 1em;
 }
 .gallery .control-button {
   color: #ccc;
@@ -155,26 +212,46 @@ input.search { font-size: 140%; }
   transition: color .1s;
 }
 
-.fullscreen-button {
+.mermaid {
+	max-width: none !important;
+	border: 1px solid #ccc;
+}
+
+.side-button {
   width: 40px;
   height: 36px;
-  background: white url('/img/fullscreen.png') no-repeat 50% 50%;
+  background: white url('/img/fullscreen-black.png') no-repeat 50% 50%;
   background-size: contain;
   z-index: 2;
-  position: absolute;
+  /*position: absolute;
   top: 0px;
-	right: -20px;
+	right: -20px;*/
   border: 2px solid #fff;
   border-radius: 3px;
+
+	float: left;
+	position: absolute;
+	cursor: pointer;
+
+	margin-left: -67px;
+	margin-top: 3em;
+
+	opacity: 0.7;
 }
-.fullscreen-button.active {
+.side-button.share-button {
+	background-image: url('/img/share-black.png');
+	margin-top: 6em;
+}
+.side-button.active {
   border: 4px solid #fff;
   box-shadow: 3px 3px 3px grey;
   position: fixed;
+	margin: 0px;
   top: 10px;
-	right: 50px;
+	left: 10px;
 	z-index: 1112;
 }
+
 figure.fullscreen {
 	background: white;
   top: 0px !important;
@@ -192,7 +269,8 @@ html.fullscreen {
 
 .project-list .project-card { padding-top: 1em; }
 .project-list .project-card a { text-decoration: none; }
-.project-list .project-card:hover { background: blue; }
+.project-list .project-card .card-text { color: #555; }
+.project-list .project-card:hover { background: #ddd; }
 .project-thumb {
   width: 128px; height: 128px;
   margin: 0px 20px 20px 0;
@@ -241,13 +319,20 @@ a.featured, a.featured h5, a.featured p
 
 /* Project Page styling */
 
+.organisation-image {
+	float: right;
+	width: 256px;
+}
+.project-authors {
+	margin-top: 1em;
+}
 .project-authors, .resource-summary {
 	clear: both;
 }
 .author {
-	width: 20em;
+	/* width: 20em;
 	text-align: left;
-	float: right;
+	float: right; */
 }
 .author img {
   height: 55px;
@@ -262,6 +347,13 @@ a.featured, a.featured h5, a.featured p
 }
 .author p, .author a {
   color: #333;
+}
+
+.share-buttons {
+	margin: 1em 0;
+}
+.share-buttons i {
+	margin-right: 1em;
 }
 
 .embedding .card-body {
@@ -298,4 +390,18 @@ a.featured, a.featured h5, a.featured p
      width: 138px;
     height: 50px;
   }
+
+	.side-button {
+		top: 0px; right: 0px;
+		position: absolute;
+		z-index: 2000;
+		background-color: transparent;
+		border-color: transparent;
+	}
+	.resource-counter {
+		display: none;
+		/*float: left;
+		display: block;
+		margin-left: 0.6em;*/
+	}
 }

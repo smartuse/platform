@@ -1,14 +1,19 @@
 var maps = {}, paginationtag = null;
 
-Zepto(function($){
+jQuery(function($){
 
-  function load_DataPackage(datapackage) {
+  function load_DataPackage(datapackage, top_container) {
     var rescount = 0;
 
-    function add_gallery_item(gallery, ii) {
+    function add_gallery_item(container, ii) {
+      container.prepend('<div class="gallery" fullscreen=1></div>');
+      gallery = container.find('.gallery');
+      if (gallery.length === 0) gallery = $('.gallery');
       // gallery.append('<div id="item-'+ii+'" class="control-operator"></div>');
       // gallery.find('.controls').append('<a href="#item-'+ii+'" class="control-button">•</a>');
-      if (gallery.attr('fullscreen')) gallery.append('<div class="fullscreen-button"></div>');
+      gallery.append('<div title="Share" class="side-button share-button"></div>');
+      if (gallery.attr('fullscreen'))
+        gallery.append('<div title="Vollbild" class="side-button fullscreen-button"></div>');
       return gallery.append('<figure class="item" />').find('.item:last-child');
     }
 
@@ -17,28 +22,59 @@ Zepto(function($){
 
       if (!(res.name || res.title)) return;
 
-      container = $('.resource-content').append(
-        '<div class="resource-container">'
-        + '<div class="gallery" fullscreen=1></div>'
-        + '<div class="container" id="' + res.name + '">'
-          + '<div class="description"></div>'
+      if (typeof(top_container) == 'object') {
+        container = top_container;
+      } else {
+        var $resourceContent = $('.resource-content');
+        var count = $resourceContent.find('.resource-container').length + 1;
+        container = $resourceContent.append(
+          '<div class="resource-counter">' + count + '</div>'
+
+        + '<div class="resource-container">'
+          + '<div class="container row" id="' + res.name + '">'
+            + '<div class="description col-md-9"></div>'
+
+            + '<div class="resource-datasets col-md-3">'
+
+            + (typeof res.author !== 'undefined' ?
+              '<a href="#resourcesummary">'
+                + '<h5 class="mb-1">' + 'Datengrundlage' + '</h5>'
+              + '</a>'
+              + '<p class="res-author">' + res.author + '</p>'
+              : '')
+
+            + '</div>'
+
+          + '</div>'
         + '</div>'
-      + '</div>'
-      ).find('.resource-container:last-child');
 
-      gallery = container.find('.gallery');
-      if (gallery.length === 0) gallery = $('.gallery');
+        ).find('.resource-container:last-child').find('.container');
+      }
 
-      description = container.find('.description');
-      description.append(
+      container.before(
         '<div class="resource-header"><a name="anchor-' + rescount + '"></a>'
         //'<a href="#item-' + rescount + '">'
         // + '<i class="material-icons">layers</i>'
         + (res.title || res.name)
         + '</div>'
       );
-      if (res.description.length>1)
+
+      description = container.find('.description');
+      if (res.description && res.description.length>1)
         description.append(res.description);
+
+      if (res.pipeline && res.pipeline.length>1) {
+        description.append('<div class="mermaid" id="mermaid' + res.id + '"></div>');
+        var graph = mermaid.render('mermaid' + res.id, 'graph LR;' + res.pipeline,
+          function (svgCode, bindFunctions) { $('#mermaid' + res.id).html(svgCode); });
+      }
+
+      datasets = container.find('.resource-datasets');
+      if (res.license && res.license.length>1)
+        datasets.append('<p class="license"><i class="fas fa-certificate"></i> ' + res.license + '</p>');
+      if (res.doc_url && res.doc_url.length>1)
+        datasets.append('<p class="doc_url"><a href="' + res.doc_url + '"><i class="fas fa-book-open"></i> Details</a></p>');
+
 
         // console.log(res);
 
@@ -51,14 +87,14 @@ Zepto(function($){
 
       if (res.mediatype == 'application/vnd.datapackage+json') {
         pp = get_project_path(res.path);
-        $.getJSON(get_project_path(res.path), function(dp) {
+        $.getJSON(pp, function(dp) {
           project_path = pp.substring(0, pp.lastIndexOf('/')+1);
-          load_DataPackage(dp);
+          load_DataPackage(dp, container);
         });
 
       } else if (res.mediatype.indexOf('image/')==0) {
         rescount = rescount + 1;
-        item = add_gallery_item(gallery, rescount);
+        item = add_gallery_item(container, rescount);
 
         img = item.append('<img id="image-'+rescount+'" />').find('img:last-child');
         imgpath = get_project_path(res.path);
@@ -66,14 +102,14 @@ Zepto(function($){
 
       } else if (res.mediatype == 'application/html') {
         rescount = rescount + 1;
-        item = add_gallery_item(gallery, rescount);
+        item = add_gallery_item(container, rescount);
 
         imgpath = get_project_path(res.path);
         item.append('<iframe id="frame-'+rescount+'" src="' + imgpath + '"/>');
 
       } else if (res.mediatype == 'application/vnd.geo+json') {
         rescount = rescount + 1;
-        item = add_gallery_item(gallery, rescount);
+        item = add_gallery_item(container, rescount);
 
         item.append('<div class="map" id="map-'+rescount+'" />');
         filepath = get_project_path(res.path);
@@ -86,7 +122,8 @@ Zepto(function($){
           container: 'map-' + rescount,
           style: 'mapbox://styles/mapbox/light-v9',
           zoom: zoom,
-          center: { lat: lati, lng: long }
+          center: { lat: lati, lng: long },
+          trackResize: true
         });
 
         var layer = {
@@ -143,6 +180,8 @@ Zepto(function($){
 
         maps[rescount] = map;
       } // -geojson
+
+      container = false;
     }); // -each resources
 
     /*
@@ -182,8 +221,10 @@ Zepto(function($){
   // $(window).resize(setStoryLayout);
 
   if (typeof mapboxgl !== 'undefined')
-  mapboxgl.accessToken = 'pk.eyJ1Ijoic21hcnR1c2UiLCJhIjoiY2pkNGowcGdzMHhpbzMzcWp3eGYydGhmMiJ9.k9QyYo-2pFvyyFDJiz16UA';
+    mapboxgl.accessToken = 'pk.eyJ1Ijoic21hcnR1c2UiLCJhIjoiY2pkNGowcGdzMHhpbzMzcWp3eGYydGhmMiJ9.k9QyYo-2pFvyyFDJiz16UA';
 
+  if (typeof mermaid !== 'undefined')
+    mermaid.initialize({startOnLoad:true});
 
     // Load the project menu
     /*
@@ -215,9 +256,10 @@ Zepto(function($){
     });
     */
 
-  $('#embed-project').click(function() {
-    var html = $(this).parents('.embedding').find('.card-body').html();
-    window.prompt('Copy this code to embed:', html.trim().replace(/  /g, ' '));
-  });
+    // Enable project-wide sharing button
+    $('#embed-project').click(function() {
+      var html = $(this).parents('.modal').find('.card-body').html();
+      window.prompt('Copy this code to embed:', html.trim().replace(/  /g, ' '));
+    });
 
 });
