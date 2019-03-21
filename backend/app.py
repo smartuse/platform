@@ -9,6 +9,7 @@ from werkzeug import secure_filename
 from flask_api import FlaskAPI
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from sqlalchemy import or_
 
 import flask_admin as admin
 from flask_admin.model import BaseModelView
@@ -269,15 +270,29 @@ admin.add_view(FileAdmin(upload_path, '/uploads/', name="Uploads"))
 @app.route("/api/projects", methods=['GET'])
 def projects_list():
     return [p.dict() for p in Project.query.filter_by(is_hidden=False,is_featured=False).limit(50).all()]
+
 @app.route("/api/projects/featured", methods=['GET'])
 def projects_list_featured():
     return [p.dict() for p in Project.query.filter_by(is_hidden=False,is_featured=True).limit(10).all()]
+
 @app.route("/api/projects/all", methods=['GET'])
 def projects_list_all():
     return [p.dict() for p in Project.query.filter_by(is_hidden=False).limit(10).all()]
+
 @app.route("/api/projects/by/<string:BY_CAT>", methods=['GET'])
 def projects_list_by_category(BY_CAT):
     return [p.dict() for p in Project.query.filter_by(is_hidden=False,category=BY_CAT).limit(10).all()]
+
+@app.route('/api/projects/search', methods=['GET'])
+def projects_search():
+    q = request.args.get('q')
+    if not q or len(q.strip()) < 3: return []
+    q = '%' + q.strip() + '%'
+    return [p.dict() for p in Project.query.filter(or_(
+        Project.title.ilike(q),
+        Project.details.ilike(q),
+        Project.summary.ilike(q),
+    )).limit(50).all()]
 
 @app.route("/api/resources", methods=['GET'])
 def resources_list():
@@ -309,17 +324,22 @@ def get_md(filename):
     return Markup(markdown.markdown(t))
 
 # Flask views
-@app.route('/about')
-def index_about():  return render_template('public/about.pug')
-@app.route('/join')
-def index_join():   return render_template('public/join.pug')
+# @app.route('/about')
+# def index_about():  return render_template('public/about.pug')
+# @app.route('/join')
+# def index_join():   return render_template('public/join.pug')
+
+@app.route('/search')
+def index_search():
+    return render_template('public/search.pug')
+
 @app.route('/')
 def index_root():
-    return render_template('public/browse.pug',
+    return render_template('public/home.pug',
         headline=get_md('home-headline'),
-        content=get_file('home-content.html'))
-@app.route('/browse')
-def index_browse(): return redirect(url_for('index_root'))
+        bottom=get_file('home-bottom.html'),
+        about=get_md('home-about'),
+    )
 
 @app.route("/project/<int:project_id>")
 def project_page(project_id):

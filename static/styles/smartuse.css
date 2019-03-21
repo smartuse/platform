@@ -22,7 +22,7 @@ body {
   float: right;
 }
 
-.welcome {
+#welcome {
 	font-size: 160%;
 	line-height: 150%;
 }

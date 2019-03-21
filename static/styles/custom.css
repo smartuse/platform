@@ -231,6 +231,9 @@ pre {
 .padding-bottom {
     padding-bottom: 50px;
 }
+.padding-top {
+    padding-top: 50px;
+}
 
 #featured .glider {
 	background-size: cover;

@@ -2,24 +2,18 @@ var maps = {}, paginationtag = null;
 
 jQuery(function($){
 
-  // Load featured projects
-  $('#featured').each(function() {
-    var $container = $(this);
-    $.getJSON('/api/projects/featured', function(projects) {
-      $.each(projects, function() {
-        $container.append(
-          '<div class="glider" style="background-image:url(\'' + this.screenshot + '\')">' +
-            '<a href="/project/' + this.id + '">' +
-              '<div class="legend">' +
-                '<h4>' + this.title + '</h4>' +
-                '<p>' + this.summary + '</p>' +
-              '</div>' +
-            '</a>' +
-          '</div>'
-        );
-      });
-    });
-  });
+  function getProjectFeature($obj, t) {
+    $obj.append(
+      '<div class="glider" style="background-image:url(\'' + this.screenshot + '\')">' +
+        '<a href="/project/' + this.id + '">' +
+          '<div class="legend">' +
+            '<h4>' + this.title + '</h4>' +
+            '<p>' + this.summary + '</p>' +
+          '</div>' +
+        '</a>' +
+      '</div>'
+    );
+  }
 
   function getProjectCard(t, with_screenshot) {
     if (typeof with_screenshot === 'undefined')
@@ -45,6 +39,14 @@ jQuery(function($){
     '</div>'
   }
 
+  // Load featured projects
+  $('#featured').each(function() {
+    var $container = $(this);
+    $.getJSON('/api/projects/featured', function(projects) {
+      $.each(projects, function() { getProjectFeature($container, this); });
+    });
+  });
+
   // Load main projects
   $('#projects-featured').each(function() {
     var $container = $(this).addClass('project-list');
@@ -61,6 +63,20 @@ jQuery(function($){
   $('#projects').each(function() {
     var $container = $(this).addClass('project-list');
     $.getJSON('/api/projects', function(projects) {
+      $.each(projects, function() {
+        $container.append(
+          getProjectCard(this)
+        );
+      });
+    });
+  });
+
+  // Load search results
+  $('#projects-search').each(function() {
+    function urldecode(str) { return decodeURIComponent((str+'').replace(/\+/g, '%20')); }
+    $('input.search').val(urldecode(document.location.search.replace('?q=', '')));
+    var $container = $(this).addClass('project-list');
+    $.getJSON('/api/projects/search' + document.location.search, function(projects) {
       $.each(projects, function() {
         $container.append(
           getProjectCard(this)

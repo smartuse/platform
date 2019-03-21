@@ -12,7 +12,7 @@ block content
   .container.padding-top.padding-bottom
     .row
       .col-md-12
-        .text.section.welcome
+        .text.section#welcome
           = headline
 
   //.container-fluid.no-padding.padding-bottom
@@ -24,10 +24,21 @@ block content
           a.glider-prev «
           a.glider-next »
     #projects-featured.row
-  .container
-    .row
+    .row.padding-top
       .col-md-12.center
-        input.form-control.form-control-lg.search(name='q',placeholder='Search ...')
+        br
+        form(action='/search')
+          input.form-control.form-control-lg.search(name='q',placeholder='Search ...')
+
+  .container-fluid.bg-secondary#about
+    .container.padding-top.padding-bottom
+      .row
+        .col-md-12
+          br
+          .text.section
+            = about
+
+  .container.padding-top
     .row
       .col-md-12
         br
@@ -38,5 +49,5 @@ block content
   .container-fluid.bg-primary.home-content
     .container
       .row
-        .col-md-12.text
-          = content|safe
+        .col-md-12.text#bottom
+          = bottom|safe
