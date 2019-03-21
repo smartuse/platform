@@ -205,6 +205,7 @@ projects_resources = db.Table(
 
 class Resource(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    order = db.Column(db.Integer)
     title = db.Column(db.String(64), unique=True)
     description = db.Column(db.UnicodeText)
     notes = db.Column(db.UnicodeText)
@@ -212,7 +213,6 @@ class Resource(db.Model):
     is_embed = db.Column(db.Boolean(), default=False)
     projects = db.relationship('Project', secondary=projects_resources,
         backref=db.backref('resources', lazy='dynamic'))
-    # features = db.Column(Geometry("MULTIPOLYGON"))
     def __repr__(self):
         return self.title
     def dict(self):
@@ -232,10 +232,6 @@ class Resource(db.Model):
         }
         if self.path:
             r['path'] = self.path
-        # if self.features is not None:
-        #     if not 'data' in r: r['data'] = {}
-        #     f = get_features_geojson(r['name'], [self.features])
-        #     r['data']['features'] = f
         return r
 
 # ----------- Admin views -----------
