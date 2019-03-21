@@ -51,7 +51,7 @@ jQuery(function($){
         ).find('.resource-container:last-child').find('.container');
       }
 
-      container.prepend(
+      container.before(
         '<div class="resource-header"><a name="anchor-' + rescount + '"></a>'
         //'<a href="#item-' + rescount + '">'
         // + '<i class="material-icons">layers</i>'
@@ -62,6 +62,13 @@ jQuery(function($){
       description = container.find('.description');
       if (res.description.length>1)
         description.append(res.description);
+
+      datasets = container.find('.resource-datasets');
+      if (res.license.length>1)
+        datasets.append('<p class="license"><i class="fas fa-certificate"></i> ' + res.license + '</p>');
+      if (res.doc_url.length>1)
+        datasets.append('<p class="doc_url"><a href="' + res.doc_url + '"><i class="fas fa-book-open"></i> Details</a></p>');
+
 
         // console.log(res);
 

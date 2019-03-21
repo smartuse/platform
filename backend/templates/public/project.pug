@@ -28,12 +28,12 @@ block content
             !=content
 
         .col-md-4.side-info
-          if status
-            .project-status
-              span Status:&nbsp;
+          if category
+            .project-category
+              // span Category:&nbsp;
               b
-                i(class=status.class) &nbsp;
-                =status.text
+                i(class=category.class) &nbsp;
+                =category.text
           .timestamp
             .created
               span Publiziert:&nbsp;

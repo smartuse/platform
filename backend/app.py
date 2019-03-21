@@ -42,8 +42,8 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
 # Various presets
-with open(ospath.join(ospath.dirname(__file__), 'templates','presets','project-status.json'), "r") as f:
-    project_statuses = json.load(f)
+with open(ospath.join(ospath.dirname(__file__), 'templates','presets','project-categories.json'), "r") as f:
+    project_categories = json.load(f)
 screenshot_path = ospath.join(ospath.dirname(__file__), '..', 'screenshots')
 upload_path = ospath.join(ospath.dirname(__file__), '..', 'uploads')
 DEFAULT_THUMB = '../img/usermap.jpg'
@@ -105,7 +105,7 @@ class Project(db.Model):
     summary = db.Column(db.Unicode(255))
     details = db.Column(db.UnicodeText)
 
-    status = db.Column(db.String(16), doc="review, labs, collect, present, publish")
+    category = db.Column(db.String(32), doc="review, labs, collect, present, publish")
     notes = db.Column(db.UnicodeText)
 
     organisation_id = db.Column(db.Integer, db.ForeignKey(Organisation.id))
@@ -144,7 +144,7 @@ class Project(db.Model):
             'thumbnail': self.thumb(),
             'date-created': self.created.strftime("%d.%m.%Y"),
             'date-updated': self.updated.strftime("%d.%m.%Y"),
-            'status': self.status,
+            'category': self.category,
             'summary': self.summary,
             'notes': self.notes,
             'url': self.url,
@@ -208,9 +208,11 @@ class Resource(db.Model):
     order = db.Column(db.Integer)
     title = db.Column(db.String(64), unique=True)
     description = db.Column(db.UnicodeText)
-    notes = db.Column(db.UnicodeText)
+    pipeline = db.Column(db.UnicodeText, doc="Mermaid pipeline diagram")
+    notes = db.Column(db.UnicodeText, doc="Internal notes")
+    license = db.Column(db.Unicode(64), doc="Conditions of use")
     path = db.Column(db.Unicode(256), doc="Use the Data tab to upload files")
-    is_embed = db.Column(db.Boolean(), default=False)
+    doc_url = db.Column(db.Unicode(256), doc="Link to a notebook or other documentation")
     projects = db.relationship('Project', secondary=projects_resources,
         backref=db.backref('resources', lazy='dynamic'))
     def __repr__(self):
@@ -226,8 +228,11 @@ class Resource(db.Model):
             'id': self.id,
             'name': "smartuse-resource-%d" % self.id,
             'title': self.title,
+            'license': self.license,
             'description': content,
+            'pipeline': self.pipeline,
             'notes': notes,
+            'doc_url': self.doc_url,
             'mediatype': get_media_type(self.path)
         }
         if self.path:
@@ -236,14 +241,14 @@ class Resource(db.Model):
 
 # ----------- Admin views -----------
 
-UserView = ModelView(User, db.session)
+UserView = ModelView(User, db.session, name="Users")
 UserView.column_list = ('username', 'fullname', 'organisation')
 admin.add_view(UserView)
 
 admin.add_view(ModelView(Organisation, db.session, name="Organisations"))
 
 class ProjectView(ModelView):
-    column_list = ('title', 'created', 'updated')
+    column_list = ('title', 'created', 'updated', 'category')
     form_extra_fields = {
         'screenshot': ImageUploadField('Screenshot',
             base_path=screenshot_path, url_relative_path='/screenshots/',
@@ -251,14 +256,14 @@ class ProjectView(ModelView):
     }
     inline_models = [Resource]
     can_export = True
-admin.add_view(ProjectView(Project, db.session, name="Projects (Data Packages)"))
+admin.add_view(ProjectView(Project, db.session, name="Data Packages (Projects)"))
 
 class ResourceView(ModelView):
-    column_list = ('title', 'path')
+    column_list = ('title', 'path', 'notes')
     can_export = True
-admin.add_view(ResourceView(Resource, db.session, name="Resources"))
+admin.add_view(ResourceView(Resource, db.session, name="Resources (Datasets)"))
 
-admin.add_view(FileAdmin(upload_path, '/uploads/', name="Data"))
+admin.add_view(FileAdmin(upload_path, '/uploads/', name="Uploads"))
 
 # API views
 @app.route("/api/projects", methods=['GET'])
@@ -270,9 +275,9 @@ def projects_list_featured():
 @app.route("/api/projects/all", methods=['GET'])
 def projects_list_all():
     return [p.dict() for p in Project.query.filter_by(is_hidden=False).limit(10).all()]
-@app.route("/api/projects/by/<string:BY_TYPE>", methods=['GET'])
-def projects_list_by_type(BY_TYPE):
-    return [p.dict() for p in Project.query.filter_by(is_hidden=False,status=BY_TYPE).limit(10).all()]
+@app.route("/api/projects/by/<string:BY_CAT>", methods=['GET'])
+def projects_list_by_category(BY_CAT):
+    return [p.dict() for p in Project.query.filter_by(is_hidden=False,category=BY_CAT).limit(10).all()]
 
 @app.route("/api/resources", methods=['GET'])
 def resources_list():
@@ -285,7 +290,7 @@ def organisations_list():
 @app.route("/api/project/<int:project_id>", methods=['GET'])
 def project_detail(project_id):
     project = Project.query.filter_by(id=project_id).first_or_404()
-    resources = project.resources.order_by(Resource.title).all() # TODO: custom sort
+    resources = project.resources.order_by(Resource.order).all()
     author = project.users.first()
     if author is not None: author = author.dict()
     return {
@@ -323,11 +328,11 @@ def project_page(project_id):
     meta = project.dict()
     created = arrow.get(meta['date-created'], 'DD.MM.YYYY').humanize()
     updated = arrow.get(meta['date-updated'], 'DD.MM.YYYY').format('DD.MM.YYYY')
-    if project.status in project_statuses:
-        status = project_statuses[project.status]
-        status['class'] = 'fas fa-' + status['icon']
+    if project.category in project_categories:
+        category = project_categories[project.category]
+        category['class'] = 'fas fa-' + category['icon']
     else:
-        status = None
+        category = None
     # version = 1.2
     organisation = project.organisation
     authors = [author.dict() for author in project.users]

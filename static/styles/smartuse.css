@@ -72,6 +72,7 @@ body {
 	content: '#';
 }
 .resource-counter {
+	color: #999;
 	float: left;
 	margin-left: -1.5em;
 	font-size: 2em;
@@ -123,9 +124,11 @@ p.author {
   border-bottom: 1px dashed #555;
 }
 .resource-header {
-	color: #777;
+	color: #000;
 	font-size: 150%;
-	margin: 0.5em 0px;
+	/*margin: 0.5em 0px;*/
+	margin: -1.8em 0 0;
+	position: absolute;
 }
 .resource-summary {
 	margin-top: 2em;
@@ -177,6 +180,7 @@ input.search { font-size: 140%; }
   height: 400px;
   top: 0px;
   overflow: hidden;
+	margin-bottom: 1em;
 }
 .gallery .control-button {
   color: #ccc;
@@ -314,7 +318,7 @@ a.featured, a.featured h5, a.featured p
 	float: right;
 	width: 256px;
 }
-.project-authors, .resource-datasets {
+.project-authors {
 	margin-top: 1em;
 }
 .project-authors, .resource-summary {
@@ -383,15 +387,16 @@ a.featured, a.featured h5, a.featured p
   }
 
 	.side-button {
-		margin: 0px;
+		top: 0px; right: 0px;
 		position: absolute;
 		z-index: 2000;
 		background-color: transparent;
 		border-color: transparent;
 	}
 	.resource-counter {
-		float: left;
+		display: none;
+		/*float: left;
 		display: block;
-		margin-left: 0.6em;
+		margin-left: 0.6em;*/
 	}
 }

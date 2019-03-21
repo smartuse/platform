@@ -59,28 +59,32 @@ html
           .col-md-4.footer-info
             // include:markdown-it index.md
             p
-              | SmartUse ist ein Kooperationsprojekt der Metropolitankonferenz Z&uuml;rich
+              | SmartUse ist ein Kooperationsprojekt der Verein Metropolitanraum Zürich
             p
               img(src='/img/logo_MK_black.png' width='200px')
-
-          .col-md-4
-            h3 Kontakt
             p.small
               a(href='https://www.metropolitanraum-zuerich.ch/kontakt.html', target='_blank', class='contact')
                 i.far.fa-envelope-open
-                | &nbsp; Geschäftsstelle des Vereins Metropolitanraum Zürich
-            h4 Immer auf dem Laufenden bleiben?
-            p.small Einfach f&uuml;r unseren Newsletter anmelden:
+                | &nbsp; Geschäftsstelle
+              &nbsp;
+              a(href='mailto:help@smartuse.ch', target='_blank', class='contact')
+                i.far.fa-envelope-open
+                | &nbsp; Technical support
+
+          .col-md-4
+            h5 Immer auf dem Laufenden bleiben?
+            //
+              p.small
+                i Einfach f&uuml;r unseren Newsletter anmelden!
             form(method='post', data-name='Immer auf dem Laufenden bleiben? Einfach für unseren Newsletter anmelden:')
               .form-fields
                 p
                   input.form-control(name='EMAIL', placeholder='E-Mail-Adresse', required='', style='background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABHklEQVQ4EaVTO26DQBD1ohQWaS2lg9JybZ+AK7hNwx2oIoVf4UPQ0Lj1FdKktevIpel8AKNUkDcWMxpgSaIEaTVv3sx7uztiTdu2s/98DywOw3Dued4Who/M2aIx5lZV1aEsy0+qiwHELyi+Ytl0PQ69SxAxkWIA4RMRTdNsKE59juMcuZd6xIAFeZ6fGCdJ8kY4y7KAuTRNGd7jyEBXsdOPE3a0QGPsniOnnYMO67LgSQN9T41F2QGrQRRFCwyzoIF2qyBuKKbcOgPXdVeY9rMWgNsjf9ccYesJhk3f5dYT1HX9gR0LLQR30TnjkUEcx2uIuS4RnI+aj6sJR0AM8AaumPaM/rRehyWhXqbFAA9kh3/8/NvHxAYGAsZ/il8IalkCLBfNVAAAAABJRU5ErkJggg=="); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;', type='email')
                 p
-                  input.form-control(name='FNAME', placeholder='Vorname', type='text')
+                  input.form-control(name='FNAME', placeholder='Vorname', type='text', style='width:49%;display:inline')
+                  input.form-control(name='LNAME', placeholder='Nachname', type='text', style='width:49%;display:inline')
                 p
-                  input.form-control(name='LNAME', placeholder='Nachname', type='text')
-                p
-                  button.btn.btn-secondary(type="submit") OK
+                  button.btn.btn-secondary(type="submit") Anmelden
 
           .col-md-4.text-right
             p.small
@@ -90,7 +94,10 @@ html
               | Quellcode
               |
               i.fas.fa-external-link-alt
-            a.btn.btn-primary.btn-sm(type="button" href='/admin') Administration
+            a.btn.btn-primary(type="button" href='/admin')
+              | Administration
+              |
+              i.fas.fa-cog
 
     script(src='/vendor/jquery-3.2.1.min.js')
     script(src='/vendor/modernizr-3.5.0.min.js')

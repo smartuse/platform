@@ -12,6 +12,7 @@ Get a hold of **Python 3** and [Pipenv](https://github.com/pypa/pipenv) on your 
 
 To install dependencies, use pip or [pipenv](https://github.com/pypa/pipenv):
 
+    $ mkdir smartuse/uploads
     $ cd smartuse/backend
     $ pipenv --three
     $ pipenv install
