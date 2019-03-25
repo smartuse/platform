@@ -4,11 +4,11 @@ jQuery(function($){
 
   function getProjectFeature($obj, t) {
     $obj.append(
-      '<div class="glider" style="background-image:url(\'' + this.screenshot + '\')">' +
-        '<a href="/project/' + this.id + '">' +
+      '<div class="glider" style="background-image:url(\'' + t.screenshot + '\')">' +
+        '<a href="/project/' + t.id + '">' +
           '<div class="legend">' +
-            '<h4>' + this.title + '</h4>' +
-            '<p>' + this.summary + '</p>' +
+            '<h4>' + t.title + '</h4>' +
+            '<p>' + t.summary + '</p>' +
           '</div>' +
         '</a>' +
       '</div>'
@@ -39,24 +39,26 @@ jQuery(function($){
     '</div>'
   }
 
-  // Load featured projects
-  $('#featured').each(function() {
-    var $container = $(this);
-    $.getJSON('/api/projects/featured', function(projects) {
-      $.each(projects, function() { getProjectFeature($container, this); });
-    });
-  });
+  $.getJSON('/api/projects/featured', function(projects) {
 
-  // Load main projects
-  $('#projects-featured').each(function() {
-    var $container = $(this).addClass('project-list');
-    $.getJSON('/api/projects/featured', function(projects) {
+    // Load into gallery
+    $('#featured').each(function() {
+      var $container = $(this);
+      $.each(projects, function() {
+        getProjectFeature($container, this);
+      });
+    });
+
+    // Load into list
+    $('#projects-featured').each(function() {
+      var $container = $(this).addClass('project-list');
       $.each(projects, function() {
         $container.append(
           getProjectCard(this, false)
         );
       });
     });
+
   });
 
   // Load other projects

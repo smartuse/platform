@@ -11,24 +11,23 @@ block head
 block content
   .container.padding-top.padding-bottom
     .row
-      .col-md-12
-        .text.section#welcome
-          = headline
-
-  //.container-fluid.no-padding.padding-bottom
-  .container.padding-bottom
-    .row
       .col-md-12.center
         .glider-contain#featured
           .dots
           a.glider-prev «
           a.glider-next »
-    #projects-featured.row
+
+  .container.padding-top.padding-bottom
+    .row
+      .col-md-12
+        .text.section#welcome
+          = headline
+
     .row.padding-top
       .col-md-12.center
-        br
         form(action='/search')
           input.form-control.form-control-lg.search(name='q',placeholder='Search ...')
+    .row#projects-featured
 
   .container-fluid.bg-secondary#about
     .container.padding-top.padding-bottom
