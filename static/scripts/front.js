@@ -23,17 +23,20 @@ jQuery(function($){
       '<a href="/project/' + t.id + '">' +
         '<div class="card mb-3">' +
           '<div class="card-header ">' +
+            (with_screenshot && t.featured ?
+              '<img src="' + t.thumbnail + '" width="100%">'
+              : '') +
             '<b class="title">' + t.title + '</b>' +
             (typeof t.organisation === 'undefined' ? '' :
             '<div class="organisation">' + t.organisation + '</div>') +
             '</div>' +
+          (t.featured ? '' :
           '<div class="card-body">' +
-            (with_screenshot ?
+            (with_screenshot && !t.featured ?
               '<img src="' + t.thumbnail + '" width="100" align="left" style="padding-right:1em">'
               : '') +
-            '<p class="card-text">' +
-              t.summary + '</p>' +
-          '</div>' +
+            '<p class="card-text">' + t.summary + '</p>' +
+          '</div>') +
         '</div>' +
       '</a>' +
     '</div>'
@@ -50,21 +53,21 @@ jQuery(function($){
     });
 
     // Load into list
-    $('#projects-featured').each(function() {
-      var $container = $(this).addClass('project-list');
-      $.each(projects, function() {
-        $container.append(
-          getProjectCard(this, false)
-        );
-      });
-    });
+    // $('#projects-featured').each(function() {
+    //   var $container = $(this).addClass('project-list');
+    //   $.each(projects, function() {
+    //     $container.append(
+    //       getProjectCard(this, false)
+    //     );
+    //   });
+    // });
 
   });
 
   // Load other projects
   $('#projects').each(function() {
     var $container = $(this).addClass('project-list');
-    $.getJSON('/api/projects', function(projects) {
+    $.getJSON('/api/projects/all', function(projects) {
       $.each(projects, function() {
         $container.append(
           getProjectCard(this)

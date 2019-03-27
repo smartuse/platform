@@ -13,6 +13,7 @@ block content
     .row
       .col-md-12.center
         .glider-contain#featured
+        //
           .dots
           a.glider-prev «
           a.glider-next »
@@ -23,29 +24,36 @@ block content
         .text.section#welcome
           = headline
 
-    .row.padding-top
+  //
+    .container-fluid.bg-secondary#about
+      .container.padding-top.padding-bottom
+        .row
+          .col-md-12
+            br
+            .text.section
+              = about
+
+  .container.padding-top
+
+    .row
       .col-md-12.center
         form(action='/search')
           input.form-control.form-control-lg.search(name='q',placeholder='Search ...')
-    .row#projects-featured
-
-  .container-fluid.bg-secondary#about
-    .container.padding-top.padding-bottom
-      .row
-        .col-md-12
-          br
-          .text.section
-            = about
-
-  .container.padding-top
+        br
     .row
       .col-md-12
-        br
         h1 Aktuell
-        br
+
     #projects.row
 
   .container-fluid.bg-primary.home-content
+    .container
+      .row
+        .col-md-12.text
+          p Governance in Datenzeitalter (Description)
+          p (few sentences to be delivered by Joris)
+
+  .container-fluid.home-content
     .container
       .row
         .col-md-12.text#bottom
