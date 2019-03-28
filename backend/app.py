@@ -277,7 +277,7 @@ def projects_list_featured():
 def projects_list_all():
     return [p.dict() for p in Project.query
         .filter_by(is_hidden=False)
-        .order_by(desc(Project.category))
+        .order_by(Project.category)
         .limit(25).all()]
 
 @app.route("/api/projects/by/<string:BY_CAT>", methods=['GET'])
