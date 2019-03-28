@@ -263,19 +263,28 @@ admin.add_view(FileAdmin(upload_path, '/uploads/', name="Uploads"))
 # API views
 @app.route("/api/projects", methods=['GET'])
 def projects_list():
-    return [p.dict() for p in Project.query.filter_by(is_hidden=False,is_featured=False).limit(50).all()]
+    return [p.dict() for p in Project.query
+        .filter_by(is_hidden=False,is_featured=False)
+        .limit(50).all()]
 
 @app.route("/api/projects/featured", methods=['GET'])
 def projects_list_featured():
-    return [p.dict() for p in Project.query.filter_by(is_hidden=False,is_featured=True).limit(10).all()]
+    return [p.dict() for p in Project.query
+        .filter_by(is_hidden=False,is_featured=True)
+        .limit(10).all()]
 
 @app.route("/api/projects/all", methods=['GET'])
 def projects_list_all():
-    return [p.dict() for p in Project.query.filter_by(is_hidden=False).limit(25).all()]
+    return [p.dict() for p in Project.query
+        .filter_by(is_hidden=False)
+        .order_by(category)
+        .limit(25).all()]
 
 @app.route("/api/projects/by/<string:BY_CAT>", methods=['GET'])
 def projects_list_by_category(BY_CAT):
-    return [p.dict() for p in Project.query.filter_by(is_hidden=False,category=BY_CAT).limit(10).all()]
+    return [p.dict() for p in Project.query
+        .filter_by(is_hidden=False,category=BY_CAT)
+        .limit(10).all()]
 
 @app.route('/api/projects/search', methods=['GET'])
 def projects_search():
@@ -333,6 +342,7 @@ def index_root():
         headline=get_md('home-headline'),
         bottom=get_file('home-bottom.html'),
         about=get_md('home-about'),
+        about2=get_md('home-about2'),
     )
 
 @app.route("/project/<int:project_id>")

@@ -1,4 +1,4 @@
-var maps = {}, paginationtag = null, project_path = '';
+  var maps = {}, paginationtag = null, project_path = '';
 
 jQuery(function($){
 
