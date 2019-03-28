@@ -9,7 +9,7 @@ from werkzeug import secure_filename
 from flask_api import FlaskAPI
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-from sqlalchemy import or_
+from sqlalchemy import or_, desc
 
 import flask_admin as admin
 from flask_admin.model import BaseModelView
@@ -277,7 +277,7 @@ def projects_list_featured():
 def projects_list_all():
     return [p.dict() for p in Project.query
         .filter_by(is_hidden=False)
-        .order_by(category)
+        .order_by(desc(Project.category))
         .limit(25).all()]
 
 @app.route("/api/projects/by/<string:BY_CAT>", methods=['GET'])
