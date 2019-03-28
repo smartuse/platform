@@ -42,9 +42,10 @@ jQuery(function($){
     '</div>'
   }
 
+  // Load the gallery
+  if ($('#featured').length)
   $.getJSON('/api/projects/featured', function(projects) {
 
-    // Load into gallery
     $('#featured').each(function() {
       var $container = $(this);
       $.each(projects, function() {
@@ -52,28 +53,20 @@ jQuery(function($){
       });
     });
 
-    // Load into list
-    // $('#projects-featured').each(function() {
-    //   var $container = $(this).addClass('project-list');
-    //   $.each(projects, function() {
-    //     $container.append(
-    //       getProjectCard(this, false)
-    //     );
-    //   });
-    // });
-
   });
 
-  // Load other projects
-  $('#projects').each(function() {
-    var $container = $(this).addClass('project-list');
-    $.getJSON('/api/projects/all', function(projects) {
-      $.each(projects, function() {
-        $container.append(
-          getProjectCard(this)
-        );
+  // Load Labs project categories
+  $.getJSON('/api/projects/by/labs', function(projects) {
+
+    $('#projects').each(function() {
+      var $container = $(this).addClass('project-list');
+        $.each(projects, function() {
+          $container.append(
+            getProjectCard(this)
+          );
+        });
       });
-    });
+
   });
 
   // Load search results

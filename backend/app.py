@@ -209,11 +209,8 @@ class Resource(db.Model):
     order = db.Column(db.Integer)
     title = db.Column(db.String(64), unique=True)
     description = db.Column(db.UnicodeText)
-    pipeline = db.Column(db.UnicodeText, doc="Mermaid pipeline diagram")
     notes = db.Column(db.UnicodeText, doc="Internal notes")
-    license = db.Column(db.Unicode(64), doc="Conditions of use")
     path = db.Column(db.Unicode(256), doc="Use the Data tab to upload files")
-    doc_url = db.Column(db.Unicode(256), doc="Link to a notebook or other documentation")
     projects = db.relationship('Project', secondary=projects_resources,
         backref=db.backref('resources', lazy='dynamic'))
     def __repr__(self):
@@ -229,11 +226,8 @@ class Resource(db.Model):
             'id': self.id,
             'name': "smartuse-resource-%d" % self.id,
             'title': self.title,
-            'license': self.license,
             'description': content,
-            'pipeline': self.pipeline,
             'notes': notes,
-            'doc_url': self.doc_url,
             'mediatype': get_media_type(self.path)
         }
         if self.path:

@@ -55,18 +55,13 @@ jQuery(function($){
         '<div class="resource-header"><a name="anchor-' + rescount + '"></a>'
         //'<a href="#item-' + rescount + '">'
         // + '<i class="material-icons">layers</i>'
-        + (res.title || res.name)
+        + (res.title || res.description)
         + '</div>'
       );
 
       description = container.find('.description');
-      if (res.description && res.description.length>1)
+      if (typeof(res.title) === 'undefined' && res.description && res.description.length>1) {
         description.append(res.description);
-
-      if (res.pipeline && res.pipeline.length>1) {
-        description.append('<div class="mermaid" id="mermaid' + res.id + '"></div>');
-        var graph = mermaid.render('mermaid' + res.id, 'graph LR;' + res.pipeline,
-          function (svgCode, bindFunctions) { $('#mermaid' + res.id).html(svgCode); });
       }
 
       datasets = container.find('.resource-datasets');
@@ -74,7 +69,12 @@ jQuery(function($){
         datasets.append('<p class="license"><i class="fas fa-certificate"></i> ' + res.license + '</p>');
       if (res.doc_url && res.doc_url.length>1)
         datasets.append('<p class="doc_url"><a href="' + res.doc_url + '"><i class="fas fa-book-open"></i> Details</a></p>');
-
+      if (res.pipeline && res.pipeline.length>1) {
+        datasets.append('<div class="mermaid" id="mermaid' + res.id + '"></div>');
+        res_id = (res.id || res.name || res.title.replace(' ', '-'));
+        var graph = mermaid.render('mermaid' + res_id, 'graph LR;' + res.pipeline,
+          function (svgCode, bindFunctions) { $('#mermaid' + res_id).html(svgCode); });
+      }
 
         // console.log(res);
 

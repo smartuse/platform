@@ -13,10 +13,11 @@ block content
     .container
       .row
         .col-md-12.page-meta
-          if organisation
-            .organisation-image
-              a(href=organisation.url,target="_blank")
-                img(src=organisation.logo,title=organisation.name)
+          //
+            if organisation
+              .organisation-image
+                a(href=organisation.url,target="_blank")
+                  img(src=organisation.logo,title=organisation.name)
           h1
             =meta.title
           if meta.summary
