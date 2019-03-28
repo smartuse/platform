@@ -1,8 +1,9 @@
 // Utility functions
 
-function get_project_path(url) {
+function get_project_path(url, canonical_url) {
+    pp = (canonical_url || PROJECT_ROOT || '');
     return (url.indexOf('http')<0) ?
-      project_path + '/' + url : url;
+      pp + '/' + url : url;
 }
 function get_media_type(fmt) {
     if (fmt == 'image') return 'image/png';

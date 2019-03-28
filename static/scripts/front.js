@@ -56,14 +56,15 @@ jQuery(function($){
   });
 
   // Load Labs project categories
-  $.getJSON('/api/projects/by/labs', function(projects) {
+  $.getJSON('/api/projects/all', function(projects) {
 
     $('#projects').each(function() {
       var $container = $(this).addClass('project-list');
         $.each(projects, function() {
-          $container.append(
-            getProjectCard(this)
-          );
+          if (this.featured)
+            $container.prepend(getProjectCard(this));
+          else
+            $container.append(getProjectCard(this));
         });
       });
 

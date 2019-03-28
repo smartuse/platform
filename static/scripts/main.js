@@ -1,9 +1,10 @@
-var maps = {}, paginationtag = null;
+var maps = {}, paginationtag = null, project_path = '';
 
 jQuery(function($){
 
-  function load_DataPackage(datapackage, top_container) {
+  function load_DataPackage(datapackage, top_container, canonical_url) {
     var rescount = 0;
+    if (typeof canonical_url !== 'string') canonical_url = project_path;
 
     function add_gallery_item(container, ii) {
       container.prepend('<div class="gallery" fullscreen=1></div>');
@@ -31,14 +32,14 @@ jQuery(function($){
           '<div class="resource-counter">' + count + '</div>'
 
         + '<div class="resource-container">'
-          + '<div class="container row" id="' + res.name + '">'
+          + '<div class="container row">'
             + '<div class="description col-md-9"></div>'
 
             + '<div class="resource-datasets col-md-3">'
 
             + (typeof res.author !== 'undefined' ?
               '<a href="#resourcesummary">'
-                + '<h5 class="mb-1">' + 'Datengrundlage' + '</h5>'
+                + '<b>' + 'Datengrundlage' + '</b>'
               + '</a>'
               + '<p class="res-author">' + res.author + '</p>'
               : '')
@@ -49,6 +50,22 @@ jQuery(function($){
         + '</div>'
 
         ).find('.resource-container:last-child').find('.container');
+
+        summary = $('.resource-summary').append(
+          '<div class="list-group-item list-group-item-action flex-column align-items-start">' +
+            '<div class="d-flex w-100 justify-content-between">' +
+              '<h5 class="mb-1">' + (res.name || res.title) + '</h5>' +
+              '<div role="group" class="download-buttons btn-group">' +
+              '<small class="btn btn-sm download-format">' + (res.format || res.mediatype || '') + '</small>' +
+              '<a type="button" href="' + get_project_path(res.path, canonical_url) + '" download' +
+              ' class="btn btn-primary btn-sm"><i class="fas fa-arrow-down"></i>&nbsp; Herunterladen</a>' +
+              // (res.mediatype === 'application/vnd.datapackage+json' ? '' :
+              //   '<a type="button" href="' + get_project_path(project_path) +
+              //   '" class="btn btn-primary btn-sm"><i class="fas fa-cogs"></i>&nbsp; Data Package</a>') +
+              '</div>' +
+            '</div>' +
+          '</div>'
+        );
       }
 
       container.before(
@@ -60,8 +77,12 @@ jQuery(function($){
       );
 
       description = container.find('.description');
-      if (typeof(res.title) === 'undefined' && res.description && res.description.length>1) {
+      if (res.title && res.description && res.description.length>1) {
         description.append(res.description);
+      } else {
+        // Remove description container if unused
+        description.next().removeClass('col-md-3').addClass('col-md-12');
+        description.remove();
       }
 
       datasets = container.find('.resource-datasets');
@@ -88,8 +109,8 @@ jQuery(function($){
       if (res.mediatype == 'application/vnd.datapackage+json') {
         pp = get_project_path(res.path);
         $.getJSON(pp, function(dp) {
-          project_path = pp.substring(0, pp.lastIndexOf('/')+1);
-          load_DataPackage(dp, container);
+          pp = pp.substring(0, pp.lastIndexOf('/')+1);
+          load_DataPackage(dp, container, pp);
         });
 
       } else if (res.mediatype.indexOf('image/')==0) {
@@ -97,14 +118,14 @@ jQuery(function($){
         item = add_gallery_item(container, rescount);
 
         img = item.append('<img id="image-'+rescount+'" />').find('img:last-child');
-        imgpath = get_project_path(res.path);
+        imgpath = get_project_path(res.path, canonical_url);
         img.attr('style', 'background-image:url('+imgpath+')');
 
       } else if (res.mediatype == 'application/html') {
         rescount = rescount + 1;
         item = add_gallery_item(container, rescount);
 
-        imgpath = get_project_path(res.path);
+        imgpath = get_project_path(res.path, canonical_url);
         item.append('<iframe id="frame-'+rescount+'" src="' + imgpath + '"/>');
 
       } else if (res.mediatype == 'application/vnd.geo+json') {
@@ -112,7 +133,7 @@ jQuery(function($){
         item = add_gallery_item(container, rescount);
 
         item.append('<div class="map" id="map-'+rescount+'" />');
-        filepath = get_project_path(res.path);
+        filepath = get_project_path(res.path, canonical_url);
 
         var lati = 47.38083877331195;
         var long = 8.548545854583836;
@@ -212,11 +233,14 @@ jQuery(function($){
   } //-load_DataPackage
 
   // Load selected project
-  if (typeof project_id != 'undefined') {
-    $.getJSON('/api/project/' + project_id, load_DataPackage);
-  } else if (typeof project_path != 'undefined') {
-    $.getJSON('/' + project_path + '/datapackage.json', load_DataPackage);
+  if (typeof PROJECT_ID != 'undefined') {
+    project_path = '/api/project/' + PROJECT_ID;
+  } else if (typeof PROJECT_ROOT != 'undefined') {
+    project_path = PROJECT_ROOT + '/datapackage.json';
   }
+  if (project_path)
+    $.getJSON(project_path, load_DataPackage);
+
   // setStoryLayout();
   // $(window).resize(setStoryLayout);
 

@@ -1,7 +1,7 @@
 extends public/base.pug
 
 block scripts
-  script project_id=#{meta.id}; project_path='/uploads';
+  script PROJECT_ID=#{meta.id}; PROJECT_ROOT='/uploads';
   script(src='/vendor/zepto.smoothscroll.js')
   script(src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.0/mapbox-gl.js')
   link(href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.0/mapbox-gl.css',rel='stylesheet')
@@ -76,26 +76,27 @@ block content
           .resource-content
 
       #resourcesummary.row
-        .col-md-12.resource-summary
+        .col-md-12
           .h2 Resourcen
-          .list-group
-            each resource in resources
-              .list-group-item.list-group-item-action.flex-column.align-items-start
-                .d-flex.w-100.justify-content-between
-                  h5.mb-1
-                    =resource.title
-                  .download-buttons.btn-group(role="group")
-                    a.btn.btn-primary.btn-sm(type="button" href='{{ resource.path }}' download)
-                      i.fas.fa-arrow-down
-                      | &nbsp; Herunterladen
-                    a.btn.btn-primary.btn-sm(type="button" href='{{ project.detail_url }}')
-                      i.fas.fa-cogs
-                      | &nbsp;
-                      =resource.mediatype
-              if resource.notes
-                .list-group-item
-                  p.resource-notes
-                    =resource.notes
+          .list-group.resource-summary
+            //
+              each resource in resources
+                .list-group-item.list-group-item-action.flex-column.align-items-start
+                  .d-flex.w-100.justify-content-between
+                    h5.mb-1
+                      =resource.title
+                    .download-buttons.btn-group(role="group")
+                      a.btn.btn-primary.btn-sm(type="button" href='{{ resource.path }}' download)
+                        i.fas.fa-arrow-down
+                        | &nbsp; Herunterladen
+                      a.btn.btn-primary.btn-sm(type="button" href='{{ project.detail_url }}')
+                        i.fas.fa-cogs
+                        | &nbsp;
+                        =resource.mediatype
+                if resource.notes
+                  .list-group-item
+                    p.resource-notes
+                      =resource.notes
 
   #share.modal(tabindex='-1', role='dialog')
     .modal-dialog(role='document')

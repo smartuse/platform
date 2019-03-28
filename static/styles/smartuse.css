@@ -109,7 +109,6 @@ body {
 
 .side-info .organisation-name {
 	font-size: 15pt;
-	text-decoration: underline;
 }
 .side-info div {
   margin: 0;
@@ -159,7 +158,8 @@ p.author {
 	margin: -1.8em 0 0;
 	position: absolute;
 }
-.resource-summary {
+
+#resourcesummary {
 	margin-top: 2em;
 }
 
