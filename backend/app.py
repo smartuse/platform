@@ -342,7 +342,6 @@ def index_root():
         headline=get_md('home-headline'),
         bottom=get_file('home-bottom.html'),
         about=get_md('home-about'),
-        about2=get_md('home-about2'),
     )
 
 @app.route("/project/<int:project_id>")
