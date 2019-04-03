@@ -123,9 +123,7 @@ class Project(db.Model):
     updated = db.Column(db.DateTime(), default=datetime.datetime.now())
     summary = db.Column(db.Unicode(255))
     details = db.Column(db.UnicodeText)
-
     category = db.Column(db.String(32), doc="review, labs, collect, present, publish")
-    notes = db.Column(db.UnicodeText)
 
     organisation_id = db.Column(db.Integer, db.ForeignKey(Organisation.id))
     organisation = db.relationship(Organisation,
@@ -170,7 +168,6 @@ class Project(db.Model):
             'date-updated': self.updated.strftime("%d.%m.%Y"),
             'category': self.category,
             'summary': self.summary,
-            'notes': self.notes,
             'url': self.url,
             'detail_url': self.detail_url,
         }
@@ -298,7 +295,7 @@ class ProjectView(ModelView):
 admin.add_view(ProjectView(Project, db.session, name="Projects (Data Packages)"))
 
 class RenderingView(ModelView):
-    column_list = ('title', 'path', 'notes')
+    column_list = ('title', 'path')
     can_export = True
 admin.add_view(RenderingView(Rendering, db.session, name="Renderings (Views)"))
 

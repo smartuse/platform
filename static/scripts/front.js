@@ -5,7 +5,7 @@ jQuery(function($){
   function getProjectFeature($obj, t) {
     $obj.append(
       '<div class="glider" style="background-image:url(\'' + t.screenshot + '\')">' +
-        '<a href="/project/' + t.id + '">' +
+        '<a href="' + t.url + '">' +
           '<div class="legend">' +
             '<h4>' + t.title + '</h4>' +
             '<p>' + t.summary + '</p>' +

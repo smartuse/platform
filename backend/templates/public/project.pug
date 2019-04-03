@@ -73,30 +73,26 @@ block content
 
       .row
         .col-md-12
-          .resource-content
+          .rendering-content
 
-      #resourcesummary.row
+      #renderingsummary.row
         .col-md-12
           .h2 Resourcen
-          .list-group.resource-summary
+          .list-group.rendering-summary
             //
-              each resource in resources
+              each rendering in renderings
                 .list-group-item.list-group-item-action.flex-column.align-items-start
                   .d-flex.w-100.justify-content-between
                     h5.mb-1
-                      =resource.title
+                      =rendering.title
                     .download-buttons.btn-group(role="group")
-                      a.btn.btn-primary.btn-sm(type="button" href='{{ resource.path }}' download)
+                      a.btn.btn-primary.btn-sm(type="button" href='{{ rendering.path }}' download)
                         i.fas.fa-arrow-down
                         | &nbsp; Herunterladen
                       a.btn.btn-primary.btn-sm(type="button" href='{{ project.detail_url }}')
                         i.fas.fa-cogs
                         | &nbsp;
-                        =resource.mediatype
-                if resource.notes
-                  .list-group-item
-                    p.resource-notes
-                      =resource.notes
+                        =rendering.mediatype
 
   #share.modal(tabindex='-1', role='dialog')
     .modal-dialog(role='document')

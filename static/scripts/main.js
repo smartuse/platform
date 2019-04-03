@@ -19,26 +19,26 @@ jQuery(function($){
     }
 
     // console.log(datapackage);
-    $.each(datapackage.resources, function(i, res) {
+    $.each(datapackage.renderings, function(i, res) {
 
       if (!(res.name || res.title)) return;
 
       if (typeof(top_container) == 'object') {
         container = top_container;
       } else {
-        var $resourceContent = $('.resource-content');
-        var count = $resourceContent.find('.resource-container').length + 1;
-        container = $resourceContent.append(
-          '<div class="resource-counter">' + count + '</div>'
+        var $renderingContent = $('.rendering-content');
+        var count = $renderingContent.find('.rendering-container').length + 1;
+        container = $renderingContent.append(
+          '<div class="rendering-counter">' + count + '</div>'
 
-        + '<div class="resource-container">'
+        + '<div class="rendering-container">'
           + '<div class="container row">'
             + '<div class="description col-md-9"></div>'
 
-            + '<div class="resource-datasets col-md-3">'
+            + '<div class="rendering-datasets col-md-3">'
 
             + (typeof res.author !== 'undefined' ?
-              '<a href="#resourcesummary">'
+              '<a href="#renderingsummary">'
                 + '<b>' + 'Datengrundlage' + '</b>'
               + '</a>'
               + '<p class="res-author">' + res.author + '</p>'
@@ -49,9 +49,9 @@ jQuery(function($){
           + '</div>'
         + '</div>'
 
-        ).find('.resource-container:last-child').find('.container');
+        ).find('.rendering-container:last-child').find('.container');
 
-        summary = $('.resource-summary').append(
+        summary = $('.rendering-summary').append(
           '<div class="list-group-item list-group-item-action flex-column align-items-start">' +
             '<div class="d-flex w-100 justify-content-between">' +
               '<h5 class="mb-1">' + (res.name || res.title) + '</h5>' +
@@ -69,7 +69,7 @@ jQuery(function($){
       }
 
       container.before(
-        '<div class="resource-header"><a name="anchor-' + rescount + '"></a>'
+        '<div class="rendering-header"><a name="anchor-' + rescount + '"></a>'
         //'<a href="#item-' + rescount + '">'
         // + '<i class="material-icons">layers</i>'
         + (res.title || res.description)
@@ -85,7 +85,7 @@ jQuery(function($){
         description.remove();
       }
 
-      datasets = container.find('.resource-datasets');
+      datasets = container.find('.rendering-datasets');
       if (res.license && res.license.length>1)
         datasets.append('<p class="license"><i class="fas fa-certificate"></i> ' + res.license + '</p>');
       if (res.doc_url && res.doc_url.length>1)
@@ -203,7 +203,7 @@ jQuery(function($){
       } // -geojson
 
       container = false;
-    }); // -each resources
+    }); // -each renderings
 
     /*
     if (rescount > 0 && $('rg-pagination').length > 0) {

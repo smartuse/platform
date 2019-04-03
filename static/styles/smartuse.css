@@ -87,7 +87,7 @@ body {
 	background: white;
 }
 
-.resource-container {
+.rendering-container {
 	margin: 3em 0em;
 
 	border-style: solid;
@@ -97,10 +97,10 @@ body {
 	padding-left: 10px;
 }
 
-.resource-counter::before {
+.rendering-counter::before {
 	content: '#';
 }
-.resource-counter {
+.rendering-counter {
 	color: #999;
 	float: left;
 	margin-left: -1.5em;
@@ -151,7 +151,7 @@ p.author {
   color: #555;
   border-bottom: 1px dashed #555;
 }
-.resource-header {
+.rendering-header {
 	color: #000;
 	font-size: 150%;
 	/*margin: 0.5em 0px;*/
@@ -159,7 +159,7 @@ p.author {
 	position: absolute;
 }
 
-#resourcesummary {
+#renderingsummary {
 	margin-top: 2em;
 }
 
@@ -355,7 +355,7 @@ a.featured, a.featured h5, a.featured p
 .project-authors {
 	margin-top: 1em;
 }
-.project-authors, .resource-summary {
+.project-authors, .rendering-summary {
 	clear: both;
 }
 .author {
@@ -427,7 +427,7 @@ a.featured, a.featured h5, a.featured p
 		background-color: transparent;
 		border-color: transparent;
 	}
-	.resource-counter {
+	.rendering-counter {
 		display: none;
 		/*float: left;
 		display: block;
