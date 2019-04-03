@@ -118,6 +118,7 @@ class Project(db.Model):
     is_hidden = db.Column(db.Boolean(), default=False)
     is_featured = db.Column(db.Boolean(), default=False)
 
+    slug = db.Column(db.String(64), unique=True)
     token_edit = db.Column(db.String(64), default=codecs.encode(urandom(12), 'hex').decode())
 
     def thumb(self, as_thumbnail=True):
@@ -130,7 +131,7 @@ class Project(db.Model):
         return self.title
     @property
     def url(self):
-        return request.host_url.rstrip('/') + url_for('project_page', project_id=self.id)
+        return request.host_url.rstrip('/') + url_for('project_page_by_slug', project_slug=self.slug)
     @property
     def detail_url(self):
         return request.host_url.rstrip('/') + url_for('project_detail', project_id=self.id)
@@ -244,6 +245,7 @@ admin.add_view(ModelView(Organisation, db.session, name="Organisations"))
 
 class ProjectView(ModelView):
     column_list = ('title', 'created', 'updated', 'category')
+    form_excluded_columns = ('slug', 'token_edit')
     form_extra_fields = {
         'screenshot': ImageUploadField('Screenshot',
             base_path=screenshot_path, url_relative_path='/screenshots/',
@@ -251,6 +253,9 @@ class ProjectView(ModelView):
     }
     inline_models = [Resource]
     can_export = True
+    def on_model_change(view, form, model, is_created):
+        model.slug = form.title.data.lower().strip().replace(' ', '-')
+
 admin.add_view(ProjectView(Project, db.session, name="Data Packages (Projects)"))
 
 class ResourceView(ModelView):
@@ -344,9 +349,15 @@ def index_root():
         about=get_md('home-about'),
     )
 
+@app.route("/project/<project_slug>")
+def project_page_by_slug(project_slug):
+    return project_page(Project.query.filter_by(slug=project_slug).first_or_404())
+
 @app.route("/project/<int:project_id>")
-def project_page(project_id):
-    project = Project.query.filter_by(id=project_id).first_or_404()
+def project_page_by_id(project_id):
+    return project_page(Project.query.filter_by(id=project_id).first_or_404())
+
+def project_page(project):
     content = Markup(markdown.markdown(project.details, extensions=MARKDOWN_EXT))
     meta = project.dict()
     created = arrow.get(meta['date-created'], 'DD.MM.YYYY').humanize()

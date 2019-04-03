@@ -20,7 +20,7 @@ jQuery(function($){
       with_screenshot = true;
     return '' +
     '<div class="col-md-4 project-card">' +
-      '<a href="/project/' + t.id + '">' +
+      '<a href="' + t.url + '">' +
         '<div class="card mb-3">' +
           '<div class="card-header ">' +
             (with_screenshot && t.featured ?
@@ -56,7 +56,7 @@ jQuery(function($){
   });
 
   // Load Labs project categories
-  $.getJSON('/api/projects/all', function(projects) {
+  $.getJSON('/api/projects', function(projects) {
 
     $('#projects').each(function() {
       var $container = $(this).addClass('project-list');
