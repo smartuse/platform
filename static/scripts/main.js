@@ -38,10 +38,17 @@ jQuery(function($){
             + '<div class="rendering-datasets col-md-3">'
 
             + (typeof res.author !== 'undefined' ?
+              '<p class="res-author">' + res.author + '</p>' : '')
+
+            + (typeof res.sources !== 'undefined' && res.sources.length > 0?
               '<a href="#renderingsummary">'
                 + '<b>' + 'Datengrundlage' + '</b>'
               + '</a>'
-              + '<p class="res-author">' + res.author + '</p>'
+              + '<ul class="res-sources">' +
+                res.sources.map(x => '<a href="' + x['path'] + '">' +
+                  x['title'] + '</a>'
+                ).join('<li>')
+              + '</ul>'
               : '')
 
             + '</div>'

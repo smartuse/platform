@@ -101,24 +101,24 @@ class Organisation(db.Model):
             'logo': self.logo
         }
 
-# class License(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     name = db.Column(db.Unicode(256), unique=True)
-#     title = db.Column(db.Unicode(256), unique=True)
-#     path = db.Column(db.Unicode(2048), doc="Enter URL to the license")
-#     def __repr__(self):
-#         return self.title
-#     def dict(self):
-#         return {
-#             'id': self.id,
-#             'name': self.name,
-#             'title': self.title,
-#             'path': self.path or '',
-#         }
+class License(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.Unicode(256), unique=True)
+    title = db.Column(db.Unicode(256), unique=True)
+    path = db.Column(db.Unicode(2048), doc="Enter URL to the license")
+    def __repr__(self):
+        return self.title
+    def dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'title': self.title,
+            'path': self.path or '',
+        }
 
 class Project(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(64), unique=True)
+    title = db.Column(db.String(128), unique=True)
     created = db.Column(db.DateTime(), default=datetime.datetime.now())
     updated = db.Column(db.DateTime(), default=datetime.datetime.now())
     summary = db.Column(db.Unicode(255))
@@ -129,9 +129,9 @@ class Project(db.Model):
     organisation = db.relationship(Organisation,
         backref=db.backref('project', cascade="all, delete-orphan", single_parent=True))
 
-    # license_id = db.Column(db.Integer, db.ForeignKey(License.id))
-    # license = db.relationship(License,
-    #     backref=db.backref('project', cascade="all, delete-orphan", single_parent=True))
+    license_id = db.Column(db.Integer, db.ForeignKey(License.id))
+    license = db.relationship(License,
+        backref=db.backref('project', cascade="all, delete-orphan", single_parent=True))
 
     screenshot = db.Column(db.String(256), doc="Use the Data tab to upload a screenshot")
 
@@ -217,18 +217,18 @@ class User(db.Model):
             'organisation': organisation,
         }
 
-# class Source(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     title = db.Column(db.Unicode(256), unique=True)
-#     path = db.Column(db.Unicode(2048), doc="Enter URL to the data source")
-#     def __repr__(self):
-#         return self.title
-#     def dict(self):
-#         return {
-#             'id': self.id,
-#             'title': self.title,
-#             'path': self.path or '',
-#         }
+class Source(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.Unicode(256), unique=True)
+    path = db.Column(db.Unicode(2048), doc="Enter URL to the data source")
+    def __repr__(self):
+        return self.title
+    def dict(self):
+        return {
+            'id': self.id,
+            'title': self.title,
+            'path': self.path or '',
+        }
 
 # Many-to-many relationship
 projects_renderings = db.Table(
@@ -236,23 +236,23 @@ projects_renderings = db.Table(
     db.Column('project_id',   db.Integer(), db.ForeignKey('project.id')),
     db.Column('rendering_id', db.Integer(), db.ForeignKey('rendering.id'))
 )
-# sources_renderings = db.Table(
-#     'sources_renderings',
-#     db.Column('source_id',    db.Integer(), db.ForeignKey('source.id')),
-#     db.Column('rendering_id', db.Integer(), db.ForeignKey('rendering.id'))
-# )
+sources_renderings = db.Table(
+    'sources_renderings',
+    db.Column('source_id',    db.Integer(), db.ForeignKey('source.id')),
+    db.Column('rendering_id', db.Integer(), db.ForeignKey('rendering.id'))
+)
 
 class Rendering(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     order = db.Column(db.Integer)
-    title = db.Column(db.String(64), unique=True)
+    title = db.Column(db.String(128), unique=True)
     description = db.Column(db.UnicodeText)
-    path = db.Column(db.Unicode(256),
+    path = db.Column(db.Unicode(2048),
         doc="Provide a URL here, use the Data tab to upload files")
     projects = db.relationship('Project', secondary=projects_renderings,
         backref=db.backref('renderings', lazy='dynamic'))
-    # sources = db.relationship('Source', secondary=sources_renderings,
-    #     backref=db.backref('renderings', lazy='dynamic'))
+    sources = db.relationship('Source', secondary=sources_renderings,
+        backref=db.backref('renderings', lazy='dynamic'))
     def __repr__(self):
         return self.title
     def dict(self):
@@ -268,7 +268,8 @@ class Rendering(db.Model):
             'name': slugify(self.title),
             'description': content,
             'mediatype': get_media_type(self.path),
-            'path': self.path or ''
+            'path': self.path or '',
+            'sources': [r.dict() for r in self.sources]
         }
 
 # ----------- Admin views -----------
@@ -299,9 +300,9 @@ class RenderingView(ModelView):
     can_export = True
 admin.add_view(RenderingView(Rendering, db.session, name="Renderings (Views)"))
 
-# admin.add_view(ModelView(Source, db.session, name="Data sources"))
-#
-# admin.add_view(ModelView(License, db.session, name="Licenses"))
+admin.add_view(ModelView(Source, db.session, name="Data sources"))
+
+admin.add_view(ModelView(License, db.session, name="Licenses"))
 
 admin.add_view(FileAdmin(upload_path, '/uploads/', name="Uploads"))
 
@@ -352,11 +353,14 @@ def project_detail(project_id):
     renderings = project.renderings.order_by(Rendering.order).all()
     author = project.users.first()
     if author is not None: author = author.dict()
+    license = project.license
+    if license is not None: license = license.dict()
     return {
         'data': project.dict(),
         'details': project.details,
         'author': author,
-        'renderings': [r.dict() for r in renderings]
+        'license': license,
+        'renderings': [r.dict() for r in renderings],
     }
 
 def get_file(filename):
