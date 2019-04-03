@@ -63,6 +63,8 @@ def get_media_type(filename, default=None):
         return 'image/jpeg'
     if filename.endswith('.geojson'):
         return 'application/vnd.geo+json'
+    if filename.contains('jupyter') or filename.contains('ipynb'):
+        return 'application/ipynb+json'
     if filename.endswith('datapackage.json'):
         return 'application/vnd.datapackage+json'
     if filename.startswith('http'):
@@ -221,6 +223,7 @@ class Source(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.Unicode(256), unique=True)
     path = db.Column(db.Unicode(2048), doc="Enter URL to the data source")
+    fmt = db.Column(db.String(32))
     def __repr__(self):
         return self.title
     def dict(self):
@@ -228,6 +231,8 @@ class Source(db.Model):
             'id': self.id,
             'title': self.title,
             'path': self.path or '',
+            'format': self.fmt,
+            'mediatype': get_media_type(self.path, self.fmt)
         }
 
 # Many-to-many relationship
