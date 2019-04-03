@@ -54,7 +54,7 @@ admin = admin.Admin(app, name='SmartUse', template_mode='bootstrap3')
 
 # ------------ Helper functions ------------
 
-def get_media_type(filename):
+def get_media_type(filename, default=None):
     if filename.endswith('.gif'):
         return 'image/gif'
     if filename.endswith('.png'):
@@ -67,7 +67,7 @@ def get_media_type(filename):
         return 'application/vnd.datapackage+json'
     if filename.startswith('http'):
         return 'application/html'
-    return None
+    return default
 
 def get_features_geojson(name, objs):
     if objs is None:
@@ -79,6 +79,9 @@ def get_features_geojson(name, objs):
     return geojson.dumps(
         {'type': 'FeatureCollection', 'features': features}
     )
+
+def slugify(title):
+    return title.lower().strip().replace(' ', '-')
 
 # -------- Models ---------------
 
@@ -98,6 +101,21 @@ class Organisation(db.Model):
             'logo': self.logo
         }
 
+# class License(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     name = db.Column(db.Unicode(256), unique=True)
+#     title = db.Column(db.Unicode(256), unique=True)
+#     path = db.Column(db.Unicode(2048), doc="Enter URL to the license")
+#     def __repr__(self):
+#         return self.title
+#     def dict(self):
+#         return {
+#             'id': self.id,
+#             'name': self.name,
+#             'title': self.title,
+#             'path': self.path or '',
+#         }
+
 class Project(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(64), unique=True)
@@ -112,6 +130,10 @@ class Project(db.Model):
     organisation_id = db.Column(db.Integer, db.ForeignKey(Organisation.id))
     organisation = db.relationship(Organisation,
         backref=db.backref('project', cascade="all, delete-orphan", single_parent=True))
+
+    # license_id = db.Column(db.Integer, db.ForeignKey(License.id))
+    # license = db.relationship(License,
+    #     backref=db.backref('project', cascade="all, delete-orphan", single_parent=True))
 
     screenshot = db.Column(db.String(256), doc="Use the Data tab to upload a screenshot")
 
@@ -198,42 +220,59 @@ class User(db.Model):
             'organisation': organisation,
         }
 
-# Many-to-many relationship
-projects_resources = db.Table(
-    'projects_resources',
-    db.Column('project_id', db.Integer(), db.ForeignKey('project.id')),
-    db.Column('resource_id', db.Integer(), db.ForeignKey('resource.id'))
-)
+# class Source(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     title = db.Column(db.Unicode(256), unique=True)
+#     path = db.Column(db.Unicode(2048), doc="Enter URL to the data source")
+#     def __repr__(self):
+#         return self.title
+#     def dict(self):
+#         return {
+#             'id': self.id,
+#             'title': self.title,
+#             'path': self.path or '',
+#         }
 
-class Resource(db.Model):
+# Many-to-many relationship
+projects_renderings = db.Table(
+    'projects_renderings',
+    db.Column('project_id',   db.Integer(), db.ForeignKey('project.id')),
+    db.Column('rendering_id', db.Integer(), db.ForeignKey('rendering.id'))
+)
+# sources_renderings = db.Table(
+#     'sources_renderings',
+#     db.Column('source_id',    db.Integer(), db.ForeignKey('source.id')),
+#     db.Column('rendering_id', db.Integer(), db.ForeignKey('rendering.id'))
+# )
+
+class Rendering(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     order = db.Column(db.Integer)
     title = db.Column(db.String(64), unique=True)
     description = db.Column(db.UnicodeText)
-    notes = db.Column(db.UnicodeText, doc="Internal notes")
-    path = db.Column(db.Unicode(256), doc="Use the Data tab to upload files")
-    projects = db.relationship('Project', secondary=projects_resources,
-        backref=db.backref('resources', lazy='dynamic'))
+    path = db.Column(db.Unicode(256),
+        doc="Provide a URL here, use the Data tab to upload files")
+    projects = db.relationship('Project', secondary=projects_renderings,
+        backref=db.backref('renderings', lazy='dynamic'))
+    # sources = db.relationship('Source', secondary=sources_renderings,
+    #     backref=db.backref('renderings', lazy='dynamic'))
     def __repr__(self):
         return self.title
     def dict(self):
         content = ''
-        notes = ''
         if self.description:
-            content = Markup(markdown.markdown(self.description, extensions=MARKDOWN_EXT))
-        if self.notes:
-            notes = Markup(markdown.markdown(self.notes, extensions=MARKDOWN_EXT))
-        r = {
+            try:
+                content = Markup(markdown.markdown(self.description, extensions=MARKDOWN_EXT))
+            except Exception as e:
+                print(e)
+        return {
             'id': self.id,
-            'name': "smartuse-resource-%d" % self.id,
             'title': self.title,
+            'name': slugify(self.title),
             'description': content,
-            'notes': notes,
-            'mediatype': get_media_type(self.path)
+            'mediatype': get_media_type(self.path),
+            'path': self.path or ''
         }
-        if self.path:
-            r['path'] = self.path
-        return r
 
 # ----------- Admin views -----------
 
@@ -251,17 +290,21 @@ class ProjectView(ModelView):
             base_path=screenshot_path, url_relative_path='/screenshots/',
             thumbnail_size=(256, 256, True))
     }
-    inline_models = [Resource]
+    inline_models = [Rendering]
     can_export = True
     def on_model_change(view, form, model, is_created):
-        model.slug = form.title.data.lower().strip().replace(' ', '-')
+        model.slug = slugify(form.title.data)
 
-admin.add_view(ProjectView(Project, db.session, name="Data Packages (Projects)"))
+admin.add_view(ProjectView(Project, db.session, name="Projects (Data Packages)"))
 
-class ResourceView(ModelView):
+class RenderingView(ModelView):
     column_list = ('title', 'path', 'notes')
     can_export = True
-admin.add_view(ResourceView(Resource, db.session, name="Resources (Datasets)"))
+admin.add_view(RenderingView(Rendering, db.session, name="Renderings (Views)"))
+
+# admin.add_view(ModelView(Source, db.session, name="Data sources"))
+#
+# admin.add_view(ModelView(License, db.session, name="Licenses"))
 
 admin.add_view(FileAdmin(upload_path, '/uploads/', name="Uploads"))
 
@@ -302,10 +345,6 @@ def projects_search():
         Project.summary.ilike(q),
     )).limit(50).all()]
 
-@app.route("/api/resources", methods=['GET'])
-def resources_list():
-    return [r.dict() for r in Resource.query.limit(10).all()]
-
 @app.route("/api/organisations", methods=['GET'])
 def organisations_list():
     return [o.dict() for o in Organisation.query.limit(10).all()]
@@ -313,14 +352,14 @@ def organisations_list():
 @app.route("/api/project/<int:project_id>", methods=['GET'])
 def project_detail(project_id):
     project = Project.query.filter_by(id=project_id).first_or_404()
-    resources = project.resources.order_by(Resource.order).all()
+    renderings = project.renderings.order_by(Rendering.order).all()
     author = project.users.first()
     if author is not None: author = author.dict()
     return {
         'data': project.dict(),
         'details': project.details,
         'author': author,
-        'resources': [r.dict() for r in resources]
+        'renderings': [r.dict() for r in renderings]
     }
 
 def get_file(filename):
@@ -370,7 +409,7 @@ def project_page(project):
     # version = 1.2
     organisation = project.organisation
     authors = [author.dict() for author in project.users]
-    resources = sorted([res.dict() for res in project.resources],
+    renderings = sorted([res.dict() for res in project.renderings],
         key=lambda res: res['id'])
     return render_template('public/project.pug', **locals())
 
