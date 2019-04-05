@@ -195,15 +195,22 @@ class Source(db.Model):
     title = db.Column(db.Unicode(256), unique=True)
     path = db.Column(db.Unicode(2048), doc="Enter URL to the data source")
     fmt = db.Column(db.String(32))
+    organisation_id = db.Column(db.Integer, db.ForeignKey(Organisation.id))
+    organisation = db.relationship(Organisation,
+        backref=db.backref('source', cascade="all, delete-orphan", single_parent=True))
     def __repr__(self):
         return self.title
     def dict(self):
+        organisation = {}
+        if not self.organisation is None:
+            organisation = self.organisation.dict()
         return {
             'id': self.id,
             'title': self.title,
             'path': self.path or '',
             'format': helper.media_name(self.path, self.fmt),
-            'mediatype': helper.media_mime(self.path, self.fmt)
+            'mediatype': helper.media_mime(self.path, self.fmt),
+            'organisation': organisation,
         }
 
 # Many-to-many relationship

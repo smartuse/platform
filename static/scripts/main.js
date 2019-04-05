@@ -41,7 +41,9 @@ jQuery(function($){
     function get_data_sources(sources) {
       return '<ul class="res-sources"><li>' +
         sources.map(x => '<a href="' + x['path'] + '">' +
-          x['title'] + '</a>' + '<fmt>' + x['format'] + '</fmt>'
+          x['title'] + '</a>' +
+          '<fmt>' + x['format'] + '</fmt>' +
+          '<p>' + x['organisation']['name'] + '</p>'
         ).join('</li><li>')
       + '</li></ul>';
     }
