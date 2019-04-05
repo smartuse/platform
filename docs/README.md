@@ -214,7 +214,7 @@ A sample response from our API:
         "date-updated": "2018-04-06",
         "title": "Gemeinden auf SmartUse",
         "summary": "Projekte auf SmartUse geolokalisiert",
-        "detail_url": "http://alpha.smartuse.ch/api/project/5",
+        "path": "http://alpha.smartuse.ch/api/project/5",
         "featured": false,
         "name": "smartuse-5",
         "id": 5,
@@ -292,7 +292,7 @@ To achieve our longer-term aim is to develop an accessible, usable, highly perfo
       - **Create, edit and delete functionality for data pipelines**: A user should be able to create, modify and delete data pipelines for his/her data projects.
     - Backend:
       - **Templates for data pipelines**: In order to support organisations and users in the process of data publication, SmartUse should offer templates for standard data pipelines. Templates can be globally available or specific for an organisation.
-      - **Versioning of data projects**: SmartUse should support multiple versions of a data project. An organisation should be able to approve a sub set of the available versions of a data project for publication. 
+      - **Versioning of data projects**: SmartUse should support multiple versions of a data project. An organisation should be able to approve a sub set of the available versions of a data project for publication.
       - **Detection of data source updates**: SmartUse should be able to detect updates of a data source. It should automatically fetch the new data and apply all the processing steps of the assigned data pipelines and automatically create a new version. As soon as the processing has been completed, it should inform the owner of the data project about the availability of new results. The new version of the data project including the automatically generated results can then be approved for publication by the data project owner or one of its users with the necessary assigned role. This feature requires role concept, publishing process, data pipelines, and versioning.
 
 89grad implemented and operates a set of web applications with extensive role concept, such as SmartUse will require in the next phase, as well as with various automation and integration requirements for various customers. Examples are:

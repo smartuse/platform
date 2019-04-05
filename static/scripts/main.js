@@ -22,21 +22,32 @@ jQuery(function($){
       return $('.rendering-summary').append(
         '<div class="list-group-item list-group-item-action flex-column align-items-start">' +
           '<div class="d-flex w-100 justify-content-between">' +
-            '<h5 class="mb-1">' + (res.name || res.title) + '</h5>' +
+            '<h5 class="mb-1">' +
+              (res.name || res.title) +
+            '</h5>' +
             '<div role="group" class="download-buttons btn-group">' +
-            '<small class="btn btn-sm download-format">' + (res.format || res.mediatype || '') + '</small>' +
-            '<a type="button" href="' + get_project_path(res.path, canonical_url) + '" download' +
-            ' class="btn btn-primary btn-sm"><i class="fas fa-arrow-down"></i>&nbsp; Herunterladen</a>' +
-            // (res.mediatype === 'application/vnd.datapackage+json' ? '' :
-            //   '<a type="button" href="' + get_project_path(project_path) +
-            //   '" class="btn btn-primary btn-sm"><i class="fas fa-cogs"></i>&nbsp; Data Package</a>') +
+              '<small class="btn btn-sm download-format">' + (res.format || res.mediatype || '') + '</small>' +
+              '<a type="button" href="' + get_project_path(res.path, canonical_url) + '" ' +
+              (res.mediatype && res.mediatype.startsWith('application') ?
+                'class="btn btn-primary btn-sm"><i class="fas fa-eye"></i>&nbsp; Anschauen</a>' :
+                'download class="btn btn-primary btn-sm"><i class="fas fa-arrow-down"></i>&nbsp; Herunterladen</a>') +
             '</div>' +
           '</div>' +
+          (res.sources ? get_data_sources(res.sources) : '') +
         '</div>'
       );
     }
 
-    add_rendering_summary(datapackage);
+    function get_data_sources(sources) {
+      return '<ul class="res-sources"><li>' +
+        sources.map(x => '<a href="' + x['path'] + '">' +
+          x['title'] + '</a>' + '<fmt>' + x['format'] + '</fmt>'
+        ).join('</li><li>')
+      + '</li></ul>';
+    }
+
+    if (datapackage.data)
+      add_rendering_summary(datapackage.data);
 
     // console.log(datapackage);
     $.each(datapackage.renderings, function(i, res) {
@@ -61,13 +72,8 @@ jQuery(function($){
               '<p class="res-author">' + res.author + '</p>' : '')
 
             + (typeof res.sources !== 'undefined' && res.sources.length > 0?
-                '<b>' + 'Datengrundlage' + '</b>'
-              + '<ul class="res-sources"><li>' +
-                res.sources.map(x => '<a href="' + x['path'] + '">' +
-                  x['title'] + '</a>'
-                ).join('</li><li>')
-              + '</li></ul>'
-              : '')
+                '<b>' + 'Datengrundlage' + '</b>' +
+                get_data_sources(res.sources) : '')
 
             + '</div>'
 
@@ -115,7 +121,7 @@ jQuery(function($){
       // );
 
       if (typeof(res.mediatype) == 'undefined' || res.mediatype === null)
-        res.mediatype = get_media_mime(res.format);
+        res.mediatype = get_media_type(res.format);
 
       if (res.mediatype == 'application/vnd.datapackage+json') {
         pp = get_project_path(res.path);

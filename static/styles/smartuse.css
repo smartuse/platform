@@ -158,6 +158,7 @@ p.author {
 	margin: -1.8em 0 0;
 	position: absolute;
 }
+
 .res-sources {
 	text-align: left;
 	padding: 0;
@@ -166,6 +167,24 @@ p.author {
 	margin-top: 1em;
 	list-style-type: none;
 }
+.res-sources li fmt {
+	font-family: monospace;
+	text-transform: uppercase;
+	font-size: 90%;
+	padding: 0.2em; margin: 0.5em;
+	color: #999; background: #eee;
+}
+.list-group-item .res-sources {
+	font-size: 80%;
+	margin: 0px; padding: 0px;
+}
+.list-group-item .res-sources li {
+	display: inline-block; margin-right: 2em;
+}
+.rendering-container .res-sources fmt {
+	display: none;
+}
+
 #renderingsummary {
 	margin-top: 2em;
 }

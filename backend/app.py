@@ -33,6 +33,8 @@ import hashlib, codecs, datetime
 import os.path as ospath
 from os import urandom
 
+from . import helper
+
 # Create application
 app = FlaskAPI(__name__, static_url_path='')
 app.debug = True
@@ -51,75 +53,6 @@ DEFAULT_THUMB = '../img/usermap.jpg'
 
 # Create admin
 admin = admin.Admin(app, name='SmartUse', template_mode='bootstrap3')
-
-# ------------ Helper functions ------------
-
-MEDIA_TYPES = [
-    {
-        'endswith': '.gif',
-        'mime': 'image/gif',
-        'text': 'Bild'
-    },{
-        'endswith': '.png',
-        'mime': 'image/png',
-        'text': 'Bild'
-    },{
-        'endswith': '.jpg',
-        'mime': 'image/jpeg',
-        'text': 'Bild'
-    },{
-        'endswith': '.geojson',
-        'mime': 'application/vnd.geo+json',
-        'text': 'Geodaten'
-    },{
-        'endswith': '.ipynb',
-        'contains': 'jupyter',
-        'mime': 'application/ipynb+json',
-        'text': 'Notebook'
-    },{
-        'endswith': 'datapackage.json',
-        'mime': 'application/vnd.datapackage+json',
-        'text': 'Data Package'
-    },{
-        'startswith': 'http',
-        'mime': 'application/html',
-        'text': 'Embed'
-    }
-]
-
-def get_media_type(filename, default=None):
-    for mt in MEDIA_TYPES:
-        if 'endswith' in mt and filename.endswith(mt['endswith']):
-            return mt
-        if 'startswith' in mt and filename.startswith(mt['startswith']):
-            return mt
-        if 'contains' in mt and mt['contains'] in filename:
-            return mt
-    for mt in MEDIA_TYPES:
-        if default in mt['mime']:
-            return mt
-    return default
-
-def get_media_mime(filename, default=None):
-    return get_media_type(filename, default)['mime']
-
-def get_media_name(filename, default=None):
-    return get_media_type(filename, default)['text']
-
-
-def get_features_geojson(name, objs):
-    if objs is None:
-        return {}
-    features = [{'type': 'Feature',
-        'geometry': to_shape(o),
-        'properties': {'name': name}
-    } for o in objs]
-    return geojson.dumps(
-        {'type': 'FeatureCollection', 'features': features}
-    )
-
-def slugify(title):
-    return title.lower().strip().replace(' ', '-')
 
 # -------- Models ---------------
 
@@ -207,8 +140,9 @@ class Project(db.Model):
             'category': self.category,
             'summary': self.summary,
             'url': self.url,
-            'detail_url': self.detail_url,
-            'path': self.detail_url
+            'path': self.detail_url,
+            'mediatype': "application/vnd.datapackage+json",
+            'format': helper.media_name('datapackage.json'),
         }
         if self.organisation:
             d['organisation'] = self.organisation.name
@@ -268,8 +202,8 @@ class Source(db.Model):
             'id': self.id,
             'title': self.title,
             'path': self.path or '',
-            'format': self.fmt,
-            'mediatype': get_media_mime(self.path, self.fmt)
+            'format': helper.media_name(self.path, self.fmt),
+            'mediatype': helper.media_mime(self.path, self.fmt)
         }
 
 # Many-to-many relationship
@@ -307,9 +241,10 @@ class Rendering(db.Model):
         return {
             'id': self.id,
             'title': self.title,
-            'name': slugify(self.title),
+            'name': helper.slugify(self.title),
             'description': content,
-            'mediatype': get_media_mime(self.path),
+            'mediatype': helper.media_mime(self.path),
+            'format': helper.media_name(self.path),
             'path': self.path or '',
             'sources': [r.dict() for r in self.sources]
         }
@@ -333,7 +268,7 @@ class ProjectView(ModelView):
     inline_models = [Rendering]
     can_export = True
     def on_model_change(view, form, model, is_created):
-        model.slug = slugify(form.title.data)
+        model.slug = helper.slugify(form.title.data)
 
 admin.add_view(ProjectView(Project, db.session, name="Projects (Data Packages)"))
 
@@ -479,6 +414,9 @@ def send_static_meta(path):
 @app.route('/theme/<path:path>')
 def send_static_theme(path):
     return send_from_directory('../static/theme', path)
+@app.route('/screenshots/<path:path>')
+def send_screenshots(path):
+    return send_from_directory('../screenshots', path)
 
 @app.route('/data/<path:path>')
 def send_static_data(path):
@@ -486,9 +424,9 @@ def send_static_data(path):
 @app.route('/uploads/<path:path>')
 def send_uploads(path):
     return send_from_directory('../uploads', path)
-@app.route('/screenshots/<path:path>')
-def send_screenshots(path):
-    return send_from_directory('../screenshots', path)
+@app.route('/api/project/<int:pid>/<path:path>')
+def send_uploads_project(pid, path):
+    return send_from_directory('../uploads', path)
 
 if __name__ == '__main__':
     db.create_all()
