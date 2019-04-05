@@ -39,13 +39,18 @@ jQuery(function($){
     }
 
     function get_data_sources(sources) {
-      return '<ul class="res-sources"><li>' +
-        sources.map(x => '<a href="' + x['path'] + '">' +
-          x['title'] + '</a>' +
+      return '<ul class="res-sources">' +
+        sources.map(x => '<li>' +
+          (x['organisation'] ?
+            '<img src="' + x['organisation']['logo'] + '">' :
+            '<img src="/img/usericon.png">') +
+          '<a href="' + x['path'] + '">' +
+            x['title'] + '</a>' +
           '<fmt>' + x['format'] + '</fmt>' +
-          '<p>' + x['organisation']['name'] + '</p>'
-        ).join('</li><li>')
-      + '</li></ul>';
+          (x['organisation'] ? '<p>' + x['organisation']['name'] + '</p>' : '') +
+          '</li>'
+        ).join('\n')
+      + '</ul>';
     }
 
     if (datapackage.data)

@@ -137,13 +137,14 @@ class Project(db.Model):
             'thumbnail': self.thumb(),
             'date-created': self.created.strftime("%d.%m.%Y"),
             'date-updated': self.updated.strftime("%d.%m.%Y"),
-            'category': self.category,
             'summary': self.summary,
             'url': self.url,
             'path': self.detail_url,
             'mediatype': "application/vnd.datapackage+json",
             'format': helper.media_name('datapackage.json'),
         }
+        if self.category:
+            d['category'] = self.category
         if self.organisation:
             d['organisation'] = self.organisation.name
         return d
@@ -179,16 +180,15 @@ class User(db.Model):
         gravatar_url += urlencode({'s':str(gr_size)})
         return gravatar_url
     def dict(self):
-        organisation = {}
-        if not self.organisation is None:
-            organisation = self.organisation.dict()
-        return {
+        d = {
             'id': self.id,
             'username': self.username,
             'fullname': self.fullname,
             'gravatar': self.gravatar(),
-            'organisation': organisation,
         }
+        if not self.organisation is None:
+            d['organisation'] = self.organisation.dict()
+        return d
 
 class Source(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -201,17 +201,16 @@ class Source(db.Model):
     def __repr__(self):
         return self.title
     def dict(self):
-        organisation = {}
-        if not self.organisation is None:
-            organisation = self.organisation.dict()
-        return {
+        d = {
             'id': self.id,
             'title': self.title,
             'path': self.path or '',
             'format': helper.media_name(self.path, self.fmt),
             'mediatype': helper.media_mime(self.path, self.fmt),
-            'organisation': organisation,
         }
+        if not self.organisation is None:
+            d['organisation'] = self.organisation.dict()
+        return d
 
 # Many-to-many relationship
 projects_renderings = db.Table(
@@ -335,17 +334,16 @@ def organisations_list():
 def project_detail(project_id):
     project = Project.query.filter_by(id=project_id).first_or_404()
     renderings = project.renderings.order_by(Rendering.order).all()
-    author = project.users.first()
-    if author is not None: author = author.dict()
-    license = project.license
-    if license is not None: license = license.dict()
-    return {
+    d = {
         'data': project.dict(),
         'details': project.details,
-        'author': author,
-        'license': license,
         'renderings': [r.dict() for r in renderings],
     }
+    author = project.users.first()
+    if author is not None: d['author'] = author.dict()
+    license = project.license
+    if license is not None: d['license'] = license.dict()
+    return d
 
 def get_file(filename):
     f = open('templates/content/%s' % filename, 'r')
@@ -356,8 +354,10 @@ def get_md(filename):
     return Markup(markdown.markdown(t))
 
 # Flask views
-# @app.route('/about')
-# def index_about():  return render_template('public/about.pug')
+@app.route('/about')
+def index_about():
+    return render_template('public/about.pug', content=get_md('about-page'))
+
 # @app.route('/join')
 # def index_join():   return render_template('public/join.pug')
 
@@ -386,11 +386,10 @@ def project_page(project):
     meta = project.dict()
     created = arrow.get(meta['date-created'], 'DD.MM.YYYY').humanize()
     updated = arrow.get(meta['date-updated'], 'DD.MM.YYYY').format('DD.MM.YYYY')
+    category = None
     if project.category in project_categories:
         category = project_categories[project.category]
         category['class'] = 'fas fa-' + category['icon']
-    else:
-        category = None
     # version = 1.2
     organisation = project.organisation
     authors = [author.dict() for author in project.users]

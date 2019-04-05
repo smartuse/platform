@@ -57,7 +57,7 @@ html
     block footer
       .container#footer
         .row
-          .col-md-4.footer-info
+          .col-md-7.footer-info
             // include:markdown-it index.md
             p
               | SmartUse ist ein Kooperationsprojekt der Verein Metropolitanraum Zürich
@@ -72,8 +72,9 @@ html
                 i.far.fa-envelope-open
                 | &nbsp; Technical support
 
-          .col-md-4
-            h5 Immer auf dem Laufenden bleiben?
+          .col-md-5
+            p
+              | Immer auf dem Laufenden bleiben?
             //
               p.small
                 i Einfach f&uuml;r unseren Newsletter anmelden!
@@ -86,20 +87,7 @@ html
                   input.form-control(name='LNAME', placeholder='Nachname', type='text', style='width:49%;display:inline')
                 p
                   button.btn.btn-secondary(type="submit") Anmelden
-
-          .col-md-4.text-right
-            p.small
-              | Version 1.0.0
-
-            a.btn.btn-primary(href='https://github.com/smartuse')
-              | Quellcode
-              |
-              i.fas.fa-external-link-alt
-            a.btn.btn-primary(type="button" href='/admin')
-              | Administration
-              |
-              i.fas.fa-cog
-
+          //
             .team-footer
               h5 Das TEAM
               ul
@@ -109,6 +97,19 @@ html
                   a(href='https://www.datalets.ch' target='_blank') Datalets.ch
                 li
                   a(href='https://www.ethz.ch' target='_blank') ETH Zürich
+
+      .container#bottom
+        .row
+          .col-md-12.text-center
+            ul
+              li
+                a(href='https://smartuse.ch') SmartUse GmbH
+              li
+                a(href='/about#impressum') Impressum
+              li
+                a(href='/about#terms') Nutzungsbedingungen
+              li
+                a(href='/about#dataprotection') Datenschutz
 
     script(src='/vendor/jquery-3.2.1.min.js')
     script(src='/vendor/modernizr-3.5.0.min.js')
