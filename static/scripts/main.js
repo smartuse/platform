@@ -18,6 +18,26 @@ jQuery(function($){
       return gallery.append('<figure class="item" />').find('.item:last-child');
     }
 
+    function add_rendering_summary(res) {
+      return $('.rendering-summary').append(
+        '<div class="list-group-item list-group-item-action flex-column align-items-start">' +
+          '<div class="d-flex w-100 justify-content-between">' +
+            '<h5 class="mb-1">' + (res.name || res.title) + '</h5>' +
+            '<div role="group" class="download-buttons btn-group">' +
+            '<small class="btn btn-sm download-format">' + (res.format || res.mediatype || '') + '</small>' +
+            '<a type="button" href="' + get_project_path(res.path, canonical_url) + '" download' +
+            ' class="btn btn-primary btn-sm"><i class="fas fa-arrow-down"></i>&nbsp; Herunterladen</a>' +
+            // (res.mediatype === 'application/vnd.datapackage+json' ? '' :
+            //   '<a type="button" href="' + get_project_path(project_path) +
+            //   '" class="btn btn-primary btn-sm"><i class="fas fa-cogs"></i>&nbsp; Data Package</a>') +
+            '</div>' +
+          '</div>' +
+        '</div>'
+      );
+    }
+
+    add_rendering_summary(datapackage);
+
     // console.log(datapackage);
     $.each(datapackage.renderings, function(i, res) {
 
@@ -41,14 +61,12 @@ jQuery(function($){
               '<p class="res-author">' + res.author + '</p>' : '')
 
             + (typeof res.sources !== 'undefined' && res.sources.length > 0?
-              '<a href="#renderingsummary">'
-                + '<b>' + 'Datengrundlage' + '</b>'
-              + '</a>'
-              + '<ul class="res-sources">' +
+                '<b>' + 'Datengrundlage' + '</b>'
+              + '<ul class="res-sources"><li>' +
                 res.sources.map(x => '<a href="' + x['path'] + '">' +
                   x['title'] + '</a>'
-                ).join('<li>')
-              + '</ul>'
+                ).join('</li><li>')
+              + '</li></ul>'
               : '')
 
             + '</div>'
@@ -58,21 +76,7 @@ jQuery(function($){
 
         ).find('.rendering-container:last-child').find('.container');
 
-        summary = $('.rendering-summary').append(
-          '<div class="list-group-item list-group-item-action flex-column align-items-start">' +
-            '<div class="d-flex w-100 justify-content-between">' +
-              '<h5 class="mb-1">' + (res.name || res.title) + '</h5>' +
-              '<div role="group" class="download-buttons btn-group">' +
-              '<small class="btn btn-sm download-format">' + (res.format || res.mediatype || '') + '</small>' +
-              '<a type="button" href="' + get_project_path(res.path, canonical_url) + '" download' +
-              ' class="btn btn-primary btn-sm"><i class="fas fa-arrow-down"></i>&nbsp; Herunterladen</a>' +
-              // (res.mediatype === 'application/vnd.datapackage+json' ? '' :
-              //   '<a type="button" href="' + get_project_path(project_path) +
-              //   '" class="btn btn-primary btn-sm"><i class="fas fa-cogs"></i>&nbsp; Data Package</a>') +
-              '</div>' +
-            '</div>' +
-          '</div>'
-        );
+        summary = add_rendering_summary(res);
       }
 
       container.before(
@@ -111,7 +115,7 @@ jQuery(function($){
       // );
 
       if (typeof(res.mediatype) == 'undefined' || res.mediatype === null)
-        res.mediatype = get_media_type(res.format);
+        res.mediatype = get_media_mime(res.format);
 
       if (res.mediatype == 'application/vnd.datapackage+json') {
         pp = get_project_path(res.path);
@@ -134,6 +138,15 @@ jQuery(function($){
 
         imgpath = get_project_path(res.path, canonical_url);
         item.append('<iframe id="frame-'+rescount+'" src="' + imgpath + '"/>');
+
+      } else if (res.mediatype == 'application/ipynb+json') {
+        rescount = rescount + 1;
+        item = add_gallery_item(container, rescount);
+
+        imgpath = get_project_path(res.path, canonical_url);
+        imgpath = imgpath.replace('https://','').replace('http://','')
+        nbpath = 'https://nbviewer.jupyter.org/urls/' + imgpath
+        item.append('<iframe id="frame-'+rescount+'" src="' + nbpath + '"/>');
 
       } else if (res.mediatype == 'application/vnd.geo+json') {
         rescount = rescount + 1;

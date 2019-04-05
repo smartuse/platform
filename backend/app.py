@@ -54,22 +54,58 @@ admin = admin.Admin(app, name='SmartUse', template_mode='bootstrap3')
 
 # ------------ Helper functions ------------
 
+MEDIA_TYPES = [
+    {
+        'endswith': '.gif',
+        'mime': 'image/gif',
+        'text': 'Bild'
+    },{
+        'endswith': '.png',
+        'mime': 'image/png',
+        'text': 'Bild'
+    },{
+        'endswith': '.jpg',
+        'mime': 'image/jpeg',
+        'text': 'Bild'
+    },{
+        'endswith': '.geojson',
+        'mime': 'application/vnd.geo+json',
+        'text': 'Geodaten'
+    },{
+        'endswith': '.ipynb',
+        'contains': 'jupyter',
+        'mime': 'application/ipynb+json',
+        'text': 'Notebook'
+    },{
+        'endswith': 'datapackage.json',
+        'mime': 'application/vnd.datapackage+json',
+        'text': 'Data Package'
+    },{
+        'startswith': 'http',
+        'mime': 'application/html',
+        'text': 'Embed'
+    }
+]
+
 def get_media_type(filename, default=None):
-    if filename.endswith('.gif'):
-        return 'image/gif'
-    if filename.endswith('.png'):
-        return 'image/png'
-    if filename.endswith('.jpg') or filename.endswith('.jpeg'):
-        return 'image/jpeg'
-    if filename.endswith('.geojson'):
-        return 'application/vnd.geo+json'
-    if filename.contains('jupyter') or filename.contains('ipynb'):
-        return 'application/ipynb+json'
-    if filename.endswith('datapackage.json'):
-        return 'application/vnd.datapackage+json'
-    if filename.startswith('http'):
-        return 'application/html'
+    for mt in MEDIA_TYPES:
+        if 'endswith' in mt and filename.endswith(mt['endswith']):
+            return mt
+        if 'startswith' in mt and filename.startswith(mt['startswith']):
+            return mt
+        if 'contains' in mt and mt['contains'] in filename:
+            return mt
+    for mt in MEDIA_TYPES:
+        if default in mt['mime']:
+            return mt
     return default
+
+def get_media_mime(filename, default=None):
+    return get_media_type(filename, default)['mime']
+
+def get_media_name(filename, default=None):
+    return get_media_type(filename, default)['text']
+
 
 def get_features_geojson(name, objs):
     if objs is None:
@@ -172,6 +208,7 @@ class Project(db.Model):
             'summary': self.summary,
             'url': self.url,
             'detail_url': self.detail_url,
+            'path': self.detail_url
         }
         if self.organisation:
             d['organisation'] = self.organisation.name
@@ -232,7 +269,7 @@ class Source(db.Model):
             'title': self.title,
             'path': self.path or '',
             'format': self.fmt,
-            'mediatype': get_media_type(self.path, self.fmt)
+            'mediatype': get_media_mime(self.path, self.fmt)
         }
 
 # Many-to-many relationship
@@ -272,7 +309,7 @@ class Rendering(db.Model):
             'title': self.title,
             'name': slugify(self.title),
             'description': content,
-            'mediatype': get_media_type(self.path),
+            'mediatype': get_media_mime(self.path),
             'path': self.path or '',
             'sources': [r.dict() for r in self.sources]
         }

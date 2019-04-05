@@ -158,7 +158,14 @@ p.author {
 	margin: -1.8em 0 0;
 	position: absolute;
 }
-
+.res-sources {
+	text-align: left;
+	padding: 0;
+}
+.res-sources li {
+	margin-top: 1em;
+	list-style-type: none;
+}
 #renderingsummary {
 	margin-top: 2em;
 }

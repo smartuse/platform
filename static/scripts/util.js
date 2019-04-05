@@ -5,6 +5,7 @@ function get_project_path(url, canonical_url) {
     return (url.indexOf('http')<0) ?
       pp + '/' + url : url;
 }
+/*
 function get_media_type(fmt) {
     if (fmt == 'image') return 'image/png';
     if (fmt == 'png') return 'image/png';
@@ -13,6 +14,7 @@ function get_media_type(fmt) {
     if (fmt == 'datapackage') return 'application/vnd.datapackage+json';
     if (fmt == 'embed') return 'application/html';
 }
+*/
 
 // Full screen mode
 function requestFullScreen() {
