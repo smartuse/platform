@@ -58,7 +58,7 @@ admin = admin.Admin(app, name='SmartUse', template_mode='bootstrap3')
 
 class Organisation(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.Unicode(128))
+    name = db.Column(db.Unicode(128), nullable=False)
     url = db.Column(db.Unicode(255))
     logo = db.Column(db.Unicode(255))
 
@@ -74,8 +74,8 @@ class Organisation(db.Model):
 
 class License(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.Unicode(256), unique=True)
-    title = db.Column(db.Unicode(256), unique=True)
+    title = db.Column(db.Unicode(256), unique=True, nullable=False)
+    name = db.Column(db.Unicode(256), unique=True, nullable=False, doc="Short, lowercase identifer")
     path = db.Column(db.Unicode(2048), doc="Enter URL to the license")
     def __repr__(self):
         return self.title
@@ -89,7 +89,7 @@ class License(db.Model):
 
 class Project(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(128), unique=True)
+    title = db.Column(db.String(128), unique=True, nullable=False)
     created = db.Column(db.DateTime(), default=datetime.datetime.now())
     updated = db.Column(db.DateTime(), default=datetime.datetime.now())
     summary = db.Column(db.Unicode(255))
@@ -158,7 +158,7 @@ projects_users = db.Table(
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.Unicode(16))
+    username = db.Column(db.Unicode(16), nullable=False)
     fullname = db.Column(db.Unicode(128))
     email = db.Column(db.Unicode(128))
     phone = db.Column(db.Unicode(32))
@@ -192,7 +192,7 @@ class User(db.Model):
 
 class Source(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.Unicode(256), unique=True)
+    title = db.Column(db.Unicode(256), unique=True, nullable=False)
     path = db.Column(db.Unicode(2048), doc="Enter URL to the data source")
     fmt = db.Column(db.String(32))
     organisation_id = db.Column(db.Integer, db.ForeignKey(Organisation.id))
@@ -227,7 +227,7 @@ sources_renderings = db.Table(
 class Rendering(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     order = db.Column(db.Integer)
-    title = db.Column(db.String(128), unique=True)
+    title = db.Column(db.String(128), unique=True, nullable=False)
     description = db.Column(db.UnicodeText)
     path = db.Column(db.Unicode(2048),
         doc="Provide a URL here, use the Data tab to upload files")
