@@ -9,44 +9,50 @@ block head
   //link(href='/vendor/gallery.prefixed.css',rel='stylesheet')
 
 block content
+  .container
+    .row
+      .col-md-12.center
+        .glider-contain#featured
+        //
+          .dots
+          a.glider-prev «
+          a.glider-next »
+
   .container.padding-top.padding-bottom
     .row
       .col-md-12
         .text.section#welcome
           = headline
 
-  //.container-fluid.no-padding.padding-bottom
-  .container.padding-bottom
-    .row
-      .col-md-12.center
-        .glider-contain#featured
-          .dots
-          a.glider-prev «
-          a.glider-next »
-    #projects-featured.row
-    .row.padding-top
-      .col-md-12.center
-        br
-        form(action='/search')
-          input.form-control.form-control-lg.search(name='q',placeholder='Search ...')
-
-  .container-fluid.bg-secondary#about
-    .container.padding-top.padding-bottom
-      .row
-        .col-md-12
-          br
-          .text.section
-            = about
+  //
+    .container-fluid.bg-secondary#about
+      .container.padding-top.padding-bottom
+        .row
+          .col-md-12
+            br
+            .text.section
+              = about
 
   .container.padding-top
+
+    .row
+      .col-md-12.center
+        form(action='/search')
+          input.form-control.form-control-lg.search(name='q',placeholder='Search ...')
+        br
     .row
       .col-md-12
-        br
         h1 Aktuell
-        br
+
     #projects.row
 
   .container-fluid.bg-primary.home-content
+    .container
+      .row
+        .col-md-12.text
+          = about
+
+  .container-fluid.home-content
     .container
       .row
         .col-md-12.text#bottom

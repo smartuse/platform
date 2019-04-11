@@ -1,9 +1,10 @@
-var maps = {}, paginationtag = null;
+var maps = {}, paginationtag = null, project_path = '';
 
 jQuery(function($){
 
-  function load_DataPackage(datapackage, top_container) {
+  function load_DataPackage(datapackage, top_container, canonical_url) {
     var rescount = 0;
+    if (typeof canonical_url !== 'string') canonical_url = project_path;
 
     function add_gallery_item(container, ii) {
       container.prepend('<div class="gallery" fullscreen=1></div>');
@@ -17,64 +18,108 @@ jQuery(function($){
       return gallery.append('<figure class="item" />').find('.item:last-child');
     }
 
+    function add_rendering_summary(res) {
+      return $('.rendering-summary').append(
+        '<div class="list-group-item list-group-item-action flex-column align-items-start">' +
+          '<div class="d-flex w-100 justify-content-between">' +
+            '<h5 class="mb-1">' +
+              (res.name || res.title) +
+            '</h5>' +
+            '<div role="group" class="download-buttons btn-group">' +
+              '<small class="btn btn-sm download-format">' + (res.format || res.mediatype || '') + '</small>' +
+              '<a type="button" href="' + get_project_path(res.path, canonical_url) + '" ' +
+              (res.mediatype && res.mediatype.startsWith('application') ?
+                'class="btn btn-primary btn-sm"><i class="fas fa-eye"></i>&nbsp; Anschauen</a>' :
+                'download class="btn btn-primary btn-sm"><i class="fas fa-arrow-down"></i>&nbsp; Herunterladen</a>') +
+            '</div>' +
+          '</div>' +
+          (res.sources ? get_data_sources(res.sources) : '') +
+        '</div>'
+      );
+    }
+
+    function get_data_sources(sources) {
+      return '<ul class="res-sources">' +
+        sources.map(x => '<li>' +
+          (x['organisation'] ?
+            '<img src="' + x['organisation']['logo'] + '">' :
+            '<img src="/img/usericon.png">') +
+          '<a href="' + x['path'] + '">' +
+            x['title'] + '</a>' +
+          '<fmt>' + x['format'] + '</fmt>' +
+          (x['organisation'] ? '<p>' + x['organisation']['name'] + '</p>' : '') +
+          '</li>'
+        ).join('\n')
+      + '</ul>';
+    }
+
+    if (datapackage.data)
+      add_rendering_summary(datapackage.data);
+
     // console.log(datapackage);
-    $.each(datapackage.resources, function(i, res) {
+    $.each(datapackage.renderings, function(i, res) {
 
       if (!(res.name || res.title)) return;
 
       if (typeof(top_container) == 'object') {
         container = top_container;
       } else {
-        var $resourceContent = $('.resource-content');
-        var count = $resourceContent.find('.resource-container').length + 1;
-        container = $resourceContent.append(
-          '<div class="resource-counter">' + count + '</div>'
+        var $renderingContent = $('.rendering-content');
+        var count = $renderingContent.find('.rendering-container').length + 1;
+        container = $renderingContent.append(
+          '<div class="rendering-counter">' + count + '</div>'
 
-        + '<div class="resource-container">'
-          + '<div class="container row" id="' + res.name + '">'
+        + '<div class="rendering-container">'
+          + '<div class="container row">'
             + '<div class="description col-md-9"></div>'
 
-            + '<div class="resource-datasets col-md-3">'
+            + '<div class="rendering-datasets col-md-3">'
 
             + (typeof res.author !== 'undefined' ?
-              '<a href="#resourcesummary">'
-                + '<h5 class="mb-1">' + 'Datengrundlage' + '</h5>'
-              + '</a>'
-              + '<p class="res-author">' + res.author + '</p>'
-              : '')
+              '<p class="res-author">' + res.author + '</p>' : '')
+
+            + (typeof res.sources !== 'undefined' && res.sources.length > 0?
+                '<b>' + 'Datengrundlage' + '</b>' +
+                get_data_sources(res.sources) : '')
 
             + '</div>'
 
           + '</div>'
         + '</div>'
 
-        ).find('.resource-container:last-child').find('.container');
+        ).find('.rendering-container:last-child').find('.container');
+
+        summary = add_rendering_summary(res);
       }
 
       container.before(
-        '<div class="resource-header"><a name="anchor-' + rescount + '"></a>'
+        '<div class="rendering-header"><a name="anchor-' + rescount + '"></a>'
         //'<a href="#item-' + rescount + '">'
         // + '<i class="material-icons">layers</i>'
-        + (res.title || res.name)
+        + (res.title || res.description)
         + '</div>'
       );
 
       description = container.find('.description');
-      if (res.description && res.description.length>1)
+      if (res.title && res.description && res.description.length>1) {
         description.append(res.description);
-
-      if (res.pipeline && res.pipeline.length>1) {
-        description.append('<div class="mermaid" id="mermaid' + res.id + '"></div>');
-        var graph = mermaid.render('mermaid' + res.id, 'graph LR;' + res.pipeline,
-          function (svgCode, bindFunctions) { $('#mermaid' + res.id).html(svgCode); });
+      } else {
+        // Remove description container if unused
+        description.next().removeClass('col-md-3').addClass('col-md-12');
+        description.remove();
       }
 
-      datasets = container.find('.resource-datasets');
+      datasets = container.find('.rendering-datasets');
       if (res.license && res.license.length>1)
         datasets.append('<p class="license"><i class="fas fa-certificate"></i> ' + res.license + '</p>');
       if (res.doc_url && res.doc_url.length>1)
         datasets.append('<p class="doc_url"><a href="' + res.doc_url + '"><i class="fas fa-book-open"></i> Details</a></p>');
-
+      if (res.pipeline && res.pipeline.length>1) {
+        datasets.append('<div class="mermaid" id="mermaid' + res.id + '"></div>');
+        res_id = (res.id || res.name || res.title.replace(' ', '-'));
+        var graph = mermaid.render('mermaid' + res_id, 'graph LR;' + res.pipeline,
+          function (svgCode, bindFunctions) { $('#mermaid' + res_id).html(svgCode); });
+      }
 
         // console.log(res);
 
@@ -88,8 +133,8 @@ jQuery(function($){
       if (res.mediatype == 'application/vnd.datapackage+json') {
         pp = get_project_path(res.path);
         $.getJSON(pp, function(dp) {
-          project_path = pp.substring(0, pp.lastIndexOf('/')+1);
-          load_DataPackage(dp, container);
+          pp = pp.substring(0, pp.lastIndexOf('/')+1);
+          load_DataPackage(dp, container, pp);
         });
 
       } else if (res.mediatype.indexOf('image/')==0) {
@@ -97,22 +142,31 @@ jQuery(function($){
         item = add_gallery_item(container, rescount);
 
         img = item.append('<img id="image-'+rescount+'" />').find('img:last-child');
-        imgpath = get_project_path(res.path);
+        imgpath = get_project_path(res.path, canonical_url);
         img.attr('style', 'background-image:url('+imgpath+')');
 
       } else if (res.mediatype == 'application/html') {
         rescount = rescount + 1;
         item = add_gallery_item(container, rescount);
 
-        imgpath = get_project_path(res.path);
+        imgpath = get_project_path(res.path, canonical_url);
         item.append('<iframe id="frame-'+rescount+'" src="' + imgpath + '"/>');
+
+      } else if (res.mediatype == 'application/ipynb+json') {
+        rescount = rescount + 1;
+        item = add_gallery_item(container, rescount);
+
+        imgpath = get_project_path(res.path, canonical_url);
+        imgpath = imgpath.replace('https://','').replace('http://','')
+        nbpath = 'https://nbviewer.jupyter.org/urls/' + imgpath
+        item.append('<iframe id="frame-'+rescount+'" src="' + nbpath + '"/>');
 
       } else if (res.mediatype == 'application/vnd.geo+json') {
         rescount = rescount + 1;
         item = add_gallery_item(container, rescount);
 
         item.append('<div class="map" id="map-'+rescount+'" />');
-        filepath = get_project_path(res.path);
+        filepath = get_project_path(res.path, canonical_url);
 
         var lati = 47.38083877331195;
         var long = 8.548545854583836;
@@ -182,7 +236,7 @@ jQuery(function($){
       } // -geojson
 
       container = false;
-    }); // -each resources
+    }); // -each renderings
 
     /*
     if (rescount > 0 && $('rg-pagination').length > 0) {
@@ -212,11 +266,14 @@ jQuery(function($){
   } //-load_DataPackage
 
   // Load selected project
-  if (typeof project_id != 'undefined') {
-    $.getJSON('/api/project/' + project_id, load_DataPackage);
-  } else if (typeof project_path != 'undefined') {
-    $.getJSON('/' + project_path + '/datapackage.json', load_DataPackage);
+  if (typeof PROJECT_ID != 'undefined') {
+    project_path = '/api/project/' + PROJECT_ID;
+  } else if (typeof PROJECT_ROOT != 'undefined') {
+    project_path = PROJECT_ROOT + '/datapackage.json';
   }
+  if (project_path)
+    $.getJSON(project_path, load_DataPackage);
+
   // setStoryLayout();
   // $(window).resize(setStoryLayout);
 

@@ -37,10 +37,74 @@ body {
 	margin: 2em 0;
 }
 
+.team-footer {
+	margin-top: 1em;
+	text-align: left;
+	font-size: 80%;
+}
+.team-footer ul,
+.team-footer li {
+	list-style: none; margin: 0px; padding: 0px;
+}
+
+#featured .glider {
+	background-size: cover;
+	height: 360px;
+}
+
+#featured .glider .legend {
+	background: transparent;
+	color: white;
+	text-align: center;
+	padding: 1em 2em;
+	/* box-shadow: 0px 6px 6px rgba(0,0,0,0.3); */
+	text-shadow: 0px 3px 3px rgba(1,1,1,0.7);
+}
+
+/* The tall orange box */
+@media only screen and (min-device-width: 812px) {
+	#featured .glider {
+	  height: 900px;
+	}
+}
+#featured .glider h4 {
+	font-size: 2rem;
+  font-weight: bold;
+}
+#featured .glider .legend {
+  position: absolute;
+  bottom: 0px;
+  background: #f3c656;
+  text-shadow: 1px 1px 1px grey;
+  font-size: 134%;
+  padding-bottom: 0.4em;
+  border-top-right-radius: 30px;
+}
+
+.btn-huge {
+	font-size: 200%;
+}
+
 .page-footer {
   margin-top: 5em;
   text-align: center;
-  /* margin-bottom: 50em; */
+  margin-bottom: 2em;
+}
+
+#bottom ul {
+	text-align: center;
+	width: 100%;
+	margin: 2em 0;
+}
+#bottom li {
+	display: inline-block;
+	list-style: none;
+}
+#bottom li::after {
+	content: '–'
+}
+#bottom li:last-child::after {
+	content: '';
 }
 
 .basemap {
@@ -58,7 +122,7 @@ body {
 	background: white;
 }
 
-.resource-container {
+.rendering-container {
 	margin: 3em 0em;
 
 	border-style: solid;
@@ -68,10 +132,10 @@ body {
 	padding-left: 10px;
 }
 
-.resource-counter::before {
+.rendering-counter::before {
 	content: '#';
 }
-.resource-counter {
+.rendering-counter {
 	color: #999;
 	float: left;
 	margin-left: -1.5em;
@@ -80,7 +144,6 @@ body {
 
 .side-info .organisation-name {
 	font-size: 15pt;
-	text-decoration: underline;
 }
 .side-info div {
   margin: 0;
@@ -123,14 +186,50 @@ p.author {
   color: #555;
   border-bottom: 1px dashed #555;
 }
-.resource-header {
+.rendering-header {
 	color: #000;
 	font-size: 150%;
 	/*margin: 0.5em 0px;*/
 	margin: -1.8em 0 0;
 	position: absolute;
 }
-.resource-summary {
+
+.res-sources {
+	text-align: left;
+	padding: 0;
+}
+.res-sources li {
+	margin-top: 1em;
+	list-style-type: none;
+}
+.res-sources li fmt {
+	font-family: monospace;
+	text-transform: uppercase;
+	font-size: 90%;
+	padding: 0.2em; margin: 0.5em;
+	color: #999; background: #eee;
+}
+.list-group-item .res-sources {
+	font-size: 80%;
+	margin: 0px; padding: 0px;
+}
+.list-group-item .res-sources li {
+	display: inline-block;
+	vertical-align: top;
+	min-width: 25%;
+}
+.list-group-item .res-sources img,
+.rendering-container .res-sources fmt {
+	display: none;
+}
+.rendering-container .res-sources img {
+	width: 2em; margin-right: 1em;
+}
+.rendering-container .res-sources p {
+	margin-left: 3em;
+}
+
+#renderingsummary {
 	margin-top: 2em;
 }
 
@@ -268,12 +367,23 @@ html.fullscreen {
 /* Project List (home) styling */
 
 .project-list .project-card { padding-top: 1em; }
+.project-list .project-card .card {
+	border: none; box-shadow: 3px 3px 3px rgba(0,0,0,0.2);
+}
 .project-list .project-card a { text-decoration: none; }
 .project-list .project-card .card-text { color: #555; }
 .project-list .project-card:hover { background: #ddd; }
 .project-thumb {
   width: 128px; height: 128px;
   margin: 0px 20px 20px 0;
+}
+.project-list .project-card .card-header img {
+	margin: -0.75rem 0 0 0;
+	padding-bottom: 10px;
+}
+.project-list .project-card .card-header {
+	min-height: 4.7em;
+	border-bottom: none;
 }
 
 /* Home Page styling */
@@ -326,7 +436,7 @@ a.featured, a.featured h5, a.featured p
 .project-authors {
 	margin-top: 1em;
 }
-.project-authors, .resource-summary {
+.project-authors, .rendering-summary {
 	clear: both;
 }
 .author {
@@ -398,7 +508,7 @@ a.featured, a.featured h5, a.featured p
 		background-color: transparent;
 		border-color: transparent;
 	}
-	.resource-counter {
+	.rendering-counter {
 		display: none;
 		/*float: left;
 		display: block;

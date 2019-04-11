@@ -1,22 +1,23 @@
 extends public/base.pug
 
 block scripts
-  script project_id=#{meta.id}; project_path='/uploads';
+  script PROJECT_ID=#{meta.id}; PROJECT_ROOT='/uploads';
   script(src='/vendor/zepto.smoothscroll.js')
   script(src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.0/mapbox-gl.js')
   link(href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.0/mapbox-gl.css',rel='stylesheet')
   script(src='https://unpkg.com/mermaid@8.0.0/dist/mermaid.min.js')
-  script(src='/scripts/main.js')
+  script(src='/scripts/project.js')
 
 block content
   .container-fluid.no-padding.story
     .container
       .row
         .col-md-12.page-meta
-          if organisation
-            .organisation-image
-              a(href=organisation.url,target="_blank")
-                img(src=organisation.logo,title=organisation.name)
+          //
+            if organisation
+              .organisation-image
+                a(href=organisation.url)
+                  img(src=organisation.logo,title=organisation.name)
           h1
             =meta.title
           if meta.summary
@@ -49,7 +50,7 @@ block content
 
           if project.organisation
             p.project-organisation
-              a(href=organisation.url,target="_blank")
+              a(href=organisation.url)
                 .organisation-name
                   =organisation.name
 
@@ -59,7 +60,7 @@ block content
                 .author
                   img(src=author.gravatar)
                   p
-                    a.fullname(href=author.url,target="_blank")
+                    a.fullname(href=author.url)
                       =author.fullname
                   if author.organisation
                     p
@@ -72,29 +73,26 @@ block content
 
       .row
         .col-md-12
-          .resource-content
+          .rendering-content
 
-      #resourcesummary.row
-        .col-md-12.resource-summary
-          .h2 Resourcen
-          .list-group
-            each resource in resources
-              .list-group-item.list-group-item-action.flex-column.align-items-start
-                .d-flex.w-100.justify-content-between
-                  h5.mb-1
-                    =resource.title
-                  .download-buttons.btn-group(role="group")
-                    a.btn.btn-primary.btn-sm(type="button" href='{{ resource.path }}' download)
-                      i.fas.fa-arrow-down
-                      | &nbsp; Herunterladen
-                    a.btn.btn-primary.btn-sm(type="button" href='{{ project.detail_url }}')
-                      i.fas.fa-cogs
-                      | &nbsp;
-                      =resource.mediatype
-              if resource.notes
-                .list-group-item
-                  p.resource-notes
-                    =resource.notes
+      #renderingsummary.row
+        .col-md-12
+          .h2 Quellen
+          .list-group.rendering-summary
+            //
+              each rendering in renderings
+                .list-group-item.list-group-item-action.flex-column.align-items-start
+                  .d-flex.w-100.justify-content-between
+                    h5.mb-1
+                      =rendering.title
+                    .download-buttons.btn-group(role="group")
+                      a.btn.btn-primary.btn-sm(type="button" href='{{ rendering.path }}' download)
+                        i.fas.fa-arrow-down
+                        | &nbsp; Herunterladen
+                      a.btn.btn-primary.btn-sm(type="button" href='{{ project.path }}')
+                        i.fas.fa-cogs
+                        | &nbsp;
+                        =rendering.mediatype
 
   #share.modal(tabindex='-1', role='dialog')
     .modal-dialog(role='document')

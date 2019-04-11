@@ -8,9 +8,11 @@ bower_components/
 
 npm-debug.log
 package-lock.json
+ENV
 .env
 yarn-error.log
 .ipynb_checkpoints
+__pycache__/
 *.mp4
 .DS_Store
 .Rhistory

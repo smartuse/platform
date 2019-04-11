@@ -41,14 +41,15 @@ html
             ul.navbar-nav
               li.nav-item
                 a.nav-link(href='/#about') Übersicht
-              li.nav-item
-                a.nav-link(href='/#join') Mitmachen!
+              //
+                li.nav-item
+                  a.nav-link(href='/#join') Mitmachen!
               li.nav-item
                 a.nav-link(href='#footer') Kontakt
 
     block top
 
-    .container(style="margin:150px")
+    .container(style="margin:100px")
 
     block content
       //- main page content
@@ -56,23 +57,24 @@ html
     block footer
       .container#footer
         .row
-          .col-md-4.footer-info
+          .col-md-7.footer-info
             // include:markdown-it index.md
             p
               | SmartUse ist ein Kooperationsprojekt der Verein Metropolitanraum Zürich
             p
               img(src='/img/logo_MK_black.png' width='200px')
             p.small
-              a(href='https://www.metropolitanraum-zuerich.ch/kontakt.html', target='_blank', class='contact')
+              a(href='https://www.metropolitanraum-zuerich.ch/kontakt.html', class='contact')
                 i.far.fa-envelope-open
                 | &nbsp; Geschäftsstelle
               &nbsp;
-              a(href='mailto:help@smartuse.ch', target='_blank', class='contact')
+              a(href='mailto:help@smartuse.ch', class='contact')
                 i.far.fa-envelope-open
                 | &nbsp; Technical support
 
-          .col-md-4
-            h5 Immer auf dem Laufenden bleiben?
+          .col-md-5
+            p
+              | Immer auf dem Laufenden bleiben?
             //
               p.small
                 i Einfach f&uuml;r unseren Newsletter anmelden!
@@ -85,19 +87,29 @@ html
                   input.form-control(name='LNAME', placeholder='Nachname', type='text', style='width:49%;display:inline')
                 p
                   button.btn.btn-secondary(type="submit") Anmelden
+          //
+            .team-footer
+              h5 Das TEAM
+              ul
+                li
+                  a(href='http://www.hosoyaschaefer.com') Hosoya Schaefer Architects
+                li
+                  a(href='https://www.datalets.ch') Datalets.ch
+                li
+                  a(href='https://www.ethz.ch') ETH Zürich
 
-          .col-md-4.text-right
-            p.small
-              | Version 1.0.0
-
-            a.btn.btn-primary(href='https://github.com/smartuse')
-              | Quellcode
-              |
-              i.fas.fa-external-link-alt
-            a.btn.btn-primary(type="button" href='/admin')
-              | Administration
-              |
-              i.fas.fa-cog
+      .container#bottom
+        .row
+          .col-md-12.text-center
+            ul
+              li
+                a(href='https://smartuse.ch') SmartUse GmbH
+              li
+                a(href='/about#impressum') Impressum
+              li
+                a(href='/about#terms') Nutzungsbedingungen
+              li
+                a(href='/about#dataprotection') Datenschutz
 
     script(src='/vendor/jquery-3.2.1.min.js')
     script(src='/vendor/modernizr-3.5.0.min.js')
@@ -106,7 +118,7 @@ html
     script(src='/theme/bootstrap.min.js')
 
     script(src='/scripts/util.js')
-    script(src='/scripts/custom.js')
+    script(src='/scripts/base.js')
 
     block scripts
       //- additional resources

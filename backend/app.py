@@ -9,7 +9,7 @@ from werkzeug import secure_filename
 from flask_api import FlaskAPI
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-from sqlalchemy import or_
+from sqlalchemy import or_, desc
 
 import flask_admin as admin
 from flask_admin.model import BaseModelView
@@ -33,6 +33,8 @@ import hashlib, codecs, datetime
 import os.path as ospath
 from os import urandom
 
+from . import helper
+
 # Create application
 app = FlaskAPI(__name__, static_url_path='')
 app.debug = True
@@ -52,39 +54,11 @@ DEFAULT_THUMB = '../img/usermap.jpg'
 # Create admin
 admin = admin.Admin(app, name='SmartUse', template_mode='bootstrap3')
 
-# ------------ Helper functions ------------
-
-def get_media_type(filename):
-    if filename.endswith('.gif'):
-        return 'image/gif'
-    if filename.endswith('.png'):
-        return 'image/png'
-    if filename.endswith('.jpg') or filename.endswith('.jpeg'):
-        return 'image/jpeg'
-    if filename.endswith('.geojson'):
-        return 'application/vnd.geo+json'
-    if filename.endswith('datapackage.json'):
-        return 'application/vnd.datapackage+json'
-    if filename.startswith('http'):
-        return 'application/html'
-    return None
-
-def get_features_geojson(name, objs):
-    if objs is None:
-        return {}
-    features = [{'type': 'Feature',
-        'geometry': to_shape(o),
-        'properties': {'name': name}
-    } for o in objs]
-    return geojson.dumps(
-        {'type': 'FeatureCollection', 'features': features}
-    )
-
 # -------- Models ---------------
 
 class Organisation(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.Unicode(128))
+    name = db.Column(db.Unicode(128), nullable=False)
     url = db.Column(db.Unicode(255))
     logo = db.Column(db.Unicode(255))
 
@@ -98,19 +72,36 @@ class Organisation(db.Model):
             'logo': self.logo
         }
 
+class License(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.Unicode(256), unique=True, nullable=False)
+    name = db.Column(db.Unicode(256), unique=True, nullable=False, doc="Short, lowercase identifer")
+    path = db.Column(db.Unicode(2048), doc="Enter URL to the license")
+    def __repr__(self):
+        return self.title
+    def dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'title': self.title,
+            'path': self.path or '',
+        }
+
 class Project(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(64), unique=True)
+    title = db.Column(db.String(128), unique=True, nullable=False)
     created = db.Column(db.DateTime(), default=datetime.datetime.now())
     updated = db.Column(db.DateTime(), default=datetime.datetime.now())
     summary = db.Column(db.Unicode(255))
     details = db.Column(db.UnicodeText)
-
     category = db.Column(db.String(32), doc="review, labs, collect, present, publish")
-    notes = db.Column(db.UnicodeText)
 
     organisation_id = db.Column(db.Integer, db.ForeignKey(Organisation.id))
     organisation = db.relationship(Organisation,
+        backref=db.backref('project', cascade="all, delete-orphan", single_parent=True))
+
+    license_id = db.Column(db.Integer, db.ForeignKey(License.id))
+    license = db.relationship(License,
         backref=db.backref('project', cascade="all, delete-orphan", single_parent=True))
 
     screenshot = db.Column(db.String(256), doc="Use the Data tab to upload a screenshot")
@@ -118,6 +109,7 @@ class Project(db.Model):
     is_hidden = db.Column(db.Boolean(), default=False)
     is_featured = db.Column(db.Boolean(), default=False)
 
+    slug = db.Column(db.String(64), unique=True)
     token_edit = db.Column(db.String(64), default=codecs.encode(urandom(12), 'hex').decode())
 
     def thumb(self, as_thumbnail=True):
@@ -130,7 +122,7 @@ class Project(db.Model):
         return self.title
     @property
     def url(self):
-        return request.host_url.rstrip('/') + url_for('project_page', project_id=self.id)
+        return request.host_url.rstrip('/') + url_for('project_page_by_slug', project_slug=self.slug)
     @property
     def detail_url(self):
         return request.host_url.rstrip('/') + url_for('project_detail', project_id=self.id)
@@ -145,12 +137,14 @@ class Project(db.Model):
             'thumbnail': self.thumb(),
             'date-created': self.created.strftime("%d.%m.%Y"),
             'date-updated': self.updated.strftime("%d.%m.%Y"),
-            'category': self.category,
             'summary': self.summary,
-            'notes': self.notes,
             'url': self.url,
-            'detail_url': self.detail_url,
+            'path': self.detail_url,
+            'mediatype': "application/vnd.datapackage+json",
+            'format': helper.media_name('datapackage.json'),
         }
+        if self.category:
+            d['category'] = self.category
         if self.organisation:
             d['organisation'] = self.organisation.name
         return d
@@ -164,7 +158,7 @@ projects_users = db.Table(
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.Unicode(16))
+    username = db.Column(db.Unicode(16), nullable=False)
     fullname = db.Column(db.Unicode(128))
     email = db.Column(db.Unicode(128))
     phone = db.Column(db.Unicode(32))
@@ -186,59 +180,80 @@ class User(db.Model):
         gravatar_url += urlencode({'s':str(gr_size)})
         return gravatar_url
     def dict(self):
-        organisation = {}
-        if not self.organisation is None:
-            organisation = self.organisation.dict()
-        return {
+        d = {
             'id': self.id,
             'username': self.username,
             'fullname': self.fullname,
             'gravatar': self.gravatar(),
-            'organisation': organisation,
         }
+        if not self.organisation is None:
+            d['organisation'] = self.organisation.dict()
+        return d
+
+class Source(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.Unicode(256), unique=True, nullable=False)
+    path = db.Column(db.Unicode(2048), doc="Enter URL to the data source")
+    fmt = db.Column(db.String(32))
+    organisation_id = db.Column(db.Integer, db.ForeignKey(Organisation.id))
+    organisation = db.relationship(Organisation,
+        backref=db.backref('source', cascade="all, delete-orphan", single_parent=True))
+    def __repr__(self):
+        return self.title
+    def dict(self):
+        d = {
+            'id': self.id,
+            'title': self.title,
+            'path': self.path or '',
+            'format': helper.media_name(self.path, self.fmt),
+            'mediatype': helper.media_mime(self.path, self.fmt),
+        }
+        if not self.organisation is None:
+            d['organisation'] = self.organisation.dict()
+        return d
 
 # Many-to-many relationship
-projects_resources = db.Table(
-    'projects_resources',
-    db.Column('project_id', db.Integer(), db.ForeignKey('project.id')),
-    db.Column('resource_id', db.Integer(), db.ForeignKey('resource.id'))
+projects_renderings = db.Table(
+    'projects_renderings',
+    db.Column('project_id',   db.Integer(), db.ForeignKey('project.id')),
+    db.Column('rendering_id', db.Integer(), db.ForeignKey('rendering.id'))
+)
+sources_renderings = db.Table(
+    'sources_renderings',
+    db.Column('source_id',    db.Integer(), db.ForeignKey('source.id')),
+    db.Column('rendering_id', db.Integer(), db.ForeignKey('rendering.id'))
 )
 
-class Resource(db.Model):
+class Rendering(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     order = db.Column(db.Integer)
-    title = db.Column(db.String(64), unique=True)
+    title = db.Column(db.String(128), unique=True, nullable=False)
     description = db.Column(db.UnicodeText)
-    pipeline = db.Column(db.UnicodeText, doc="Mermaid pipeline diagram")
-    notes = db.Column(db.UnicodeText, doc="Internal notes")
-    license = db.Column(db.Unicode(64), doc="Conditions of use")
-    path = db.Column(db.Unicode(256), doc="Use the Data tab to upload files")
-    doc_url = db.Column(db.Unicode(256), doc="Link to a notebook or other documentation")
-    projects = db.relationship('Project', secondary=projects_resources,
-        backref=db.backref('resources', lazy='dynamic'))
+    path = db.Column(db.Unicode(2048),
+        doc="Provide a URL here, use the Data tab to upload files")
+    projects = db.relationship('Project', secondary=projects_renderings,
+        backref=db.backref('renderings', lazy='dynamic'))
+    sources = db.relationship('Source', secondary=sources_renderings,
+        backref=db.backref('renderings', lazy='dynamic'))
     def __repr__(self):
         return self.title
     def dict(self):
         content = ''
-        notes = ''
         if self.description:
-            content = Markup(markdown.markdown(self.description, extensions=MARKDOWN_EXT))
-        if self.notes:
-            notes = Markup(markdown.markdown(self.notes, extensions=MARKDOWN_EXT))
-        r = {
+            try:
+                content = Markup(markdown.markdown(self.description, extensions=MARKDOWN_EXT))
+            except Exception as e:
+                print(e)
+        return {
             'id': self.id,
-            'name': "smartuse-resource-%d" % self.id,
             'title': self.title,
-            'license': self.license,
+            'name': helper.slugify(self.title),
             'description': content,
-            'pipeline': self.pipeline,
-            'notes': notes,
-            'doc_url': self.doc_url,
-            'mediatype': get_media_type(self.path)
+            'mediatype': helper.media_mime(self.path),
+            'format': helper.media_name(self.path),
+            'path': self.path or '',
+            'sources': [r.dict() for r in self.sources]
         }
-        if self.path:
-            r['path'] = self.path
-        return r
 
 # ----------- Admin views -----------
 
@@ -250,38 +265,55 @@ admin.add_view(ModelView(Organisation, db.session, name="Organisations"))
 
 class ProjectView(ModelView):
     column_list = ('title', 'created', 'updated', 'category')
+    form_excluded_columns = ('slug', 'token_edit')
     form_extra_fields = {
         'screenshot': ImageUploadField('Screenshot',
             base_path=screenshot_path, url_relative_path='/screenshots/',
             thumbnail_size=(256, 256, True))
     }
-    inline_models = [Resource]
+    inline_models = [Rendering]
     can_export = True
-admin.add_view(ProjectView(Project, db.session, name="Data Packages (Projects)"))
+    def on_model_change(view, form, model, is_created):
+        model.slug = helper.slugify(form.title.data)
 
-class ResourceView(ModelView):
-    column_list = ('title', 'path', 'notes')
+admin.add_view(ProjectView(Project, db.session, name="Projects (Data Packages)"))
+
+class RenderingView(ModelView):
+    column_list = ('title', 'path')
     can_export = True
-admin.add_view(ResourceView(Resource, db.session, name="Resources (Datasets)"))
+admin.add_view(RenderingView(Rendering, db.session, name="Renderings (Views)"))
+
+admin.add_view(ModelView(Source, db.session, name="Data sources"))
+
+admin.add_view(ModelView(License, db.session, name="Licenses"))
 
 admin.add_view(FileAdmin(upload_path, '/uploads/', name="Uploads"))
 
 # API views
 @app.route("/api/projects", methods=['GET'])
 def projects_list():
-    return [p.dict() for p in Project.query.filter_by(is_hidden=False,is_featured=False).limit(50).all()]
+    return [p.dict() for p in Project.query
+        .filter_by(is_hidden=False,is_featured=False)
+        .limit(50).all()]
 
 @app.route("/api/projects/featured", methods=['GET'])
 def projects_list_featured():
-    return [p.dict() for p in Project.query.filter_by(is_hidden=False,is_featured=True).limit(10).all()]
+    return [p.dict() for p in Project.query
+        .filter_by(is_hidden=False,is_featured=True)
+        .limit(10).all()]
 
 @app.route("/api/projects/all", methods=['GET'])
 def projects_list_all():
-    return [p.dict() for p in Project.query.filter_by(is_hidden=False).limit(10).all()]
+    return [p.dict() for p in Project.query
+        .filter_by(is_hidden=False)
+        .order_by(Project.category)
+        .limit(25).all()]
 
 @app.route("/api/projects/by/<string:BY_CAT>", methods=['GET'])
 def projects_list_by_category(BY_CAT):
-    return [p.dict() for p in Project.query.filter_by(is_hidden=False,category=BY_CAT).limit(10).all()]
+    return [p.dict() for p in Project.query
+        .filter_by(is_hidden=False,category=BY_CAT)
+        .limit(10).all()]
 
 @app.route('/api/projects/search', methods=['GET'])
 def projects_search():
@@ -294,10 +326,6 @@ def projects_search():
         Project.summary.ilike(q),
     )).limit(50).all()]
 
-@app.route("/api/resources", methods=['GET'])
-def resources_list():
-    return [r.dict() for r in Resource.query.limit(10).all()]
-
 @app.route("/api/organisations", methods=['GET'])
 def organisations_list():
     return [o.dict() for o in Organisation.query.limit(10).all()]
@@ -305,18 +333,25 @@ def organisations_list():
 @app.route("/api/project/<int:project_id>", methods=['GET'])
 def project_detail(project_id):
     project = Project.query.filter_by(id=project_id).first_or_404()
-    resources = project.resources.order_by(Resource.order).all()
-    author = project.users.first()
-    if author is not None: author = author.dict()
-    return {
+    renderings = project.renderings.order_by(Rendering.order).all()
+    d = {
         'data': project.dict(),
         'details': project.details,
-        'author': author,
-        'resources': [r.dict() for r in resources]
+        'renderings': [r.dict() for r in renderings],
     }
+    author = project.users.first()
+    if author is not None: d['author'] = author.dict()
+    license = project.license
+    if license is not None: d['license'] = license.dict()
+    return d
 
 def get_file(filename):
-    f = open('templates/content/%s' % filename, 'r')
+    f = open(ospath.join(
+            ospath.dirname(__file__),
+            'templates',
+            'content',
+            filename
+        ), 'r')
     return f.read()
 
 def get_md(filename):
@@ -324,8 +359,10 @@ def get_md(filename):
     return Markup(markdown.markdown(t))
 
 # Flask views
-# @app.route('/about')
-# def index_about():  return render_template('public/about.pug')
+@app.route('/about')
+def index_about():
+    return render_template('public/about.pug', content=get_md('about-page'))
+
 # @app.route('/join')
 # def index_join():   return render_template('public/join.pug')
 
@@ -341,22 +378,27 @@ def index_root():
         about=get_md('home-about'),
     )
 
+@app.route("/project/<project_slug>")
+def project_page_by_slug(project_slug):
+    return project_page(Project.query.filter_by(slug=project_slug).first_or_404())
+
 @app.route("/project/<int:project_id>")
-def project_page(project_id):
-    project = Project.query.filter_by(id=project_id).first_or_404()
+def project_page_by_id(project_id):
+    return project_page(Project.query.filter_by(id=project_id).first_or_404())
+
+def project_page(project):
     content = Markup(markdown.markdown(project.details, extensions=MARKDOWN_EXT))
     meta = project.dict()
     created = arrow.get(meta['date-created'], 'DD.MM.YYYY').humanize()
     updated = arrow.get(meta['date-updated'], 'DD.MM.YYYY').format('DD.MM.YYYY')
+    category = None
     if project.category in project_categories:
         category = project_categories[project.category]
         category['class'] = 'fas fa-' + category['icon']
-    else:
-        category = None
     # version = 1.2
     organisation = project.organisation
     authors = [author.dict() for author in project.users]
-    resources = sorted([res.dict() for res in project.resources],
+    renderings = sorted([res.dict() for res in project.renderings],
         key=lambda res: res['id'])
     return render_template('public/project.pug', **locals())
 
@@ -383,6 +425,9 @@ def send_static_meta(path):
 @app.route('/theme/<path:path>')
 def send_static_theme(path):
     return send_from_directory('../static/theme', path)
+@app.route('/screenshots/<path:path>')
+def send_screenshots(path):
+    return send_from_directory('../screenshots', path)
 
 @app.route('/data/<path:path>')
 def send_static_data(path):
@@ -390,9 +435,9 @@ def send_static_data(path):
 @app.route('/uploads/<path:path>')
 def send_uploads(path):
     return send_from_directory('../uploads', path)
-@app.route('/screenshots/<path:path>')
-def send_screenshots(path):
-    return send_from_directory('../screenshots', path)
+@app.route('/api/project/<int:pid>/<path:path>')
+def send_uploads_project(pid, path):
+    return send_from_directory('../uploads', path)
 
 if __name__ == '__main__':
     db.create_all()

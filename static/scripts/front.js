@@ -2,73 +2,32 @@ var maps = {}, paginationtag = null;
 
 jQuery(function($){
 
-  function getProjectFeature($obj, t) {
-    $obj.append(
-      '<div class="glider" style="background-image:url(\'' + this.screenshot + '\')">' +
-        '<a href="/project/' + this.id + '">' +
-          '<div class="legend">' +
-            '<h4>' + this.title + '</h4>' +
-            '<p>' + this.summary + '</p>' +
-          '</div>' +
-        '</a>' +
-      '</div>'
-    );
-  }
+  // Load the gallery
+  if ($('#featured').length)
+  $.getJSON('/api/projects/featured', function(projects) {
 
-  function getProjectCard(t, with_screenshot) {
-    if (typeof with_screenshot === 'undefined')
-      with_screenshot = true;
-    return '' +
-    '<div class="col-md-4 project-card">' +
-      '<a href="/project/' + t.id + '">' +
-        '<div class="card mb-3">' +
-          '<div class="card-header ">' +
-            '<b class="title">' + t.title + '</b>' +
-            (typeof t.organisation === 'undefined' ? '' :
-            '<div class="organisation">' + t.organisation + '</div>') +
-            '</div>' +
-          '<div class="card-body">' +
-            (with_screenshot ?
-              '<img src="' + t.thumbnail + '" width="100" align="left" style="padding-right:1em">'
-              : '') +
-            '<p class="card-text">' +
-              t.summary + '</p>' +
-          '</div>' +
-        '</div>' +
-      '</a>' +
-    '</div>'
-  }
-
-  // Load featured projects
-  $('#featured').each(function() {
-    var $container = $(this);
-    $.getJSON('/api/projects/featured', function(projects) {
-      $.each(projects, function() { getProjectFeature($container, this); });
-    });
-  });
-
-  // Load main projects
-  $('#projects-featured').each(function() {
-    var $container = $(this).addClass('project-list');
-    $.getJSON('/api/projects/featured', function(projects) {
+    $('#featured').each(function() {
+      var $container = $(this);
       $.each(projects, function() {
-        $container.append(
-          getProjectCard(this, false)
-        );
+        getProjectFeature($container, this);
       });
     });
+
   });
 
-  // Load other projects
-  $('#projects').each(function() {
-    var $container = $(this).addClass('project-list');
-    $.getJSON('/api/projects', function(projects) {
-      $.each(projects, function() {
-        $container.append(
-          getProjectCard(this)
-        );
+  // Load Labs project categories
+  $.getJSON('/api/projects', function(projects) {
+
+    $('#projects').each(function() {
+      var $container = $(this).addClass('project-list');
+        $.each(projects, function() {
+          if (this.featured)
+            $container.prepend(getProjectCard(this));
+          else
+            $container.append(getProjectCard(this));
+        });
       });
-    });
+
   });
 
   // Load search results
@@ -102,6 +61,7 @@ jQuery(function($){
 */
 
   // Interactive search
+/*
   $('input.search').on('input', function() {
     var $cards = $('#projects .project-card');
     var q = $(this).val().toLowerCase();
@@ -111,5 +71,5 @@ jQuery(function($){
         $(item).show();
     });
   });
-
+*/
 });
