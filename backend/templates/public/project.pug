@@ -6,7 +6,7 @@ block scripts
   script(src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.0/mapbox-gl.js')
   link(href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.0/mapbox-gl.css',rel='stylesheet')
   script(src='https://unpkg.com/mermaid@8.0.0/dist/mermaid.min.js')
-  script(src='/scripts/main.js')
+  script(src='/scripts/project.js')
 
 block content
   .container-fluid.no-padding.story
@@ -16,7 +16,7 @@ block content
           //
             if organisation
               .organisation-image
-                a(href=organisation.url,target="_blank")
+                a(href=organisation.url)
                   img(src=organisation.logo,title=organisation.name)
           h1
             =meta.title
@@ -50,7 +50,7 @@ block content
 
           if project.organisation
             p.project-organisation
-              a(href=organisation.url,target="_blank")
+              a(href=organisation.url)
                 .organisation-name
                   =organisation.name
 
@@ -60,7 +60,7 @@ block content
                 .author
                   img(src=author.gravatar)
                   p
-                    a.fullname(href=author.url,target="_blank")
+                    a.fullname(href=author.url)
                       =author.fullname
                   if author.organisation
                     p

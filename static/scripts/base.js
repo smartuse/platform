@@ -56,4 +56,14 @@
     return lines;
   }
 
+  // External links in new window
+  $(document).ready(function() {
+    $('a').each(function() {
+      if (typeof this.host === 'undefined') return;
+      if (this.host !== window.location.host) {
+        $(this).attr('target', '_blank');
+      }
+    });
+  });
+
 })();

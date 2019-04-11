@@ -12,6 +12,7 @@ ENV
 .env
 yarn-error.log
 .ipynb_checkpoints
+__pycache__/
 *.mp4
 .DS_Store
 .Rhistory
