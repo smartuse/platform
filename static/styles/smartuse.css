@@ -55,11 +55,30 @@ body {
 #featured .glider .legend {
 	background: transparent;
 	color: white;
-	font-weight: bold;
 	text-align: center;
 	padding: 1em 2em;
 	/* box-shadow: 0px 6px 6px rgba(0,0,0,0.3); */
 	text-shadow: 0px 3px 3px rgba(1,1,1,0.7);
+}
+
+/* The tall orange box */
+@media only screen and (min-device-width: 812px) {
+	#featured .glider {
+	  height: 900px;
+	}
+}
+#featured .glider h4 {
+	font-size: 2rem;
+  font-weight: bold;
+}
+#featured .glider .legend {
+  position: absolute;
+  bottom: 0px;
+  background: #f3c656;
+  text-shadow: 1px 1px 1px grey;
+  font-size: 134%;
+  padding-bottom: 0.4em;
+  border-top-right-radius: 30px;
 }
 
 .btn-huge {

@@ -1,5 +1,7 @@
+<center>
 # *«Smart» vernetzen (Akteure, Daten, Werkzeuge, Fragen)*
 # *«Smart» verdichten, «Smart» nutzen, statt teuer bauen!*
+</center>
 
 <br>
 
