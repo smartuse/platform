@@ -346,7 +346,12 @@ def project_detail(project_id):
     return d
 
 def get_file(filename):
-    f = open('templates/content/%s' % filename, 'r')
+    f = open(ospath.join(
+            ospath.dirname(__file__),
+            'templates',
+            'content',
+            filename
+        ), 'r')
     return f.read()
 
 def get_md(filename):
