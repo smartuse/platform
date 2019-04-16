@@ -59,14 +59,14 @@ function setStoryLayout() {
 
 function getProjectFeature($obj, t) {
   $obj.append(
-    '<div class="glider" style="background-image:url(\'' + t.screenshot + '\')">' +
-      '<a href="' + t.url + '">' +
+    '<a href="' + t.url + '">' +
+      '<div class="glider" style="background-image:url(\'' + t.screenshot + '\')">' +
         '<div class="legend">' +
           '<h4>' + t.title + '</h4>' +
           '<p>' + t.summary + '</p>' +
         '</div>' +
-      '</a>' +
-    '</div>'
+      '</div>' +
+    '</a>'
   );
 }
 

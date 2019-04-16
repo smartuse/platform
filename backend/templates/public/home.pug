@@ -34,17 +34,20 @@ block content
               = about
 
   .container.padding-top
-
     .row
       .col-md-12.center
         form(action='/search')
           input.form-control.form-control-lg.search(name='q',placeholder='Search ...')
-        br
-    .row
-      .col-md-12
-        h1 Aktuell
 
-    #projects.row
+  .container#home-projects
+    .row.padding-top
+      .col-md-12
+        h1 Case Studies
+    .row(project-category='case-study')
+    .row.padding-top
+      .col-md-12
+        h1 Labs
+    .row(project-category='labs')
 
   .container-fluid.bg-primary.home-content
     .container

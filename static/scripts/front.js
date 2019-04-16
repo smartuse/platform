@@ -18,15 +18,17 @@ jQuery(function($){
   // Load Labs project categories
   $.getJSON('/api/projects', function(projects) {
 
-    $('#projects').each(function() {
-      var $container = $(this).addClass('project-list');
-        $.each(projects, function() {
-          if (this.featured)
-            $container.prepend(getProjectCard(this));
-          else
-            $container.append(getProjectCard(this));
-        });
-      });
+    var $container = $('#home-projects');
+    $.each(projects, function() {
+      if (!this.category) return;
+      var $cat = $container.find('[project-category="' + this.category + '"]');
+      if ($cat.length === 1) {
+        $cat.addClass('project-list');
+        $cat.append(getProjectCard(this));
+      } else {
+        console.warn('Category not found', this);
+      }
+    });
 
   });
 

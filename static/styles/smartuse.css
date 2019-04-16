@@ -369,10 +369,12 @@ html.fullscreen {
 .project-list .project-card { padding-top: 1em; }
 .project-list .project-card .card {
 	border: none; box-shadow: 3px 3px 3px rgba(0,0,0,0.2);
+  margin-bottom: 1rem !important;
 }
 .project-list .project-card a { text-decoration: none; }
 .project-list .project-card .card-text { color: #555; }
-.project-list .project-card:hover { background: #ddd; }
+.project-list .project-card:hover { background: #eee; }
+.project-list .project-card:hover a { color: #00b0e9; }
 .project-thumb {
   width: 128px; height: 128px;
   margin: 0px 20px 20px 0;
