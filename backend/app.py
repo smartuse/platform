@@ -320,11 +320,13 @@ def projects_search():
     q = request.args.get('q')
     if not q or len(q.strip()) < 3: return []
     q = '%' + q.strip() + '%'
-    return [p.dict() for p in Project.query.filter(or_(
-        Project.title.ilike(q),
-        Project.details.ilike(q),
-        Project.summary.ilike(q),
-    )).limit(50).all()]
+    return [p.dict() for p in Project.query
+        .filter_by(is_hidden=False)
+        .filter(or_(
+            Project.title.ilike(q),
+            Project.details.ilike(q),
+            Project.summary.ilike(q),
+        )).limit(50).all()]
 
 @app.route("/api/organisations", methods=['GET'])
 def organisations_list():
