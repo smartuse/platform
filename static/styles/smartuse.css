@@ -51,28 +51,23 @@ body {
 
 #featured .glider {
 	background-size: cover;
-	height: 320px;
+	height: 400px;
 }
 
 #featured .glider .legend {
 	background: transparent;
 	color: white;
 	text-align: center;
-	padding: 1em 2em;
 	/* box-shadow: 0px 6px 6px rgba(0,0,0,0.3); */
 	text-shadow: 0px 3px 3px rgba(1,1,1,0.7);
+	padding: 0px;
 }
 
-/* The tall orange box */
-@media only screen and (min-device-width: 812px) {
-	#featured .glider {
-	  height: 900px;
-	}
-}
 #featured .glider h4 {
-	font-size: 2rem;
   font-weight: bold;
+	padding: 0.4em 0.4em 0 0.4em;
 }
+
 #featured .glider .legend {
   position: absolute;
   bottom: 0px;
@@ -82,6 +77,21 @@ body {
   padding-bottom: 0.4em;
   border-top-right-radius: 30px;
 }
+
+/* The tall orange box */
+@media only screen and (min-device-width: 812px) {
+	#featured .glider {
+	  height: 800px;
+	}
+	#featured .glider .legend {
+		padding: 1em 2em;
+	}
+	#featured .glider h4 {
+		padding: initial;
+		font-size: 2rem;
+	}
+}
+
 
 .btn-huge {
 	font-size: 160%;
