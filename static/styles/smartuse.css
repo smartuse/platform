@@ -23,8 +23,10 @@ body {
 }
 
 #welcome {
-	font-size: 160%;
 	line-height: 150%;
+}
+.text {
+  font-size: 150%;
 }
 .home-content {
 	margin: 4em 0;
@@ -49,7 +51,7 @@ body {
 
 #featured .glider {
 	background-size: cover;
-	height: 360px;
+	height: 320px;
 }
 
 #featured .glider .legend {
@@ -82,7 +84,7 @@ body {
 }
 
 .btn-huge {
-	font-size: 200%;
+	font-size: 160%;
 }
 
 .page-footer {

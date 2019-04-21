@@ -5,77 +5,29 @@ block content
     .row
       .col-md-12
         .text.section
-          h1 Die Idee
-          p
-            | Unser Ziel ist ein Werkzeug und Netzwerk fu&#x308;r Planer (Kantone, Gemeinden, Sta&#x308;dte),
-            | &ldquo;Planungsnahe&rdquo;
-            | (Architekturbu&#x308;ros, Planungsbu&#x308;ros) und die Zivilgesellschaft. Es bringt zusammen, zeigt auf
-            | und
-            | ermo&#x308;glicht so nachhaltige Ansa&#x308;tze fu&#x308;r den Wirtschafts- und Lebensraum zu gestalten und als
-            | Bindeglied zwischen Top-down Planung und Bottom-up Partizipation zu agieren.
-          p
-        .text.section
-          p
-            | &laquo;Smart&raquo; vernetzen (Akteure, Daten, Werkzeuge, Fragen), &laquo;Smart&raquo; verdichten,&nbsp;
-            b &laquo;Smart&raquo; nutzen,&nbsp;
-            | statt teuer bauen. Das Projekt &laquo;Smart Use&raquo; ist eine laufende Kooperation zwischen der
-            | Metropolitankonferenz Zu&#x308;rich und der ARGE Smart Use, bestehend aus Joris van Wezemael, Hosoya
-            | Schaefer Architects und Datalets.ch.
+          = intro
 
-  .container-fluid.no-padding.bg-primary.home-content
-    img.img-fluid.w-100(src='/img/SmartUse_header.jpg' alt='SmartUse Header')
+        center.section
+          img(src='/img/cartoon.png', height='50%')
+          br
+          small
+            | Image: CC BY-ND 4.0 /
+            a(href='https://6aika.fi/open-data-and-interfaces/')
+              | 6Aika
+            |  / Paper Planes Oy
 
-  .container
-    .row
-      .col-md-12
         .text.section
-          =content
+          = content
 
   .container-fluid.no-padding.bg-primary.home-content
     .container
       .row
         .col-md-12.text
-          h1 Arbeitsrapport 2018
-          p Sunt aliquip aliqua elit minim cupidatat occaecat ad culpa ipsum ad eiusmod labore. Occaecat esse aute proident elit in officia ullamco eu. Occaecat adipisicing et est in fugiat duis cillum est esse veniam in aliqua. Ullamco aliqua veniam occaecat nulla ad. Ea tempor ex sint culpa aliquip anim aliquip culpa veniam nulla.
-          p Laboris veniam aute excepteur sunt in pariatur excepteur duis. Commodo nisi incididunt sint aute in exercitation. Aliquip tempor occaecat commodo nulla ullamco. Elit cillum irure culpa veniam quis. Ad aliqua ex minim ut in excepteur cupidatat cupidatat deserunt laboris reprehenderit et do officia. Incididunt sunt dolor culpa cupidatat do consectetur laborum commodo.
-          center
-            a(href="#")
-              h1(style='color:white')
-                i.fas.fa-file-download
-                | &nbsp;
-                small
-                  b Herunterladen
-                  br
-                  sup (PDF, 10 MB)
+          = report
 
   .container.padding-top
     .row
       .col-md-12
-        h2 Das Team
-    .row
-      .col-md-4
-        h4
-          a(href='http://www.hosoyaschaefer.com') Hosoya Schaefer Architects
-        ul
-          li Markus Schaefer
-          li Viktoria Molnar
-          li Thorben Westerhuys
-      .col-md-4
-        h4
-          a(href='https://www.datalets.ch') Datalets.ch
-        ul
-          li Oleg Lavrovsky
-      .col-md-4
-        h4
-          a(href='https://www.ethz.ch') ETH Zürich
-        ul
-          li Joris van Wezemael
-
-  // .container#about
-    .row
-      .col-md-12
-        h1
-          | SMARTUSE
-          small
-            br
-            | Die funktionale Region
+        h2 Impressum
+    = logos|safe
+    = impressum|safe

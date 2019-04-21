@@ -49,14 +49,15 @@ block content
         h1 Labs
     .row(project-category='labs')
 
-  .container-fluid.bg-primary.home-content
+  .container-fluid.bg-primary.no-padding.home-content
+    img.img-fluid.w-100(src='/img/SmartUse_header.jpg' alt='SmartUse Header')
     .container
       .row
         .col-md-12.text
           = about
+          center
+            a.btn.btn-lg.btn-secondary(href='/about') Weiter lesen ...
 
   .container-fluid.home-content
     .container
-      .row
-        .col-md-12.text#bottom
-          = bottom|safe
+      = logos|safe
