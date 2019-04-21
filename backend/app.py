@@ -198,6 +198,9 @@ class Source(db.Model):
     organisation_id = db.Column(db.Integer, db.ForeignKey(Organisation.id))
     organisation = db.relationship(Organisation,
         backref=db.backref('source', cascade="all, delete-orphan", single_parent=True))
+    license_id = db.Column(db.Integer, db.ForeignKey(License.id))
+    license = db.relationship(License,
+        backref=db.backref('source', cascade="all, delete-orphan", single_parent=True))
     def __repr__(self):
         return self.title
     def dict(self):
@@ -210,6 +213,8 @@ class Source(db.Model):
         }
         if not self.organisation is None:
             d['organisation'] = self.organisation.dict()
+        if not self.license is None:
+            d['license'] = self.license.dict()
         return d
 
 # Many-to-many relationship

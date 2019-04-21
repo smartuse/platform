@@ -221,8 +221,15 @@ p.author {
 	padding: 0.2em; margin: 0.5em;
 	color: #999; background: #eee;
 }
+.res-sources li .license {
+	text-transform: uppercase;
+	padding: 0.2em; margin-right: 0.5em	;
+	font-size: 90%;
+	border: 1px solid #aaa;
+	color: #333;
+}
+
 .list-group-item .res-sources {
-	font-size: 80%;
 	margin: 0px; padding: 0px;
 }
 .list-group-item .res-sources li {
