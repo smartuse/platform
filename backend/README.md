@@ -9,6 +9,8 @@ Technical details on getting the backend running follow. See also details on upd
 Get a hold of **Python 3** and [Pipenv](https://github.com/pypa/pipenv) on your machine.
 
     $ git clone https://gitlab.com/smartuse/smartuse.git
+    $ git submodule init
+    $ git submodule foreach git pull
 
 To install dependencies, use pip or [pipenv](https://github.com/pypa/pipenv):
 
