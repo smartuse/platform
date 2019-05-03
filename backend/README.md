@@ -1,10 +1,12 @@
-# SmartUse backend
+# SmartUse Backend
 
 A web application for collecting and sharing maps using geospatial Data Packages. Part of SmartUse, a pilot land use mapping project focusing on the greater metropolitan area around Zurich, Switzerland (Metropolitankonferenz Zürich). For more information, see the README in the parent folder, or visit [smartuse.ch](https://smartuse.ch).
 
-Technical details on getting the backend running follow. See also details on updating the frontend in the [static README](../static/README.md).
+Technical details on getting the backend service running follow. Details on updating the frontend can be found in the [static README](../static/README.md).
 
 ## Usage
+
+See also [Docker instructions](#Docker) below.
 
 Get a hold of **Python 3** and [Pipenv](https://github.com/pypa/pipenv) on your machine.
 
@@ -40,6 +42,32 @@ To start the backend:
     $ flask run
 
 The app will now be available at http://localhost:5000
+
+## Docker
+
+1) Copy `.env.example` to `.env` in the root path and modify with your preferred settings.
+
+2) Run `docker-compose build` in the root folder and make sure you don't get any errors.
+
+3) Use `docker-compose up -d` to start a daemon
+
+4) Create a database:
+
+```
+sudo docker container exec -u postgres -i smartuse_postgres_1 createdb smartuse
+```
+
+If you have a database export, you should:
+
+```
+sudo docker container exec -u postgres -i smartuse_postgres_1 psql < ../my-backup.sql
+```
+
+If not, then:
+
+```
+sudo docker-compose exec web flask db upgrade
+```
 
 ## License
 
