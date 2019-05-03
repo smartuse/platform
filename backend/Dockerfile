@@ -21,11 +21,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the source code into the container
 COPY . /opt/app
 
-# NB: in newer Docker, COPY --chown=flask:flaskgroup
-
-RUN mkdir -p /opt/uploads
-
-RUN chown -Rf flask:flaskgroup /opt/app
-RUN chown -Rf flask:flaskgroup /opt/uploads
+RUN mkdir -p /opt/uploads && chown -Rf flask:flaskgroup /opt/uploads
+RUN mkdir -p /opt/screenshots && chown -Rf flask:flaskgroup /opt/screenshots
 
 USER flask

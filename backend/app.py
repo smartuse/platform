@@ -33,7 +33,10 @@ import hashlib, codecs, datetime
 import os.path as ospath
 from os import urandom
 
-from . import helper
+try:
+    import helper
+except:
+    from . import helper
 
 # Create application
 app = FlaskAPI(__name__, static_url_path='')

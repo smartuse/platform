@@ -11,6 +11,15 @@ To fetch the frontend assets, use npm or [yarn](https://yarnpkg.com/lang/en/) in
     $ cd smartuse
     $ yarn install
 
+## Docker
+
+Use `docker-compose up -d` to start a daemon, then get a database export, and:
+
+```
+sudo docker container exec -u postgres -i smartuse_postgres_1 createdb smartuse
+sudo docker container exec -u postgres -i smartuse_postgres_1 psql < ../my-backup.sql
+```
+
 ## License
 
 MIT - details in [LICENSE](../LICENSE) file.
