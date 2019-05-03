@@ -384,9 +384,6 @@ def index_legal():
         impressum=get_file('impressum.html'),
 )
 
-# @app.route('/join')
-# def index_join():   return render_template('public/join.pug')
-
 @app.route('/search')
 def index_search():
     return render_template('public/search.pug')
