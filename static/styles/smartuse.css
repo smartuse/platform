@@ -282,6 +282,13 @@ p.author {
 .story-nav a { color: black; font-weight: bold; }
 */
 input.search { font-size: 140%; }
+form .fa-search {
+  font-size: 200%;
+  right: 0px;
+  position: absolute;
+  margin: 7pt 20pt;
+  opacity: 0.5;
+}
 
 .item img, .item iframe, .item .map {
   width: 100%;

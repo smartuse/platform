@@ -1,8 +1,9 @@
 <center>
-# *«Smart» vernetzen (Akteure, Daten, Werkzeuge, Fragen)*
-# *«Smart» verdichten, «Smart» nutzen, statt teuer bauen!*
+# *Digitale Werkzeuge für die analoge Stadt*
 </center>
 
-<br>
+Smart Use vereinbart Raum, Wachstum und Big Data, etabliert Ansätze zur evidenzbasierten Raumentwicklung vom hardwareorientierten Basis zu softwaregetriebene Gebrauchsmanagement und schafft die nachhaltige Transformation urbaner Landschaften dadurch.
 
-Unser Ziel ist ein Werkzeug und Netzwerk für Planer (Kantone, Gemeinden, Städte), "planungsnahe" (Architekturbüros, Planungsbüros) und die Zivilgesellschaft. Es bringt zusammen, zeigt auf und ermöglicht so nachhaltige Ansätze für den Wirtschafts- und Lebensraum zu gestalten. Es agiert als Bindeglied zwischen Top-down Planung und Bottom-up Partizipation. SmartUse bringt Akteure zusammen, eröffnet Diskurse und zeigt Wege zur Kollaboration und Partizipation auf. Im digitalen Zeitalter ist es entscheidend, systemisches Denken, die Befähigung aller Stakeholder und die bottom-up Initiativen zusammenzubringen.
+Mit einem **Datenbasiertes Ortsverständnis als Anwendungsbeispiel** bringt Smart Use die Akteure zusammen, eröffnet Diskurse und zeigt Wege zur Kollaboration und Partizipation auf. Im digitalen Zeitalter ist es entscheidend, systemisches Denken, die Befähigung aller Stakeholder und die Bottom-Up Initiativen zusammenzubringen.
+
+<br>

@@ -37,12 +37,16 @@ jQuery(function($){
     function urldecode(str) { return decodeURIComponent((str+'').replace(/\+/g, '%20')); }
     $('input.search').val(urldecode(document.location.search.replace('?q=', '')));
     var $container = $(this).addClass('project-list');
-    $.getJSON('/api/projects/search' + document.location.search, function(projects) {
+    var url = '/api/projects/search' + document.location.search;
+    if (document.location.search == 'labs') url = '/api/'
+    $.getJSON(url, function(projects) {
+      if (projects.length) $container.empty();
       $.each(projects, function() {
         $container.append(
           getProjectCard(this)
         );
       });
+      $container.show();
     });
   });
 

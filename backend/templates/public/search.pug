@@ -8,10 +8,13 @@ block content
     .row
       .col-md-12.center
         form(action='/search')
-          input.form-control.form-control-lg.search(name='q',placeholder='Search ...')
+          i.icon.fa.fa-search
+          input.form-control.form-control-lg.search(name='q',placeholder='Suchen ...')
 
-  .container.padding-top
+  .container
     .row
       .col-md-12.center
-        h2 Search results
-    #projects-search.row
+        h2 Recherche
+    #projects-search.row(style='display:none')
+      .col-md-12.text-center
+        i Zur Zeit gibt es hier keine Ergebnisse.

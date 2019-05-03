@@ -373,14 +373,15 @@ def get_md(filename):
 def index_about():
     return render_template('public/about.pug',
         intro=get_md('about-intro'),
+        participate=get_md('about-participate'),
         report=get_md('about-report'),
-        impressum=get_file('about-impressum.html'),
+        impressum=get_file('impressum.html'),
     )
 @app.route('/legal')
 def index_legal():
     return render_template('public/legal.pug',
         content=get_md('legal'),
-        impressum=get_file('about-impressum.html'),
+        impressum=get_file('impressum.html'),
 )
 
 # @app.route('/join')
