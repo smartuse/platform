@@ -302,26 +302,26 @@ admin.add_view(FileAdmin(upload_path, '/uploads/', name="Uploads"))
 def projects_list():
     return [p.dict() for p in Project.query
         .filter_by(is_hidden=False,is_featured=False)
-        .limit(50).all()]
+        .limit(12).all()]
 
 @app.route("/api/projects/featured", methods=['GET'])
 def projects_list_featured():
     return [p.dict() for p in Project.query
         .filter_by(is_hidden=False,is_featured=True)
-        .limit(10).all()]
+        .limit(6).all()]
 
 @app.route("/api/projects/all", methods=['GET'])
 def projects_list_all():
     return [p.dict() for p in Project.query
         .filter_by(is_hidden=False)
         .order_by(Project.category)
-        .limit(25).all()]
+        .limit(50).all()] # TODO: pagination
 
 @app.route("/api/projects/by/<string:BY_CAT>", methods=['GET'])
 def projects_list_by_category(BY_CAT):
     return [p.dict() for p in Project.query
         .filter_by(is_hidden=False,category=BY_CAT)
-        .limit(10).all()]
+        .limit(12).all()]
 
 @app.route('/api/projects/search', methods=['GET'])
 def projects_search():
