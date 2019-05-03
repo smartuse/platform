@@ -16,8 +16,7 @@ jQuery(function($){
   });
 
   // Load Labs project categories
-  $.getJSON('/api/projects', function(projects) {
-
+  function listProjects(projects) {
     var $container = $('#home-projects');
     $.each(projects, function() {
       if (!this.category) return;
@@ -29,8 +28,10 @@ jQuery(function($){
         console.warn('Category not found', this);
       }
     });
+  }
 
-  });
+  $.getJSON('/api/projects/by/case-study', listProjects);
+  $.getJSON('/api/projects/by/labs', listProjects);
 
   // Load search results
   $('#projects-search').each(function() {
