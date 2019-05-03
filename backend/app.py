@@ -373,11 +373,15 @@ def get_md(filename):
 def index_about():
     return render_template('public/about.pug',
         intro=get_md('about-intro'),
-        content=get_md('about-page'),
         report=get_md('about-report'),
-        logos=get_file('about-logos.html'),
         impressum=get_file('about-impressum.html'),
     )
+@app.route('/legal')
+def index_legal():
+    return render_template('public/legal.pug',
+        content=get_md('legal'),
+        impressum=get_file('about-impressum.html'),
+)
 
 # @app.route('/join')
 # def index_join():   return render_template('public/join.pug')
@@ -390,7 +394,6 @@ def index_search():
 def index_root():
     return render_template('public/home.pug',
         headline=get_md('home-headline'),
-        logos=get_file('about-logos.html'),
         about=get_md('home-about'),
     )
 

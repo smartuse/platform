@@ -113,10 +113,16 @@ body {
 	list-style: none;
 }
 #bottom li::after {
-	content: '–'
+	content: '_';
+	vertical-align: super;
 }
 #bottom li:last-child::after {
 	content: '';
+}
+
+#impressum ul { margin-top: 2em; }
+#impressum ul, #impressum li {
+	list-style: none;
 }
 
 .basemap {

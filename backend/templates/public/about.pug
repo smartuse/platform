@@ -16,18 +16,31 @@ block content
               | 6Aika
             |  / Paper Planes Oy
 
-        .text.section
-          = content
-
   .container-fluid.no-padding.bg-primary.home-content
     .container
       .row
         .col-md-12.text
           = report
+          center
+            a(href='https://web.tresorit.com/l#Vwz_xBMjlj3YrxkjfaPjcw', target='_blank')
+              h1(style='color:white')
+                i.fas.fa-file-download
+                | &nbsp;
+                small
+                  b Fact Sheet
+                  |  - English
 
-  .container.padding-top
+            a(href='https://web.tresorit.com/l#fHLcvV0mXjl34gcEGIZ1gg', target='_blank')
+              h1(style='color:white')
+                i.fas.fa-file-download
+                | &nbsp;
+                small
+                  b Tech Report
+                  br
+                  sup (PDF, 2 MB)
+
+  .container.padding-top#impressum
     .row
       .col-md-12
         h2 Impressum
-    = logos|safe
     = impressum|safe
