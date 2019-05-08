@@ -69,6 +69,27 @@ If not, then:
 sudo docker-compose exec web flask db upgrade
 ```
 
+## Production
+
+In production we use gunicorn + nginx + pipenv, monitored by this supervisor script:
+
+```
+[program:smartuse]
+directory=/srv/smartuse-platform/backend
+command=pipenv run gunicorn app:app -b 0.0.0.0:5555 -w 3
+autostart=true
+autorestart=true
+user=smartuser
+stderr_logfile=/var/log/smartuse/smartuse.err.log
+stdout_logfile=/var/log/smartuse/smartuse.out.log
+environment=
+    FLASK_APP="app.py",
+    SECRET_KEY="...",
+    DATABASE_URI="postgres://..",
+    MAPBOX_ID="..",
+    MAPBOX_TOKEN=".."
+```
+
 ## License
 
 MIT - details in [LICENSE](../LICENSE) file.
