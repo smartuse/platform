@@ -58,6 +58,8 @@ function setStoryLayout() {
 
 
 function getProjectFeature($obj, t) {
+  if (t.mediatype == "application/vnd.datapackage+json")
+    return embedProjectFeature($obj, t.path);
   $obj.append(
     '<a href="' + t.url + '">' +
       '<div class="glider" style="background-image:url(\'' + t.screenshot + '\')">' +
@@ -68,6 +70,27 @@ function getProjectFeature($obj, t) {
       '</div>' +
     '</a>'
   );
+}
+
+function embedProjectFeature($obj, tpath) {
+  $.getJSON(tpath, function(data) {
+    if (!(data.renderings && data.renderings.length > 0
+       && data.renderings[0].format == "Embed"))
+       return console.error('Unable to load feature: first resource must be an embed.');
+    var url = data.renderings[0].path;
+    var t = data.data;
+    $obj.append(
+      '<a href="' + t.url + '">' +
+      '<div class="glider" style="background-color:#eee">' +
+        '<iframe width="100%" frameborder="0" src="' + url + '"></iframe>' +
+        '<div class="legend">' +
+          '<h4>' + t.title + '</h4>' +
+          '<p>' + t.summary + '</p>' +
+        '</div>' +
+      '</div>' +
+      '</a>'
+    );
+  })
 }
 
 function getProjectCard(t, with_screenshot) {
