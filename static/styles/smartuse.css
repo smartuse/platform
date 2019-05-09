@@ -50,6 +50,7 @@ body {
 }
 
 #featured .glider, #featured iframe {
+	background-image: url('/img/welcome-loader.jpg');
 	background-size: cover;
 	height: 400px;
 }
@@ -138,6 +139,19 @@ body {
 	font-size: 120%;
 	border: 1px solid #999;
 	background: white;
+}
+.navbar-nav .nav-link::after {
+  content: '•';
+  padding-left: 1em;
+}
+.navbar-nav .nav-item:last-child .nav-link::after {
+  content: none;
+}
+.navbar-nav .nav-link {
+  font-size: 142%;
+  font-weight: bold;
+  color: white !important;
+  opacity: 1;
 }
 
 .rendering-container {

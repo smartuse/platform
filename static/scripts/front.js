@@ -3,19 +3,16 @@ var maps = {}, paginationtag = null;
 jQuery(function($){
 
   // Load the gallery
-  if ($('#featured').length)
-  $.getJSON('/api/projects/featured', function(projects) {
-
-    $('#featured').each(function() {
-      var $container = $(this);
+  if ($('#featured').length) {
+    $.getJSON('/api/projects/by/top', function(projects) {
+      var $container = $('#featured');
       $.each(projects, function() {
         getProjectFeature($container, this);
       });
     });
+  }
 
-  });
-
-  // Load Labs project categories
+  // Load project categories
   function listProjects(projects) {
     var $container = $('#home-projects');
     $.each(projects, function() {
@@ -23,7 +20,6 @@ jQuery(function($){
       var $cat = $container.find('[project-category="' + this.category + '"]');
       if ($cat.length === 1) {
         $cat.addClass('project-list');
-        this.featured = true;
         $cat.append(getProjectCard(this));
       } else {
         console.warn('Category not found', this.category);
@@ -31,8 +27,11 @@ jQuery(function($){
     });
   }
 
-  $.getJSON('/api/projects/by/case-study', listProjects);
-  $.getJSON('/api/projects/by/labs', listProjects);
+  // Load all project categories
+  $('#home-projects [project-category]').each(function() {
+    var p_type = $(this).attr('project-category');
+    $.getJSON('/api/projects/by/' + p_type, listProjects);
+  });
 
   // Load search results
   $('#projects-search').each(function() {

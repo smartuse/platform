@@ -82,7 +82,7 @@ function embedProjectFeature($obj, tpath) {
     $obj.append(
       '<a href="' + t.url + '">' +
       '<div class="glider" style="background-color:#eee">' +
-        '<iframe width="100%" frameborder="0" src="' + url + '"></iframe>' +
+        '<iframe width="100%" allowtransparency="true" frameborder="0" src="' + url + '"></iframe>' +
         '<div class="legend">' +
           '<h4>' + t.title + '</h4>' +
           '<p>' + t.summary + '</p>' +
@@ -97,9 +97,12 @@ function getProjectCard(t, with_screenshot) {
   if (typeof with_screenshot === 'undefined')
     with_screenshot = true;
   return '' +
-  '<div class="col-md-6 project-card">' +
+  '<div class="' +
+  (t.featured ? 'col-md-12 ' : 'col-md-6 ') +
+  'project-card">' +
     '<a href="' + t.url + '">' +
-      '<div class="card mb-5">' +
+      '<div class="card ' +
+        (t.featured ? 'mb-12 ' : 'mb-5 ') + '">' +
         '<div class="card-header ">' +
           (with_screenshot && t.featured ?
             '<img src="' + t.thumbnail + '" width="100%">'
