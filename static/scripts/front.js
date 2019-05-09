@@ -26,13 +26,13 @@ jQuery(function($){
         this.featured = true;
         $cat.append(getProjectCard(this));
       } else {
-        console.warn('Category not found', this);
+        console.warn('Category not found', this.category);
       }
     });
   }
 
   $.getJSON('/api/projects/by/case-study', listProjects);
-  // $.getJSON('/api/projects/by/labs', listProjects);
+  $.getJSON('/api/projects/by/labs', listProjects);
 
   // Load search results
   $('#projects-search').each(function() {
