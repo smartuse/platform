@@ -375,6 +375,7 @@ def index_about():
         intro=get_md('about-intro'),
         participate=get_md('about-participate'),
         report=get_md('about-report'),
+        logos=get_file('logos.html'),
         impressum=get_file('impressum.html'),
     )
 @app.route('/legal')
