@@ -4,7 +4,7 @@ Wir gestalten Premium-Produkte für urbane Arbeiterinnen und Arbeiter: All jene,
 
 **Interesse? Benötigen Sie weitere Informationen?**
 
-Nehmen Sie bitte mit uns Kontakt auf: [info@smartuse.ch](mailto:info@smartuse.ch) oder +41 (0)43 243 6313
+Nehmen Sie bitte [mit uns per Formular Kontakt auf](https://mailchi.mp/471fc9137668/smartuse-mitmachen), schreiben Sie uns [per E-mail](mailto:info@smartuse.ch) oder auf +41 (0)43 243 6313 anrufen (Mo-Fr 9-17 Uhr)
 
 **Jetzt Präsentationstermin vereinbaren!**
 
