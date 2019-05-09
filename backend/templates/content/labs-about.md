@@ -1,0 +1,3 @@
+# Labs
+
+Im digitalen Zeitalter sieht unsere Welt aus wie zuvor. Sie verhält sich aber anders. Sie ist massiv vernetzt. Sensorik und mobile Rechner wie beispielsweise Smartphones tracken unseren Alltag zeitlich und räumlich. Die technologischen und wirtschaftlichen Skalierungseffekte sind so stark, dass wir eine Dominanz grosser Tech-Firmen in Kernbereichen befürchten müssen. In diesem Kontext wird das «System Planung» wie so manche andere «Expertendomäne» aufgebrochen. SmartUse führt auf einer neuen Plattform Daten zur gebauten Umwelt zusammen. So werden im digitalen Zeitalter Betroffene zu Beteiligten.

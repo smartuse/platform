@@ -42,9 +42,11 @@ html
               li.nav-item
                 a.nav-link(href='/#home-projects') Case Studies
               li.nav-item
+                a.nav-link(href='/labs') Labs
+              li.nav-item
                 a.nav-link(href='/about') Hintergrund
               li.nav-item
-                a.nav-link(href='#footer') Kontakt
+                a.nav-link(href='/contact') Kontakt
 
     block top
 
@@ -55,46 +57,12 @@ html
       .container#footer
         .row
           .col-md-7.footer-info
-            // include:markdown-it index.md
-            p
-              | SmartUse ist ein Kooperationsprojekt der Verein Metropolitanraum Zürich
-            p
-              img(src='/img/logo_MK_black.png' width='200px')
-
-            p(style='margin-top:3em')
-              a(href='https://www.metropolitanraum-zuerich.ch/kontakt.html', class='contact')
-                i.far.fa-envelope-open
-                | &nbsp; Geschäftsstelle
-              &nbsp;
-              a(href='mailto:info@smartuse.ch', class='contact')
-                i.far.fa-envelope-open
-                | &nbsp; Technischer support
+            include snippets/contacts.pug
 
           .col-md-5
             p
               | Immer auf dem Laufenden bleiben?
-            //
-              p.small
-                i Einfach f&uuml;r unseren Newsletter anmelden!
-            form(method='post', data-name='Immer auf dem Laufenden bleiben? Einfach für unseren Newsletter anmelden:')
-              .form-fields
-                p
-                  input.form-control(name='EMAIL', placeholder='E-Mail-Adresse', required='', style='background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABHklEQVQ4EaVTO26DQBD1ohQWaS2lg9JybZ+AK7hNwx2oIoVf4UPQ0Lj1FdKktevIpel8AKNUkDcWMxpgSaIEaTVv3sx7uztiTdu2s/98DywOw3Dued4Who/M2aIx5lZV1aEsy0+qiwHELyi+Ytl0PQ69SxAxkWIA4RMRTdNsKE59juMcuZd6xIAFeZ6fGCdJ8kY4y7KAuTRNGd7jyEBXsdOPE3a0QGPsniOnnYMO67LgSQN9T41F2QGrQRRFCwyzoIF2qyBuKKbcOgPXdVeY9rMWgNsjf9ccYesJhk3f5dYT1HX9gR0LLQR30TnjkUEcx2uIuS4RnI+aj6sJR0AM8AaumPaM/rRehyWhXqbFAA9kh3/8/NvHxAYGAsZ/il8IalkCLBfNVAAAAABJRU5ErkJggg=="); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;', type='email')
-                p
-                  input.form-control(name='FNAME', placeholder='Vorname', type='text', style='width:49%;display:inline')
-                  input.form-control(name='LNAME', placeholder='Nachname', type='text', style='width:49%;display:inline')
-                p
-                  button.btn.btn-secondary(type="submit") Anmelden
-          //
-            .team-footer
-              h5 Das TEAM
-              ul
-                li
-                  a(href='http://www.hosoyaschaefer.com') Hosoya Schaefer Architects
-                li
-                  a(href='https://www.datalets.ch') Datalets.ch
-                li
-                  a(href='https://www.ethz.ch') ETH Zürich
+            include snippets/subscribe.html
 
       .container#bottom
         .row

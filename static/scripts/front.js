@@ -23,6 +23,7 @@ jQuery(function($){
       var $cat = $container.find('[project-category="' + this.category + '"]');
       if ($cat.length === 1) {
         $cat.addClass('project-list');
+        this.featured = true;
         $cat.append(getProjectCard(this));
       } else {
         console.warn('Category not found', this);
@@ -31,7 +32,7 @@ jQuery(function($){
   }
 
   $.getJSON('/api/projects/by/case-study', listProjects);
-  $.getJSON('/api/projects/by/labs', listProjects);
+  // $.getJSON('/api/projects/by/labs', listProjects);
 
   // Load search results
   $('#projects-search').each(function() {
