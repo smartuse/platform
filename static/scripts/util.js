@@ -96,29 +96,39 @@ function embedProjectFeature($obj, tpath) {
 function getProjectCard(t, with_screenshot) {
   if (typeof with_screenshot === 'undefined')
     with_screenshot = true;
-  return '' +
-  '<div class="' +
-  (t.featured ? 'col-md-12 ' : 'col-md-6 ') +
-  'project-card">' +
-    '<a href="' + t.url + '">' +
-      '<div class="card ' +
-        (t.featured ? 'mb-12 ' : 'mb-5 ') + '">' +
-        '<div class="card-header ">' +
-          (with_screenshot && t.featured ?
-            '<img src="' + t.thumbnail + '" width="100%">'
-            : '') +
-          '<b class="title">' + t.title + '</b>' +
-          (typeof t.organisation === 'undefined' ? '' :
-          '<div class="organisation">' + t.organisation + '</div>') +
+
+  if (t.featured)
+    return '' +
+      '<div class="col-md-12 project-card featured">' +
+        '<a href="' + t.url + '">' +
+          '<div class="card mb-12">' +
+            '<div class="card-header ">' +
+              (!with_screenshot ? '' :
+                '<img src="' + t.thumbnail + '">') +
+              '<div class="card-text">' +
+                '<b class="title">' + t.title + '</b>' +
+                // (typeof t.organisation === 'undefined' ? '' :
+                //   '<p class="organisation">' + t.organisation + '</p>') +
+                '<p class="summary">' + t.summary + '</p>' +
+              '</div>' +
+            '</div>' +
           '</div>' +
-        (t.featured ? '' :
-        '<div class="card-body">' +
-          (with_screenshot && !t.featured ?
-            '<img src="' + t.thumbnail + '" width="100" align="left" style="padding-right:1em">'
-            : '') +
-          '<p class="card-text">' + t.summary + '</p>' +
-        '</div>') +
-      '</div>' +
-    '</a>' +
-  '</div>'
+        '</a>' +
+      '</div>';
+
+    return '' +
+      '<div class="col-md-4 project-card">' +
+        '<a href="' + t.url + '">' +
+          '<div class="card mb-3">' +
+            '<div class="card-header ">' +
+              (!with_screenshot ? '' :
+                '<img src="' + t.thumbnail + '" width="100" align="left" style="padding-right:1em">') +
+              '<b class="title">' + t.title + '</b>' +
+              '<p class="card-text">' + t.summary + '</p>' +
+              // (typeof t.organisation === 'undefined' ? '' :
+              //   '<small class="organisation">' + t.organisation + '</small>') +
+            '</div>' +
+          '</div>' +
+        '</a>' +
+      '</div>';
 }

@@ -95,7 +95,7 @@ class Project(db.Model):
     title = db.Column(db.String(128), unique=True, nullable=False)
     created = db.Column(db.DateTime(), default=datetime.datetime.now())
     updated = db.Column(db.DateTime(), default=datetime.datetime.now())
-    summary = db.Column(db.Unicode(255))
+    summary = db.Column(db.UnicodeText(255))
     details = db.Column(db.UnicodeText)
     category = db.Column(db.String(32), doc="review, labs, collect, present, publish")
 

@@ -412,6 +412,7 @@ html.fullscreen {
 
 /* Project List (home) styling */
 
+.project-list .project-card img,
 .project-list .project-card { padding-top: 1em; }
 .project-list .project-card .card {
 	border: none; box-shadow: 3px 3px 3px rgba(0,0,0,0.2);
@@ -419,11 +420,30 @@ html.fullscreen {
 }
 .project-list .project-card a { text-decoration: none; }
 .project-list .project-card .card-text { color: #555; }
-.project-list .project-card:hover { background: #eee; }
+.project-list .project-card:hover { background: #00b0e9; }
 .project-list .project-card:hover a { color: #00b0e9; }
 .project-thumb {
   width: 128px; height: 128px;
   margin: 0px 20px 20px 0;
+}
+.project-list .project-card.featured .card-header {
+	background: #fcfcfc;  /* For Thorben */
+}
+.project-list .project-card.featured .organisation {
+	font-style: italic;
+	float: right;
+}
+.project-list .project-card.featured .card-text {
+	padding: 1em;
+	height: 8.5em;
+	margin-left: 1em; margin-top: 1em;
+	font-size: 140%;
+}
+.project-list .project-card.featured .card-header img {
+	float: left;
+	margin-right: 20px;
+	height: 200px;
+	border-bottom: 2px solid #aaa;
 }
 .project-list .project-card .card-header img {
 	margin: -0.75rem 0 0 0;
