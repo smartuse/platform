@@ -1,6 +1,7 @@
-title: test
-published: 2019-05-14
+title: The Page Title
 
 Hello, *World*!
+
+This is _Markdown_. Here is a [funny link](https://cividi.tech) ...
 
 Lorem ipsum dolor sit amet, …
