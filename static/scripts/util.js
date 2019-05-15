@@ -79,10 +79,11 @@ function embedProjectFeature($obj, tpath) {
        return console.error('Unable to load feature: first resource must be an embed.');
     var url = data.renderings[0].path;
     var t = data.data;
+    var thumb = t.screenshot;
     $obj.append(
       '<a href="' + t.url + '">' +
-      '<div class="glider" style="background-color:#eee">' +
-        '<iframe width="100%" allowtransparency="true" frameborder="0" src="' + url + '"></iframe>' +
+      '<div class="glider" style="background-image:url(\'' + thumb + '\')">' +
+        //'<iframe width="100%" allowtransparency="true" frameborder="0" src="' + url + '"></iframe>' +
         '<div class="legend">' +
           '<h4>' + t.title + '</h4>' +
           '<p>' + t.summary + '</p>' +

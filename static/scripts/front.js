@@ -54,22 +54,6 @@ jQuery(function($){
     });
   });
 
-  /*
-        each project in projects
-          .c-card
-            a(href='/project/{{ project.id }}')
-              .c-card__header
-                img.project-thumb(src='{{ project.thumb() }}',align='left')
-                h2.c-heading
-                  =project.title
-                each user in project.users
-                  span= user.organisation
-              if project.summary
-                .c-card__body
-                  .c-paragraph
-                    =project.summary
-*/
-
   // Interactive search
 /*
   $('input.search').on('input', function() {

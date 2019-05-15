@@ -49,10 +49,13 @@ body {
 	list-style: none; margin: 0px; padding: 0px;
 }
 
-#featured .glider, #featured iframe {
-	background-image: url('/img/welcome-loader.jpg');
+#featured, #featured .glider, #featured iframe {
 	background-size: cover;
 	height: 400px;
+}
+
+#featured iframe {
+	background-image: url('/img/welcome-loader.jpg');
 }
 
 #featured .glider .legend {
@@ -81,7 +84,7 @@ body {
 
 /* The tall orange box */
 @media only screen and (min-device-width: 812px) {
-	#featured .glider, #featured iframe {
+	#featured, #featured .glider, #featured iframe {
 	  height: 800px;
 	}
 	#featured .glider .legend {
@@ -192,6 +195,7 @@ body {
 
 .story .page-meta h1 {
 	font-weight: 500;
+	overflow: hidden;
 }
 
 .page-meta {
@@ -581,5 +585,12 @@ a.featured, a.featured h5, a.featured p
 		/*float: left;
 		display: block;
 		margin-left: 0.6em;*/
+	}
+
+	.project-list .project-card.featured .card-header img {
+		float: none;
+	}
+	.project-list .project-card.featured .card-text {
+		height: auto;
 	}
 }
