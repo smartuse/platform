@@ -2,6 +2,7 @@ arrow
 Flask
 Flask-Admin
 Flask-API
+Flask-FlatPages
 Flask-Migrate
 Flask-SQLAlchemy
 geoalchemy2

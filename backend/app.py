@@ -5,12 +5,16 @@ from flask import (
     render_template,
     send_from_directory,
 )
-from werkzeug import secure_filename
 from flask_api import FlaskAPI
-from flask_sqlalchemy import SQLAlchemy
+from flask_flatpages import FlatPages
 from flask_migrate import Migrate
+
+from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import or_, desc
 
+from werkzeug import secure_filename
+
+# Administration area
 import flask_admin as admin
 from flask_admin.model import BaseModelView
 from flask_admin.contrib.geoa import ModelView
@@ -46,6 +50,7 @@ app.jinja_env.add_extension('pypugjs.ext.jinja.PyPugJSExtension')
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
+pages = FlatPages(app)
 
 # Various presets
 with open(ospath.join(ospath.dirname(__file__), 'templates','presets','project-categories.json'), "r") as f:
@@ -358,8 +363,9 @@ def project_detail(project_id):
 def get_file(filename):
     f = open(ospath.join(
             ospath.dirname(__file__),
-            'templates',
+            '..',
             'content',
+            'top',
             filename
         ), 'r')
     return f.read()
@@ -393,6 +399,7 @@ def index_legal():
 @app.route('/search')
 def index_search():
     return render_template('public/search.pug')
+
 @app.route('/labs')
 def index_labs():
     return render_template('public/labs.pug',
@@ -405,6 +412,12 @@ def index_root():
         headline=get_md('home-headline'),
         about=get_md('home-about'),
     )
+
+@app.route('/p/<path:path>/')
+def flat_page(path):
+    page = pages.get_or_404(path)
+    content = Markup(markdown.markdown(page.body))
+    return render_template('public/page.pug', page=page, content=content)
 
 @app.route("/project/<project_slug>")
 def project_page_by_slug(project_slug):
