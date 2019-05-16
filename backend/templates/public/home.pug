@@ -34,26 +34,31 @@ block content
               = about
 
   .container.padding-top
-
     .row
       .col-md-12.center
         form(action='/search')
-          input.form-control.form-control-lg.search(name='q',placeholder='Search ...')
-        br
-    .row
+          i.icon.fa.fa-search
+          input.form-control.form-control-lg.search(name='q',placeholder='Suchen ...')
+
+  .container#home-projects
+    .row.padding-top
       .col-md-12
-        h1 Aktuell
+        h1 Case Studies
+    .row(project-category='case-study')
+    .row.padding-top
+      .col-md-12.text-center
+        a.btn.btn-lg.btn-secondary(href='/labs') Weitere Projekte ...
 
-    #projects.row
-
-  .container-fluid.bg-primary.home-content
+  .container-fluid.bg-primary.no-padding.home-content
+    img.img-fluid.w-100(src='/img/SmartUse_header.jpg' alt='SmartUse Header')
     .container
       .row
         .col-md-12.text
           = about
+          center
+            a.btn.btn-lg.btn-secondary(href='/about') Weiter lesen ...
 
-  .container-fluid.home-content
-    .container
-      .row
-        .col-md-12.text#bottom
-          = bottom|safe
+  link(href='https://assets.calendly.com/assets/external/widget.css', rel='stylesheet')
+  script(src='https://assets.calendly.com/assets/external/widget.js', type='text/javascript')
+  script(type='text/javascript').
+    Calendly.initBadgeWidget({ url: 'https://calendly.com/meet-smartuse/30min', text: 'Mitmachen!', color: '#00a2ff', textColor: '#ffffff', branding: true });

@@ -47,7 +47,12 @@ jQuery(function($){
           '<a href="' + x['path'] + '">' +
             x['title'] + '</a>' +
           '<fmt>' + x['format'] + '</fmt>' +
-          (x['organisation'] ? '<p>' + x['organisation']['name'] + '</p>' : '') +
+          (x['organisation'] ?
+            '<p><a class="org" href="' + x['organisation']['url'] + '" target="_blank">' +
+              x['organisation']['name'] + '</a></p>' : '') +
+          (x['license'] ?
+            '<p><a class="license" href="' + x['license']['path'] + '" target="_blank">' +
+              x['license']['name'] + '</a></p>' : '') +
           '</li>'
         ).join('\n')
       + '</ul>';
@@ -110,11 +115,9 @@ jQuery(function($){
       }
 
       datasets = container.find('.rendering-datasets');
-      if (res.license && res.license.length>1)
-        datasets.append('<p class="license"><i class="fas fa-certificate"></i> ' + res.license + '</p>');
-      if (res.doc_url && res.doc_url.length>1)
+      if (res.doc_url && res.doc_url.length>0)
         datasets.append('<p class="doc_url"><a href="' + res.doc_url + '"><i class="fas fa-book-open"></i> Details</a></p>');
-      if (res.pipeline && res.pipeline.length>1) {
+      if (res.pipeline && res.pipeline.length>0) {
         datasets.append('<div class="mermaid" id="mermaid' + res.id + '"></div>');
         res_id = (res.id || res.name || res.title.replace(' ', '-'));
         var graph = mermaid.render('mermaid' + res_id, 'graph LR;' + res.pipeline,

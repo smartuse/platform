@@ -11,7 +11,9 @@ services:
     depends_on:
      - postgres
     volumes:
-     - uploads-data:/opt/uploads
+     - ./screenshots:/opt/screenshots:z
+     - ./uploads:/opt/uploads:z
+     - ./static:/opt/static:z
 
   nginx:
     restart: always
@@ -33,6 +35,4 @@ services:
 
 volumes:
   postgres-data:
-    driver: local
-  uploads-data:
     driver: local

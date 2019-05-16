@@ -1,0 +1,14 @@
+extends public/base.pug
+
+block top
+  .container(style="margin:100px")
+
+block content
+  .container.padding-top
+    .row
+      .col-md-12
+        h1
+          = page.title
+        hr
+        .text.section
+          = content

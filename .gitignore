@@ -8,8 +8,8 @@ bower_components/
 
 npm-debug.log
 package-lock.json
-ENV
-.env
+
+.env*
 yarn-error.log
 .ipynb_checkpoints
 __pycache__/

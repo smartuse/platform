@@ -5,12 +5,16 @@ from flask import (
     render_template,
     send_from_directory,
 )
-from werkzeug import secure_filename
 from flask_api import FlaskAPI
-from flask_sqlalchemy import SQLAlchemy
+from flask_flatpages import FlatPages
 from flask_migrate import Migrate
+
+from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import or_, desc
 
+from werkzeug import secure_filename
+
+# Administration area
 import flask_admin as admin
 from flask_admin.model import BaseModelView
 from flask_admin.contrib.geoa import ModelView
@@ -33,7 +37,10 @@ import hashlib, codecs, datetime
 import os.path as ospath
 from os import urandom
 
-from . import helper
+try:
+    import helper
+except:
+    from . import helper
 
 # Create application
 app = FlaskAPI(__name__, static_url_path='')
@@ -43,6 +50,7 @@ app.jinja_env.add_extension('pypugjs.ext.jinja.PyPugJSExtension')
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
+pages = FlatPages(app)
 
 # Various presets
 with open(ospath.join(ospath.dirname(__file__), 'templates','presets','project-categories.json'), "r") as f:
@@ -92,7 +100,7 @@ class Project(db.Model):
     title = db.Column(db.String(128), unique=True, nullable=False)
     created = db.Column(db.DateTime(), default=datetime.datetime.now())
     updated = db.Column(db.DateTime(), default=datetime.datetime.now())
-    summary = db.Column(db.Unicode(255))
+    summary = db.Column(db.UnicodeText(255))
     details = db.Column(db.UnicodeText)
     category = db.Column(db.String(32), doc="review, labs, collect, present, publish")
 
@@ -198,6 +206,9 @@ class Source(db.Model):
     organisation_id = db.Column(db.Integer, db.ForeignKey(Organisation.id))
     organisation = db.relationship(Organisation,
         backref=db.backref('source', cascade="all, delete-orphan", single_parent=True))
+    license_id = db.Column(db.Integer, db.ForeignKey(License.id))
+    license = db.relationship(License,
+        backref=db.backref('source', cascade="all, delete-orphan", single_parent=True))
     def __repr__(self):
         return self.title
     def dict(self):
@@ -210,6 +221,8 @@ class Source(db.Model):
         }
         if not self.organisation is None:
             d['organisation'] = self.organisation.dict()
+        if not self.license is None:
+            d['license'] = self.license.dict()
         return d
 
 # Many-to-many relationship
@@ -294,37 +307,39 @@ admin.add_view(FileAdmin(upload_path, '/uploads/', name="Uploads"))
 def projects_list():
     return [p.dict() for p in Project.query
         .filter_by(is_hidden=False,is_featured=False)
-        .limit(50).all()]
+        .limit(24).all()]
 
 @app.route("/api/projects/featured", methods=['GET'])
 def projects_list_featured():
     return [p.dict() for p in Project.query
         .filter_by(is_hidden=False,is_featured=True)
-        .limit(10).all()]
+        .limit(6).all()]
 
 @app.route("/api/projects/all", methods=['GET'])
 def projects_list_all():
     return [p.dict() for p in Project.query
         .filter_by(is_hidden=False)
         .order_by(Project.category)
-        .limit(25).all()]
+        .limit(60).all()] # TODO: pagination
 
 @app.route("/api/projects/by/<string:BY_CAT>", methods=['GET'])
 def projects_list_by_category(BY_CAT):
     return [p.dict() for p in Project.query
         .filter_by(is_hidden=False,category=BY_CAT)
-        .limit(10).all()]
+        .limit(24).all()]
 
 @app.route('/api/projects/search', methods=['GET'])
 def projects_search():
     q = request.args.get('q')
     if not q or len(q.strip()) < 3: return []
     q = '%' + q.strip() + '%'
-    return [p.dict() for p in Project.query.filter(or_(
-        Project.title.ilike(q),
-        Project.details.ilike(q),
-        Project.summary.ilike(q),
-    )).limit(50).all()]
+    return [p.dict() for p in Project.query
+        .filter_by(is_hidden=False)
+        .filter(or_(
+            Project.title.ilike(q),
+            Project.details.ilike(q),
+            Project.summary.ilike(q),
+        )).limit(60).all()]
 
 @app.route("/api/organisations", methods=['GET'])
 def organisations_list():
@@ -348,8 +363,9 @@ def project_detail(project_id):
 def get_file(filename):
     f = open(ospath.join(
             ospath.dirname(__file__),
-            'templates',
+            '..',
             'content',
+            'top',
             filename
         ), 'r')
     return f.read()
@@ -361,22 +377,47 @@ def get_md(filename):
 # Flask views
 @app.route('/about')
 def index_about():
-    return render_template('public/about.pug', content=get_md('about-page'))
-
-# @app.route('/join')
-# def index_join():   return render_template('public/join.pug')
+    return render_template('public/about.pug',
+        intro=get_md('about-intro'),
+        report=get_md('about-report'),
+        logos=get_file('logos.html'),
+        impressum=get_file('impressum.html'),
+    )
+@app.route('/contact')
+def index_contact():
+    return render_template('public/contact.pug',
+        participate=get_md('contact-intro'),
+        impressum=get_file('impressum.html'),
+    )
+@app.route('/legal')
+def index_legal():
+    return render_template('public/legal.pug',
+        content=get_md('legal'),
+        impressum=get_file('impressum.html'),
+)
 
 @app.route('/search')
 def index_search():
     return render_template('public/search.pug')
 
+@app.route('/labs')
+def index_labs():
+    return render_template('public/labs.pug',
+        content=get_md('labs-about'),
+    )
+
 @app.route('/')
 def index_root():
     return render_template('public/home.pug',
         headline=get_md('home-headline'),
-        bottom=get_file('home-bottom.html'),
         about=get_md('home-about'),
     )
+
+@app.route('/p/<path:path>/')
+def flat_page(path):
+    page = pages.get_or_404(path)
+    content = Markup(markdown.markdown(page.body))
+    return render_template('public/page.pug', page=page, content=content)
 
 @app.route("/project/<project_slug>")
 def project_page_by_slug(project_slug):
