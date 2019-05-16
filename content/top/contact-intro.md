@@ -1,14 +1,14 @@
 # Mitmachen!
 
-Wir gestalten Premium-Produkte für urbane Arbeiterinnen und Arbeiter: All jene, die Interessen im und am Raumplanungsprozesse haben, werden mit unseren Daten und deren Visualisierungen bessere Entscheide treffen und effizienter agieren. Das heisst Zusammenarbeit.
+Wir gestalten anspruchvolle Produkte für urbane Arbeiter*innen: All jene, die Interesse daran haben, Ihre Umwelt besser zu verstehen und aktiv mitzugestalten, können mit unseren Daten und deren Visualisierungen bessere Entscheidungen treffen und effizienter agieren. Gemeinsam gedacht, gemeinsam gemacht.
 
 **Interesse? Benötigen Sie weitere Informationen?**
 
-Nehmen Sie bitte [mit uns per Formular Kontakt auf](https://mailchi.mp/471fc9137668/smartuse-mitmachen), schreiben Sie uns [per E-mail](mailto:info@smartuse.ch) oder auf +41 (0)43 243 6313 anrufen (Mo-Fr 9-17 Uhr)
+Nehmen Sie bitte [mit uns per Formular Kontakt auf](https://mailchi.mp/471fc9137668/smartuse-mitmachen), schreiben Sie uns [per E-mail](mailto:info@smartuse.ch) oder rufen Sie uns unter +41 43 243 6313 an (Mo-Fr 9-17 Uhr).
 
-**Jetzt Präsentationstermin vereinbaren!**
+**Jetzt einen Präsentationstermin vereinbaren!**
 
-Suchen wir zusammen neuen Auswertungen und Kanäle für eure Projekte:
+Wir suchen zusammen neuartige Auswertungen und Kanäle für Ihre Projekte:
 
 <div class="calendly-inline-widget" data-url="https://calendly.com/meet-smartuse/30min?hide_landing_page_details=1&hide_event_type_details=1" style="min-width:320px;height:640px;margin-bottom:50px"></div><script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js"></script>
 
