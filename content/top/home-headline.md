@@ -2,8 +2,8 @@
 # *Digitale Werkzeuge für die analoge Stadt*
 </center>
 
-Smart Use vereinbart Raum, Wachstum und Big Data, etabliert Ansätze zur evidenzbasierten Raumentwicklung vom hardwareorientierten Basis zu softwaregetriebene Gebrauchsmanagement und schafft die nachhaltige Transformation urbaner Landschaften dadurch.
+Smart Use hinterfragt das Leben im urbanen Raum, betreibt und verbessert Stadtentwicklung. Dazu verbinden offene digitale Werkzeuge Daten unterschiedlicher Herkunft, bringen fachbezogene und zivile Akteure zusammen.
 
-Mit einem **Datenbasiertes Ortsverständnis als Anwendungsbeispiel** bringt Smart Use die Akteure zusammen, eröffnet Diskurse und zeigt Wege zur Kollaboration und Partizipation auf. Im digitalen Zeitalter ist es entscheidend, systemisches Denken, die Befähigung aller Stakeholder und die Bottom-Up Initiativen zusammenzubringen. [Mehr erfahren ...](/about)
+Unsere faktenbasierte Aussagen beruhen auf Alltagserfahrung und Nutzerverhalten. **Die Analyse und Visualisierung von Daten erlaubt effizientes und systemrelevantes Entscheidung.** Smart Use entwickelt Methode und Werkzeuge, betreibt neue Prozesse, prägt offene Datenstandards. Responsivität aus datenbasierte und partizipative Ansätze sind die Grundlage von agile Smart Cities der Zukunft.
 
-<br>
+[Mehr erfahren ...](/about)

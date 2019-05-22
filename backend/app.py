@@ -5,14 +5,13 @@ from flask import (
     render_template,
     send_from_directory,
 )
+
+# Flask extensions
 from flask_api import FlaskAPI
 from flask_flatpages import FlatPages
 from flask_migrate import Migrate
-
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import or_, desc
-
-from werkzeug import secure_filename
 
 # Administration area
 import flask_admin as admin
@@ -21,10 +20,9 @@ from flask_admin.contrib.geoa import ModelView
 from flask_admin.contrib.fileadmin import FileAdmin
 from flask_admin.form import ImageUploadField
 
-# Geoshapes in model
-from geoalchemy2.types import Geometry
-from geoalchemy2.shape import to_shape
+# Data loading support
 import geojson, json
+from werkzeug import secure_filename
 
 # Project formatting
 import arrow
