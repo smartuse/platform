@@ -1,8 +1,8 @@
-# SmartUse Backend
+# Smart Use backend
 
-A web application for collecting and sharing maps using geospatial Data Packages. Part of SmartUse, a pilot land use mapping project focusing on the greater metropolitan area around Zurich, Switzerland (Metropolitankonferenz Zürich). For more information, see the README in the parent folder, or visit [smartuse.ch](https://smartuse.ch).
+A web application for collecting and sharing maps powered by a Geospatial Data Package API. Part of Smart Use, a pilot land use mapping project focusing on the greater metropolitan area around Zurich, Switzerland. For more information, see the [README](../README.md) in the parent folder. Details on updating the frontend can be found in the [static README](../static/README.md).
 
-Technical details on getting the backend service running follow. Details on updating the frontend can be found in the [static README](../static/README.md).
+Technical details on getting the backend service running follow.
 
 ## Usage
 
@@ -10,15 +10,21 @@ See also [Docker instructions](#Docker) below.
 
 Get a hold of **Python 3** and [Pipenv](https://github.com/pypa/pipenv) on your machine.
 
-    $ git clone https://gitlab.com/smartuse/smartuse.git
-    $ git submodule init
-    $ git submodule foreach git pull
+    $ git clone https://github.com/smartuse/platform.git smartuse
 
 To install dependencies, use pip or [pipenv](https://github.com/pypa/pipenv):
 
-    $ mkdir smartuse/uploads
-    $ cd smartuse/backend
+    $ cd smartuse
+    $ mkdir uploads
+    $ cd backend
     $ pipenv --three
+
+At this point you will have a virtual environment, which you can activate with:
+
+    $ pipenv shell
+
+You'll also need to install dependencies with:
+
     $ pipenv install
 
 Configure your **PostgreSQL** database, and [Mapbox](https://www.mapbox.com/help/how-access-tokens-work/) access tokens to render GeoJSON:
