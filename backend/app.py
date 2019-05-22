@@ -15,8 +15,7 @@ from sqlalchemy import or_, desc
 
 # Administration area
 import flask_admin as admin
-from flask_admin.model import BaseModelView
-from flask_admin.contrib.geoa import ModelView
+from flask_admin.contrib.sqla import ModelView
 from flask_admin.contrib.fileadmin import FileAdmin
 from flask_admin.form import ImageUploadField
 
