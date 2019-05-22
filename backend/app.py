@@ -46,6 +46,10 @@ app.debug = True
 app.config.from_pyfile('config.py')
 app.jinja_env.add_extension('pypugjs.ext.jinja.PyPugJSExtension')
 
+# TODO: in the future, consider moving to Rest+ https://flask-restplus.readthedocs.io/
+#    version='1.0', title='Smart Use API',
+#    description='An API based on Frictionless Data standards')
+
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 pages = FlatPages(app)
@@ -408,6 +412,7 @@ def index_labs():
 def index_root():
     return render_template('public/home.pug',
         headline=get_md('home-headline'),
+        studies=get_md('home-studies'),
         about=get_md('home-about'),
     )
 

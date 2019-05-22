@@ -29,7 +29,7 @@ block content
       .container.padding-top.padding-bottom
         .row
           .col-md-12
-            br
+            br(clear='all')
             .text.section
               = about
 
@@ -43,7 +43,8 @@ block content
   .container#home-projects
     .row.padding-top
       .col-md-12
-        h1 Case Studies
+        .text.section
+          = studies
     .row(project-category='case-study')
     .row.padding-top
       .col-md-12.text-center
@@ -52,6 +53,15 @@ block content
   .container-fluid.bg-primary.no-padding.home-content
     img.img-fluid.w-100(src='/img/SmartUse_header.jpg' alt='SmartUse Header')
     .container
+      .row.home-symbols.padding-top.padding-bottom
+        .col-md-4(style='background-image:url(/img/clogo-1.png)')
+          h5 Planungsnahe
+          small Architekturbüros, Planungsbüros
+        .col-md-4(style='background-image:url(/img/clogo-2.png)')
+          h5 Planer
+          small Kantone, Gemeinden,Städte
+        .col-md-4(style='background-image:url(/img/clogo-3.png)')
+          h5 Zivilgesellschaft
       .row
         .col-md-12.text
           = about

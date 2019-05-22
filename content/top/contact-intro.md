@@ -1,6 +1,6 @@
 # Mitmachen!
 
-Wir gestalten anspruchvolle Produkte für urbane Arbeiter*innen: All jene, die Interesse daran haben, Ihre Umwelt besser zu verstehen und aktiv mitzugestalten, können mit unseren Daten und deren Visualisierungen bessere Entscheidungen treffen und effizienter agieren. Gemeinsam gedacht, gemeinsam gemacht.
+Wir gestalten anspruchsvolle Produkte für urbane Arbeiter*innen: all jene, die Interesse daran haben, ihre Umwelt besser zu verstehen und aktiv mitzugestalten, können mit unseren Daten und deren Visualisierungen bessere Entscheidungen treffen und effizienter agieren. Gemeinsam gedacht, gemeinsam gemacht.
 
 **Interesse? Benötigen Sie weitere Informationen?**
 

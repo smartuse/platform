@@ -39,6 +39,14 @@ body {
 	margin: 2em 0;
 }
 
+.home-symbols .col-md-4 {
+	background-repeat: no-repeat;
+  background-position: 80%;
+  background-size: contain;
+	color: white;
+	font-size: 120%;
+}
+
 .team-footer {
 	margin-top: 1em;
 	text-align: left;
@@ -96,6 +104,10 @@ body {
 	}
 }
 
+.about-logos img {
+	height: 140px;
+	margin: 20px;
+}
 
 .btn-huge {
 	font-size: 160%;

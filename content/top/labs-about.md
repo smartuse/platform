@@ -1,3 +1,5 @@
 # Labs
 
-Im digitalen Zeitalter sieht unsere Welt aus wie zuvor. Sie verhält sich aber anders. Sie ist massiv vernetzt. Sensorik und mobile Rechner wie beispielsweise Smartphones tracken unseren Alltag zeitlich und räumlich. Die technologischen und wirtschaftlichen Skalierungseffekte sind so stark, dass wir eine Dominanz grosser Tech-Firmen in Kernbereichen befürchten müssen. In diesem Kontext wird das «System Planung» wie so manche andere «Expertendomäne» aufgebrochen. SmartUse führt auf einer neuen Plattform Daten zur gebauten Umwelt zusammen. So werden im digitalen Zeitalter Betroffene zu Beteiligten.
+Smart Use entwickelt Werkzeuge und zeigt unterschiedliche Themenbereiche auf. SmartUse Labs sind eine Sammlung von Experimenten, die Ansätze zu datenbasierten und kollaborativer Raumplanung darstellen. Jedes Lab ist als Modul gedacht und transformiert daher einen oder mehrere Inputs in einen fragestellunsgbezogenen Output.
+
+Die Analyse- und Visualisierung von Daten passiert durch offene Standards und etablierte Prozesse, die die Kompatibilität von unterschiedlichen Daten ermöglicht. Dadurch sind verschiedene Datengeschichten im Bereichen Raumnutzung, Infrastrukturplanung und Arealentwicklung entstanden.
