@@ -407,6 +407,12 @@ def index_labs():
         content=get_md('labs-about'),
     )
 
+@app.route('/studies')
+def index_studies():
+    return render_template('public/studies.pug',
+        studies=get_md('home-studies'),
+    )
+
 @app.route('/')
 def index_root():
     return render_template('public/home.pug',

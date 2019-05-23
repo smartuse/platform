@@ -1,6 +1,11 @@
+Sitemap: https://smartuse.ch/sitemap.xml
+
 User-agent: *
 Allow: /about
+Allow: /legal
 Allow: /contact
 
 Disallow: /admin/*
 Disallow: /api/*
+Disallow: /data/*
+Disallow: /uploads/*
