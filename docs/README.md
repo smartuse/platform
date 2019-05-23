@@ -1,5 +1,5 @@
 **Smart Use** is a prototype platform for sharing geographical and other data models about urban development in a usable and accessible way, with our primary users the 100+ communes in the 2M area around Zürich, architects and planning offices, and the various stakeholders involved in evidence-based decision making, civic dialogue and questions of governance. It offers a new basis for developing digital participation models through a freely accessible planning platform for Swiss metropolitan areas.
-SmartUse enables collection, analytics and visualisation of data useful for an effidence-based city planning. It aims at a proactive and collaborative exploitation of all openly available data for the benefit of the citizens. It helps to involve interested individuals and organisations into the process of solving urgent spatial development, city planning, big data and governance challenges by enabling them to share their data, their analytics, the resulting findings, their knowledge and their requests and concerns.
+Smart Use enables collection, analytics and visualisation of data useful for an effidence-based city planning. It aims at a proactive and collaborative exploitation of all openly available data for the benefit of the citizens. It helps to involve interested individuals and organisations into the process of solving urgent spatial development, city planning, big data and governance challenges by enabling them to share their data, their analytics, the resulting findings, their knowledge and their requests and concerns.
 
 ![](screens/front.jpg)
 
@@ -9,7 +9,7 @@ The Zurich Metropolitan Area Association promotes the quality of life and streng
 
 From 2016 to 2019, the association is pursuing a priority programme in which, among other things, concrete solutions for the current challenge of "the consequences of population and economic growth" are to be worked out. In February 2017, the association called for the submission of cooperation projects in a two-stage procedure.
 
-ARGE ("Arbeitsgemeinschaft") SmartUse submitted the **Smart Use** project in the first round in April 2017. Aiming to contribute to a more evidence-based approach to spatial development by investigating and mapping spatial use patterns "bottom-up" through the analysis of suitable relational data sets, the project proposed to achieve this by: (1) recording spatial-temporal routines and presenting, analysing and interpreting them at different scale levels, and (2) involving the actors involved in spatial development with a view to existing spatial structures, planned projects and strategic guidelines. In July 2017, the ARGE association awarded the contract for the initial project, to run until January 2019.
+The SmartUse ARGE ("Arbeitsgemeinschaft") submitted the **Smart Use** project in the first round in April 2017. Aiming to contribute to a more evidence-based approach to spatial development by investigating and mapping spatial use patterns "bottom-up" through the analysis of suitable relational data sets, the project proposed to achieve this by: (1) recording spatial-temporal routines and presenting, analysing and interpreting them at different scale levels, and (2) involving the actors involved in spatial development with a view to existing spatial structures, planned projects and strategic guidelines. In July 2017, the ARGE association awarded the contract for the initial project, to run until January 2019.
 
 The aims of the initial project founded by Zurich Metropolitan Area Association included:
 
@@ -67,7 +67,7 @@ The main advantages of using Frictionless Data are:
 - platform agnostic interoperability of these data packages with various existing tools
 - cutting costs by the provided interoperability and the easier, i.e. frictionless, integration of data packages into various platforms
 
-As SmartUse is exploiting frictionless data package formats, it is automatically compliant with a huge set of existing data manipulation and verification tools, i.e. data quality can be tested and assured without the need of implementing new tools.
+As Smart Use is exploiting frictionless data package formats, it is automatically compliant with a huge set of existing data manipulation and verification tools, i.e. data quality can be tested and assured without the need of implementing new tools.
 
 ## Software architecture
 
@@ -163,7 +163,7 @@ All of the other mapping platforms that we considered are potential candidates f
 
 Geodata analytics in the current beta release were done using the open source [QGIS software](https://www.qgis.org/en/site/) in conjunction with [PostGIS server](https://postgis.net/). [R scripts](https://www.r-project.org/) and [Julia notebooks](https://julialang.org/) were also used for some data science tasks.
 
-Several geodata workflows around these tools have been explored during the project. Our primary interface between these environments has been the [GeoJSON format](http://geojson.org/). In the project wiki you can find documentation of our main process in the [Communes Map](https://gitlab.com/SmartUse/smartuse-platform/wikis/GIS/communes-map-process) - transforming geopoints collected from SmartUse Projects into a heatmap for the project front page.
+Several geodata workflows around these tools have been explored during the project. Our primary interface between these environments has been the [GeoJSON format](http://geojson.org/). In the project wiki you can find documentation of our main process in the [Communes Map](https://gitlab.com/SmartUse/smartuse-platform/wikis/GIS/communes-map-process) - transforming geopoints collected from Smart Use Projects into a heatmap for the project front page.
 
 ![](screens/SU-Heatmap-002.jpg)
 
@@ -204,14 +204,14 @@ A sample response from our API:
     "data": {
         "date-created": "2018-04-06",
         "date-updated": "2018-04-06",
-        "title": "Gemeinden auf SmartUse",
-        "summary": "Projekte auf SmartUse geolokalisiert",
+        "title": "Gemeinden auf Smart Use",
+        "summary": "Projekte geolokalisiert",
         "path": "http://alpha.smartuse.ch/api/project/5",
         "featured": false,
         "name": "smartuse-5",
         "id": 5,
         "hidden": true,
-        "text": "Gemeinden auf SmartUse"
+        "text": "Gemeinden auf Smart Use"
     },
     "details": "Lorem Ipsum",
     "author": {
@@ -277,20 +277,20 @@ Extensions and improvements of the backend:
 - **Registration and onboarding process** (users): An organisation or an individual should be able to register itself using a proper registration and onboarding process.
 - **Modelling of publishing process**: The management of data projects (e.g. uploading new data sets, analytics, etc.) should be modelled and represented with various states, e.g. "data uploaded", "data cleaned", "data verified", "data normalised", "custom analytics run", "data ready for publication waiting approval", "publication approved", "data published". This process needs to be moderated by users with the correct role belonging to the publishing organisation as well as by the maintainer of the **Smart Use** platform.
 - **Modelling the data pipeline**: A data pipeline should be modelled in a way that all steps involved in the data amelioration can be automatically and reproducibly applied to the data set fetched from the data source. This includes executing external data processing services as well as storing and executing all scripts (R/Julia) used in order to get the final result.
-  
+
 Further ideas and vision
 
 - Frontend:
-  - **Storytelling**: SmartUse could include features for telling a comprehensive story based on the data produced. This might include a timeline or a sequence of data sets and its findings and conclusions.
+  - **Storytelling**: Smart Use could include features for telling a comprehensive story based on the data produced. This might include a timeline or a sequence of data sets and its findings and conclusions.
   - **Definition of data packages** and their components: The frontend could include a way for defining data packages and their components.
   - **Upload functionality** for R/Julia data processing scripts
   - **Create, edit and delete functionality for data pipelines**: A user should be able to create, modify and delete data pipelines for his/her data projects.
 - Backend:
-  - **Templates for data pipelines**: In order to support organisations and users in the process of data publication, SmartUse should offer templates for standard data pipelines. Templates can be globally available or specific for an organisation.
-  - **Versioning of data projects**: SmartUse should support multiple versions of a data project. An organisation should be able to approve a sub set of the available versions of a data project for publication.
-  - **Detection of data source updates**: SmartUse should be able to detect updates of a data source. It should automatically fetch the new data and apply all the processing steps of the assigned data pipelines and automatically create a new version. As soon as the processing has been completed, it should inform the owner of the data project about the availability of new results. The new version of the data project including the automatically generated results can then be approved for publication by the data project owner or one of its users with the necessary assigned role. This feature requires role concept, publishing process, data pipelines, and versioning.
+  - **Templates for data pipelines**: In order to support organisations and users in the process of data publication, Smart Use should offer templates for standard data pipelines. Templates can be globally available or specific for an organisation.
+  - **Versioning of data projects**: Smart Use should support multiple versions of a data project. An organisation should be able to approve a sub set of the available versions of a data project for publication.
+  - **Detection of data source updates**: Smart Use should be able to detect updates of a data source. It should automatically fetch the new data and apply all the processing steps of the assigned data pipelines and automatically create a new version. As soon as the processing has been completed, it should inform the owner of the data project about the availability of new results. The new version of the data project including the automatically generated results can then be approved for publication by the data project owner or one of its users with the necessary assigned role. This feature requires role concept, publishing process, data pipelines, and versioning.
 
-89grad implemented and operates a set of web applications with extensive role concept, such as SmartUse will require in the next phase, as well as with various automation and integration requirements for various customers. Examples are:
+89grad implemented and operates a set of web applications with extensive role concept, such as Smart Use will require in the next phase, as well as with various automation and integration requirements for various customers. Examples are:
 
 - Order Gateway and Merchant Portal for e-commerce market place siroop:
   - Handling of updates (master, stock, and price data) for more than 1 Mio products of more than 500 merchants (> 2 Mio updates per day)
