@@ -29,8 +29,8 @@ jQuery(function($){
               '<small class="btn btn-sm download-format">' + (res.format || res.mediatype || '') + '</small>' +
               '<a type="button" href="' + get_project_path(res.path, canonical_url) + '" ' +
               (res.mediatype && res.mediatype.startsWith('application') ?
-                'class="btn btn-primary btn-sm"><i class="fas fa-eye"></i>&nbsp; Anschauen</a>' :
-                'download class="btn btn-primary btn-sm"><i class="fas fa-arrow-down"></i>&nbsp; Herunterladen</a>') +
+                'class="btn btn-primary btn-sm">&#128065;&nbsp; Anschauen</a>' :
+                'download class="btn btn-primary btn-sm">&#128459;&nbsp; Herunterladen</a>') +
             '</div>' +
           '</div>' +
           (res.sources ? get_data_sources(res.sources) : '') +
@@ -116,7 +116,7 @@ jQuery(function($){
 
       datasets = container.find('.rendering-datasets');
       if (res.doc_url && res.doc_url.length>0)
-        datasets.append('<p class="doc_url"><a href="' + res.doc_url + '"><i class="fas fa-book-open"></i> Details</a></p>');
+        datasets.append('<p class="doc_url"><a href="' + res.doc_url + '">&#128366; Details</a></p>');
       if (res.pipeline && res.pipeline.length>0) {
         datasets.append('<div class="mermaid" id="mermaid' + res.id + '"></div>');
         res_id = (res.id || res.name || res.title.replace(' ', '-'));

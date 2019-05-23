@@ -1,9 +1,5 @@
-/*html { background: #333; overflow-x: hidden; }*/
-.hidden { display: none; }
 body {
-  font-family: "Roboto", sans-serif;
-  /* height: 100%;  */
-  /* margin: 2em 0; */
+	font-family: Helvetica,'Lucida Sans',sans-serif;
 }
 .logo {
 	background: url("/img/SmartUse-Logo.png") left center no-repeat;
@@ -21,12 +17,12 @@ body {
   margin-top: -15px;
   float: right;
 }
-
 #welcome {
 	line-height: 150%;
 }
+.hidden { display: none; }
 .text {
-  font-size: 150%;
+  font-size: 125%;
 }
 .home-content {
 	margin: 4em 0;
@@ -157,9 +153,11 @@ body {
 	border: 1px solid #999;
 	background: white;
 }
-.navbar-nav .nav-link::after {
-  content: '•';
-  padding-left: 1em;
+@media only screen and (min-device-width: 812px) {
+	.navbar-nav .nav-link::after {
+	  content: '•';
+	  padding-left: 1em;
+	}
 }
 .navbar-nav .nav-item:last-child .nav-link::after {
   content: none;

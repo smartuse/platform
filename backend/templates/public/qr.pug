@@ -1,0 +1,27 @@
+extends public/base.pug
+
+block scripts
+  script(src='/scripts/front.js')
+  script(src='/vendor/glider.js')
+
+block head
+  link(href='/vendor/glider.min.css',rel='stylesheet')
+
+block top
+  .container(style="margin:100px")
+
+block content
+  .container-fluid(style='background:url(/img/welcome.jpg);background-size:cover;background-position:50%')
+    .container.padding-top(style='background:rgba(255,255,255,0.9);padding:50px')
+      .row
+        .col-md-12
+          .text.section
+            = studies
+          p.padding-top
+            a.btn.btn-lg.btn-primary(href='/') Zum Anfang
+
+  .container#home-projects
+    .row.padding-top(project-category='case-study')
+    .row.padding-top
+      .col-md-12.text-center
+        a.btn.btn-lg.btn-secondary(href='/labs') Weitere Projekte ...

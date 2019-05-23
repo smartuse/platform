@@ -413,6 +413,12 @@ def index_studies():
         studies=get_md('home-studies'),
     )
 
+@app.route('/qr')
+def index_qr():
+    return render_template('public/qr.pug',
+        studies=get_md('home-qr'),
+    )
+
 @app.route('/')
 def index_root():
     return render_template('public/home.pug',
