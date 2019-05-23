@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /about
+Allow: /contact
+
+Disallow: /admin/*
+Disallow: /api/*
