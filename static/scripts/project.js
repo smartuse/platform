@@ -28,7 +28,7 @@ jQuery(function($){
             '<div role="group" class="download-buttons btn-group">' +
               '<small class="btn btn-sm download-format">' + (res.format || res.mediatype || '') + '</small>' +
               '<a type="button" href="' + get_project_path(res.path, canonical_url) + '" ' +
-              (res.mediatype && res.mediatype.startsWith('application') ?
+              (res.mediatype && res.mediatype.indexOf('application') == 0) ?
                 'class="btn btn-primary btn-sm">&#128065;&nbsp; Anschauen</a>' :
                 'download class="btn btn-primary btn-sm">&#128459;&nbsp; Herunterladen</a>') +
             '</div>' +
