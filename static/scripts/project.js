@@ -15,7 +15,7 @@ jQuery(function($){
       gallery.append('<div title="Share" class="side-button share-button"></div>');
       if (gallery.attr('fullscreen'))
         gallery.append('<div title="Vollbild" class="side-button fullscreen-button"></div>');
-      return gallery.append('<figure class="item" />').find('.item:last-child');
+      return $('<figure class="item" />').appendTo(gallery);
     }
 
     function add_rendering_summary(res) {
