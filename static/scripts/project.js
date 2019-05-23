@@ -272,6 +272,13 @@ jQuery(function($){
 
   } //-load_DataPackage
 
+  // Check compatibility
+  if (get_ie_version() < 11) {
+    $('<div class="alert alert-danger" role="alert">' +
+      'Ihr Webbrowser wird nicht unterstützt. Visualisierungen werden wahrscheinlich nicht geladen. <u>Bitte aktualisieren!</u>' +
+      '</div>').prependTo('.row:first')
+  }
+
   // Load selected project
   if (typeof PROJECT_ID != 'undefined') {
     project_path = '/api/project/' + PROJECT_ID;
