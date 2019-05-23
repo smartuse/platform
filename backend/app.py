@@ -472,6 +472,7 @@ def send_static_theme(path):
 def send_screenshots(path):
     return send_from_directory('../screenshots', path)
 
+# Data serving paths
 @app.route('/data/<path:path>')
 def send_static_data(path):
     return send_from_directory('../views/projects', path)
@@ -481,6 +482,11 @@ def send_uploads(path):
 @app.route('/api/project/<int:pid>/<path:path>')
 def send_uploads_project(pid, path):
     return send_from_directory('../uploads', path)
+
+# Error paths
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('public/404.pug'), 404
 
 if __name__ == '__main__':
     db.create_all()

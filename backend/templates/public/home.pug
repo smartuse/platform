@@ -9,9 +9,9 @@ block head
   //link(href='/vendor/gallery.prefixed.css',rel='stylesheet')
 
 block content
-  .container
+  .container-fluid
     .row
-      .col-md-12.center
+      .col.center
         .glider-contain#featured
         //
           .dots
@@ -23,15 +23,6 @@ block content
       .col-md-12
         .text.section#welcome
           = headline
-
-  //
-    .container-fluid.bg-secondary#about
-      .container.padding-top.padding-bottom
-        .row
-          .col-md-12
-            br(clear='all')
-            .text.section
-              = about
 
   .container.padding-top
     .row
