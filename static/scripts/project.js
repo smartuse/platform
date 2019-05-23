@@ -273,10 +273,11 @@ jQuery(function($){
   } //-load_DataPackage
 
   // Check compatibility
-  if (get_ie_version() < 11) {
+  if (get_ie_version() && get_ie_version() < 12) {
     $('<div class="alert alert-danger" role="alert">' +
-      'Ihr Webbrowser wird nicht unterstützt. Visualisierungen werden wahrscheinlich nicht geladen. <u>Bitte aktualisieren!</u>' +
-      '</div>').prependTo('.row:first')
+      'Internet Explorer wird nicht unterstützt. Versuchen Sie es bitte erneut mit einem aktuellen Browser: ' +
+      '<a href="http://outdatedbrowser.com/de" target="_blank">outdatedbrowser.com</a>' +
+      '</div>').prependTo('.row:first');
   }
 
   // Load selected project
