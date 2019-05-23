@@ -40,7 +40,7 @@ jQuery(function($){
 
     function get_data_sources(sources) {
       return '<ul class="res-sources">' +
-        sources.map(x => '<li>' +
+        $.map(sources, function(x) { '<li>' +
           (x['organisation'] ?
             '<img src="' + x['organisation']['logo'] + '">' :
             '<img src="/img/usericon.png">') +
@@ -54,7 +54,7 @@ jQuery(function($){
             '<p><a class="license" href="' + x['license']['path'] + '" target="_blank">' +
               x['license']['name'] + '</a></p>' : '') +
           '</li>'
-        ).join('\n')
+        }).join('\n')
       + '</ul>';
     }
 
