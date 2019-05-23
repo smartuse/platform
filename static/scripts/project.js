@@ -7,9 +7,9 @@ jQuery(function($){
     if (typeof canonical_url !== 'string') canonical_url = project_path;
 
     function add_gallery_item(container, ii) {
-      container.prepend('<div class="gallery" fullscreen=1></div>');
-      gallery = container.find('.gallery');
+      var gallery = $('<div class="gallery" fullscreen=1></div>').prependTo(container);
       if (gallery.length === 0) gallery = $('.gallery');
+      if (gallery.length === 0) return null;
       // gallery.append('<div id="item-'+ii+'" class="control-operator"></div>');
       // gallery.find('.controls').append('<a href="#item-'+ii+'" class="control-button">•</a>');
       gallery.append('<div title="Share" class="side-button share-button"></div>');
@@ -142,22 +142,25 @@ jQuery(function($){
 
       } else if (res.mediatype.indexOf('image/')==0) {
         rescount = rescount + 1;
-        item = add_gallery_item(container, rescount);
+        var item = add_gallery_item(container, rescount);
+        if (item == null) return;
 
-        img = item.append('<img id="image-'+rescount+'" />').find('img:last-child');
+        var img = $('<img id="image-'+rescount+'" />').appendTo(item);
         imgpath = get_project_path(res.path, canonical_url);
         img.attr('style', 'background-image:url('+imgpath+')');
 
       } else if (res.mediatype == 'application/html') {
         rescount = rescount + 1;
-        item = add_gallery_item(container, rescount);
+        var item = add_gallery_item(container, rescount);
+        if (item == null) return;
 
         imgpath = get_project_path(res.path, canonical_url);
         item.append('<iframe id="frame-'+rescount+'" src="' + imgpath + '"/>');
 
       } else if (res.mediatype == 'application/ipynb+json') {
         rescount = rescount + 1;
-        item = add_gallery_item(container, rescount);
+        var item = add_gallery_item(container, rescount);
+        if (item == null) return;
 
         imgpath = get_project_path(res.path, canonical_url);
         imgpath = imgpath.replace('https://','').replace('http://','')
@@ -166,7 +169,8 @@ jQuery(function($){
 
       } else if (res.mediatype == 'application/vnd.geo+json') {
         rescount = rescount + 1;
-        item = add_gallery_item(container, rescount);
+        var item = add_gallery_item(container, rescount);
+        if (item == null) return;
 
         item.append('<div class="map" id="map-'+rescount+'" />');
         filepath = get_project_path(res.path, canonical_url);
