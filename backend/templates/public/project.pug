@@ -100,11 +100,11 @@ block content
     .modal-dialog(role='document')
       .modal-content
         .modal-header
-          // h5.modal-title Share
+          h5.modal-title Share
           button.close(type='button', data-dismiss='modal', aria-label='Close')
             span(aria-hidden='true') ×
         .modal-body
-          p Share the story with your network using these buttons:
+          p Teilen Sie die Geschichte mit Ihrem Netzwerk:
           .share-buttons
             a.btn.btn-primary.btn-sm(type="button" target='_blank' href='https://twitter.com/intent/tweet?text={{ project.title }}&hashtags=smartuse&url={{ project.url }}')
               i.fab.fa-twitter
@@ -115,7 +115,7 @@ block content
             a.btn.btn-primary.btn-sm(type="button" href='mailto:?subject=SmartUse+Share&body=Check out this link: {{ project.url }}')
               i.far.fa-envelope-open
               | Email
-          p You can also use this button to get code for embedding this project elsewhere, like in your blog:
+          p Code für die Einbettung dieses Projekts an anderer Stelle, wie in einem Blog, gibt es hier:
           .share-buttons
             button.btn.btn-primary.btn-sm(type="button" href='#' id='embed-project')
               i.far.fa-file-alt
@@ -132,5 +132,5 @@ block content
                     =user.organisation
                 p.card-text
                   =project.summary
-        .modal-footer
+        // .modal-footer
           button.btn.btn-secondary(type='button', data-dismiss='modal') OK
