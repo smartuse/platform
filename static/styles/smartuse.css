@@ -1,5 +1,5 @@
 body {
-	font-family: Helvetica,'Lucida Sans',sans-serif;
+	font-family: 'Roboto',Helvetica,'Lucida Sans',sans-serif;
 }
 .logo {
 	background: url("/img/SmartUse-Logo.png") left center no-repeat;
@@ -36,8 +36,9 @@ body {
 }
 
 .home-symbols .col-md-4 {
+	margin-top: 2em;
 	background-repeat: no-repeat;
-  background-position: 80%;
+  background-position: 80% 50%;
   background-size: contain;
 	color: white;
 	font-size: 120%;
@@ -454,6 +455,7 @@ html.fullscreen {
 	height: 8.5em;
 	margin-left: 1em; margin-top: 1em;
 	font-size: 140%;
+	overflow: hidden;
 }
 .project-list .project-card.featured .card-header img {
 	float: left;
