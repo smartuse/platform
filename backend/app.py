@@ -107,11 +107,11 @@ class Project(db.Model):
 
     organisation_id = db.Column(db.Integer, db.ForeignKey(Organisation.id))
     organisation = db.relationship(Organisation,
-        backref=db.backref('project', cascade="all, delete-orphan", single_parent=True))
+        backref=db.backref('project', single_parent=True))
 
     license_id = db.Column(db.Integer, db.ForeignKey(License.id))
     license = db.relationship(License,
-        backref=db.backref('project', cascade="all, delete-orphan", single_parent=True))
+        backref=db.backref('project', single_parent=True))
 
     screenshot = db.Column(db.String(256), doc="Use the Data tab to upload a screenshot")
 
@@ -175,7 +175,7 @@ class User(db.Model):
     biography = db.Column(db.UnicodeText)
     organisation_id = db.Column(db.Integer, db.ForeignKey(Organisation.id))
     organisation = db.relationship(Organisation,
-        backref=db.backref('user', cascade="all, delete-orphan", single_parent=True))
+        backref=db.backref('user', single_parent=True))
     projects = db.relationship(Project, secondary=projects_users,
         backref=db.backref('users', lazy='dynamic'))
     def __repr__(self):
@@ -206,10 +206,10 @@ class Source(db.Model):
     fmt = db.Column(db.String(32))
     organisation_id = db.Column(db.Integer, db.ForeignKey(Organisation.id))
     organisation = db.relationship(Organisation,
-        backref=db.backref('source', cascade="all, delete-orphan", single_parent=True))
+        backref=db.backref('source', single_parent=True))
     license_id = db.Column(db.Integer, db.ForeignKey(License.id))
     license = db.relationship(License,
-        backref=db.backref('source', cascade="all, delete-orphan", single_parent=True))
+        backref=db.backref('source', single_parent=True))
     def __repr__(self):
         return self.title
     def dict(self):
