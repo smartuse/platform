@@ -29,8 +29,8 @@ jQuery(function($){
               '<small class="btn btn-sm download-format">' + (res.format || res.mediatype || '') + '</small>' +
               '<a type="button" href="' + get_project_path(res.path, canonical_url) + '" ' +
               (res.mediatype && res.mediatype.indexOf('application') == 0 ?
-                'class="btn btn-primary btn-sm">&#128065;&nbsp; Anschauen</a>' :
-                'download class="btn btn-primary btn-sm">&#128459;&nbsp; Herunterladen</a>') +
+                'class="btn btn-primary btn-sm">Anschauen</a>' :
+                'download class="btn btn-primary btn-sm">Herunterladen</a>') +
             '</div>' +
           '</div>' +
           (res.sources ? get_data_sources(res.sources) : '') +
@@ -40,7 +40,7 @@ jQuery(function($){
 
     function get_data_sources(sources) {
       return '<ul class="res-sources">' +
-        $.map(sources, function(x) { '<li>' +
+        $.map(sources, function(x) { return '<li>' +
           (x['organisation'] ?
             '<img src="' + x['organisation']['logo'] + '">' :
             '<img src="/img/usericon.png">') +
