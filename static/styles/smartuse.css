@@ -258,12 +258,16 @@ p.author {
 	padding: 0.2em; margin: 0.5em;
 	color: #999; background: #eee;
 }
-.res-sources li .license {
+
+.license {
 	text-transform: uppercase;
 	padding: 0.2em; margin-right: 0.5em	;
 	font-size: 90%;
 	border: 1px solid #aaa;
 	color: #333;
+	max-width: 12em;
+	display: inline-block;
+	text-align: center;
 }
 
 .list-group-item .res-sources {
