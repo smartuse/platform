@@ -19,7 +19,7 @@ block content
             if organisation
               .organisation-image
                 a(href=organisation.url)
-                  img(src=organisation.logo,title=organisation.name)
+                  img(src=organisation.logo title=organisation.name)
           h1
             =meta.title
           if meta.summary
@@ -52,26 +52,9 @@ block content
 
           if project.organisation
             p.project-organisation
-              a(href=organisation.url)
+              a(href=organisation.url target="_blank")
                 .organisation-name
                   =organisation.name
-
-          if authors
-            .project-authors
-              each author in authors
-                .author
-                  img(src=author.gravatar)
-                  p
-                    a.fullname(href=author.url)
-                      =author.fullname
-                  if author.organisation
-                    p
-                      a(href=author.organisation.url)
-                        .organisation
-                          =author.organisation.name
-                  if author.biography
-                    p.biography
-                      =author.biography
 
       .row
         .col-md-12
@@ -96,12 +79,39 @@ block content
                         | &nbsp;
                         =rendering.mediatype
 
+      .row
+        .col-md-12.author-card.padding-top
+          .card.mb-12
+            .card-header
+              .action-call
+                a(href='/contact')
+                  h3.title Zu meiner Gemeindescan&nbsp;&#9654;
+                p.summary Fragen Sie unsere Experten für eine unverbindliche Beratung.
+
+              if authors
+                .project-authors
+                  each author in authors
+                    .author
+                      img(src=author.gravatar)
+                      p
+                        a.fullname(href=author.url)
+                          =author.fullname
+                      if author.organisation
+                        p
+                          a(href=author.organisation.url)
+                            .organisation
+                              =author.organisation.name
+                      if author.biography
+                        p.biography
+                          =author.biography
+
+
   #share.modal(tabindex='-1', role='dialog')
     .modal-dialog(role='document')
       .modal-content
         .modal-header
           h5.modal-title Share
-          button.close(type='button', data-dismiss='modal', aria-label='Close')
+          button.close(type='button' data-dismiss='modal' aria-label='Close')
             span(aria-hidden='true') ×
         .modal-body
           p Teilen Sie die Geschichte mit Ihrem Netzwerk:
@@ -126,11 +136,11 @@ block content
                 h4.card-title
                   =project.title
                 |
-                img.project-thumb(src='{{ project.thumb() }}',align='left')
+                img.project-thumb(src='{{ project.thumb() }}' align='left')
                 each user in project.users
                   b
                     =user.organisation
                 p.card-text
                   =project.summary
         // .modal-footer
-          button.btn.btn-secondary(type='button', data-dismiss='modal') OK
+          button.btn.btn-secondary(type='button' data-dismiss='modal') OK

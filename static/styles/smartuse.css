@@ -546,6 +546,17 @@ a.featured, a.featured h5, a.featured p
   color: #333;
 }
 
+@media only screen and (min-device-width: 812px) {
+	.author-card .action-call {
+		float: right;
+		width: 50%;
+		margin-top: 0.5em;
+	}
+	.author-card .project-authors {
+		clear: none;
+	}
+}
+
 .share-buttons {
 	margin: 1em 0;
 }
