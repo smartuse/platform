@@ -1,9 +1,5 @@
-/*html { background: #333; overflow-x: hidden; }*/
-.hidden { display: none; }
 body {
-  font-family: "Roboto", sans-serif;
-  /* height: 100%;  */
-  /* margin: 2em 0; */
+	font-family: 'Roboto',Helvetica,'Lucida Sans',sans-serif;
 }
 .logo {
 	background: url("/img/SmartUse-Logo.png") left center no-repeat;
@@ -21,12 +17,12 @@ body {
   margin-top: -15px;
   float: right;
 }
-
 #welcome {
 	line-height: 150%;
 }
+.hidden { display: none; }
 .text {
-  font-size: 150%;
+  font-size: 125%;
 }
 .home-content {
 	margin: 4em 0;
@@ -37,6 +33,15 @@ body {
 }
 .home-content .text img {
 	margin: 2em 0;
+}
+
+.home-symbols .col-md-4 {
+	margin-top: 2em;
+	background-repeat: no-repeat;
+  background-position: 90%;
+  background-size: contain;
+	color: white;
+	font-size: 120%;
 }
 
 .team-footer {
@@ -51,6 +56,8 @@ body {
 
 #featured, #featured .glider, #featured iframe {
 	background-size: cover;
+	background-repeat: no-repeat;
+  background-position: 50% 50%;
 	height: 400px;
 }
 
@@ -96,6 +103,10 @@ body {
 	}
 }
 
+.about-logos img {
+	height: 140px;
+	margin: 20px;
+}
 
 .btn-huge {
 	font-size: 160%;
@@ -143,9 +154,11 @@ body {
 	border: 1px solid #999;
 	background: white;
 }
-.navbar-nav .nav-link::after {
-  content: '•';
-  padding-left: 1em;
+@media only screen and (min-device-width: 812px) {
+	.navbar-nav .nav-link::after {
+	  content: '•';
+	  padding-left: 1em;
+	}
 }
 .navbar-nav .nav-item:last-child .nav-link::after {
   content: none;
@@ -245,12 +258,16 @@ p.author {
 	padding: 0.2em; margin: 0.5em;
 	color: #999; background: #eee;
 }
-.res-sources li .license {
+
+.license {
 	text-transform: uppercase;
 	padding: 0.2em; margin-right: 0.5em	;
 	font-size: 90%;
 	border: 1px solid #aaa;
 	color: #333;
+	max-width: 12em;
+	display: inline-block;
+	text-align: center;
 }
 
 .list-group-item .res-sources {
@@ -394,6 +411,7 @@ form .fa-search {
 .side-button.active {
   border: 4px solid #fff;
   box-shadow: 3px 3px 3px grey;
+	background-color: white;
   position: fixed;
 	margin: 0px;
   top: 10px;
@@ -442,6 +460,7 @@ html.fullscreen {
 	height: 8.5em;
 	margin-left: 1em; margin-top: 1em;
 	font-size: 140%;
+	overflow: hidden;
 }
 .project-list .project-card.featured .card-header img {
 	float: left;
@@ -531,6 +550,17 @@ a.featured, a.featured h5, a.featured p
   color: #333;
 }
 
+@media only screen and (min-device-width: 812px) {
+	.author-card .action-call {
+		float: right;
+		width: 50%;
+		margin-top: 0.5em;
+	}
+	.author-card .project-authors {
+		clear: none;
+	}
+}
+
 .share-buttons {
 	margin: 1em 0;
 }
@@ -572,13 +602,18 @@ a.featured, a.featured h5, a.featured p
      width: 138px;
     height: 50px;
   }
-
+	.gallery {
+		overflow: visible;
+	}
 	.side-button {
-		top: 0px; right: 0px;
-		position: absolute;
-		z-index: 2000;
+		float: right;
+		position: relative;
 		background-color: transparent;
 		border-color: transparent;
+		margin-left: 0px;
+		margin-right: -4px;
+		left: 15px;
+		clear: both;
 	}
 	.rendering-counter {
 		display: none;

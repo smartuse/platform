@@ -5,26 +5,23 @@ from flask import (
     render_template,
     send_from_directory,
 )
+
+# Flask extensions
 from flask_api import FlaskAPI
 from flask_flatpages import FlatPages
 from flask_migrate import Migrate
-
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import or_, desc
 
-from werkzeug import secure_filename
-
 # Administration area
 import flask_admin as admin
-from flask_admin.model import BaseModelView
-from flask_admin.contrib.geoa import ModelView
+from flask_admin.contrib.sqla import ModelView
 from flask_admin.contrib.fileadmin import FileAdmin
 from flask_admin.form import ImageUploadField
 
-# Geoshapes in model
-from geoalchemy2.types import Geometry
-from geoalchemy2.shape import to_shape
+# Data loading support
 import geojson, json
+from werkzeug import secure_filename
 
 # Project formatting
 import arrow
@@ -47,6 +44,10 @@ app = FlaskAPI(__name__, static_url_path='')
 app.debug = True
 app.config.from_pyfile('config.py')
 app.jinja_env.add_extension('pypugjs.ext.jinja.PyPugJSExtension')
+
+# TODO: in the future, consider moving to Rest+ https://flask-restplus.readthedocs.io/
+#    version='1.0', title='Smart Use API',
+#    description='An API based on Frictionless Data standards')
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
@@ -106,11 +107,11 @@ class Project(db.Model):
 
     organisation_id = db.Column(db.Integer, db.ForeignKey(Organisation.id))
     organisation = db.relationship(Organisation,
-        backref=db.backref('project', cascade="all, delete-orphan", single_parent=True))
+        backref=db.backref('project', single_parent=True))
 
     license_id = db.Column(db.Integer, db.ForeignKey(License.id))
     license = db.relationship(License,
-        backref=db.backref('project', cascade="all, delete-orphan", single_parent=True))
+        backref=db.backref('project', single_parent=True))
 
     screenshot = db.Column(db.String(256), doc="Use the Data tab to upload a screenshot")
 
@@ -174,7 +175,7 @@ class User(db.Model):
     biography = db.Column(db.UnicodeText)
     organisation_id = db.Column(db.Integer, db.ForeignKey(Organisation.id))
     organisation = db.relationship(Organisation,
-        backref=db.backref('user', cascade="all, delete-orphan", single_parent=True))
+        backref=db.backref('user', single_parent=True))
     projects = db.relationship(Project, secondary=projects_users,
         backref=db.backref('users', lazy='dynamic'))
     def __repr__(self):
@@ -205,10 +206,10 @@ class Source(db.Model):
     fmt = db.Column(db.String(32))
     organisation_id = db.Column(db.Integer, db.ForeignKey(Organisation.id))
     organisation = db.relationship(Organisation,
-        backref=db.backref('source', cascade="all, delete-orphan", single_parent=True))
+        backref=db.backref('source', single_parent=True))
     license_id = db.Column(db.Integer, db.ForeignKey(License.id))
     license = db.relationship(License,
-        backref=db.backref('source', cascade="all, delete-orphan", single_parent=True))
+        backref=db.backref('source', single_parent=True))
     def __repr__(self):
         return self.title
     def dict(self):
@@ -406,10 +407,23 @@ def index_labs():
         content=get_md('labs-about'),
     )
 
+@app.route('/studies')
+def index_studies():
+    return render_template('public/studies.pug',
+        studies=get_md('home-studies'),
+    )
+
+@app.route('/qr')
+def index_qr():
+    return render_template('public/qr.pug',
+        studies=get_md('home-qr'),
+    )
+
 @app.route('/')
 def index_root():
     return render_template('public/home.pug',
         headline=get_md('home-headline'),
+        studies=get_md('home-studies'),
         about=get_md('home-about'),
     )
 
@@ -470,6 +484,7 @@ def send_static_theme(path):
 def send_screenshots(path):
     return send_from_directory('../screenshots', path)
 
+# Data serving paths
 @app.route('/data/<path:path>')
 def send_static_data(path):
     return send_from_directory('../views/projects', path)
@@ -479,6 +494,11 @@ def send_uploads(path):
 @app.route('/api/project/<int:pid>/<path:path>')
 def send_uploads_project(pid, path):
     return send_from_directory('../uploads', path)
+
+# Error paths
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('public/404.pug'), 404
 
 if __name__ == '__main__':
     db.create_all()

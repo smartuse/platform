@@ -1,6 +1,6 @@
-# SmartUse Frontend
+# Smart Use frontend
 
-A web application for collecting and sharing maps using geospatial Data Packages, for a pilot land use mapping project focusing on the greater metropolitan area around Zurich, Switzerland (Metropolitankonferenz Zürich). For more information, see the README in the parent folder, or visit [smartuse.ch](https://smartuse.ch).
+A web application for collecting and sharing maps using geospatial Data Packages, for a pilot land use mapping project focusing on the greater metropolitan area around Zurich, Switzerland (Metropolitankonferenz Zürich). For more information, see the [README](../README.md) in the parent folder, or visit [smartuse.ch](https://smartuse.ch).
 
 ## Usage
 

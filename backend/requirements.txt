@@ -5,11 +5,9 @@ Flask-API
 Flask-FlatPages
 Flask-Migrate
 Flask-SQLAlchemy
-geoalchemy2
 geojson
 gunicorn
 markdown
 Pillow
 psycopg2-binary
 pypugjs
-shapely

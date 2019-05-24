@@ -1,0 +1,22 @@
+extends public/base.pug
+
+block scripts
+  script(src='/scripts/front.js')
+  script(src='/vendor/glider.js')
+
+block head
+  link(href='/vendor/glider.min.css',rel='stylesheet')
+  
+block top
+  .container(style="margin:100px")
+
+block content
+  .container#home-projects
+    .row.padding-top
+      .col-md-12
+        .text.section
+          = studies
+    .row(project-category='case-study')
+    .row.padding-top
+      .col-md-12.text-center
+        a.btn.btn-lg.btn-secondary(href='/labs') Weitere Projekte ...

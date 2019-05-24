@@ -7,15 +7,15 @@ jQuery(function($){
     if (typeof canonical_url !== 'string') canonical_url = project_path;
 
     function add_gallery_item(container, ii) {
-      container.prepend('<div class="gallery" fullscreen=1></div>');
-      gallery = container.find('.gallery');
+      var gallery = $('<div class="gallery" fullscreen=1></div>').prependTo(container);
       if (gallery.length === 0) gallery = $('.gallery');
+      if (gallery.length === 0) return null;
       // gallery.append('<div id="item-'+ii+'" class="control-operator"></div>');
       // gallery.find('.controls').append('<a href="#item-'+ii+'" class="control-button">•</a>');
       gallery.append('<div title="Share" class="side-button share-button"></div>');
       if (gallery.attr('fullscreen'))
         gallery.append('<div title="Vollbild" class="side-button fullscreen-button"></div>');
-      return gallery.append('<figure class="item" />').find('.item:last-child');
+      return $('<figure class="item" />').appendTo(gallery);
     }
 
     function add_rendering_summary(res) {
@@ -28,9 +28,9 @@ jQuery(function($){
             '<div role="group" class="download-buttons btn-group">' +
               '<small class="btn btn-sm download-format">' + (res.format || res.mediatype || '') + '</small>' +
               '<a type="button" href="' + get_project_path(res.path, canonical_url) + '" ' +
-              (res.mediatype && res.mediatype.startsWith('application') ?
-                'class="btn btn-primary btn-sm"><i class="fas fa-eye"></i>&nbsp; Anschauen</a>' :
-                'download class="btn btn-primary btn-sm"><i class="fas fa-arrow-down"></i>&nbsp; Herunterladen</a>') +
+              (res.mediatype && res.mediatype.indexOf('application') == 0 ?
+                'class="btn btn-primary btn-sm">Anschauen</a>' :
+                'download class="btn btn-primary btn-sm">Herunterladen</a>') +
             '</div>' +
           '</div>' +
           (res.sources ? get_data_sources(res.sources) : '') +
@@ -40,7 +40,7 @@ jQuery(function($){
 
     function get_data_sources(sources) {
       return '<ul class="res-sources">' +
-        sources.map(x => '<li>' +
+        $.map(sources, function(x) { return '<li>' +
           (x['organisation'] ?
             '<img src="' + x['organisation']['logo'] + '">' :
             '<img src="/img/usericon.png">') +
@@ -54,7 +54,7 @@ jQuery(function($){
             '<p><a class="license" href="' + x['license']['path'] + '" target="_blank">' +
               x['license']['name'] + '</a></p>' : '') +
           '</li>'
-        ).join('\n')
+        }).join('\n')
       + '</ul>';
     }
 
@@ -116,7 +116,7 @@ jQuery(function($){
 
       datasets = container.find('.rendering-datasets');
       if (res.doc_url && res.doc_url.length>0)
-        datasets.append('<p class="doc_url"><a href="' + res.doc_url + '"><i class="fas fa-book-open"></i> Details</a></p>');
+        datasets.append('<p class="doc_url"><a href="' + res.doc_url + '">&#128366; Details</a></p>');
       if (res.pipeline && res.pipeline.length>0) {
         datasets.append('<div class="mermaid" id="mermaid' + res.id + '"></div>');
         res_id = (res.id || res.name || res.title.replace(' ', '-'));
@@ -142,22 +142,25 @@ jQuery(function($){
 
       } else if (res.mediatype.indexOf('image/')==0) {
         rescount = rescount + 1;
-        item = add_gallery_item(container, rescount);
+        var item = add_gallery_item(container, rescount);
+        if (item == null) return;
 
-        img = item.append('<img id="image-'+rescount+'" />').find('img:last-child');
+        var img = $('<img id="image-'+rescount+'" />').appendTo(item);
         imgpath = get_project_path(res.path, canonical_url);
         img.attr('style', 'background-image:url('+imgpath+')');
 
       } else if (res.mediatype == 'application/html') {
         rescount = rescount + 1;
-        item = add_gallery_item(container, rescount);
+        var item = add_gallery_item(container, rescount);
+        if (item == null) return;
 
         imgpath = get_project_path(res.path, canonical_url);
         item.append('<iframe id="frame-'+rescount+'" src="' + imgpath + '"/>');
 
       } else if (res.mediatype == 'application/ipynb+json') {
         rescount = rescount + 1;
-        item = add_gallery_item(container, rescount);
+        var item = add_gallery_item(container, rescount);
+        if (item == null) return;
 
         imgpath = get_project_path(res.path, canonical_url);
         imgpath = imgpath.replace('https://','').replace('http://','')
@@ -166,7 +169,8 @@ jQuery(function($){
 
       } else if (res.mediatype == 'application/vnd.geo+json') {
         rescount = rescount + 1;
-        item = add_gallery_item(container, rescount);
+        var item = add_gallery_item(container, rescount);
+        if (item == null) return;
 
         item.append('<div class="map" id="map-'+rescount+'" />');
         filepath = get_project_path(res.path, canonical_url);
@@ -267,6 +271,14 @@ jQuery(function($){
     initFullScreen();
 
   } //-load_DataPackage
+
+  // Check compatibility
+  if (get_ie_version() && get_ie_version() < 12) {
+    $('<div class="alert alert-danger" role="alert">' +
+      'Internet Explorer wird nicht unterstützt. Versuchen Sie es bitte erneut mit einem aktuellen Browser: ' +
+      '<a href="http://outdatedbrowser.com/de" target="_blank">outdatedbrowser.com</a>' +
+      '</div>').prependTo('.row:first');
+  }
 
   // Load selected project
   if (typeof PROJECT_ID != 'undefined') {

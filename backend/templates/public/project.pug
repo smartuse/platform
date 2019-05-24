@@ -19,7 +19,7 @@ block content
             if organisation
               .organisation-image
                 a(href=organisation.url)
-                  img(src=organisation.logo,title=organisation.name)
+                  img(src=organisation.logo title=organisation.name)
           h1
             =meta.title
           if meta.summary
@@ -36,7 +36,7 @@ block content
             .project-category
               // span Category:&nbsp;
               b
-                i(class=category.class) &nbsp;
+                // i(class=category.class) &nbsp;
                 =category.text
           .timestamp
             .created
@@ -52,26 +52,13 @@ block content
 
           if project.organisation
             p.project-organisation
-              a(href=organisation.url)
+              a(href=organisation.url target="_blank")
                 .organisation-name
                   =organisation.name
 
-          if authors
-            .project-authors
-              each author in authors
-                .author
-                  img(src=author.gravatar)
-                  p
-                    a.fullname(href=author.url)
-                      =author.fullname
-                  if author.organisation
-                    p
-                      a(href=author.organisation.url)
-                        .organisation
-                          =author.organisation.name
-                  if author.biography
-                    p.biography
-                      =author.biography
+          if project.license
+            a.license(href=project.license.path target="_blank")
+              =project.license.title
 
       .row
         .col-md-12
@@ -89,22 +76,49 @@ block content
                       =rendering.title
                     .download-buttons.btn-group(role="group")
                       a.btn.btn-primary.btn-sm(type="button" href='{{ rendering.path }}' download)
-                        i.fas.fa-arrow-down
+                        &#128459;
                         | &nbsp; Herunterladen
                       a.btn.btn-primary.btn-sm(type="button" href='{{ project.path }}')
-                        i.fas.fa-cogs
+                        &#9881;
                         | &nbsp;
                         =rendering.mediatype
+
+      .row
+        .col-md-12.author-card.padding-top
+          .card.mb-12
+            .card-header
+              .action-call
+                a(href='/contact')
+                  h3.title Zu meiner Gemeindescan&nbsp;&#9654;
+                p.summary Fragen Sie unsere Experten für eine unverbindliche Beratung.
+
+              if authors
+                .project-authors
+                  each author in authors
+                    .author
+                      img(src=author.gravatar)
+                      p
+                        a.fullname(href=author.url)
+                          =author.fullname
+                      if author.organisation
+                        p
+                          a(href=author.organisation.url)
+                            .organisation
+                              =author.organisation.name
+                      if author.biography
+                        p.biography
+                          =author.biography
+
 
   #share.modal(tabindex='-1', role='dialog')
     .modal-dialog(role='document')
       .modal-content
         .modal-header
-          // h5.modal-title Share
-          button.close(type='button', data-dismiss='modal', aria-label='Close')
+          h5.modal-title Share
+          button.close(type='button' data-dismiss='modal' aria-label='Close')
             span(aria-hidden='true') ×
         .modal-body
-          p Share the story with your network using these buttons:
+          p Teilen Sie die Geschichte mit Ihrem Netzwerk:
           .share-buttons
             a.btn.btn-primary.btn-sm(type="button" target='_blank' href='https://twitter.com/intent/tweet?text={{ project.title }}&hashtags=smartuse&url={{ project.url }}')
               i.fab.fa-twitter
@@ -115,7 +129,7 @@ block content
             a.btn.btn-primary.btn-sm(type="button" href='mailto:?subject=SmartUse+Share&body=Check out this link: {{ project.url }}')
               i.far.fa-envelope-open
               | Email
-          p You can also use this button to get code for embedding this project elsewhere, like in your blog:
+          p Code für die Einbettung dieses Projekts an anderer Stelle, wie in einem Blog, gibt es hier:
           .share-buttons
             button.btn.btn-primary.btn-sm(type="button" href='#' id='embed-project')
               i.far.fa-file-alt
@@ -126,11 +140,11 @@ block content
                 h4.card-title
                   =project.title
                 |
-                img.project-thumb(src='{{ project.thumb() }}',align='left')
+                img.project-thumb(src='{{ project.thumb() }}' align='left')
                 each user in project.users
                   b
                     =user.organisation
                 p.card-text
                   =project.summary
-        .modal-footer
-          button.btn.btn-secondary(type='button', data-dismiss='modal') OK
+        // .modal-footer
+          button.btn.btn-secondary(type='button' data-dismiss='modal') OK
