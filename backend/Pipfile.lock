@@ -22,11 +22,11 @@
         },
         "arrow": {
             "hashes": [
-                "sha256:002f2315cf4c8404de737c42860441732d339bbc57fee584e2027520e055ecc1",
-                "sha256:82dd5e13b733787d4eb0fef42d1ee1a99136dc1d65178f70373b3678b3181bfc"
+                "sha256:2d30837085011ef0b90ff75aa0a28f5c7d063e96b7e76b6cbc7e690310256685",
+                "sha256:e4c4157d9f5eb7f850ffdcedd0cc1454ff677881deee03434a5705dc19192042"
             ],
             "index": "pypi",
-            "version": "==0.13.2"
+            "version": "==0.14.1"
         },
         "chardet": {
             "hashes": [
@@ -121,9 +121,9 @@
         },
         "mako": {
             "hashes": [
-                "sha256:7165919e78e1feb68b4dbe829871ea9941398178fa58e6beedb9ba14acf63965"
+                "sha256:889c7f16d5388092d4c585cf9def19cad089e9f848a7c40e03394553048362a6"
             ],
-            "version": "==1.0.10"
+            "version": "==1.0.11"
         },
         "markdown": {
             "hashes": [
@@ -279,9 +279,9 @@
         },
         "sqlalchemy": {
             "hashes": [
-                "sha256:91c54ca8345008fceaec987e10924bf07dcab36c442925357e5a467b36a38319"
+                "sha256:c7fef198b43ef31dfd783d094fd5ee435ce8717592e6784c45ba337254998017"
             ],
-            "version": "==1.3.3"
+            "version": "==1.3.4"
         },
         "werkzeug": {
             "hashes": [
