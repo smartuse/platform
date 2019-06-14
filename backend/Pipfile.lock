@@ -75,11 +75,11 @@
         },
         "flask-migrate": {
             "hashes": [
-                "sha256:a08a92eaf2c5b1a49280bdc9faa1ac1d3538aeb65945adfdd45cc4789499b0d4",
-                "sha256:e2217ff18b98df27adbf6cc51eaa5f074c9e22f06074b47ebc7b29d2f545eccc"
+                "sha256:6fb038be63d4c60727d5dfa5f581a6189af5b4e2925bc378697b4f0a40cfb4e1",
+                "sha256:a96ff1875a49a40bd3e8ac04fce73fdb0870b9211e6168608cbafa4eb839d502"
             ],
             "index": "pypi",
-            "version": "==2.5.1"
+            "version": "==2.5.2"
         },
         "flask-sqlalchemy": {
             "hashes": [
