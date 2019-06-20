@@ -13,6 +13,7 @@ html
 
     link(rel='stylesheet' href='/theme/yeti.bootstrap.css' media='screen')
     link(href='https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap',rel='stylesheet')
+    link(rel='stylesheet', type='text/css', href='https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css')
 
     link(rel="apple-touch-icon-precomposed",href="/img/apple-touch-iphone.png")
     link(rel="apple-touch-icon-precomposed",sizes="72x72",href="/img/apple-touch-ipad.png")
@@ -89,3 +90,13 @@ html
       // Fathom website analytics
       script.
         !function(t,e,a,c,n,o){e[c]=e[c]||function(){(e[c].q=e[c].q||[]).push(arguments)},n=t.createElement("script"),o=t.getElementsByTagName("script")[0],n.async=1,n.src="//cdn.usefathom.com/tracker.js",n.id="fathom-script",o.parentNode.insertBefore(n,o)}(document,window,0,"fathom"),fathom("set","siteId","ODZDJJPO"),fathom("trackPageview");
+
+    block consent
+      // Legal notice
+      script(src='https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js')
+      script.
+        window.addEventListener("load", function(){
+        window.cookieconsent.initialise({ "palette": {
+        "popup": { "background": "#008cba" },
+        "button": { "background": "#ffffff", "color": "#000000" }
+        }})});
