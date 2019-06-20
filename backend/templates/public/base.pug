@@ -76,6 +76,7 @@ html
     script(src='/vendor/jquery-3.2.1.min.js')
     script(src='/vendor/modernizr-3.5.0.min.js')
     script(src='/vendor/zepto.smoothscroll.js')
+    script(src='/vendor/cookieconsent.min.js')
 
     script(src='/theme/popper.min.js')
     script(src='/theme/bootstrap.min.js')
@@ -90,13 +91,3 @@ html
       // Fathom website analytics
       script.
         !function(t,e,a,c,n,o){e[c]=e[c]||function(){(e[c].q=e[c].q||[]).push(arguments)},n=t.createElement("script"),o=t.getElementsByTagName("script")[0],n.async=1,n.src="//cdn.usefathom.com/tracker.js",n.id="fathom-script",o.parentNode.insertBefore(n,o)}(document,window,0,"fathom"),fathom("set","siteId","ODZDJJPO"),fathom("trackPageview");
-
-    block consent
-      // Legal notice
-      script(src='https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js')
-      script.
-        window.addEventListener("load", function(){
-        window.cookieconsent.initialise({ "palette": {
-        "popup": { "background": "#008cba" },
-        "button": { "background": "#ffffff", "color": "#000000" }
-        }})});
