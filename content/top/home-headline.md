@@ -9,4 +9,4 @@
 Unsere faktenbasierte Aussagen beruhen auf Alltagserfahrung und Nutzerverhalten. Die Analyse und Visualisierung von Daten erlaubt effiziente und systemrelevante Entscheide. Smart Use entwickelt Methoden und Werkzeuge, betreibt neue Prozesse, prägt offene Datenstandards. Resilienz entsteht durch datenbasierte und partizipative Ansätze und sind so Grundlage agiler Smart Cities der Zukunft.
 _**[ &#9654;&nbsp;Mehr&nbsp;erfahren](/about)**_
 
-<center style="margin-top:3em"><iframe width="100%" height="315" src="https://www.youtube-nocookie.com/embed/grwRc3TGwV0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></center>
+<center style="margin-top:3em"><iframe width="100%" height="315" src="https://www.youtube-nocookie.com/embed/grwRc3TGwV0?cc_load_policy=1" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></center>

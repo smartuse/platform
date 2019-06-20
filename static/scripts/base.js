@@ -56,12 +56,27 @@
     return lines;
   }
 
-  // External links in new window
   $(document).ready(function() {
+
+    // External links in new window
     $('a').each(function() {
       if (typeof this.host === 'undefined') return;
       if (this.host !== window.location.host) {
         $(this).attr('target', '_blank');
+      }
+    });
+
+    // Cookie consent form
+    window.cookieconsent.initialise({
+      "palette": {
+        "popup": { "background": "#008cba" },
+        "button": { "background": "#ffffff", "color": "#000000" }
+      },
+      "content": {
+        "message": "Diese Website verwendet Cookies, um Ihnen eine optimale Nutzung unserer Website zu ermöglichen.",
+        "dismiss": "Zustimmen",
+        "link": "Weitere informationen",
+        "href": "/legal"
       }
     });
   });

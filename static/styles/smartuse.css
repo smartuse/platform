@@ -89,6 +89,12 @@ body {
   border-top-right-radius: 30px;
 }
 
+#downloads h1, #downloads a {
+	color: white;
+}
+#downloads h1 { margin-bottom: 1em; }
+#downloads a { margin-left: 2em; }
+
 /* The tall orange box */
 @media only screen and (min-device-width: 812px) {
 	#featured, #featured .glider, #featured iframe {

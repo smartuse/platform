@@ -10,15 +10,6 @@ block content
         .text.section
           = intro
 
-        center.section
-          img(src='/img/cartoon.png', height='50%')
-          br
-          small
-            | Image: CC BY-ND 4.0 /
-            a(href='https://6aika.fi/open-data-and-interfaces/')
-              | 6Aika
-            |  / Paper Planes Oy
-
   .container-fluid.no-padding.bg-primary.home-content
     .container
       .row
@@ -26,32 +17,30 @@ block content
           = report
 
           #downloads
-            a(href='https://web.tresorit.com/l#I9PVcFx3-pMjOEzXJlhZPA', target='_blank')
-              h1(style='color:white')
-                &#128209;
-                | &nbsp;
-                small
-                  b Factsheet
-                  br
+            h1
+              &#128209;
+              | &nbsp;
+              small
+                b Factsheet
+                br
+                a(href='https://web.tresorit.com/l#I9PVcFx3-pMjOEzXJlhZPA', target='_blank')
                   sup Deutsch, PDF, 0.4 MB
-
-            a(href='https://web.tresorit.com/l#Vwz_xBMjlj3YrxkjfaPjcw', target='_blank')
-              h1(style='color:white')
-                &#128209;
-                | &nbsp;
-                small
-                  b Factsheet
-                  br
+                br
+                a(href='https://web.tresorit.com/l#Vwz_xBMjlj3YrxkjfaPjcw', target='_blank')
                   sup English, PDF, 0.2 MB
 
-            a(href='https://web.tresorit.com/l#fHLcvV0mXjl34gcEGIZ1gg', target='_blank')
-              h1(style='color:white')
-                &#128209;
-                | &nbsp;
-                small
-                  b Tech Report
-                  br
+            h1
+              &#128209;
+              | &nbsp;
+              small
+                b Tech Report
+                br
+                a(href='https://web.tresorit.com/l#fHLcvV0mXjl34gcEGIZ1gg', target='_blank')
                   sup English, PDF, 2 MB
+
+            .github-card(data-github='smartuse/platform', data-width='400', data-height='', data-theme='default')
+              script(src='//cdn.jsdelivr.net/github-cards/latest/widget.js')
+
 
   .container-fluid.home-content
     .container
