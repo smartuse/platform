@@ -361,6 +361,27 @@ def project_detail(project_id):
     if license is not None: d['license'] = license.dict()
     return d
 
+@app.route("/api/renderings", methods=['GET'])
+def renderings_list():
+    return [r.dict() for r in Rendering.query.limit(50).all()]
+
+@app.route("/api/rendering/<int:rendering_id>", methods=['GET'])
+def rendering_detail(rendering_id):
+    rendering = Rendering.query.filter_by(id=rendering_id).first_or_404()
+    return rendering.dict()
+
+@app.route("/api/sources", methods=['GET'])
+def datasources_list():
+    return [r.dict() for r in Source.query.limit(50).all()]
+
+@app.route("/api/source/<int:source_id>", methods=['GET'])
+def datasource_detail(source_id):
+    ds = Source.query.filter_by(id=source_id).first_or_404()
+    return ds.dict()
+
+
+
+# Utility functions
 def get_file(filename):
     f = open(ospath.join(
             ospath.dirname(__file__),

@@ -30,7 +30,7 @@ MEDIA_TYPES = [
     },{
         'startswith': 'http',
         'mime': 'application/html',
-        'text': 'Embed'
+        'text': 'Website'
     }
 ]
 
