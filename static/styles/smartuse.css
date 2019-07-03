@@ -635,3 +635,39 @@ a.featured, a.featured h5, a.featured p
 		height: auto;
 	}
 }
+
+/* Styling for collapsible FAQ pages */
+.faq-c {
+	border-bottom: 1px dotted #ccc;
+	padding: 1em 0;
+}
+
+.faq-q {
+	font-size: 125%;
+	font-weight: 800;
+	line-height: 1.1em;
+	margin-bottom: 1em;
+}
+
+.faq-t {
+	line-height: 1em;
+	color: #aaa;
+	float: left;
+	font-weight: 700;
+	padding-right: 0.3em;
+	-webkit-transition: all 200ms;
+	-moz-transition: all 200ms;
+	transition: all 200ms;
+}
+
+.faq-o {
+	transform: rotate(-45deg);
+	transform-origin: 50% 50%;
+	-ms-transform: rotate(-45deg);
+	-ms-transform-origin: 50% 50%;
+	-webkit-transform: rotate(-45deg);
+	-webkit-transform-origin: 50% 50%;
+	-webkit-transition: all 200ms;
+	-moz-transition: all 200ms;
+	transition: all 200ms;
+}
