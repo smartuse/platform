@@ -17,9 +17,11 @@ package-lock.json
 yarn-error.log
 .ipynb_checkpoints
 __pycache__/
-*.mp4
 .DS_Store
 .Rhistory
+
+*.mp4
+*.sqlite
 
 .pytest_cache/
 .report.json

@@ -60,7 +60,7 @@ with open(ospath.join(ospath.dirname(__file__), 'templates','presets','project-c
     project_categories = json.load(f)
 screenshot_path = ospath.join(ospath.dirname(__file__), '..', 'screenshots')
 upload_path = ospath.join(ospath.dirname(__file__), '..', 'uploads')
-DEFAULT_THUMB = './img/usermap.jpg'
+DEFAULT_THUMB = '/img/usermap.jpg'
 
 # Create admin
 admin = admin.Admin(app, name='SmartUse', template_mode='bootstrap3')
@@ -464,40 +464,35 @@ def project_page(project):
 # Static paths
 @app.route('/img/<path:path>')
 def send_static_img(path):
-    return send_from_directory('./static/img', path)
+    return send_from_directory('../static/img', path)
 @app.route('/scripts/<path:path>')
 def send_static_scripts(path):
-    return send_from_directory('./static/scripts', path)
+    return send_from_directory('../static/scripts', path)
 @app.route('/styles/<path:path>')
 def send_static_styles(path):
-    return send_from_directory('./static/styles', path)
+    return send_from_directory('../static/styles', path)
 @app.route('/tags/<path:path>')
 def send_static_tags(path):
-    return send_from_directory('./static/tags', path)
+    return send_from_directory('../static/tags', path)
 @app.route('/vendor/<path:path>')
 def send_static_vendor(path):
-    return send_from_directory('./static/vendor', path)
+    return send_from_directory('../static/vendor', path)
 @app.route('/meta/<path:path>')
 def send_static_meta(path):
-    return send_from_directory('./static/meta', path)
+    return send_from_directory('../static/meta', path)
 
 @app.route('/theme/<path:path>')
 def send_static_theme(path):
-    return send_from_directory('./static/theme', path)
+    return send_from_directory('../static/theme', path)
 @app.route('/screenshots/<path:path>')
 def send_screenshots(path):
-    return send_from_directory('./screenshots', path)
+    return send_from_directory('../screenshots', path)
 
 # Data serving paths
-@app.route('/data/<path:path>')
-def send_static_data(path):
-    return send_from_directory('./views/projects', path)
 @app.route('/uploads/<path:path>')
-def send_uploads(path):
-    return send_from_directory('./uploads', path)
 @app.route('/api/project/<int:pid>/<path:path>')
-def send_uploads_project(pid, path):
-    return send_from_directory('./uploads', path)
+def send_uploads(path):
+    return send_from_directory('../uploads', path)
 
 # Error paths
 @app.errorhandler(404)
