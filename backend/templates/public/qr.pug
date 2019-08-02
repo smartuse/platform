@@ -13,8 +13,8 @@ block top
 block content
   .container-fluid(style='background:url(/img/welcome.jpg);background-size:cover;background-position:50%')
     .container.padding-top(style='background:rgba(255,255,255,0.9);padding:50px;font-size:125%')
-      .row
-        .col-md-12
+      .row.justify-content-md-center
+        .col-md-8
           .text.section
             = studies
           center
@@ -22,6 +22,6 @@ block content
 
   .container#home-projects
     .row.padding-top(project-category='case-study')
-    .row.padding-top
-      .col-md-12.text-center
+    .row.padding-top.justify-content-md-center
+      .col-md-8.text-center
         a.btn.btn-lg.btn-secondary(href='/labs') Weitere Projekte ...

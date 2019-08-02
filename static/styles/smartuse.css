@@ -20,6 +20,12 @@ body {
 #welcome {
 	line-height: 150%;
 }
+#welcome h1 {
+	font-weight: 900;
+}
+#welcome h3 {
+	line-height: 1.4;
+}
 .hidden { display: none; }
 .text {
   font-size: 125%;
@@ -441,14 +447,22 @@ html.fullscreen {
 /* Project List (home) styling */
 
 .project-list .project-card img,
-.project-list .project-card { padding-top: 1em; }
+.project-list .project-card {
+	padding-top: 1em;
+}
 .project-list .project-card .card {
-	border: none; box-shadow: 3px 3px 3px rgba(0,0,0,0.2);
+	/* border: none; box-shadow: 3px 3px 3px rgba(0,0,0,0.2); */
   margin-bottom: 1rem !important;
 }
 .project-list .project-card a { text-decoration: none; }
 .project-list .project-card .card-text { color: #555; }
-.project-list .project-card:hover { background: #00b0e9; }
+.project-list .card {
+	-webkit-transition: border-color 0.75s; /* Safari prior 6.1 */
+  transition: border-color 0.75s;
+}
+.project-list .card:hover {
+	border: 1px solid #008cba;
+}
 .project-list .project-card:hover a { color: #00b0e9; }
 .project-thumb {
   width: 128px; height: 128px;
@@ -462,7 +476,7 @@ html.fullscreen {
 	float: right;
 }
 .project-list .project-card.featured .card-text {
-	padding: 1em;
+	padding: 0.1em;
 	height: 8.5em;
 	margin-left: 1em; margin-top: 1em;
 	font-size: 140%;
@@ -475,8 +489,8 @@ html.fullscreen {
 	border-bottom: 2px solid #aaa;
 }
 .project-list .project-card .card-header img {
-	margin: -0.75rem 0 0 0;
-	padding-bottom: 10px;
+	margin: -0.5rem 0 0 0;
+	/* padding-bottom: 10px; */
 }
 .project-list .project-card .card-header {
 	min-height: 4.7em;
