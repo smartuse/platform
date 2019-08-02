@@ -1057,7 +1057,7 @@ esutils@^2.0.2:
 
 event-stream@~3.3.0:
   version "3.3.4"
-  resolved "http://registry.npmjs.org/event-stream/-/event-stream-3.3.4.tgz#4ab4c9a0f5a54db9338b4c34d86bfce8f4b35571"
+  resolved "https://registry.npmjs.org/event-stream/-/event-stream-3.3.4.tgz#4ab4c9a0f5a54db9338b4c34d86bfce8f4b35571"
   dependencies:
     duplexer "~0.1.1"
     from "~0"
@@ -1725,8 +1725,8 @@ levn@^0.3.0, levn@~0.3.0:
     type-check "~0.3.2"
 
 lodash@^4.17.4, lodash@^4.2.0, lodash@^4.3.0:
-  version "4.17.10"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.10.tgz#1b7793cf7259ea38fb3661d4d38b3260af8ae4e7"
+  version "4.17.15"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
 
 loose-envify@^1.0.0:
   version "1.3.1"
@@ -2267,10 +2267,6 @@ rimraf@^2.2.8, rimraf@^2.6.1:
   resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.6.2.tgz#2ed8150d24a16ea8651e6d6ef0f47c4158ce7a36"
   dependencies:
     glob "^7.0.5"
-
-riotgear@^3.5.0:
-  version "3.5.0"
-  resolved "https://registry.yarnpkg.com/riotgear/-/riotgear-3.5.0.tgz#847be311f49ddcb0108764a48fff2e8cb01ced62"
 
 run-async@^2.2.0:
   version "2.3.0"
