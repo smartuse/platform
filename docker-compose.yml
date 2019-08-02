@@ -11,6 +11,7 @@ services:
     depends_on:
      - postgres
     volumes:
+     - ./content:/opt/content:z
      - ./screenshots:/opt/screenshots:z
      - ./uploads:/opt/uploads:z
      - ./static:/opt/static:z

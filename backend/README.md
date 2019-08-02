@@ -60,13 +60,13 @@ The app will now be available at http://localhost:5000
 4) Create a database:
 
 ```
-sudo docker container exec -u postgres -i smartuse_postgres_1 createdb smartuse
+sudo docker container exec -u postgres -i platform_postgres_1 createdb smartuse
 ```
 
 If you have a database export, you should:
 
 ```
-sudo docker container exec -u postgres -i smartuse_postgres_1 psql < ../my-backup.sql
+sudo docker container exec -u postgres -i platform_postgres_1 psql < ../my-backup.sql
 ```
 
 If not, then:
