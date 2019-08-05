@@ -396,7 +396,9 @@ def index_legal():
         content=get_md('legal'),
         impressum=get_file('impressum.html'),
 )
-
+@app.route('/faq')
+def index_faq():
+    return render_template('public/faq.pug')
 @app.route('/search')
 def index_search():
     return render_template('public/search.pug')

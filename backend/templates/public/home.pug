@@ -19,26 +19,26 @@ block content
           a.glider-next »
 
   .container.padding-top
-    .row
-      .col-md-12
+    .row.justify-content-md-center
+      .col-md-10
         .text.section#welcome
           = headline
 
   .container.padding-top
-    .row
-      .col-md-12.center
+    .row.justify-content-md-center
+      .col-md-10.center
         form(action='/search')
           i.icon.fa.fa-search
           input.form-control.form-control-lg.search(name='q',placeholder='Suchen ...')
 
   .container#home-projects
-    .row.padding-top
-      .col-md-12
+    .row.padding-top.justify-content-md-center
+      .col-md-10
         .text.section
           = studies
     .row(project-category='case-study')
-    .row.padding-top
-      .col-md-12.text-center
+    .row.padding-top.justify-content-md-center
+      .col-md-10.text-center
         a.btn.btn-lg.btn-secondary(href='/labs') Weitere Projekte ...
 
   .container-fluid.bg-primary.no-padding.home-content

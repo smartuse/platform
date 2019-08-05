@@ -112,9 +112,9 @@ function getProjectCard(t, with_screenshot) {
 
   if (t.featured)
     return '' +
-      '<div class="col-md-12 project-card featured">' +
+      '<div class="col-md-8 project-card featured">' +
         '<a href="' + t.url + '">' +
-          '<div class="card mb-12">' +
+          '<div class="card mb-8">' +
             '<div class="card-header ">' +
               (!with_screenshot ? '' :
                 '<img src="' + t.thumbnail + '">') +

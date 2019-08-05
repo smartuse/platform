@@ -13,8 +13,8 @@ block top
 block content
   .container-fluid.no-padding.story
     .container
-      .row
-        .col-md-12.page-meta
+      .row.justify-content-md-center
+        .col-md-10.page-meta
           //
             if organisation
               .organisation-image
@@ -22,16 +22,19 @@ block content
                   img(src=organisation.logo title=organisation.name)
           h1
             =meta.title
-          if meta.summary
-            p.description
-              =meta.summary
+      .row.justify-content-md-center
+       .col-md-8.page-meta
+         if meta.summary
+           p.description
+             =meta.summary
+       .col-md-2
 
-      .row
+      .row.justify-content-md-center
         .col-md-8
           .page-content
             !=content
 
-        .col-md-4.side-info
+        .col-md-2.side-info
           if category
             .project-category
               // span Category:&nbsp;
@@ -64,8 +67,8 @@ block content
         .col-md-12
           .rendering-content
 
-      #renderingsummary.row
-        .col-md-12
+      #renderingsummary.row.justify-content-md-center
+        .col-md-10
           .h2 Quellen
           .list-group.rendering-summary
             //
@@ -83,9 +86,9 @@ block content
                         | &nbsp;
                         =rendering.mediatype
 
-      .row
-        .col-md-12.author-card.padding-top
-          .card.mb-12
+      .row.justify-content-md-center
+        .col-md-10.author-card.padding-top
+          .card.mb-10
             .card-header
               .action-call
                 a(href='/contact')

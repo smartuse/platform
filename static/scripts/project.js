@@ -70,15 +70,12 @@ jQuery(function($){
         container = top_container;
       } else {
         var $renderingContent = $('.rendering-content');
-        var count = $renderingContent.find('.rendering-container').length + 1;
         container = $renderingContent.append(
-          '<div class="rendering-counter">' + count + '</div>'
+          '<div class="rendering-container">'
+          + '<div class="container row justify-content-md-center">'
+            + '<div class="description col-md-8"></div>'
 
-        + '<div class="rendering-container">'
-          + '<div class="container row">'
-            + '<div class="description col-md-9"></div>'
-
-            + '<div class="rendering-datasets col-md-3">'
+            + '<div class="rendering-datasets col-md-2">'
 
             + (typeof res.author !== 'undefined' ?
               '<p class="res-author">' + res.author + '</p>' : '')
@@ -97,11 +94,13 @@ jQuery(function($){
         summary = add_rendering_summary(res);
       }
 
+      var count = rescount + 1;
       container.before(
-        '<div class="rendering-header"><a name="anchor-' + rescount + '"></a>'
+        '<div class="rendering-header"><a name="anchor-' + count + '"></a>'
+        + '<div class="rendering-counter">' + count + '</div>'
         //'<a href="#item-' + rescount + '">'
         // + '<i class="material-icons">layers</i>'
-        + (res.title || res.description)
+        + '<h2>' + (res.title || res.description) + '</h2>'
         + '</div>'
       );
 

@@ -1,0 +1,176 @@
+extends public/base.pug
+
+block scripts
+  script(src='/scripts/faq.js')
+
+block top
+  .container(style="margin:100px")
+
+block content
+  .container.padding-top
+    .row.justify-content-md-center
+      .col-md-10
+        h1 FAQ
+        p.text.section
+          | Das Smart Use Projekt entstand und lebt im Spannungsfeld zwischen den Chancen und Risiken unserer durch Daten und Algorithmen getriebenen Welt. Es stellt die praxisrelevanten Aspekte in den Vordergrund und erforscht die Implikationen und Herausforderungen für die (Raum-)Planung. Dieser Hintergrund bringt eine Reihe von ethischen, technischen, aber auch rechtlichen Fragen mit sich. Einen Teil dieser Fragen versuchen wir im Folgenden nachzugehen. Die Antworten sind nicht abschliessend und zumeist Teil einer laufenden Diskussion. Bei weiteren Fragen sind wir&nbsp;
+          a(href='/contact') gerne erreichbar.
+
+
+  .container.padding-top#faq
+    .row.justify-content-md-center
+      .col-md-10
+        .faq-c
+          .faq-q
+            span.faq-t +
+            | Wer steht hinter dem Projekt und wie ist es entstanden?
+          .faq-a
+            p
+              | Das Projekt Smart Use begann als Arbeitsgemeinschaft des Architekturbüros Hosoya Schaefer Architects, von Oleg Lavrovsky (Datalets) und Joris Van Wezemael. Inzwischen entstand daraus die SmartUse GmbH mit drei Teilhabern (CHE-338.123.960). Als interdisziplinäres Team verbinden wir Architektur & Städtebau, Daten & Software, Geographie & Raumentwicklung.
+            p
+              | Die Smart Use Plattform entstand im Auftrag der Metropolitankonferenz Zürich, wurde von der Regierungspräsidentin und Volkswirtschaftsdirektorin Carmen Walker Späh als Projektpatin begleitet und von der Swisscom unterstützt.
+        .faq-c
+          .faq-q
+            span.faq-t +
+            | Was bedeutet faktenbasierte Planung?
+          .faq-a
+            p
+              | Smart Use verknüpft nutzergenerierte, statistische und offene Daten so, dass eine Entscheidungsgrundlage für Areal-, Raum- und Verkehrsplanungsfragen geschaffen werden kann. Diese dient Nutzern, Behörden, Politikern oder Planenden.
+        .faq-c
+          .faq-q
+            span.faq-t +
+            | Was sind nutzergenerierte Daten?
+          .faq-a
+            p
+              | Grundsätzlich gibt es zwei Arten von nutzergenerierten Daten: zum einen "<b>aktiv</b>" generierte Daten, die wir als Nutzer z.B. von Plattformen bewusst als Autor*in verfassen, zum Anderen "<b>passive</b>" Daten, die wir als Datenspuren jeden Tag wissentlich oder unwissentlich hinterlassen. 
+            p
+              | Aktiv meint zum Beispiel ein Instagram-Post, ein Youtube Video oder ein Kommentar dazu, ein Eintrag in der Wikipedia oder auf OpenStreetMap zum städtischen Raum. Passiv generierte Daten sind unter anderem Mobilfunkdaten. In aggregierter und anonymisierter Form helfen sie uns zu verstehen wie beispielsweise öffentlichen Räume genutzt und wie sie verbessert werden können.
+        .faq-c
+          .faq-q
+            span.faq-t +
+            | Was bringen nutzergenerierte Daten?
+          .faq-a
+            p
+              | Durch die Datenspuren des Alltags können wir verstehen wie Nutzergruppen sich tatsächlich verhalten (passiv) oder was ihre Anliegen sind (aktiv). Anstatt nur auf Experten zu hören (zu denen wir ja auch gehören) sehen wir, wie “die Nutzer mit ihren Füssen abstimmen”. Statt an Meinungsumfragen oder Beteiligungsverfahren teilzunehmen, können uns Nutzer direkt vor Ort im Alltag ihre Anliegen aufzeigen, z.B. durch crowd-sourced Plattformen wie 
+              a(href='bikeable.ch') Bikeable.ch
+              | .
+        .faq-c
+          .faq-q
+            span.faq-t +
+            | Wozu nutzt Smart Use nutzergenerierte Daten?
+          .faq-a
+            p
+              | Zum Einen nutzt Smart Use crowd-sourced Plattformen wie Openstreetmap oder Bikeable.ch als Datenquellen. Auf der anderen Seite ermöglicht eine Kooperation mit Swisscom, Fragestellungen der Raumplanung und Arealentwicklung zu validieren und überprüfen und zwar anhand der alltäglichen Nutzung.
+        .faq-c
+          .faq-q
+            span.faq-t +
+            | Wird mein ganz persönliches Nutzungsverhalten analysiert?
+          .faq-a
+            p
+              | Nein. Der einzelne Datensatz und das Verhalten von Einzelpersonen hat für die Planung keine Relevanz. Smart Use basiert auf Daten, die bereits von den Datenlieferanten aggregiert und auf spezifische Fragestellungen hin verdichtet wurden.
+        .faq-c
+          .faq-q
+            span.faq-t +
+            | Wie sind persönliche Daten rechtlich geschützt?
+          .faq-a
+            p
+              | Personenbezogene Daten sind geschützt. Beispielsweise durch das Bundesgesetz über den Datenschutz (DSG) oder die DSGVO der EU.
+        .faq-c
+          .faq-q
+            span.faq-t +
+            | Was ist Open Data?
+          .faq-a
+            p
+              | Neben den nutzergenerierten Daten verwendet Smart Use auch offene Daten für die Planung. Open Data ist dabei der Sammelbegriff für offen publizierte und damit offen zugängliche Daten.
+        .faq-c
+          .faq-q
+            span.faq-t +
+            | Was macht einen Datensatz zu einem “offenen” Datensatz?
+          .faq-a
+            p
+              | Die 
+              a(href='http://opendefinition.org/od/2.1/de/') Open Definition 
+              | beschreibt etwas dann als offen, wenn
+            ul 
+              li Das Werk offen verfügbar ist. Es also
+                ul
+                  li eine offene Lizenz oder einen offenen Status hat
+                  li eine angemessene Zugänglichkeit gewährleistet ist
+                  li maschinenlesbar ist
+                  li als offenes (Datei-)Format vorliegt
+              li Eine offene Lizenzen ist u.a. gegeben, wenn 
+                ul
+                  li eine kostenfreie Nutzung des lizenzierten Werks möglich ist
+                  li Die Weiterverbreitung möglich ist
+                  li Die Herstellung von Derivaten möglich ist
+            p
+              | Diese Definition führt bereits zu einer Reihe an Implikationen auf gesellschaftlicher, rechtlicher und technischer Ebene. Dazu hat zum Beispiel die Open Knowledge Foundation hat ein
+              a(href='http://opendatahandbook.org/', target='_blank') Handbuch
+              |  (englisch) veröffentlicht und ermöglicht so einen tieferen Einstieg in die Thematik.
+        .faq-c
+          .faq-q
+            span.faq-t +
+            | Wozu Open Data?
+          .faq-a
+            p
+              | Offene Daten dienen vor Allem drei Zielen: Transparenz für eine funktionierende demokratische Gesellschaft, Grundlage für gesellschaftliche und wirtschaftliche Aktivitäten, Unterstützung von Partizipation und zivilgesellschaftlichem Engagement - siehe 
+              a(href='https://okfn.org/opendata/why-open-data', target="_blank") Grundcharta 
+              | der Open Knowledge Foundation.
+        .faq-c
+          .faq-q
+            span.faq-t +
+            | Wozu Open Source?
+          .faq-a
+            p
+              | Investitionen der öffentlichen Hand sollen auch der Allgemeinheit wieder zu Gute kommen. Public money, public good. Smart Use möchte hier einen Beitrag leisten, indem zum Beispiel der Source Code der Plattform und der Code hinter den Kartendarstellungen frei auf 
+              a(href='https://www.github.com/smartuse') GitHub
+              | verfügbar sind. Die Aufbereitung der Datenanalyse hinter den Fallbeispielen und Labs steht im Zentrum unserer Arbeit im Rahmen von 
+              a(href='https://www.cividi.ch') Cividi
+              | . Wir möchten, dass die Analysen auch für Laien nachvollziehbar und für Interessierte reproduzierbar sind.
+        .faq-c
+          .faq-q
+            span.faq-t +
+            | Was ist Frictionless Data?
+          .faq-a
+            p
+              | Um Daten nachhaltig zugänglich und nutzbar zu machen braucht es geeignete technische Standards. Das Smart Use Projekt nutzt dazu den von der Open Knowledge Foundation lancierten 
+              a(href='https://frictionlessdata.io/specs/', target='_blank') Frictionless Data Standard 
+              | . Die Philosophie dahinter zielt auf einen einfachen, erweiterbaren, menschenbearbeitbaren und gleichzeitig maschinenlesbaren, wiederbenutzbaren und technologieunabhängigen Standard. 
+            p
+              | Dazu fokussiert Frictionless Data auf eine leichtgewichtige Verpackung von Datentypen, die weborientiert (JSON-Standard), dezentralisiert und offen ist. Das ermöglicht Plattform, Geräte und softwareübergreifende Kompatibilität. Jedes Datenpaket ist so aufgebaut, dass zentrale Themen der Datennutzung wie Lizenzierung und Validierung vereinfacht werden.
+        .faq-c
+          .faq-q
+            span.faq-t +
+            | Cividi? SmartUse? Smart Use? SmartUse GmbH?
+          .faq-a
+            p
+              | Smart Use ist das für die Metropolitankonferenz entwickelte Projekt und bis heute daher Haupttitel. Die Arbeitsgemeinschaft dahinter hiess SmartUse ARGE, wie dann auch die neu gegründete GmbH.
+            p
+              | In der Neuorientierung erweiterte sich unser Fokus auf eine Reihe von Themen im Civic Tech Umfeld, sodass Smart Use als rein raumplanungsbezogener Titel nicht mehr angebracht schien. So entstand gefördert durch Engagement Migros Cividi. Civic data intelligence - digitale Werkzeuge für die analoge Stadt.
+        .faq-c
+          .faq-q
+            span.faq-t +
+            | Gibt es bereits ein Produkt oder eine Dienstleistung?
+          .faq-a
+            p
+              | Wir lancieren den sogenannten Gemeindescan als erstes Produkt. Gemeinden stehen vor vielfältigen Herausforderungen - Verkehr, Demographie, Verdichtung oder Kommunikation zwischen Verwaltung, Politik und Bürgern. Der Gemeindescan dient hier als Standortbestimmung und als Kommunikationsinstrument.
+        .faq-c
+          .faq-q
+            span.faq-t +
+            | Wozu braucht es einen Gemeindescan?
+          .faq-a
+            p
+              | Ein Gemeindescan unterstützt bei Fragen wie einer Revision der Bau- und Zonenordnung, bei grösseren Arealentwicklungen oder Infrastrukturprojekten, aber auch bei der regionalen Kooperation von Gemeinden, bei Beteiligungsverfahren oder einfach als strategische Begleitung von Verwaltung und Politik.
+        .faq-c
+          .faq-q
+            span.faq-t +
+            | Warum ist das gerade heute relevant?
+          .faq-a
+            p
+              | Die Schweiz ist föderal und subsidiär aufgebaut. Gemeinden sind autonom und können viele ihrer Fragen alleine lösen. Gleichzeitig hat das Wachstum der vergangenen Jahre zu übergreifenden funktionalen Regionen und entsprechenden Fragestellungen geführt. Daten machen nicht halt an den Gemeindegrenzen, funktionale Zusammenhänge können daher sichtbar gemacht, Ähnlichkeiten zwischen Gemeinden aufgezeigt werden. Andererseits können lokale Qualitäten und Identitäten gestärkt werden, wenn sie besser verstanden und an Politiker oder Wähler kommunizierbar sind.
+        .faq-c
+          .faq-q
+            span.faq-t +
+            | Wie kann meine Gemeinde mitmachen?
+          .faq-a
+            p
+              | Ein Gemeindescan kann als Workshop oder als Projekt gebucht werden. Gerne steht Ihnen unser Team zur Verfügung.
