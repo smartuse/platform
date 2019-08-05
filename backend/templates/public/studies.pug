@@ -12,11 +12,11 @@ block top
 
 block content
   .container#home-projects
-    .row.padding-top
-      .col-md-12
+    .row.padding-top.justify-content-md-center
+      .col-md-10
         .text.section
           = studies
-    .row(project-category='case-study')
-    .row.padding-top
-      .col-md-12.text-center
+    .row(project-category='case-study').justify-content-md-center
+    .row.padding-top.justify-content-md-center
+      .col-md-10.text-center
         a.btn.btn-lg.btn-secondary(href='/labs') Weitere Projekte ...

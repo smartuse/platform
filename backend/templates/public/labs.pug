@@ -13,20 +13,20 @@ block top
 
 block content
   .container.padding-top.padding-bottom
-    .row
-      .col-md-12
+    .row.justify-content-md-center
+      .col-md-10
         .text.section#welcome
           = content
 
   .container.padding-top
-    .row
-      .col-md-12.center
+    .row.justify-content-md-center
+      .col-md-10.center
         form(action='/search')
           i.icon.fa.fa-search
           input.form-control.form-control-lg.search(name='q',placeholder='Suchen ...')
 
   .container#home-projects
-    .row(project-category='labs')
-    .row.padding-top
-      .col-md-12.text-center
+    .row(project-category='labs').justify-content-md-center
+    .row.padding-top.justify-content-md-center
+      .col-md-8.text-center
         a.btn.btn-lg.btn-secondary(href='/search?all') Mehr ...
