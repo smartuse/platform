@@ -20,6 +20,11 @@ body {
 #welcome {
 	line-height: 150%;
 }
+
+h1 {
+	font-weight: 900;
+}
+
 #welcome h1 {
 	font-weight: 900;
 }
@@ -72,11 +77,13 @@ body {
 }
 
 #featured .glider .legend {
-	background: transparent;
+	background-color: hsla(195, 100%, 36%, 0.75);
 	color: white;
-	text-align: center;
+	text-align: left;
 	/* box-shadow: 0px 6px 6px rgba(0,0,0,0.3); */
-	text-shadow: 0px 3px 3px rgba(1,1,1,0.7);
+	text-shadow: none; /* 0px 3px 3px rgba(1,1,1,0.7) */
+	backdrop-filter: blur(3px);
+	-webkit-backdrop-filter: blur(3px);
 	padding: 0px;
 }
 
@@ -88,11 +95,16 @@ body {
 #featured .glider .legend {
   position: absolute;
   bottom: 0px;
-  background: #f3c656;
-  text-shadow: 1px 1px 1px grey;
-  font-size: 134%;
-  padding-bottom: 0.4em;
-  border-top-right-radius: 30px;
+  text-shadow: none; /* 1px 1px 1px grey */
+  font-size: 100%;
+  padding: 0.75em;
+	border-radius: 10px;
+	margin: 10px;
+  border: 1px solid hsla(195, 100%, 36%, 0.75);
+}
+
+#featured .glider .legend:hover {
+	background-color: hsla(195, 100%, 36%, 0.6);
 }
 
 #downloads h1, #downloads a {
@@ -107,7 +119,7 @@ body {
 	  height: 800px;
 	}
 	#featured .glider .legend {
-		padding: 1em 2em;
+		padding: 0.75em;
 	}
 	#featured .glider h4 {
 		padding: initial;
@@ -168,7 +180,7 @@ body {
 }
 @media only screen and (min-device-width: 812px) {
 	.navbar-nav .nav-link::after {
-	  content: '•';
+	  content: ''; /* • */
 	  padding-left: 1em;
 	}
 }
@@ -182,14 +194,18 @@ body {
   opacity: 1;
 }
 
+.navbar-nav a.nav-link:hover {
+	color: rgba(255,255,255,0.8);
+}
+
 .rendering-container {
-	margin: 3em 0em;
+	margin: 6em 0em;
 
-	border-style: solid;
+	/* border-style: solid;
 	border-width: 10px 0px 10px 10px;
-	border-color: white transparent transparent #008cba;
+	border-color: white transparent transparent #008cba; */
 
-	padding-left: 10px;
+	/* padding-left: 10px; */
 }
 
 .rendering-counter::before {
@@ -198,8 +214,13 @@ body {
 .rendering-counter {
 	color: #999;
 	float: left;
-	margin-left: -1.5em;
-	font-size: 2em;
+	margin-left: -1.75em;
+	font-size: 1em;
+}
+
+.rendering-content h3 {
+	font-size: 1.5em;
+	font-weight: 900;
 }
 
 .side-info .organisation-name {
@@ -219,12 +240,12 @@ body {
 }
 
 .story .page-meta h1 {
-	font-weight: 500;
+	font-weight: 900;
 	overflow: hidden;
 }
 
 .page-meta {
-	margin: 2em 0;
+	margin: 1em 0;
 }
 
 .page-meta p {
@@ -242,6 +263,11 @@ p.author {
   font-size: 110%;
 }
 
+p.description {
+	font-size: 1.640625rem;
+	color: #222;
+}
+
 .description h2 a {
   text-decoration: none;
   color: #555;
@@ -251,8 +277,13 @@ p.author {
 	color: #000;
 	font-size: 150%;
 	/*margin: 0.5em 0px;*/
-	margin: -1.8em 0 0;
+	margin: -2.2em 0 0;
 	position: absolute;
+}
+
+.rendering-header h2 {
+	font-size: 1.640625rem;
+	font-weight: 900;
 }
 
 .res-sources {
@@ -303,6 +334,21 @@ p.author {
 
 #renderingsummary {
 	margin-top: 2em;
+}
+
+.rendering-datasets {
+	font-size: 0.9em;
+}
+
+.description p, .page-content p {
+	text-align: justify;
+	overflow-wrap: break-word;
+  word-wrap: break-word;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  hyphens: auto;
+	font-size: 1.2em;
 }
 
 .item .description {
@@ -358,7 +404,7 @@ form .fa-search {
   height: 400px;
   top: 0px;
   overflow: hidden;
-	margin-bottom: 1em;
+	margin-bottom: 4em;
 }
 .gallery .control-button {
   color: #ccc;
@@ -396,29 +442,32 @@ form .fa-search {
 }
 
 .side-button {
-  width: 40px;
-  height: 36px;
+  width: 32px;
+  height: 35px;
   background: white url('/img/fullscreen-black.png') no-repeat 50% 50%;
   background-size: contain;
   z-index: 2;
   /*position: absolute;
   top: 0px;
 	right: -20px;*/
-  border: 2px solid #fff;
-  border-radius: 3px;
 
 	float: left;
 	position: absolute;
 	cursor: pointer;
 
-	margin-left: -67px;
+	margin-left: -42px;
 	margin-top: 3em;
 
 	opacity: 0.7;
 }
+
+.side-button:hover {
+	opacity: 1.0;
+}
+
 .side-button.share-button {
 	background-image: url('/img/share-black.png');
-	margin-top: 6em;
+	margin-top: 0em;
 }
 .side-button.active {
   border: 4px solid #fff;

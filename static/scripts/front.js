@@ -20,6 +20,7 @@ jQuery(function($){
       var $cat = $container.find('[project-category="' + this.category + '"]');
       if ($cat.length === 1) {
         $cat.addClass('project-list');
+        $cat.addClass('justify-content-md-center');
         $cat.append(getProjectCard(this));
       } else {
         console.warn('Category not found', this.category);
