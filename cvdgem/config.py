@@ -15,6 +15,6 @@ if 'MAPBOX_ID' in os.environ:
 	MAPBOX_MAP_ID = os.environ['MAPBOX_ID']
 	MAPBOX_ACCESS_TOKEN = os.environ['MAPBOX_TOKEN']
 
-FLATPAGES_ROOT = '../content/pages/'
+FLATPAGES_ROOT = './content/pages/'
 FLATPAGES_EXTENSION = '.md'
 FLATPAGES_HTML_RENDERER = 'markdown'

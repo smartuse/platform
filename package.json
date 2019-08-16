@@ -1,19 +1,19 @@
 {
-  "name": "smartuse-arge",
-  "description": "A land use mapping project focusing on the greater metropolitan area around Zurich, Switzerland (Metropolitankonferenz Zürich)",
-  "version": "0.0.1",
+  "name": "cividi-platform",
+  "description": "Digital tools for analogue cities",
+  "version": "0.1.0",
   "author": {
-    "name": "Arbeitsgemeinschaft SMART USE",
+    "name": "SmartUse GmbH",
     "email": "info@smartuse.ch"
   },
   "contributors": [
     {
       "name": "Oleg Lavrovsky",
-      "email": "o@datalets.ch"
+      "email": "oleg@smartuse.ch"
     },
     {
       "name": "Thorben Westerhuys",
-      "email": "thorben@hosoyaschaefer.com"
+      "email": "thorben@smartuse.ch"
     }
   ],
   "engines": {
@@ -34,13 +34,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://gitlab.com/loleg/smartuse.git"
+    "url": "https://github.com/cividi/platform.git"
   },
   "keywords": [
     "geo",
     "landuse",
     "mapping",
-    "zurich",
     "switzerland"
   ],
   "dependencies": {

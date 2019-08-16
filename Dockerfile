@@ -1,5 +1,5 @@
 FROM python:3.7.1
-MAINTAINER SmartUse Devteam "info@smartuse.ch"
+MAINTAINER SmartUse GmbH "info@smartuse.ch"
 
 ENV LANG 'C.UTF-8'
 ENV LC_ALL 'C.UTF-8'
