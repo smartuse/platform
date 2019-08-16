@@ -45,7 +45,9 @@ app.debug = True
 app.config.from_pyfile('config.py')
 app.jinja_env.add_extension('pypugjs.ext.jinja.PyPugJSExtension')
 
-# TODO: in the future, consider moving to Rest+ https://flask-restplus.readthedocs.io/
+# TODO: move app to Blueprints
+
+# TODO: move to Rest+ https://flask-restplus.readthedocs.io/
 #    version='1.0', title='Smart Use API',
 #    description='An API based on Frictionless Data standards')
 
@@ -58,7 +60,7 @@ with open(ospath.join(ospath.dirname(__file__), 'templates','presets','project-c
     project_categories = json.load(f)
 screenshot_path = ospath.join(ospath.dirname(__file__), '..', 'screenshots')
 upload_path = ospath.join(ospath.dirname(__file__), '..', 'uploads')
-DEFAULT_THUMB = '../img/usermap.jpg'
+DEFAULT_THUMB = '/img/usermap.jpg'
 
 # Create admin
 admin = admin.Admin(app, name='SmartUse', template_mode='bootstrap3')
@@ -487,14 +489,9 @@ def send_screenshots(path):
     return send_from_directory('../screenshots', path)
 
 # Data serving paths
-@app.route('/data/<path:path>')
-def send_static_data(path):
-    return send_from_directory('../views/projects', path)
 @app.route('/uploads/<path:path>')
-def send_uploads(path):
-    return send_from_directory('../uploads', path)
 @app.route('/api/project/<int:pid>/<path:path>')
-def send_uploads_project(pid, path):
+def send_uploads(path):
     return send_from_directory('../uploads', path)
 
 # Error paths
