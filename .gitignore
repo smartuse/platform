@@ -2,6 +2,7 @@
 
 notebooks/data
 
+migrations/
 uploads/
 screenshots/
 

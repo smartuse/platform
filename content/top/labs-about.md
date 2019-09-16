@@ -1,5 +1,6 @@
 # Labs
 
-Smart Use entwickelt Werkzeuge und zeigt unterschiedliche Themenbereiche auf. Smart Use Labs sind eine Sammlung von Experimenten, die Ansätze zu datenbasierten und kollaborativer Raumplanung darstellen. Jedes Lab ist als Modul gedacht und transformiert daher einen oder mehrere Inputs in einen fragestellunsgbezogenen Output.
+Smart Use ist ein Laboratorium für die Smart City der Bürger*innen. SmartUse Labs zeigt eine Sammlung von Experimenten. In Themen von Mobilität bis Handelsstatistik haben wir kolloborative, datengestützte Raumentwicklung erprobt. Jedes “Lab” ist ein Proof of concept - und laufend kommen neue Experimente dazu.
 
-Die Analyse- und Visualisierung von Daten passiert durch offene Standards und etablierte Prozesse, die die Kompatibilität von unterschiedlichen Daten ermöglicht. Dadurch sind verschiedene Datengeschichten im Bereichen Raumnutzung, Infrastrukturplanung und Arealentwicklung entstanden.
+Die Analyse- und Visualisierung von Daten erfolgt in offene Standards und etablierten Prozesse, die die Kompatibilität von unterschiedlichen Daten ermöglicht. In der Kombination von Laboratorien entstehen Datengeschichten im Bereichen Raumnutzung, Infrastrukturplanung und Arealentwicklung.
+**[ Mehr&nbsp;erfahren](/studies)**

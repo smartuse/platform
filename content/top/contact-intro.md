@@ -2,11 +2,11 @@
 
 Wir gestalten anspruchsvolle Produkte für urbane Arbeiter*innen: all jene, die Interesse daran haben, ihre Umwelt besser zu verstehen und aktiv mitzugestalten, können mit unseren Daten und deren Visualisierungen bessere Entscheidungen treffen und effizienter agieren. Gemeinsam gedacht, gemeinsam gemacht.
 
-**Interesse? Benötigen Sie weitere Informationen?**
+**Benötigen Sie weitere Informationen?**
 
-Nehmen Sie bitte [mit uns per Formular Kontakt auf](https://mailchi.mp/471fc9137668/smartuse-mitmachen), schreiben Sie uns [per E-mail](mailto:info@smartuse.ch) oder rufen Sie uns unter +41 43 243 6313 an (Mo-Fr 9-17 Uhr).
+Für News und Eventeinladungen, abonnieren Sie auch [unseren Newsletter](https://smartuse.us17.list-manage.com/subscribe/post?u=4ffb5e217856ee5ca6e021c83&id=29f718ecf0). Oder nehmen Sie [per E-mail](mailto:info@smartuse.ch) oder Telefon unter +41 43 543 89 49 (Mo-Fr 9-17 Uhr) Kontakt mit uns auf.
 
-**Jetzt einen Präsentationstermin vereinbaren!**
+**Präsentationstermin vereinbaren**
 
 Wir suchen zusammen neuartige Auswertungen und Kanäle für Ihre Projekte:
 

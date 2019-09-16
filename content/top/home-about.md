@@ -1,1 +1,1 @@
-Smart Use bringt die Akteure zusammen, eröffnet Diskurse und zeigt Wege zur Kollaboration und Partizipation auf. Die Vision und Ökosystem beruht auf systemisches Denken, Befähigung aller Stakeholder durch die Vernetzung von Fachbezogenen und die Beteiligung der Zivilgesellschaft durch Bottom-up Initiativen.
+Smart Use bringt die Akteure zusammen, eröffnet Diskurse und zeigt Wege zur Kollaboration und Partizipation auf. Vision und Ökosystem beruhen auf systemischem Denken,auf der Befähigung aller Stakeholder durch Vernetzung von Fach- und Alltagsexperten.
