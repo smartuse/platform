@@ -1,5 +1,3 @@
-![](http://www.metropolitanraum-zuerich.ch/assets/images/e/Smart%20Use-c3c550de.jpg)
-
 # Smart Use - Land, Growth and Big Data
 
 _[README auf Deutsch](README.de.md)_
