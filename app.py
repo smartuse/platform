@@ -388,7 +388,7 @@ def index_about():
 @app.route('/contact')
 def index_contact():
     return render_template('public/contact.pug',
-        participate=get_md('contact-intro'),
+        participate=get_md('contact-participate'),
         impressum=get_file('impressum.html'),
     )
 @app.route('/legal')
