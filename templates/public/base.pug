@@ -59,17 +59,18 @@ html
           .col-md-7.footer-info
             include snippets/contacts.pug
 
-          .col-md-5
+          .col-md-5.footer-newsletter
             p
               | Immer auf dem Laufenden bleiben?
-            include snippets/subscribe.html
+              a(href="https://smartuse.us17.list-manage.com/subscribe/post?u=4ffb5e217856ee5ca6e021c83&id=29f718ecf0" class="btn btn-secondary" style="margin-left:1em") Newsletter abbonieren
+            //- include snippets/subscribe.html
 
       .container#bottom
         .row
           .col-md-12.text-center
             ul
               li
-                a(href='https://smartuse.ch') SmartUse.ch
+                a(href='/contact', class='contact') Support
               li
                 a(href='/about#impressum') Impressum
               li

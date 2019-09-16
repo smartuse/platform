@@ -1,6 +1,6 @@
 # Smart Use backend
 
-A web application for collecting and sharing maps powered by a Geospatial Data Package API. Part of Smart Use, a pilot land use mapping project focusing on the greater metropolitan area around Zurich, Switzerland. For more information, see the [README](../README.md) in the parent folder. Details on updating the frontend can be found in the [static README](../static/README.md).
+A web application for collecting and sharing maps powered by a Geospatial Data Package API. Part of Smart Use, a pilot land use mapping project focusing on the greater metropolitan area around Zurich, Switzerland. For more information, see the main [README](README.md). Details on updating the frontend can be found in the [static README](static/README.md).
 
 Technical details on getting the backend service running follow.
 
@@ -66,7 +66,7 @@ sudo docker container exec -u postgres -i platform_postgres_1 createdb smartuse
 If you have a database export, you should:
 
 ```
-sudo docker container exec -u postgres -i platform_postgres_1 psql < ../my-backup.sql
+sudo docker container exec -u postgres -i platform_postgres_1 psql < my-backup.sql
 ```
 
 If not, then:
@@ -98,4 +98,4 @@ environment=
 
 ## License
 
-MIT - details in [LICENSE](../LICENSE) file.
+MIT - details in [LICENSE](LICENSE) file.

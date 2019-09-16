@@ -3,7 +3,7 @@ version: '2'
 services:
   web:
     restart: always
-    build: ./backend
+    build: .
     expose:
      - "8000"
     env_file: .env
