@@ -61,10 +61,13 @@
     // External links in new window
     $('a').each(function() {
       if (typeof this.host === 'undefined') return;
-      if (this.host !== window.location.host) {
+      if (this.host !== window.location.host && !$(this).attr('target')) {
         $(this).attr('target', '_blank');
       }
     });
+
+    // Enable auto fullscreen
+    if ($('fullscreen-button').length > 0) initFullScreen();
 
     // Cookie consent form
     window.cookieconsent.initialise({

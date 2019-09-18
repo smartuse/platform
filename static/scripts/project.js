@@ -267,8 +267,6 @@ jQuery(function($){
     }
     */
 
-    initFullScreen();
-
   } //-load_DataPackage
 
   // Check compatibility
