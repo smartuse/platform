@@ -28,25 +28,10 @@ html
 
   body
     block nav
-      .navbar.navbar-expand-lg.fixed-top.navbar-dark.bg-primary
-        .container
-          a.navbar-brand(href='/')
-            img(src='/img/SmartUse-Logo-White.png' width='150px' alt='Smart Use Logo' title='Home')
-          button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarResponsive' aria-controls='navbarResponsive' aria-expanded='false' aria-label='Toggle navigation')
-            span.navbar-toggler-icon
-          #navbarResponsive.collapse.navbar-collapse
-            ul.navbar-nav
-              // .justify-content-center.d-flex.flex-fill
-              li.nav-item
-                a.nav-link(href='/studies') Case Studies
-              li.nav-item
-                a.nav-link(href='/labs') Labs
-              li.nav-item
-                a.nav-link(href='/about') Hintergrund
-              li.nav-item
-                a.nav-link(href='/faq') Fragen
-              li.nav-item
-                a.nav-link(href='/contact') Kontakt
+      include snippets/navbar.pug
+
+    block toast
+      include snippets/toast.pug
 
     block top
 
@@ -54,31 +39,7 @@ html
       //- main page content
 
     block footer
-      .container#footer
-        .row
-          .col-md-7.footer-info
-            include snippets/contacts.pug
-
-          .col-md-5.footer-newsletter
-            p
-              | Immer auf dem Laufenden bleiben?
-            p
-              a(href="https://smartuse.us17.list-manage.com/subscribe/post?u=4ffb5e217856ee5ca6e021c83&id=29f718ecf0" class="btn btn-secondary") 
-                | Newsletter abbonieren
-            //- include snippets/subscribe.html
-
-      .container#bottom
-        .row
-          .col-md-12.text-center
-            ul
-              li
-                a(href='/contact', class='contact') Support
-              li
-                a(href='/about#impressum') Impressum
-              li
-                a(href='/legal') Nutzungsbedingungen
-              li
-                a(href='https://github.com/smartuse') Open Source
+      include snippets/footer.pug
 
     script(src='/vendor/jquery-3.2.1.min.js')
     script(src='/vendor/modernizr-3.5.0.min.js')
@@ -95,4 +56,4 @@ html
       //- additional resources
 
     block analytics
-      include snippets/analytics.html
+      include snippets/analytics.pug
