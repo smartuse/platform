@@ -740,8 +740,8 @@ a.featured, a.featured h5, a.featured p
 }
 
 .toast {
-	position: absolute;
-	top: 100px;
+	position: fixed;
+	top: 105px;
 	right: 7px;
 	z-index: 999;
 }
