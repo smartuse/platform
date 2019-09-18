@@ -743,5 +743,5 @@ a.featured, a.featured h5, a.featured p
 	position: fixed;
 	top: 105px;
 	right: 7px;
-	z-index: 999;
+	z-index: 9999;
 }

@@ -66,9 +66,6 @@
       }
     });
 
-    // Enable auto fullscreen
-    if ($('fullscreen-button').length > 0) initFullScreen();
-
     // Cookie consent form
     window.cookieconsent.initialise({
       "palette": {

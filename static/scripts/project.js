@@ -244,7 +244,11 @@ jQuery(function($){
       container = false;
     }); // -each renderings
 
+    // Enable fullscreen controls
+    initFullScreen();
+
     /*
+    // Pagination (currently not used)
     if (rescount > 0 && $('rg-pagination').length > 0) {
       // console.log(rescount);
       // gallery.addClass('items-' + rescount);
