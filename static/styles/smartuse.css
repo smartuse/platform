@@ -278,7 +278,7 @@ p.description {
 	font-size: 150%;
 	/*margin: 0.5em 0px;*/
 	margin: -2.2em 0 0;
-	position: absolute;
+	/* position: absolute; */
 }
 
 .rendering-header h2 {
@@ -444,7 +444,9 @@ form .fa-search {
 .side-button {
   width: 32px;
   height: 35px;
-  background: white url('/img/fullscreen-black.png') no-repeat 50% 50%;
+  background: white;
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
   background-size: contain;
   z-index: 2;
   /*position: absolute;
@@ -464,7 +466,9 @@ form .fa-search {
 .side-button:hover {
 	opacity: 1.0;
 }
-
+.side-button.fullscreen-button {
+	background-image: url('/img/fullscreen-black.png')
+}
 .side-button.share-button {
 	background-image: url('/img/share-black.png');
 	margin-top: 0em;
@@ -733,4 +737,11 @@ a.featured, a.featured h5, a.featured p
 	-webkit-transition: all 200ms;
 	-moz-transition: all 200ms;
 	transition: all 200ms;
+}
+
+.toast {
+	position: fixed;
+	top: 105px;
+	right: 7px;
+	z-index: 9999;
 }

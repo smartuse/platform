@@ -1,0 +1,57 @@
+extends public/base.pug
+
+block top
+  .container(style="margin:100px")
+
+block content
+  .container.padding-top
+    .row.justify-content-md-center
+      .col-md-10
+        .text.section
+          = intro
+
+  .container-fluid.no-padding.bg-primary.home-content
+    .container
+      .row
+        .col-md-12.text
+          = report
+
+      .row#downloads
+        .col-md-4
+          h1
+            &#128209;
+            | &nbsp;
+            small
+              b Factsheet
+              br
+              a(href='https://smartuse.ch/uploads/assets/pdf/smartuse-factsheet-de.pdf', target='_blank')
+                sup Deutsch, PDF, 0.4 MB
+              //- br
+              //- a(href='https://smartuse.ch/uploads/assets/pdf/smartuse-factsheet-en.pdf', target='_blank')
+              //-   sup English, PDF, 0.2 MB
+        .col-md-4
+          h1
+            &#128209;
+            | &nbsp;
+            small
+              b Tech Report
+              br
+              a(href='https://smartuse.ch/uploads/assets/pdf/smartuse-techreport-en.pdf', target='_blank')
+                sup English, PDF, 2 MB
+        .col-md-4(style="padding-bottom:20px;text-align:center")
+          .github-card(data-github='smartuse/platform', data-width='400', data-height='', data-theme='default')
+            script(src='//cdn.jsdelivr.net/github-cards/latest/widget.js')
+
+
+  .container-fluid.home-content
+    .container
+      .row
+        .col-md-12
+          h2 Technologies
+      = logos|safe
+
+  .container.padding-top#impressum
+    .row
+      .col-md-12
+        h2 Impressum
+    = impressum|safe

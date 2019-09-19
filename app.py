@@ -58,8 +58,8 @@ pages = FlatPages(app)
 # Various presets
 with open(ospath.join(ospath.dirname(__file__), 'templates','presets','project-categories.json'), "r") as f:
     project_categories = json.load(f)
-screenshot_path = ospath.join(ospath.dirname(__file__), '..', 'screenshots')
-upload_path = ospath.join(ospath.dirname(__file__), '..', 'uploads')
+screenshot_path = ospath.join(ospath.dirname(__file__), 'screenshots')
+upload_path = ospath.join(ospath.dirname(__file__), 'uploads')
 DEFAULT_THUMB = '/img/usermap.jpg'
 
 # Create admin
@@ -366,7 +366,6 @@ def project_detail(project_id):
 def get_file(filename):
     f = open(ospath.join(
             ospath.dirname(__file__),
-            '..',
             'content',
             'top',
             filename
@@ -389,7 +388,7 @@ def index_about():
 @app.route('/contact')
 def index_contact():
     return render_template('public/contact.pug',
-        participate=get_md('contact-intro'),
+        participate=get_md('contact-participate'),
         impressum=get_file('impressum.html'),
     )
 @app.route('/legal')
@@ -464,35 +463,35 @@ def project_page(project):
 # Static paths
 @app.route('/img/<path:path>')
 def send_static_img(path):
-    return send_from_directory('../static/img', path)
+    return send_from_directory('./static/img', path)
 @app.route('/scripts/<path:path>')
 def send_static_scripts(path):
-    return send_from_directory('../static/scripts', path)
+    return send_from_directory('./static/scripts', path)
 @app.route('/styles/<path:path>')
 def send_static_styles(path):
-    return send_from_directory('../static/styles', path)
+    return send_from_directory('./static/styles', path)
 @app.route('/tags/<path:path>')
 def send_static_tags(path):
-    return send_from_directory('../static/tags', path)
+    return send_from_directory('./static/tags', path)
 @app.route('/vendor/<path:path>')
 def send_static_vendor(path):
-    return send_from_directory('../static/vendor', path)
+    return send_from_directory('./static/vendor', path)
 @app.route('/meta/<path:path>')
 def send_static_meta(path):
-    return send_from_directory('../static/meta', path)
+    return send_from_directory('./static/meta', path)
 
 @app.route('/theme/<path:path>')
 def send_static_theme(path):
-    return send_from_directory('../static/theme', path)
+    return send_from_directory('./static/theme', path)
 @app.route('/screenshots/<path:path>')
 def send_screenshots(path):
-    return send_from_directory('../screenshots', path)
+    return send_from_directory('./screenshots', path)
 
 # Data serving paths
 @app.route('/uploads/<path:path>')
 @app.route('/api/project/<int:pid>/<path:path>')
 def send_uploads(path):
-    return send_from_directory('../uploads', path)
+    return send_from_directory('./uploads', path)
 
 # Error paths
 @app.errorhandler(404)

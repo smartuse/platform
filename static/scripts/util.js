@@ -35,7 +35,9 @@ function requestFullScreen() {
   if (requestMethod) { requestMethod.call(element); }
 }
 function initFullScreen() {
-  $('.fullscreen-button').click(function(e) {
+  // Activate the full screen button
+  var fsbtns = $('.fullscreen-button').click(function(e) {
+    if (!$(this).hasClass('side-button')) return true;
     e.preventDefault();
     if ($(this).hasClass('active')) {
       $(this).removeClass('active').next().removeClass('fullscreen');
@@ -52,10 +54,24 @@ function initFullScreen() {
     if (typeof(maps) !== typeof(undefined))
       $.each(maps, function() { this.resize(); });
   });
+
+  // Show modal window for sharing
   $('.share-button').click(function(e) {
     e.preventDefault();
     $('#share').modal('show');
   });
+
+  // Start full screen mode automatically for small screens
+  if (location.hash.indexOf('!nofs') < 0 &&
+      fsbtns.length > 0 && $(window).width() < 720) {
+    $('.toast.autofullscreen')
+      .toast('show')
+      .find('.x-fullscreen').click(function() {
+        location.href += '#!nofs';
+        location.reload();
+      });
+    fsbtns[0].click();
+  }
 }
 
 // Adjust page sizes

@@ -7,8 +7,9 @@ block content
   .container.padding-top
     .row.justify-content-md-center
       .col-md-10
-        h1
-          = page.title
-        hr
+        unless page.hideTitle
+          h1
+            = page.title
+          hr
         .text.section
           = content

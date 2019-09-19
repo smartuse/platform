@@ -1,0 +1,59 @@
+//- base template
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    title='Smart Use'
+
+    link(rel='icon' href='/meta/favicon.ico')
+    link(rel='manifest' href='/meta/manifest.json')
+
+    meta(name='viewport' content='width=device-width, initial-scale=1')
+    meta(http-equiv='X-UA-Compatible' content='IE=edge')
+
+    link(rel='stylesheet' href='/theme/yeti.bootstrap.css' media='screen')
+    link(href='https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap',rel='stylesheet')
+    link(rel='stylesheet', type='text/css', href='https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css')
+
+    link(rel="apple-touch-icon-precomposed",href="/img/apple-touch-iphone.png")
+    link(rel="apple-touch-icon-precomposed",sizes="72x72",href="/img/apple-touch-ipad.png")
+    link(rel="apple-touch-icon-precomposed",sizes="114x114",href="/img/apple-touch-iphone4.png")
+    link(rel="apple-touch-icon-precomposed",sizes="144x144",href="/img/apple-touch-ipad-retina.png")
+
+    link(rel='stylesheet',href='/styles/custom.css')
+    link(rel='stylesheet',href='/styles/smartuse.css')
+
+    block head
+      //- additional scripts and styles
+
+  body
+    block nav
+      include snippets/navbar.pug
+
+    block toast
+      include snippets/toast.pug
+
+    block top
+
+    block content
+      //- main page content
+
+    block footer
+      include snippets/footer.pug
+
+    script(src='/vendor/jquery-3.2.1.min.js')
+    script(src='/vendor/modernizr-3.5.0.min.js')
+    script(src='/vendor/zepto.smoothscroll.js')
+    script(src='/vendor/cookieconsent.min.js')
+
+    script(src='/theme/popper.min.js')
+    script(src='/theme/bootstrap.min.js')
+
+    script(src='/scripts/util.js')
+    script(src='/scripts/base.js')
+
+    block scripts
+      //- additional resources
+
+    block analytics
+      include snippets/analytics.pug

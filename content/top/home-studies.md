@@ -1,3 +1,3 @@
 # Case Studies
 
-Mit einem datenbasiertes Ortsverständnis als Anwendungsbeispiel stellt und beantwortet Smart Use Fragen der Raumnutzung, Infrastrukturplanung und Arealentwicklung. Mit Smart Use ist es möglich, Nutzen zu optimieren und (öffentliche) Gelder effizient und am richtigen Ort zu investieren.
+Mit Smart Use werden öffentliche Gelder datengestützt, transparent, sparsam und mit grösstmöglichem Nutzen eingesetzt. Die tatsächliche Raumnutzung ist Grundlage für Freiraumplanung und für deren Bewertung. Unser datebasiertes Ortsverständnis ermöglicht die systematische Evaluation vergangener Arealentwicklungen, legt die Basis für faire “Stadtgespräche” und ermöglicht es Gemeinden und Entwicklern, aus Erfahrungen für künftige Vorhaben zu lernen.

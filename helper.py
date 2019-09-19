@@ -52,7 +52,7 @@ def media_type(filename, default=None):
         if 'contains' in mt and mt['contains'] in filename:
             return mt
     for mt in MEDIA_TYPES:
-        if default in mt['mime']:
+        if type(default) is str and default in mt['mime']:
             return mt
     return default
 
