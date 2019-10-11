@@ -8,7 +8,7 @@ Gefördert durch [Engagement Migros](https://www.engagement-migros.ch/de/pionier
 
 **Benötigen Sie weitere Informationen?**
 
-Für News und Eventeinladungen, abonnieren Sie auch [unseren Newsletter](https://smartuse.us17.list-manage.com/subscribe/post?u=4ffb5e217856ee5ca6e021c83&id=29f718ecf0). Oder nehmen Sie [per E-mail](mailto:info@smartuse.ch) oder Telefon unter +41 43 543 89 49 (Mo-Fr 9-17 Uhr) Kontakt mit uns auf.
+Für News und Eventeinladungen, abonnieren Sie auch [unseren Newsletter](https://smartuse.us17.list-manage.com/subscribe/post?u=4ffb5e217856ee5ca6e021c83&id=29f718ecf0). Oder nehmen Sie [per E-mail](mailto:info@smartuse.ch) oder Telefon unter +41 43 543 44 45 (Mo-Fr 9-17 Uhr) Kontakt mit uns auf.
 
 **Präsentationstermin vereinbaren**
 

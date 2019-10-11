@@ -276,7 +276,7 @@ jQuery(function($){
   // Check compatibility
   if (get_ie_version() && get_ie_version() < 12) {
     $('<div class="alert alert-danger" role="alert">' +
-      'Internet Explorer wird nicht unterstützt. Versuchen Sie es bitte erneut mit einem aktuellen Browser: ' +
+      'Internet Explorer wird nicht vollständig unterstützt. Versuchen Sie es bitte erneut mit einem aktuellen Browser: ' +
       '<a href="http://outdatedbrowser.com/de" target="_blank">outdatedbrowser.com</a>' +
       '</div>').prependTo('.row:first');
   }

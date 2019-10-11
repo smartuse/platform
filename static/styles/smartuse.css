@@ -667,6 +667,12 @@ a.featured, a.featured h5, a.featured p
   overflow-y: scroll;
 }
 
+.alert-danger a {
+    color: #fff;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
 /* Mobile rendering */
 @media only screen
   and (max-device-width: 812px) {
