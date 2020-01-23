@@ -244,7 +244,11 @@ jQuery(function($){
       container = false;
     }); // -each renderings
 
+    // Enable fullscreen controls
+    initFullScreen();
+
     /*
+    // Pagination (currently not used)
     if (rescount > 0 && $('rg-pagination').length > 0) {
       // console.log(rescount);
       // gallery.addClass('items-' + rescount);
@@ -267,14 +271,12 @@ jQuery(function($){
     }
     */
 
-    initFullScreen();
-
   } //-load_DataPackage
 
   // Check compatibility
   if (get_ie_version() && get_ie_version() < 12) {
     $('<div class="alert alert-danger" role="alert">' +
-      'Internet Explorer wird nicht unterstützt. Versuchen Sie es bitte erneut mit einem aktuellen Browser: ' +
+      'Internet Explorer wird nicht vollständig unterstützt. Versuchen Sie es bitte erneut mit einem aktuellen Browser: ' +
       '<a href="http://outdatedbrowser.com/de" target="_blank">outdatedbrowser.com</a>' +
       '</div>').prependTo('.row:first');
   }

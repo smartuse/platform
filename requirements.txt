@@ -7,7 +7,8 @@ Flask-Migrate
 Flask-SQLAlchemy
 geojson
 gunicorn
-markdown
+Markdown
 Pillow
 psycopg2-binary
 pypugjs
+python-dotenv

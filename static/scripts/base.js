@@ -61,7 +61,7 @@
     // External links in new window
     $('a').each(function() {
       if (typeof this.host === 'undefined') return;
-      if (this.host !== window.location.host) {
+      if (this.host !== window.location.host && !$(this).attr('target')) {
         $(this).attr('target', '_blank');
       }
     });

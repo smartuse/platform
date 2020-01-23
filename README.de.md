@@ -1,5 +1,3 @@
-![](http://www.metropolitanraum-zuerich.ch/assets/images/e/Smart%20Use-c3c550de.jpg)
-
 # Smart Use – Raum, Wachstum und Big Data
 
 Wachstum von Wirtschaft und Bevölkerung hiess bislang Ausbau von Infrastruktur und Siedlungsraum.
